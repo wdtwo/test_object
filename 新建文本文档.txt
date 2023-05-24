@@ -1,7 +1,0 @@
-echo "# test_object" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add test git@github.com:wdtwo/test_object.git
-git push -u test main

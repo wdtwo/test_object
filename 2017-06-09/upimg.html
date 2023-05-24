@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>反差萌</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="wrap-bottom pos-fix">
+		<!--输出图片-->
+		<div class="outimg pos-re">
+			<div></div>
+			<canvas id="outcvs" width="640" height="1048" ></canvas>
+			<img src="images/reset_img.png" class="pos-ab reset_img" style="display:none;width:53px;left:55px;top:260px; z-index:9;"/>
+		</div>
+	</div>
+	<div class="wrap upimg">
+		<div class="box">
+			<div class="infor">
+				<input type="text" id="username" maxlength="10"/>
+			</div>
+			<!--上传start-->
+			<div class="head_pic pos-re">
+				<input type="file" id="file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"/>
+				<canvas id="cvs" width="600" height="600" s='pic.jpg'></canvas>
+				<img src="images/reset_img.png" class="dis-none pos-ab reset_img" style="width:53px;left:5px;bottom:5px;z-index:8;"/>
+			</div>
+			<!--上传end-->
+			<img src="images/fcm_page2_2.jpg" class="createCvs"/>
+		</div>
+	</div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/exif.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/file.js"></script>
+	<script type="text/javascript">
+		//判断名字是否为空
+		$('.infor input').on('blur',function(){
+			var t = $(this);
+			if(!t.val()){
+				t.removeClass('nobg');
+			}else{
+				t.addClass('nobg');
+			}
+		})
+		//页面重置
+		$('.outimg .reset_img').on('click',function(){
+			window.location.reload();
+		})
+	</script>
+</body>
+</html>
