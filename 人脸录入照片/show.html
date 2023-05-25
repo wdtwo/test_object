@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>头像信息</title>
+	<link href="css/basic.css?v=1" rel="stylesheet" type="text/css" />
+	<link href="css/toast.css" rel="stylesheet" type="text/css" />
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 750));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+</head>
+<body>
+	<div class="wrap" style="background-color: white;overflow-y:auto">
+		<div class="tit1">
+			<a href="index.html" class="tit m-c m-t-80 block">
+				<img src="images/person1.png">
+				<div class="info">
+					<div class="f36">
+						<span>000001</span>
+						<span>司马老贼</span>
+					</div>
+				</div>
+			</a>
+			<div class="proess re">
+				<img src="images/t1.png" class="w26 block">
+				<div class="ab t1">
+					<div>
+						<a href="./index.html" class="reset">上传头像</a>
+					</div>
+					<div style="margin-top: 1.1rem;">
+						录入人脸信息后<br>
+						通过人脸识别进入办公区域
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tit2">
+			<div class="tit m-c m-t-80">
+				<img src="images/person1.png" class="t3img" id="img">
+				<div class="info">
+					<div class="f36">
+						<span>000001</span>
+						<span>司马老贼</span>
+					</div>
+				</div>
+			</div>
+			<div class="proess re">
+				<img src="images/t2.png" class="w26 block">
+				<div class="ab t1">
+					<div>
+						头像已上传<a href="./index.html" class="reset m-l-20">修改头像</a>
+					</div>
+					<div style="margin-top:1.1rem">
+						您可以通过人脸识别<br>
+						进入办公区域
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<img src="images/logo.png" class="logo" alt="尚美数智">
+	</div>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/toast.js"></script>
+	<script>
+        // 禁止后退
+		history.pushState(null, null, document.URL);
+		window.addEventListener('popstate', function () {
+			history.pushState(null, null, document.URL);
+		});
+		if(localStorage.getItem("img")){
+			$('#img').attr('src',localStorage.getItem("img"))
+			localStorage.clear()
+			$(".tit1").hide()
+			$(".tit2").show()
+		}
+	</script>
+</body>
+</html>
