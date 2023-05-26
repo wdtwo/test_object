@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title></title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css" />
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 750));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+    </script>
+</head>
+<body>
+	<div class="wrap">
+		<div id="app">
+			{{message}}
+			<hr>
+			<ol>
+				<todo-item v-for='item in 3' v-bind:todo='item'></todo-item>
+			</ol>
+			<hr>
+			<div v-if='true'>1</div>
+			<div v-if='false'>0</div>
+			<button @click='Message()'>message btn</button>
+		</div>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.min.js"></script>
+	<script>
+		//v-bind:href ==> :href  动态参数 :[key]
+		//v-on:click ==> @  动态参数 @[event]
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message   : 'hello world!',
+				firstName : 'Foo',
+    			lastName  : 'Bar'
+			},
+			created(){
+				//init beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy destroyed
+				//get请求
+				axios.get('/',{
+					params:{
+						title:'123'
+					}
+				}).then(function(res){
+					console.log(res)
+				}).catch(()=>{
+					console.log(error)
+				})
+				//post请求
+				axios.post('/', {
+					firstName: 'Fred',
+					lastName: 'Flintstone'
+				}).then(function(res){
+					console.log(res);
+				}).catch(function (error) {
+					console.log(error);
+				});
+				// 注意: 如果发送请求时，发现传递的参数是对象，那么可用如下方式传参数
+				// var params = new URLSearchParams();
+				// params.append('title', '眼镜');
+				// axios.post('/user', params).then(function(res){}).catch(function(error){});
+				//多请求并发
+				function getUserAccount() {
+					return axios.get('/');
+				}
+				function getUserPermissions() {
+					return axios.get('/');
+				}
+				axios.all([getUserAccount(),getUserPermissions()])
+					.then(axios.spread(function (acct, perms) {
+						//两个请求现已完成
+					})
+				);
+				//请求拦截器
+				axios.interceptors.request.use(function(config){
+						// 在发送请求之前做些什么
+						return config;
+					},
+					function (error) {
+						// 对请求错误做些什么
+						return Promise.reject(error);
+					}
+				);
+				//响应拦截器
+				axios.interceptors.response.use(function(config){
+						// 对响应数据做点什么
+						return config;
+					},
+					function(error){
+						// 对响应错误做点什么
+						return Promise.reject(error);
+					}
+				);
+			},
+			methods:{
+				//事件
+				Message(){
+					console.log('message')
+				}
+			},
+			watch:{
+				//监听
+				firstName(){
+					this.fullName = val + ' ' + this.lastName
+				},
+				lastName: function (val) {
+					his.fullName = this.firstName + ' ' + val
+				}
+			},
+			computed:{
+				//计算方法
+				reversedMsg(){
+					return this.message.split('').reverse().join('')
+				}
+			},
+			components:{
+				'todo-item':{
+					props:['todo'],
+					template:'<li>{{todo}}</li>'
+				}
+			}
+		})
+	</script>
+</body>
+</html>

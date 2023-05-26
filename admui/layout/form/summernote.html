@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="/vendor/text/summernote/summernote-bs4.css">
+    <script src="/vendor/text/summernote/summernote-bs4.js"></script>
+    <script src="/vendor/text/summernote/lang/summernote-zh-CN.js"></script>
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-forms">
+    <div class="page-header">
+        <h1 class="page-title">文本编辑器</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>首页</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">表单</a>
+            </li>
+            <li class="breadcrumb-item active">文本编辑器</li>
+        </ol>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="http://summernote.org" target="_blank">
+                <i class="fa fa-link" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">标准模式</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="summernote" data-plugin="summernote" data-lang="zh-CN">
+                            <h4>基于Bootstrap的强大HTML文本编辑器Summernote</h4>
+                            <p>Summernote是一个轻量级、灵活基于Bootstrap和jQuery的HTML文本编辑器，拥有强大的API配置功能，多国语言支持支持Bootstrap2.x和3.0，支持视频和图片上传以及代码的高亮显示，多种后台语言版本示例以及多主体支持，在浏览器兼容方面，支持IE9+以及现代的浏览器Chrome,
+                                Firefox,Safari等，在移动端应该有不错的表现，还是很不错的，值得使用。</p>
+                        </div>
+                        <button class="btn btn-primary" id="get-sum">获取数据</button>
+                        <div class="text" style="width:500px;"></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">漂浮模式</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>添加 <code>data-air-mode="true"</code></p>
+                        <div data-plugin="summernote" data-air-mode="true" data-lang="zh-CN">
+                            <h4>基于Bootstrap的强大HTML文本编辑器Summernote</h4>
+                            <p>Summernote是一个轻量级、灵活基于Bootstrap和jQuery的HTML文本编辑器，拥有强大的API配置功能，多国语言支持支持Bootstrap2.x和3.0，支持视频和图片上传以及代码的高亮显示，多种后台语言版本示例以及多主体支持，在浏览器兼容方面，支持IE9+以及现代的浏览器Chrome,
+                                Firefox,Safari等，在移动端应该有不错的表现，还是很不错的，值得使用。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">自定义工具栏</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div data-plugin="summernote" data-plugin-options='{"toolbar":[["style", ["bold", "italic", "underline", "clear"]],["color", ["color"]],["para", ["ul", "ol", "paragraph"]]]}'
+                             data-lang="zh-CN">
+                            <h4>基于Bootstrap的强大HTML文本编辑器Summernote</h4>
+                            <p>Summernote是一个轻量级、灵活基于Bootstrap和jQuery的HTML文本编辑器，拥有强大的API配置功能，多国语言支持支持Bootstrap2.x和3.0，支持视频和图片上传以及代码的高亮显示，多种后台语言版本示例以及多主体支持，在浏览器兼容方面，支持IE9+以及现代的浏览器Chrome,
+                                Firefox,Safari等，在移动端应该有不错的表现，还是很不错的，值得使用。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>   
+    /* 初始化 */
+    $('[data-plugin="summernote"]').each(function(){
+
+        var options = $(this).data('plugin-options');
+        var lang = $(this).data("lang");
+        var air = $(this).data('air-mode');
+        if(!options){
+            options = {};
+        }
+        if(lang){
+            options.lang = lang;
+        }
+        if(air){
+            options.air = $(this).data('air-mode');
+        }
+        //console.log(air,lang,options);
+        $(this).summernote(options);
+
+    })
+    /* 获取数据 */
+    $('#get-sum').on('click',function(){
+        console.log($('#summernote').summernote('code'));
+    })
+
+</script>
+</body>
+</html>

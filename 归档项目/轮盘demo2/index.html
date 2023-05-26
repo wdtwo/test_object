@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>手机轮盘</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="wrap page_2">
+		<header class="flex">
+			<i class="go-back"></i>
+			<div>新年好运转出来</div>
+			<span></span>
+		</header>
+		<div class="clearfix">
+			<a href="prizelist.html" class="beibao flex">
+				<img src="images/beibao-ico.png" />
+				奖品背包
+			</a>
+		</div>
+		<div class="tit">
+			<img src="images/tit.png"/>
+		</div>
+	    <div class="lunpan">
+			<img src="images/choujiang1.png" class="zhizhen"/>
+		  	<ul class="m-c m-t-60">
+		  	    <li></li>
+		  	    <li></li>
+		  	    <li></li>
+		  	    <li></li>
+		  	    <li></li>
+		  	    <li></li>
+		  	    <li></li>
+		  	    <li></li>
+		  	</ul>
+	    </div>
+	    <div class="btn-start flex">
+	    	今日可抽奖次数 :<span>2</span>
+	    </div>
+	    <div class="info">
+	    	<ul>
+	    		<li>1.每位会员每天有两次抽奖机会。</li>
+	    		<li>2.每次抽奖将消耗30积分。</li>
+	    		<li>3.积分及优惠券为自动到账，可至个人中心查看使用。</li>
+	    		<li>4.实物奖品需在3天内完成收货地址填写，过期视为放弃奖励。</li>
+	    		<li>5.实物奖品发放时间为15个工作日内，由于年底快递停运，实际到达时间以快递送达为准。</li>
+	    		<li>6.如有疑问可联系4006-456-999。</li>
+	    	</ul>
+	    </div>
+	    
+		<div class="prize">
+			<div class="in prize-yhq">
+				<h3>恭喜您获得<b class="num"></b>元优惠券!</h3>
+				<div class="yhq flex">
+					<div>
+						<span>¥</span><b class="num"></b>
+					</div>
+					<p>
+						满129元可用
+					</p>
+				</div>
+				<div class="tips">
+					请前往我的优惠券中查看
+				</div>
+				<i class="close"></i>
+			</div>
+			<div class="in prize-jf">
+				<h3>恭喜您获得<b class="num"></b>积分!</h3>
+				<div class="jf flex">
+					<img src="images/prize-jf.png"/>
+					<div>
+						+<b class="num"></b>积分
+					</div>
+				</div>
+				<div class="tips">
+					请前往我的积分-积分明细中查看
+				</div>
+				<i class="close"></i>
+			</div>
+			<div class="in prize-sw">
+				<h3 class="p-t-50 no-p-b">恭喜您获得<b class="name"></b>!</h3>
+				<div class="tips" style="margin-top: 5px;margin-bottom: 10px;">
+					奖品已发放到尾号为<span class="c-yellow tel"></span>的账户中
+				</div>
+				<div class="sw flex">
+					<img src="images/prize-demo.png"/>
+				</div>
+				<div class="tips" style="margin-top: 20px;">
+					请填写收货地址, 便于我们给您邮寄 <br />
+					物流信息可在<span class="c-yellow">我的背包</span>中查看
+				</div>
+				<a href="address.html" class="btn-start f30">填写收货地址</a>
+				<i class="close"></i>
+			</div>
+			<div class="bg-shadow"></div>
+		</div>
+	</div>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<script src="js/common.js"></script>
+    <script>
+       function start(){
+           var i     = 0; //索引
+           var speed = 1;//默认旋转速度
+           var a     = 1.1;//线性加速度
+           var group = 1;//默认速度跑几圈
+           var jie   = 0;//记录当前已经跑了几圈
+           var li    = $('li')
+           var count = 0;//除了默认速度 记录跑了多少个
+           var prize_absolute = 7;//从1开始的位置
+           var play = function(){
+               if(i >= 7){
+                   i = 0;
+                   jie++;
+               }else{
+                   i++;
+               }
+               if(jie >= group && prize_absolute <= 0){
+                   //减速停止
+                   console.log(i,count++)
+                   li.eq(i).addClass('active').siblings().removeClass('active')
+                   speed *= a;
+                   if(count <= 15){
+                       init(100*speed)
+                   }else{
+                       btn_lock = true;
+                       console.log('结束')
+                   }
+                   return false;
+               }
+               if(jie >= group){
+                   prize_absolute--;
+               }
+               li.eq(i).addClass('active').siblings().removeClass('active')
+               init(100*speed)
+           }
+           function init(n){
+               setTimeout(function(){
+                   play();
+               },n || 0)
+           }
+           init(1)
+       }
+		var count = 2;
+		var btn_lock = true;
+		$(".btn-start span").html(count);
+		//启动的点击事件
+		$(".lunpan .zhizhen").on('click',function(){
+			if(btn_lock){
+                btn_lock = false;
+				if(count > 0){
+					start();
+                    count--;
+                    $(".btn-start span").html(count);
+				}else{
+					alert('抽奖次数已耗尽！');
+				}
+			}
+		})
+	</script>
+</body>
+</html>

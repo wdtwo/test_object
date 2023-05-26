@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title>笔记 - UI示例</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 移动设备 viewport -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+	<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+	<link rel="stylesheet" href="/vendor/animsition/animsition.css"/>
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="/vendor/nestable/jquery.nestable.min.css">
+	<script src="/vendor/nestable/jquery.nestable.min.js"></script>
+
+
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Nestable</h1>
+    </div>
+    <div class="page-content">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                	Nestable
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本</h4>
+                            <div class="example">
+                                <div id="nestable1" class="dd">
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="1">
+                                            <div class="dd-handle">列表项 1
+                                                <span class="float-right text-info">进行中</span>
+                                            </div>
+                                        </li>
+                                        <li class="dd-item" data-id="2">
+                                            <div class="dd-handle">列表项 2
+                                                <span class="float-right text-success">已批准</span>
+                                            </div>
+                                        </li>
+                                        <li class="dd-item" data-id="3">
+                                            <div class="dd-handle">列表项 3
+                                                <span class="float-right text-warning">待处理</span>
+                                            </div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item" data-id="4">
+                                                    <div class="dd-handle">列表项 4</div>
+                                                </li>
+                                                <li class="dd-item" data-id="5" data-foo="bar">
+                                                    <div class="dd-handle">列表项 5</div>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                        <li class="dd-item" data-id="6">
+                                            <div class="dd-handle">列表项 6</div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item" data-id="7">
+                                                    <div class="dd-handle">列表项 7</div>
+                                                    <ol class="dd-list">
+                                                        <li class="dd-item" data-id="8">
+                                                            <div class="dd-handle">列表项 8</div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">手柄拖动</h4>
+                            <div class="example">
+                                <div id="nestable2" class="dd">
+                                    <ol class="dd-list">
+                                        <li class="dd-item dd-item-alt" data-id="1">
+                                            <div class="dd-handle"></div>
+                                            <div class="dd-content">列表项 1
+                                                <span class="float-right wb-wrench"></span>
+                                            </div>
+                                        </li>
+                                        <li class="dd-item dd-item-alt" data-id="2">
+                                            <div class="dd-handle"></div>
+                                            <div class="dd-content">列表项 2
+                                                <span class="float-right wb-settings"></span>
+                                            </div>
+                                        </li>
+                                        <li class="dd-item dd-item-alt" data-id="3">
+                                            <div class="dd-handle"></div>
+                                            <div class="dd-content">列表项 3</div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item dd-item-alt" data-id="4">
+                                                    <div class="dd-handle"></div>
+                                                    <div class="dd-content">列表项 4</div>
+                                                </li>
+                                                <li class="dd-item dd-item-alt" data-id="5" data-foo="bar">
+                                                    <div class="dd-handle"></div>
+                                                    <div class="dd-content">列表项 5</div>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                        <li class="dd-item dd-item-alt" data-id="6">
+                                            <div class="dd-handle"></div>
+                                            <div class="dd-content">列表项 6</div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item dd-item-alt" data-id="7">
+                                                    <div class="dd-handle"></div>
+                                                    <div class="dd-content">列表项 7</div>
+                                                    <ol class="dd-list">
+                                                        <li class="dd-item dd-item-alt" data-id="8">
+                                                            <div class="dd-handle"></div>
+                                                            <div class="dd-content">列表项 8</div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap m-md-0">
+                            <h4 class="example-title">连接</h4>
+                            <p>列表项可在两个列表之间拖动。</p>
+                            <div class="example">
+                                <div id="nestable3" class="dd">
+                                    <h5>第 1 个列表</h5>
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="1">
+                                            <div class="dd-handle">列表项 1</div>
+                                        </li>
+                                        <li class="dd-item" data-id="2">
+                                            <div class="dd-handle">列表项 2</div>
+                                        </li>
+                                        <li class="dd-item" data-id="3">
+                                            <div class="dd-handle">列表项 3</div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item" data-id="4">
+                                                    <div class="dd-handle">列表项 4</div>
+                                                </li>
+                                                <li class="dd-item" data-id="5" data-foo="bar">
+                                                    <div class="dd-handle">列表项 5</div>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                    </ol>
+                                    <h5>第 2 个列表</h5>
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="6">
+                                            <div class="dd-handle">列表项 6</div>
+                                        </li>
+                                        <li class="dd-item" data-id="7">
+                                            <div class="dd-handle">列表项 7</div>
+                                        </li>
+                                        <li class="dd-item" data-id="8">
+                                            <div class="dd-handle">列表项 8</div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">媒体</h4>
+                            <div class="example">
+                                <div id="nestable4" class="dd">
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="1">
+                                            <div class="dd-handle">列表项 1</div>
+                                            <div class="dd-content">
+                                                <div class="media">
+                                                    <div class="pr-10">
+                                                        <a class="avatar" href="javascript:;">
+                                                            <img class="img-fluid" src="/vendor/theme/img/demo.gif" alt="...">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">♫茉莉花</h4>
+                                                        <small>CTO</small>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <span class="status status-lg status-off"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="dd-item" data-id="2">
+                                            <div class="dd-handle">列表项 2</div>
+                                            <div class="dd-content">
+                                                <div class="media">
+                                                    <div class="pr-10">
+                                                        <a class="avatar" href="javascript:;">
+                                                            <img class="img-fluid" src="/vendor/theme/img/demo.gif" alt="...">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">璇子</h4>
+                                                        <small>CVO</small>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <span class="status status-lg status-away"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item" data-id="3">
+                                                    <div class="dd-handle">列表项 3</div>
+                                                    <div class="dd-content">
+                                                        <div class="media">
+                                                            <div class="pr-10">
+                                                                <a class="avatar" href="javascript:;">
+		                                                            <img class="img-fluid" src="/vendor/theme/img/demo.gif" alt="...">
+		                                                        </a>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h4 class="media-heading">hanwen</h4>
+                                                                <small>CIO</small>
+                                                            </div>
+                                                            <div class="media-right">
+                                                                <span class="status status-lg status-busy"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                        <li class="dd-item" data-id="4">
+                                            <div class="dd-handle">列表项 4</div>
+                                            <div class="dd-content">
+                                                <div class="media">
+                                                    <div class="pr-10">
+                                                        <a class="avatar" href="javascript:;">
+                                                            <img class="img-fluid" src="/vendor/theme/img/demo.gif" alt="...">
+                                                            <i></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">李志文</h4>
+                                                        <small>CVO</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+	<script>
+		//基本的
+		$('#nestable1').nestable({
+
+			/* 参数 */
+			/*
+			maxDepth:2,				//一个项目可以嵌套的级别数（默认5）
+			group:0,				//组ID以允许在列表之间拖动（默认0）
+			scroll:false,			//启用或禁用滚动行为（默认：false）
+			scrollSensitivity:1,	//鼠标移动需要触发滚动（默认值：1）
+			scrollSpeed:5,			//滚动的速度（默认值：5）
+			scrollTriggers:{ 		//从那里滚动变得活跃的边界距离（默认值：{ top: 40, left: 40, right: -40, bottom: -40 }）
+				top: 40,
+				left: 40,
+				right: -40,
+				bottom: -40
+			},
+			effect:{ 				//删除项目动画效果（默认值：）{ animation: 'none', time: 'slow'}。要淡出元素，请在初始化插件时将“动画”值设置为“淡入淡出”。
+				animation: 'none',
+				time: 'slow'
+			},
+			*/
+
+			/* 高级设置 */
+			/*
+			contentCallback:function(item) {
+				//自定义内容的回调（默认function(item) {return item.content || '' ? item.content : item.id;}）
+				return item.content || '' ? item.content : item.id;
+			},
+			listNodeName : 'ol',			//为列表创建的HTML元素（默认'ol'）
+			itemNodeName : 'li',			//为列表项创建的HTML元素（默认'li'）
+			rootClass : 'dd',				//使用了root元素的类.nestable()（默认'dd'）
+			listClass : 'dd-list',				//所有列表元素的类（默认'dd-list'）
+			itemClass : 'dd-item',		 		//所有列表项元素的类（默认'dd-item'）
+			dragClass : 'dd-dragel'				//应用于要拖动的列表元素的类（默认'dd-dragel'）
+			noDragClass	: 'dd-nodrag'			//应用于元素以防止拖动的类（默认'dd-nodrag'）
+			handleClass	: 'dd-handle'			//每个列表项内的content元素的类（默认'dd-handle'）
+			collapsedClass : 'dd-collapsed'			//应用于已折叠的列表的类（默认'dd-collapsed'）
+			noChildrenClass : 'dd-nochildren'			//该类应用于没有子项的项目（默认'dd-nochildren'）
+			placeClass : 'dd-placeholder'				//占位符元素的类（默认'dd-placeholder'）
+			emptyClass : 'dd-empty'				//用于空列表占位符元素的类（默认'dd-empty'）
+			expandBtnHTML : '<button data-action="expand">Expand></button>',			//用于生成列表项扩展按钮的HTML文本（默认'<button data-action="expand">Expand></button>'）
+			collapseBtnHTML : '<button data-action="collapse">Collapse</button>',			//用于生成列表项折叠按钮的HTML文本（默认'<button data-action="collapse">Collapse</button>'）
+			includeContent : false,			//启用或禁用输出中的内容（默认false）
+			listRenderer : function(children, options) {
+				//用于自定义最终列表输出的回调（默认function(children, options) { ... }-请参见代码中的默认值）
+			},
+			itemRenderer : function(item_attrs, content, children, options) {
+				//用于自定义最终商品输出的回调（默认-请参见代码中的默认值）
+			},
+			json : {}					//用于动态生成Nestable列表的JSON字符串。这是与serialize()输出相同的格式
+			*/
+
+			/* 事件 */
+			callback: function(l,e){
+
+				//元素更改后的回调函数（默认null）
+				// 当元素重新排序或嵌套时，将作为选项提供
+		        // l 主容器
+		        // e 被移动元素
+
+		    },
+		    onDragStart: function(l,e){
+		    	//当用户开始拖动元素时，将触发作为选项提供的回调。false从此回调返回将禁用拖动。
+		        var type = $(e).data('type');
+		        console.log(l,e);
+		        switch(type) {
+		            case 'type1':
+		                // TYPE1的元件可以是TYPE2和3型的儿童升
+		                l.find("[data-type=type2]").removeClass('dd-nochildren');
+		                l.find("[data-type=type3]").removeClass('dd-nochildren');
+		                break;
+		            case 'type2':
+		                // TYPE2的元件不能TYPE2或TYPE3的孩子
+		                l.find("[data-type=type2]").addClass('dd-nochildren');
+		                l.find("[data-type=type3]").addClass('dd-nochildren');
+		                break;
+		            case 'type3':
+		                // TYPE3的元素不能是2型的孩子，但可能是3型的孩子
+		                l.find("[data-type=type2]").addClass('dd-nochildren');
+		                l.find("[data-type=type3]").removeClass('dd-nochildren');
+		                break;
+		            default:
+		                console.warn("无效类型");
+		        }
+		    },
+		    beforeDragStop:function(l, e, p){
+		    	//当用户放下一个元素时并且在触发“回调”方法之前，将触发作为选项提供的回调。从此回调返回false将禁用在开始位置的放置和还原元素。
+		        // p 元素被移动的位置
+		        //console.log(p);
+		    }
+		});
+		/* 事件 */
+		/*
+		$('#nestable1').on('change',function(e){
+			console.log(e);
+		})
+		*/
+		/* 方法 */
+		//$('#nestable1').nestable('destroy');//注销
+		//var arr = $('#nestable1').nestable('serialize');		//返回列表的data-*值
+		//var arr = $('#nestable1').nestable('toArray');		//返回一维数组 {id,parent_id,depth,left,right}
+		//var arr = $('#nestable1').nestable('asNestedSet');	//返回一维数组{id,parent_id,depth,lft,rgt}
+		//$('#nestable1').nestable('add', {"id":1,"children":[{"id":4}]});//添加数据(样式有问题)
+		//$('#nestable1').nestable('replace', {"id":1,"foo":"bar"});//通过传递带有'id'属性的对象来替换树中的现有项。(添加到头部)
+		//$('#nestable1').nestable('replace', {"id":1,"children":[{"id":4}]});//通过传递带有'id'属性的对象来替换树中的现有项。(添加到头部)
+		//$('#nestable1').nestable({ scroll: true });//在拖动时自动滚动容器元素    -----------
+		/*
+		$('#nestable1').nestable('remove', 1, function(){
+			//通过传递此元素的"id"来删除现有项目
+		    console.log('Item deleted');
+		});
+		*/
+		/*
+		$('#nestable1').nestable('removeAll', function(){
+			//删除全部
+		    console.log('All items deleted');
+		});
+		*/
+
+		/*
+		var json = '[{"id":1},{"id":2},{"id":3,"children":[{"id":4},{"id":5,"foo":"bar"}]}]';
+		var options = {'json': json}
+		$('#nestable1').nestable(options);
+		*/
+		//console.log(arr);
+
+		/* 手柄拖动 */
+		$('#nestable2').nestable();
+		/* 连接 */
+		$('#nestable3').nestable();
+		/* 媒体 */
+		$('#nestable4').nestable();
+	</script>
+</body>
+</html>

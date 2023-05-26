@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>手机轮盘</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	<style>
+		.wrap {
+			height:100%;
+			position: absolute;
+			left:50%;
+			margin-left:-375px;
+			width:750px;
+			background: white;
+		}
+		.grid {
+			width:100%;
+			height:750px;
+			display: grid;
+			grid-template-columns: 100px 100px 100px;
+			grid-template-rows: 100px 100px 100px;
+			/* grid-template-columns: repeat(3,33.33%);
+			grid-template-rows: repeat(3,33.33%); */
+			/* grid-template-columns: repeat(3,100px 20px 80px); */
+			/* grid-template-columns: repeat(auto-fill, 100px); */
+			/* grid-template-columns: 1fr 1fr; */
+			/* grid-template-columns: 150px 1fr 2fr; */
+			/* grid-template-columns: 1fr 1fr minmax(100px,1fr); */
+			/* grid-template-columns: 100px auto 100px; */
+			/* grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4];
+			grid-template-rows: [r1] 100px [r2] 100[x] [r3] auto [r4]; */
+			/* grid-template-columns: 70% 30%; */
+			/* grid-template-columns: repeat(12,1fr); */
+			/* grid-row-gap: 10px;
+			grid-column-gap: 1px; 
+			grid-gap: 10px 5px; */
+			/* row-gap: 10px;
+			column-gap: 5px;
+			gap: 10px 5px; */
+			grid-template-columns: 100px 100px 100px;
+			grid-template-rows: 100px 100px 100px;
+			/* grid-template-areas: 'header1 header2 header3'
+								 'main main sidebar'
+								 'footer footer footer'; */
+			/* grid-auto-flow: column; */
+			grid-auto-flow: row dense;
+		}
+		.grid div {
+			/* border:1px solid black; */
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			font-size: 3em;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="grid">
+			<div>
+				<p>1</p>
+			</div>
+			<div>
+				<p>2</p>
+			</div>
+			<div>
+				<p>3</p>
+			</div>
+			<div>
+				<p>4</p>
+			</div>
+			<div>
+				<p>5</p>
+			</div>
+			<div>
+				<p>6</p>
+			</div>
+			<div>
+				<p>7</p>
+			</div>
+			<div>
+				<p>8</p>
+			</div>
+			<div>
+				<p>9</p>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+		var a = $(".lunpan").lunpan();
+		var count = 20;
+		var btn_lock = true;
+		$(".btn-start span").html(count);
+		//启动的点击事件
+		$(".lunpan .zhizhen").on('click',function(){
+			if(btn_lock){
+				if(count > 0){
+					a.start(Math.floor(Math.random()*360));
+					$(".btn-start span").html(--count);
+				}else{
+					alert('抽奖次数已耗尽！');
+				}
+			}
+		})
+	</script>
+</body>
+</html>

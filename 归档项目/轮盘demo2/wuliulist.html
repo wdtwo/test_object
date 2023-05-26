@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>手机轮盘</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background: #F9F9FB;">
+	<div class="wrap page_2 no-bg">
+		<header class="flex">
+			<i class="go-back"></i>
+			<div>物流信息</div>
+			<span></span>
+		</header>
+		<div class="wuliu">
+			<div class="wuliu-head m-t-40 flex flex-item-start">
+				<div class="pic flex flex-column">
+					<img src="images/prize-demo.png" alt="">
+				</div>
+				<div class="infor m-l-30">
+					<div class="flex flex-jus-between flex-item-start">
+						<div class="name f28">
+							旅行洗漱包旅行洗漱包旅行洗漱包旅行洗漱包
+						</div>
+						<div class="num f28">
+							x<span class="m-l-10">1</span>
+						</div>
+					</div>
+					<div class="flex flex-jus-between m-t-20">
+						<div class="date f26">2019-12-20</div>
+						<a href="tel:12345678901" class="link flex flex-column">联系客服</a>
+					</div>
+				</div>
+			</div>
+			<div class="wuliu-num flex flex-jus-start m-20-0">
+				<img src="images/icon_wuliu.png" alt="">
+				<div class="name f26 f-w-b m-0-10">中通快递</div>
+				<div class="num f26">123456789123456788</div>
+				<i class="copy m-l-10" data-clipboard-text="123456789123456788"></i>
+			</div>
+			<ul class="wuliu-type re clearfix">
+				<li class="line"></li>
+				<li class="current no-m-t">
+					<div class="date">
+						<div>01-08</div>
+						<div class="time">07:35</div>
+					</div>
+					<i class="icon"></i>
+					<div class="location">
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+					</div>
+				</li>
+				<li>
+					<div class="date">
+						<div>01-08</div>
+						<div class="time">07:35</div>
+					</div>
+					<i class="icon"></i>
+					<div class="location">
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+					</div>
+				</li>
+				<li>
+					<div class="date">
+						<div>01-08</div>
+						<div class="time">07:35</div>
+					</div>
+					<i class="icon"></i>
+					<div class="location">
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+					</div>
+				</li>
+				<li>
+					<div class="date">
+						<div>01-08</div>
+						<div class="time">07:35</div>
+					</div>
+					<i class="icon"></i>
+					<div class="location">
+						【上海市】快件已从上海转运中心发出
+					</div>
+				</li>
+				<li>
+					<div class="date">
+						<div>01-08</div>
+						<div class="time">07:35</div>
+					</div>
+					<i class="icon"></i>
+					<div class="location">
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+						【上海市】快件已从上海转运中心发出，正在发往北京中转部
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<script src="js/clipboard.min.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+		var clipboard = new ClipboardJS('.copy');
+        clipboard.on('success', function(e) {
+			alert("复制成功!");
+			e.clearSelection();
+        });
+        clipboard.on('error', function(e) {
+            alert("复制失败,请长按编号复制！");
+        });
+		
+	
+	</script>
+</body>
+</html>

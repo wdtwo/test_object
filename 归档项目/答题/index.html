@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title></title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css" />
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 750));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+    </script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="init flex flex-column animate8">
+			<img src="images/init-pic.png" class="w500" alt="">
+			<dl class="c-white f18 m-t-65">
+				<dt>规则介绍：</dt>
+				<dd>
+					1、答题冲关共分三关，每一关共12道单选题，4道多选题； <br>
+					2、每一关答题开始后限定30分钟内完成答题并提交；<br>
+					3、每一关通关成功后，即开启下一关答题，依次类推；<br>
+					4、连续过三关视为通关成功，通关成功的前20名员工获得200元读书卡<br>
+					5、每位员工仅限一次机会。
+				</dd>
+			</dl>
+			<button id="start">开始闯关</button>
+		</div>
+		<div class="jieduan">
+			<div class="win hide">
+				<img src="images/win-pic.png" class="w603 block m-c" />
+				<button class="m-t-150" id="startNext">开始下一关</button>
+			</div>
+			<div class="lose hide">
+				<img src="images/lose-pic.png" class="w545 block m-c" />
+				<button class="m-t-150 dis" onclick="window.location.reload()">返回</button>
+			</div>
+		</div>
+
+		<div class="king flex flex-column t-c">
+			<img src="images/king-pic.png" class="w547 block">
+			<div class="m-t-35 m-b-80">
+				<div class="f72 f-w-b">恭喜您</div>
+				<div class="f44">
+					成为第<span>100</span>位闯关成功者
+				</div>
+			</div>
+			<img src="images/stars.png" class='ab stars' />
+			<a href="" class="re">分享</a>
+
+		</div>
+		<div class="dati re">
+			<div class="p-t-35 p-l-25 p-r-35 flex flex-jus-between c-white ab w100p">
+				<div class="time flex">
+					00:30
+				</div>
+				<div class="f36 press">
+					共<span>0</span>/0题
+				</div>
+			</div>
+			<div class="items">
+				<div class="question f28 c-white">
+					1、关于尚美生活集团的使命，以下说法正确的是？
+				</div>
+				<div class="option danxuan f30 w100p p-b-100">
+					<img src="images/option-ico.png" class="ab ico">
+					<ul class="p-b-25">
+						<li data-option='A'>
+							<i class="opt"></i>
+							<span>A、 占领中高端酒店市场</span>
+						</li>
+						<li data-option='B'>
+							<i class="opt"></i>
+							<span>B、 让天下没有难开的店，让住宿有更多选择</span>
+						</li>
+						<li data-option='C'>
+							<i class="opt"></i>
+							<span>C、 做美好的住宿产品</span>
+						</li>
+						<li data-option='D'>
+							<i class="opt"></i>
+							<span>D、 完成酒店模式的转型</span>
+						</li>
+						<li data-option='E' class="none">
+							<i class="opt"></i>
+							<span></span>
+						</li>
+					</ul>
+					<div class="daan">
+						<div class="success">
+							<div class="jieguo">正确</div>
+							<img src="images/right.png">
+						</div>
+						<div class="error flex">
+							<div class="jieguo">错误</div>
+							<div class="f31 f-w-b">
+								正确答案 <span class="f90">A</span>
+							</div>
+							<img src="images/error.png">
+						</div>
+					</div>
+					<button id="next" class="dis">下一题</button>
+					<button id="checkbox" class="hide">确定提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script>
+		//问题及答案
+		var questionArr = [
+			[
+				{
+					'wenti':'1、关于尚美生活集团的使命，以下说法正确的是？',
+					'option':[
+						'A、占领中高端酒店市场；',
+						'B、让天下没有难开的店，让住宿有更多选择；',
+						'C、做美好的住宿产品；',
+						'D、完成酒店模式的转型；'
+					],
+					'daan':"C"
+				},
+				{
+					'wenti':'2、关于公司的愿景，以下说法正确的是？',
+					'option':[
+						'A、打造最具创意的酒店；',
+						'B、做最具年轻人喜爱的酒店连锁品牌；',
+						'C、成为全球覆盖最广的酒店集团；',
+						'D、成就最具有文化氛围的酒店集团；'
+					],
+					'daan':"C"
+				},
+				/* {
+					'wenti':'3、以下哪个选项不是企业四大核心价值观之一？',
+					'option':[
+						'A、产品为本',
+						'B、技术驱动',
+						'C、团队协作',
+						'D、谦虚谨慎'
+					],
+					'daan':"D"
+				},
+				{
+					'wenti':'1、尚美的铁军文化在哪些方面体现？(多选)',
+					'option':[
+						'A、强文化',
+						'B、强目标',
+						'C、强激励',
+						'D、强KPI'
+					],
+					'daan':"ABCD"
+				},  */
+				{
+					'wenti':'2、以下哪些是尚美生活的四大价值观？(多选)',
+					'option':[
+						'A、产品为本',
+						'B、技术驱动',
+						'C、团队协作',
+						'D、强悍执行'
+					],
+					'daan':"ABCD"
+				}
+			],
+			[
+				{
+					'wenti':'1、关于”客户第一”中的客户，以下说法正确的是？',
+					'option':[
+						'A、 加盟商；',
+						'B、 投资人；',
+						'C、 住客；',
+						'D、 上下游供应商；'
+					],
+					'daan':"C"
+				},
+				{
+					'wenti':'2、关于尚美生活的事业版图，以下说法正确的是？',
+					'option':[
+						'A、 全国大部分下沉市场；',
+						'B、 全世界各地；',
+						'C、 世界的大部分下沉市场；',
+						'D、 全国各地；'
+					],
+					'daan':"C"
+				},
+				/* {
+					'wenti':'3、以下不属于尚美创业战略三板斧是什么？',
+					'option':[
+						'A、二三线城市；',
+						'B、40-60间客房；  ',
+						'C、小而美酒店；',
+						'D、核心商圈；'
+					],
+					'daan':"D"
+				},
+				{
+					'wenti':'1、以下品牌不属于尚美的是？(多选)',
+					'option':[
+						'A、 花间堂；',
+						'B、 兰欧尚品；',
+						'C、 君睿； ',
+						'D、 W-hotel；'
+					],
+					'daan':"AD"
+				},*/
+				{
+					'wenti':'2、尚美业务范围有哪些？(多选)',
+					'option':[
+						'A、连锁酒店',
+						'B、加盟性质',
+						'C、整装零售',
+						'D、提供开店服务',
+						'E、酒店解决方案'
+					],
+					'daan':"ABCDE"
+				} 
+			],
+			[
+				{
+					'wenti':'1、关于尚美生活集团的使命，以下说法正确的是？',
+					'option':[
+						'A、 占领中高端酒店市场；',
+						'B、 让天下没有难开的店，让住宿有更多选择；',
+						'C、 完成酒店模式的转型；',
+						'D、做美好的住宿产品；'
+					],
+					'daan':"D"
+				},
+				/* {
+					'wenti':'2、以下哪个选项属于企业四大核心价值观的是？',
+					'option':[
+						'A、 产品至上',
+						'B、 技术为王',
+						'C、 团队协作',
+						'D、 谦虚谨慎'
+					],
+					'daan':"C"
+				},
+				{
+					'wenti':'3、集团全称是什么？',
+					'option':[
+						'A、青岛尚美生活集团有限公司；',
+						'B、尚美生活集团；',
+						'C、尚客优集团；',
+						'D、尚美生活集团股份有限公司；'
+					],
+					'daan':"A"
+				},
+				{
+					'wenti':'1、下列以下说法正确的是？(多选)',
+					'option':[
+						'A、中国下沉市场是尚美事业的土壤和基因',
+						'B、世界的大部分下沉市场是尚美的版图和血液',
+						'C、覆盖中国所有一二线城市',
+						'D、着力中高端'
+					],
+					'daan':"ABD"
+				}, */
+				{
+					'wenti':'2、尚小二包含哪些内容？(多选)',
+					'option':[
+						'A、表情包',
+						'B、行动承诺加一度',
+						'C、心理咨询',
+						'D、文创周边'
+					],
+					'daan':"ABCD"
+				}
+			],
+		]
+		
+		var limit = [2,1,0]//次数限定
+		var index = 1;     //当前第几题
+		var press = 0;     //当前第几阶段
+		var time = '';     //初始化倒计时计时器
+		var timeDelay = 30;
+		var errCount = 0;  //错误计数
+	
+		//倒计时
+		function timePress(){
+			var ele = $('.time')
+			ele.html('00:30')
+			var i = timeDelay + 1; //每道题的时间
+			var a = ''//补零
+			time = window.setInterval(function(){
+				if(i > 0){
+					i--;
+					if(i < 10){
+						a = '0' + i
+					}else{
+						a = i
+					}
+				}else{
+					stopTimePress()
+					panduanShow();
+					window.setTimeout(function(){
+						nextQuest()
+					},3000)
+				}
+				ele.html('00:' + a)
+			},1000)
+		}
+		function stopTimePress(){
+			window.clearInterval(time);
+		}
+		//当前第几题
+		function pressIndex(i,l){
+			if(i >= l){
+				console.log('当前阶段最后一题')
+			}
+			console.log(i)
+			$('.press').html('共<span>'+i+'</span>/'+l+'题')
+		}
+		//显示是否正确
+		function panduanShow(str){
+			//console.log(press,index-1)
+			//console.log(questionArr[press][index-1])
+			var daan = questionArr[press][index-1].daan;
+			//console.log(str,daan)
+			if(str == daan){
+				$('.daan .error').addClass('hide')
+			}else{
+				$('.daan .success').addClass('hide')
+				$('.daan .error span').html(daan)
+				//console.log('错误')
+				errCount++;
+			}
+			$('.daan').addClass('show')
+		}
+		//隐藏是否正确
+		function panduanHide(){
+			$('.daan').removeClass('show')
+			setTimeout(function(){
+				$('.daan .error,.daan .success').removeClass('hide')
+			},500)
+		}
+		//问题出现动画
+		function questionShow(){
+			$('.question').addClass('show')
+		}
+		//问题消失动画
+		function questionHide(){
+			$('.question').removeClass('show')
+		}
+		//选项出现动画
+		function optShow(){
+			$('.option ul').addClass('show')
+		}
+		//选项消失动画
+		function optHide(){
+			$('.option ul').removeClass('show')
+		}
+		//先消失再出现动画
+		function timeAndPress(){
+			$('.time,.press').removeClass('show')
+			window.setTimeout(function(){
+				//出现之前初始化时间及修改当前题目
+				stopTimePress()
+				timePress()
+				pressIndex(index,questionArr[press].length)
+				$('.time,.press').addClass('show')
+			},400)
+		}
+		
+		//可以点击下一题
+		function removeDis(){
+			$('#next').removeClass('dis')
+		}
+		//禁用点击下一题
+		function addDis(){
+			$('#next').addClass('dis')
+		}
+		//初始化选项状态
+		function clearLiActive(){
+			$('.option li').removeClass('active')
+		}
+		//下一题方法
+		function nextQuest(){
+			window.clearInterval(time)
+			if(index < questionArr[press].length){
+				index++;
+				panduanHide();
+				window.setTimeout(function(){
+					timeAndPress(index)
+					questionHide()//问题消失
+					optHide()//选项消失
+					window.setTimeout(function(){
+						$('.danxuan').removeClass('lock')
+						//更换问题和答案
+						$('.question').html(questionArr[press][index-1]['wenti'])
+						for(var i = 0;i < questionArr[press][index-1]['option'].length;i++){
+							$('.option li').eq(i).find('span').html(questionArr[press][index-1]['option'][i])
+						}
+						isCheckbox()//判断下一个是多选还是单选
+						clearLiActive()//清空选中项
+						questionShow()//问题出现
+						optShow()//选项出现
+					},400)
+					addDis()
+				},400)
+			}else{
+				$('.jieduan').addClass('show')
+				if(dabiao()){
+					console.log('达标',press)
+					//第三次达标成功 走完程序
+					if(press >= 2){
+						window.location.href = './success.html'
+						$('.king').addClass('show')
+						return false;
+					}
+					press++;
+					$('.jieduan .lose').addClass('hide')
+					$('.jieduan .win').removeClass('hide')
+					questionHide()
+					optHide()
+					panduanHide()
+					addDis()
+					$('.time,.press').removeClass('show')
+				}else{
+					$('.jieduan .win').addClass('hide')
+					$('.jieduan .lose').removeClass('hide')
+				}
+				errCount = 0;//重置错误次数
+				index = 1;//重置索引
+			}
+		}
+		//判断每个阶段是否达标
+		function dabiao(){
+			return errCount <= limit[press] ? true : false;
+		}
+		//判断是多选还是单选
+		function isCheckbox(){
+			if(questionArr[press][index-1]['daan'].length > 1){
+				//多选
+				$('.option li').addClass('checkbox')
+				$('#next').addClass('hide')
+				$('#checkbox').removeClass('hide')
+				//如果选项多余5条显示E
+				if(questionArr[press][index-1]['option'].length >=5){
+					$('.option li').removeClass('none')
+				}else{
+					$('.option li').eq(4).addClass('none')
+				}
+			}else{
+				//单选
+				$('.option li').removeClass('checkbox')
+				$('#checkbox').addClass('hide')
+				$('#next').removeClass('hide')
+				$('.option li').eq(4).addClass('none')
+			}
+		}
+		//开始按钮
+		$('#start').on('click',function(){
+			$(this).parents('.init').addClass('over')
+			//第一次启动
+			window.setTimeout(function(){
+				timePress()
+				panduanHide()
+				questionShow()
+				optShow()
+				pressIndex(1,questionArr[0].length)
+			},800)
+			//显示时间和进度的动画
+			window.setTimeout(function(){
+				$('.time,.press').addClass('show')
+			},1000)
+		})
+		//开始下一关
+		$('#startNext').on('click',function(){
+			$('.jieduan').removeClass('show')
+			clearLiActive()
+			$('.danxuan').removeClass('lock')
+			window.setTimeout(function(){
+				timePress();
+				panduanHide()
+				//更换问题和答案
+				$('.question').html(questionArr[press][index-1]['wenti'])
+				for(var i = 0;i < questionArr[press][index-1]['option'].length;i++){
+					$('.option li').eq(i).find('span').html(questionArr[press][index-1]['option'][i])
+				}
+				$('.option li').removeClass('checkbox')
+				isCheckbox();
+				questionShow()
+				optShow()
+				pressIndex(1,questionArr[press].length)
+			},800)
+			//显示时间和进度的动画
+			window.setTimeout(function(){
+				$('.time,.press').addClass('show')
+			},1000)
+		})
+
+		//选择事件
+		$('.danxuan li').on('click',function(){
+			var t = $(this)
+			if(t.hasClass('checkbox')){
+				//多选
+				//console.log(111);
+				if(t.hasClass('active')){
+					t.removeClass('active')
+				}else{
+					t.addClass('active')
+				}
+			}else{
+				//单选
+				var danxuan = $(this).parents('.danxuan')
+				//单选点击一个选项以后这个答案就不能再点击了
+				if(!danxuan.hasClass('lock')){
+					var index = $(this).index();
+					$(this).addClass('active')
+					danxuan.addClass('lock')
+					var sel = $(this).data('option')
+					//console.log(sel)
+					panduanShow(sel)
+					removeDis()
+				}
+			}
+		})
+		//下一题按钮
+		$('#next').on('click',function(){
+			if(!$(this).hasClass('dis')){
+				nextQuest()
+			}
+		})
+		//多选确定提交按钮
+		$('#checkbox').on('click',function(){
+			$(this).addClass('hide')
+			$('#next').removeClass('hide')
+			var str = '';
+			$('.option li').each(function(i,v){
+				if($(this).hasClass('active')){
+					str += $(this).data('option')
+				}
+			})
+			panduanShow(str)
+			removeDis()
+		})
+
+
+		//首页加载全部图片
+		var imgList = [
+			'images/bg-dati.png',
+			'images/bg-init.png',
+			'images/error.png',
+			'images/ico-opt.png',
+			'images/ico-opt-sel.png',
+			'images/init-pic.png',
+			'images/king-pic.png',
+			'images/lose-pic.png',
+			'images/option-ico.png',
+			'images/right.png',
+			'images/share.png',
+			'images/stars.png',
+			'images/win-pic.png'
+		]
+		function loadImg(i){
+			var img = new Image();
+				img.src = imgList[i];
+				img.onload = function(){
+					if(i < imgList.length-1){
+						loadImg(++i)
+					}
+				}
+		}
+		window.onload = function(){
+			setTimeout(function(){
+				loadImg(0)
+			},1000)
+		}
+	</script>
+</body>
+</html>

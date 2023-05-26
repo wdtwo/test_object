@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    
+    <link rel="stylesheet" href="/vendor/charts/gaugejs/gauge.css" />
+    <script src="http://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+	
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Gauges 图表</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="http://bernii.github.io/gauge.js/" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content container-fluid">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">仪表盘</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row row-lg">
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本示例</h4>
+                            <div class="example">
+                                <div class="gauge" data-plugin="gauge">
+                                    <canvas width="400" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">动态变化</h4>
+                            <div class="example">
+                                <div class="gauge">
+                                    <div class="gauge-label"></div>
+                                    <canvas width="200" height="150" id="exampleDynamicGauge"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="example-wrap">
+                    <h4 class="example-title">不同大小</h4>
+                    <div class="row row-lg">
+                        <div class="col-sm-4">
+                            <div class="gauge gauge-lg" data-plugin="gauge" data-value="2190" data-max-value="3000">
+                                <div class="gauge-label"></div>
+                                <canvas width="300" height="220"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="gauge" data-plugin="gauge" data-value="2190" data-max-value="3000">
+                                <div class="gauge-label"></div>
+                                <canvas width="200" height="150"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="gauge gauge-sm" data-plugin="gauge" data-value="2190" data-max-value="3000">
+                                <div class="gauge-label"></div>
+                                <canvas width="150" height="110"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">环形图</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row row-lg">
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本示例</h4>
+                            <div class="example">
+                                <div class="donut" data-plugin="donut" data-value="1280" data-max-value="2000">
+                                    <canvas width="200" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">动态变化</h4>
+                            <div class="example">
+                                <div class="donut">
+                                    <div class="donut-label"></div>
+                                    <canvas width="200" height="150" id="exampleDynamicDonut"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="example-wrap">
+                    <h4 class="example-title">不同尺寸</h4>
+                    <div class="row row-lg">
+                        <div class="col-md-4">
+                            <div class="donut donut-lg" data-plugin="donut" data-value="1280" data-max-value="2000">
+                                <div class="donut-label"></div>
+                                <canvas width="300" height="220"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="donut" data-plugin="donut" data-value="1280" data-max-value="2000">
+                                <div class="donut-label"></div>
+                                <canvas width="200" height="150"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="donut donut-sm" data-plugin="donut" data-value="1280" data-max-value="2000">
+                                <div class="donut-label"></div>
+                                <canvas width="150" height="110"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+	$.fn.gauge = function(opts,TValue) {
+        var self = this[0];
+        //console.log(this);
+        var $this = $(self),
+            data = $this.data();
+        if (data.gauge) {
+            data.gauge.stop();
+            delete data.gauge;
+        }
+        if (opts !== false) {
+            data.gauge = new Gauge(self).setOptions(opts);
+            
+            data.gauge.maxValue = 50; // 最大值
+            data.gauge.setMinValue(-20);  //最小值
+            data.gauge.animationSpeed = 37; //动画速度
+            data.gauge.set(TValue); //实际值
+        }
+		return data.gauge;
+	};
+
+    $('[data-plugin="gauge"] canvas').each(function(i,v){
+        var self = $(this);
+        self.gauge({
+            angle: 0, 				// 轨距弧的跨度
+            lineWidth: 0.1, 		// 刻度线宽
+            radiusScale: .7, 		// 放大倍数
+            colorStart: 'red',   // Colors
+            colorStop: '#dc5566',    // 划过刻度线的颜色
+            strokeColor: '#efefef',  //刻度线颜色
+
+            pointer: {			//指针
+                length: 0.5,  		// 指针长度
+                strokeWidth: 0.02,  // 指针宽度
+                color: '#999' 		// 填充颜色
+            },
+            staticLabels: {
+                font: "14px sans-serif",  // 文字参数
+                labels: [ -20, -10, 0, 10, 20, 30, 40, 50, 60, 70],  // 刻度
+                color: "#000000",  // 文字颜色
+                fractionDigits: 1  // 小数位
+            },
+            staticZones: [              //阶段颜色
+                {strokeStyle: "#F03E3E", min: -20, max: 0}, // Red from 100 to 130
+                {strokeStyle: "#FFDD00", min: 0, max: 30}, // Yellow
+                {strokeStyle: "#30B32D", min: 30, max: 40}, // Green
+                {strokeStyle: "#FFDD00", min: 40, max: 50}, // Yellow
+                {strokeStyle: "blue", min: 50, max: 60}  // Red
+            ],
+            renderTicks: {             //显示刻度
+                divisions: 5,           //密度
+                divWidth: 2.1,          //刻度线粗
+                divLength: 1,          //刻度线长 基于表盘宽度
+                divColor: '#333333',    //
+                subDivisions: 10,       //小刻度线
+                subLength: 0.5,         //
+                subWidth: 0.6,          //
+                subColor:'#666666'      //
+            },
+            limitMax: false,     // If false, max value increases automatically if value > maxValue
+            limitMin: false,     // If true, the min value of the gauge will be fixed
+            
+            generateGradient: false,
+            highDpiSupport: false     // High resolution support
+        },Math.floor(Math.random()*70)-20);
+
+    })
+    var demo = $('#exampleDynamicGauge').gauge({
+        angle: -.1, 			// 轨距弧的跨度
+        lineWidth: 0.1, 		// 刻度线宽
+        radiusScale: .7, 		// 放大倍数
+        pointer: {			//指针
+            length: 0.5,  		// 指针长度
+            strokeWidth: 0.02,  // 指针宽度
+            color: '#999' 		// 填充颜色
+        },
+        staticLabels: {         // 文字参数
+            font: "15px sans-serif",    
+            labels: [ -20, -10, 0, 10, 20, 30, 40, 50, 60, 70],  // 刻度
+            color: "#000000",           // 文字颜色
+            fractionDigits: 0           // 可选：数值精度。0=舍入。
+        },
+        
+        limitMax: false,                // If false, max value increases automatically if value > maxValue
+        limitMin: false,                // If true, the min value of the gauge will be fixed
+        colorStart: 'red',              // Colors
+        colorStop: '#dc5566',           // 划过刻度线的颜色
+        strokeColor: '#efefef',         //刻度线颜色
+        generateGradient: false,
+        highDpiSupport: false           // High resolution support
+    },Math.floor(Math.random()*70)-20);
+    window.setInterval(function(){
+        demo.set(Math.floor(Math.random()*70)-20);
+    },1500)
+    
+	console.log(demo);
+	
+	
+</script>
+
+
+</body>
+</html>

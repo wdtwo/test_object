@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+	<link rel="stylesheet" href="/vendor/bootstrap-slider/css/bootstrap-slider.css" />
+	<script src="/vendor/bootstrap-slider/bootstrap-slider.js"></script>
+
+	<link rel="stylesheet" href="/vendor/jquery-strength/css/strength.css" />
+	<script src="/vendor/jquery-strength/password_strength.js"></script>
+	<script src="/vendor/jquery-strength/jquery-strength.js"></script>
+
+	<script src="/vendor/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+
+	<script src="/vendor/jquery-knob/jquery.knob.js"></script>
+
+	<style>
+		.strength-container {
+			position: relative;
+		}
+		.strength-container .strength-meter {
+		}
+		.strength-container .strength-score {
+			position: absolute;
+			top:15%;
+			right:5px;
+			z-index: 5;
+			width:4px;
+			height:70%;
+			background: #ddd;
+		}
+		.strength-container .label-danger {
+			background: #dc3545;
+		}
+		.strength-container .label-warning {
+			background: #ffc107;
+		}
+		.strength-container .label-info {
+			background: #20c997;
+		}
+		.strength-container .label-success {
+			background: #28a745;
+		}
+	</style>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-forms">
+    <div class="page-header">
+        <h1 class="page-title">其他表单元素</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="javascript:;">首页</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">表单</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">高级表单元素</a>
+            </li>
+            <li class="breadcrumb-item active">其他表单元素</li>
+        </ol>
+    </div>
+    <div class="page-content container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Maxlength Control（输入长度限制）
+                    <small>
+                        <a class="example-plugin-link" href="https://github.com/mimo84/bootstrap-maxlength" target="_blank">
+							官网
+                        </a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-md-6">
+                        <div class="example-wrap m-sm-0">
+                            <h4 class="example-title">文本框</h4>
+                            <p>
+                                <code>max-length</code> 设为35 </p>
+                            <div class="example">
+                                <input
+                                	type="text"
+                                	class="maxlength-input form-control"
+                                	data-plugin="maxlength"
+                                    data-placement="bottom-right-inside"
+                                    maxlength="35"
+                                    value=""
+                                    placeholder="最大允许输入35个字符">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">文本域</h4>
+                            <p>
+                                <code>max-length</code> 设为100
+                            </p>
+                            <div class="example">
+                                <textarea
+                                	class="maxlength-textarea form-control"
+                                	data-plugin="maxlength"
+                                    data-placement="bottom-right-inside"
+                                    maxlength="100"
+                                    rows="3"
+                                    value=""
+                                    placeholder="最大允许输入100个字符"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel">
+                    <header class="panel-heading">
+                        <h3 class="panel-title">Bootstrap Slider (范围选择）
+                            <small>
+                                <a class="example-plugin-link" href="http://seiyria.com/bootstrap-slider/" target="_blank">
+									官网
+                                </a>
+                            </small>
+                        </h3>
+                    </header>
+                    <div class="panel-body">
+                        <p>
+                        	使用
+                            <code>data-plugin="bootstrapSlider"</code>
+							创建
+                        </p>
+                        <div class="example-wrap">
+                            <h4 class="example-title">默认</h4>
+                            <div class="example">
+                                <input type="text" data-plugin="bootstrapSlider" data-slider-min="0" data-slider-max="20"
+                                    data-slider-step="1" data-slider-value="14">
+                            </div>
+                        </div>
+                        <div class="example-wrap">
+                            <h4 class="example-title">范围</h4>
+                            <div class="example">
+                                <input type="text" data-plugin="bootstrapSlider" data-slider-min="10" data-slider-max="1000"
+                                    data-slider-step="5" data-slider-value="[150,850]">
+                            </div>
+                        </div>
+                        <div class="example-wrap">
+                            <h4 class="example-title">竖向显示</h4>
+                            <div class="example h-100">
+                                <input type="text" data-plugin="bootstrapSlider" data-slider-min="0" data-slider-max="20"
+                                    data-slider-step="1" data-slider-value="14" data-slider-orientation="vertical">
+                            </div>
+                        </div>
+                        <div class="example-wrap">
+                            <div class="example h-100">
+                                <textarea class="form-control" id="slider-output" name="" rows="" cols="" disabled=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <header class="panel-heading">
+                        <h3 class="panel-title">Jquery Strength（密码强度验证）
+                            <small>
+                                <a class="example-plugin-link" href="https://github.com/amazingSurge/jquery-strength"
+                                    target="_blank">
+									官网
+                                </a>
+                            </small>
+                        </h3>
+                    </header>
+                    <div class="panel-body">
+                        <p>
+                        	使用
+                            <code>data-plugin="strength"</code>
+							创建
+                        </p>
+                        <div class="example-wrap">
+                            <form class="example mb-40">
+                                <div class="form-group">
+                                    <label class="col-form-label mb-15" for="inputPassword1">密码</label>
+                                    <input
+                                    	type="password"
+                                    	class="password-strength-example1 form-control"
+                                    	id="inputPassword1"
+                                        name="inputPasswords"
+                                        data-plugin="strength"
+                                        value="" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label mb-15" for="inputPassword2">密码</label>
+                                    <input
+                                    	type="password"
+                                    	class="password-strength-example2 form-control"
+                                    	id="inputPassword2"
+                                        name="inputPasswords"
+                                        data-plugin="strength"
+                                        data-show-toggle="true"
+                                        value="123456" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <header class="panel-heading">
+                <h3 class="panel-title">Jquery Knob（旋钮）
+                    <small>
+                        <a class="example-plugin-link" href="https://github.com/aterrien/jQuery-Knob" target="_blank">
+							官网
+                        </a>
+                    </small>
+                </h3>
+            </header>
+            <div class="panel-body">
+                <p>
+                	使用
+                    <code>data-plugin="knob"</code> 创建， 使用
+                    <code>data-option</code> 设置
+                </p>
+                <div class="row text-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <input
+                                	type="text"
+                                	class="knob-chart knob-example-5"
+                                	data-plugin="knob"
+                                    data-displayInput="false"
+                                    data-fg-color="#526069"
+                                    value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <input
+                                	type="text"
+                                	class="knob-chart knob-example-3"
+                                	data-plugin="knob"
+                                	data-line-cap="round"
+                                    data-fg-color="#62a8ea"
+                                    data-cursor="true"
+                                    value="-25">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <input
+                                	type="text"
+                                	class="knob-chart knob-example-1"
+                                	data-plugin="knob"
+                                	data-fg-color="#f96868"
+                                    data-min="0"
+                                    data-max="100"
+                                    value="20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <input
+                                	type="text"
+                                	class="knob-chart knob-example-2"
+                                	data-plugin="knob"
+                                	data-min="-15000"
+                                    data-max="15000"
+                                    data-step="1000"
+                                    data-display-previous="true"
+                                    data-fg-color="#926dde"
+                                    value="-10000">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <input
+                                	type="text"
+                                	class="knob-chart knob-example-6"
+                                	data-plugin="knob"
+                                    data-angleOffset="90"
+                                    data-linecap="round"
+                                    data-min="0"
+                                    data-max="100"
+                                    data-fg-color="#57c7d4"
+                                    value="60">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <input
+                                	type="text"
+                                	class="knob-chart knob-example-4"
+                                	data-plugin="knob"
+                                	data-fg-color="#3aa99e"
+                                    data-cursor="true"
+                                    data-line-cap="round"
+                                    data-angle-offset="-125"
+                                    data-angle-arc="250"
+                                    data-min="-50"
+                                    data-max="50"
+                                    value="11">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<script>
+		/* Maxlength Control（输入长度限制） */
+		//https://github.com/mimo84/bootstrap-maxlength
+		$('[data-plugin="maxlength"]').maxlength({
+		    alwaysShow		  : false,	//阈值
+		    threshold		  : 10,	//还剩多少字符开始显示限制长度
+		    warningClass	  : "label label-info",	//指示器的元素的类
+		    limitReachedClass : "label label-warning",//达到限制时元素将获取的类
+		    /*
+			    bottom
+			    left
+			    top
+			    right
+			    bottom-right
+			    top-right
+			    top-left
+			    bottom-left
+			    centered-right。
+				也可用：
+				    bottom-right-inside（默认选项，如谷歌的材质设计）
+				    top-right-inside
+				    top-left-inside
+				    bottom-left-inside。
+		    */
+		    placement		  : 'bottom-right-inside',
+		    preText			  : '已经输入 ',
+		    separator		  : ' 了，共可输入',
+		    postText		  : ' 字符.'
+		});
+
+		/* Bootstrap Slider (范围选择） */
+		//http://seiyria.com/bootstrap-slider/
+		$('[data-plugin="bootstrapSlider"]').each(function(){
+			new Slider(this, {
+				formatter: function(value) {
+					$("#slider-output").val(value);
+					//console.log(value);
+					//return 'Current value: ' + value;
+				}
+			});
+		})
+
+
+		/* Jquery Strength（密码强度验证） */
+		//https://github.com/thecreation/jquery-strength
+		$("#inputPassword1").strength({
+			templates: {
+                score : `<span class="label {scoreClass}"></span>`,
+			    meter : `<div class="{meterClass}">{score}</div>`,
+			    main  : `
+			    	<div class="{containerClass}">
+			    		<div class="input-group">{input}{meter}</div>
+
+			    	</div>`
+			},
+			scoreLables: {	//强度提示词
+			    empty	: '',	//空的 Empty
+			    invalid : '',	//无效得 Invalid
+			    weak	: '',	//弱 Weak
+			    good	: '',	//好的 Good
+			    strong	: ''	//强的 Strong
+			},
+			scoreClasses: {//强度提示class
+			    empty	: '',
+			    invalid : 'label-danger',
+			    weak	: 'label-warning',
+			    good	: 'label-info',
+			    strong	: 'label-success'
+			},
+		});
+		{
+		$("#inputPassword2").strength({
+		  	namespace	: 'strength',
+		  	skin		: null,
+		  	showMeter	: true,
+		  	showToggle	: true,
+
+			templates: {
+			    toggle : `
+			    		<div class="checkbox-custom checkbox-primary show-password-wrap">
+                            <input type="checkbox" id="inputUnchecked" class="strength-toggle" title="Show/Hide Password">
+                            <label for="inputUnchecked">显示密码</label>
+                        </div>`,
+                score : `<span class="label {scoreClass}"></span>`,
+			    meter : `<div class="{meterClass}">{score}</div>`,
+			    main  : `
+			    	<div class="{containerClass}">
+			    		<div class="input-group">{input}{meter}</div>
+
+			    		{toggle}
+			    	</div>`
+			},
+
+			/*classes: {
+			    container: 'strength-container',
+			    status	: 'strength-{status}',
+			    input	: 'strength-input',
+			    toggle	: 'strength-toggle',
+			    meter	: 'strength-meter',
+			    score	: 'strength-score'
+			},*/
+			scoreLables: {	//强度提示词
+			    empty	: '空',	//空的 Empty
+			    invalid : '无效',	//无效得 Invalid
+			    weak	: '弱',	//弱 Weak
+			    good	: '好',	//好的 Good
+			    strong	: '强'	//强的 Strong
+			},
+			scoreClasses: {//强度提示class
+			    empty	: '',
+			    invalid : 'label-danger',
+			    weak	: 'label-warning',
+			    good	: 'label-info',
+			    strong	: 'label-success'
+			},
+		  	//emptyStatus: true,
+		  	//scoreCallback: null,
+		  	//statusCallback: null
+		});
+		}
+
+		/* Jquery Knob（旋钮） */
+		//http://anthonyterrien.com/knob
+		$('[data-plugin="knob"]').each(function(){
+			var t = $(this);
+			t.knob({
+
+				width 		: 120,
+				height 		: 120,
+				thickness 	: 0.1,//厚度
+				cursor 		: getData(t,'cursor'),//滑块宽度
+
+				step 		: getData(t,'step'),//步长
+
+				lineCap 	: getData(t,'line-cap'), //仪表笔划末端 default=butt, round=rounded line endings
+				angleOffset : getData(t,'angle-offset'),//开始角度
+            	angleArc 	: getData(t,'angle-arc'),//结束角度
+
+				fgColor 	: getData(t,'fg-color'), //前景色
+				bgColor 	: '#efefef',//背景颜色
+				inputColor  : getData(t,'fg-color'),//文字颜色
+
+				'release' 	: function(v){
+					//release  change   draw   cancel   format
+					console.log(v);
+				}
+			});
+		})
+		function getData(t,str){
+			return t.data(str)
+		}
+	</script>
+</body>
+</html>

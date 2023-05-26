@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>手机轮盘</title>
+	<link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css"/>
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	
+</head>
+<body style="background: white;">
+	<div class="wrap page_2 no-bg">
+		<header class="flex">
+			<i class="go-back"></i>
+			<div>请填写收货地址</div>
+			<span></span>
+		</header>
+		<div class="address-info">
+			<dl>
+				<dt>收货人</dt>
+				<dd>
+					<input type="text" placeholder="请填写收货人姓名" autocomplete="value" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>联系电话</dt>
+				<dd>
+					<input type="tel" placeholder="请填写收货人联系电话" autocomplete="value" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>选择地区</dt>
+				<dd>
+					<input type='text' id='city-picker' placeholder='请选择省市区县' value="北京 北京市 海淀区" />
+				</dd>
+			</dl>
+			<dl style="height:200px;align-items: flex-start;">
+				<dt>详细地址</dt>
+				<dd>
+					<textarea placeholder="请填写详细收货地址 如：城市-地区-道路-门牌号-小区-楼栋号-单元-室等…" autocomplete="value"></textarea>
+				</dd>
+			</dl>
+			<button class="flex">保存</button>
+		</div>
+		<div class="address-tips">
+			<dl class="flex">
+				<dt>
+					<img src="images/tishi.png" />
+				</dt>
+				<dd>
+					请您及时填写收货地址，最晚在<span>3天</span>内填写完成。<br />
+					奖品自<span>确认收货地址后15天内发货。</span><br />
+					可到奖品背包中查看物流进度。<br />
+					如有问题，请及时联系客服4006-456-999
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<script src="js/jquery-weui.min.js"></script>
+	<script src="js/city-picker.min.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+		//三级联动
+		var a = $("#city-picker").cityPicker({
+	        title: "请选择地区",
+	        onChange: function (picker, values, displayValues) {
+	            console.log(picker,values, displayValues);
+	        }
+	    });
+        console.log(a);
+	</script>
+</body>
+</html>

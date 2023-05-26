@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title></title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+			box-sizing: border-box;
+		}
+		html,body {
+			height:100%;
+			background-color: #efefef;
+		}
+		.move {
+			width:200px;
+			height:500px;
+			margin:0 auto;
+		}
+		.box {
+			width:200px;
+			height:500px;
+			position: relative;
+			background-color: aqua;
+		}
+	</style>
+	
+</head>
+<body style="padding-top: 100px;">
+	<div class="move">
+		<div class="box" id="box"></div>
+	</div>
+
+	<script>
+		let moveHeight = 0;
+		let box = document.getElementById('box');
+			box.onmousedown = function(e){
+				//console.log(e.clientY);
+				var start = e.clientY;
+				//按下
+				//console.log('按下');
+				document.body.onmousemove = function(e){
+					let diff = start - e.clientY;
+					box.style.cssText = `
+						transform: translateY(${-(diff)/3}px);
+					`;
+					if(diff > 0){
+						console.log('上拉')
+						
+					}else{
+						console.log('下拉')
+					}
+				}
+			}
+			document.body.onmouseup = function(){
+				//抬起
+				//console.log('抬起');
+				document.body.onmousemove = null;
+				box.style.cssText = `
+					transform: translateY(0px);
+				`;
+			}
+
+
+	</script>
+</body>
+</html>

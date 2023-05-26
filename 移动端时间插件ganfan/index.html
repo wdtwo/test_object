@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>尚美订餐</title>
+	<link href="css/basic.css?v=4" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/toast.css?v=1">
+	<link rel="stylesheet" href="css/frozen.css?v=1">
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 750));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+	
+</head>
+<body>
+	<div class="wrap">
+		<div class="box">
+			<dl>
+				<dt class="flex flex-jus-start">
+					<i class="ui-icon-history"></i>
+					订餐时间
+				</dt>
+				<dd class="timebox"></dd>
+			</dl>
+		</div>
+		<div class="box">
+			<dl>
+				<dt class="flex flex-jus-start">
+					<i class="ui-icon-cart"></i>
+					预定信息
+				</dt>
+				<dd>
+					<!-- <div>
+						<input type="text" placeholder="订餐人" id="user">
+					</div> -->
+					<div>
+						<select name="" id="floor">
+							<option value="0">请选择楼层</option>
+							<option value="7">7楼</option>
+							<option value="8">8楼</option>
+							<option value="9">9楼</option>
+							<option value="10">10楼</option>
+							<option value="11">11楼</option>
+							<option value="12">12楼</option>
+						</select>
+					</div>
+				</dd>
+			</dl>
+		</div>
+		<div class="box">
+			<dl>
+				<dt class="flex flex-jus-start">
+					<i class="ui-icon-info"></i>
+					订餐须知
+				</dt>
+				<dd>
+					<p>
+					1、使用企业微信扫码或点击企业微信应用，填写订餐信息，以便于餐厅统计用餐数量；
+					</p>
+					<p>
+					2、每人限订1份。为精准备餐，避免不必要的浪费，象征性收取餐费5元/份，订餐时在线支持即可。
+					</p>
+					<p>
+					3、当日订餐不得晚于11：00，非当日用餐可提前三天预订。
+					</p>
+					<p>
+					4、取餐时需展示取餐码，扫码领取。
+					</p>
+					<p>
+					5、订餐后不支持退款。
+					</p>
+				</dd>
+			</dl>
+		</div>
+		<div class="fixed pay flex flex-jus-between">
+			<div class="je"><small>￥</small><b>0</b></div>
+			<div class="submit flex">提交订单</div>
+		</div>
+	</div>
+	
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/toast.js"></script>
+	<script src="js/dateMultiFunc.min.js"></script>
+	<script>
+
+		var totalje = 0;//总金额
+		var time = []
+
+
+		//如果现在是11点之前则可以点击今天明天后天
+		//如果是11点之后则可以点击明天后天大后天
+		var nowDate = new Date()
+		var nowTime = nowDate.getHours()
+		console.log(nowTime);
+		var oneDay = 24*60*60*1000
+		var time = 0
+
+		//获取今天日期
+		var date = new Date(nowDate.getTime())
+		var now = {
+			year : date.getFullYear(),
+			month : date.getMonth()+1,
+			day  :date.getDate()
+		}
+
+		//获取三天以后的日期
+		var dateAfter3day = new Date(date.getTime()+time)
+		var after3day = {
+			year : dateAfter3day.getFullYear(),
+			month : dateAfter3day.getMonth()+1,
+			day  :dateAfter3day.getDate()
+		}
+		var dateMulti = new dateMultiFunc({
+			type: 1,
+			minTime: `${now.year}.${now.month}.${now.day}`,
+			maxTime: `${after3day.year}.${after3day.month}.${after3day.day}`,//最大日期
+			cancelFunc: function() {
+				console.log("取消")
+			},
+			confirmFunc: function(res) {
+				console.log("确认")
+				console.log(res)
+				time = res;
+				totalje = res.length*5
+				$('.je b').html(totalje)
+			}
+		});
+		dateMulti.show();
+		//提交
+		$('.submit').click(function(){
+			console.log($('.toast_div'));
+			console.log(time.length);
+			if(time.length <=0){
+				showMessage('请选择时间!',1500,true);
+				return false;
+			}
+			// if(!$('#user').val()){
+			// 	showMessage('请填写姓名!',1500,true);
+			// 	return false;
+			// }
+			if($('#floor').val() == 0){
+				showMessage('请选择楼层!',1500,true);
+				return false;
+			}
+			$.ajax({
+				url:'/',
+				method:'get',
+				data:{
+					time:time
+				},
+				success:function(){
+					showMessage('提交成功!',2000,true);
+					setTimeout(function(){
+						//关闭窗口
+						window.close();
+						//关闭安卓系统的手机
+						document.addEventListener('WeixinJSBridgeReady', function(){ WeixinJSBridge.call('closeWindow'); }, false);
+						//关闭ios系统的手机
+						WeixinJSBridge.call('closeWindow');
+						wx.closeWindow();
+					},20000)
+				}
+			})
+		})
+	</script>
+</body>
+</html>

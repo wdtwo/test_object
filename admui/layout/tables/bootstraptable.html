@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="/vendor/bootstrap-table/bootstrap-table.css">
+    <script src="/vendor/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/vendor/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<!--     <link rel="stylesheet" href="/vendor/bootstrap-select/bootstrap-select.css">
+    <script src="/vendor/bootstrap-select/bootstrap-select.js"></script>
+ -->
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="page-aside-fixed page-aside-left site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-bs-table">
+    <div class="page-aside" style="display: none;">
+        <div class="page-aside-switch">
+            <i class="icon wb-chevron-left" aria-hidden="true"></i>
+            <i class="icon wb-chevron-right" aria-hidden="true"></i>
+        </div>
+        <div class="page-aside-inner h-full" data-plugin="mCustomScrollbar">
+            <section class="page-aside-section">
+                <h5 class="page-aside-title">选项</h5>
+                <div class="list-group">
+                    <a class="list-group-item active" href="/tables/bootstrap-table/options/boolean-options.html">
+                        <i class="fa fa-circle-o"></i> 布尔配置项
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/from-html.html">
+                        <i class="fa fa-circle-o"></i> Html 表格
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/from-data.html">
+                        <i class="fa fa-circle-o"></i> 数据表格
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/modal-table.html">
+                        <i class="fa fa-circle-o"></i> 包含在模态框中
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/table-style.html">
+                        <i class="fa fa-circle-o"></i> 表格样式
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/no-bordered.html">
+                        <i class="fa fa-circle-o"></i> 无边框表格
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/aligning-columns.html">
+                        <i class="fa fa-circle-o"></i> 单元格对齐
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/basic-sort.html">
+                        <i class="fa fa-circle-o"></i> 基础排序
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/custom-sort.html">
+                        <i class="fa fa-circle-o"></i> 自定义排序
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/format.html">
+                        <i class="fa fa-circle-o"></i> 格式化
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/basic-columns.html">
+                        <i class="fa fa-circle-o"></i> 基础列
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/large-columns.html">
+                        <i class="fa fa-circle-o"></i> 列较多的情况
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/group-columns.html">
+                        <i class="fa fa-circle-o"></i> 列分组
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/disabled-checkbox.html">
+                        <i class="fa fa-circle-o"></i> 禁用复选框
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/custom-toolbar.html">
+                        <i class="fa fa-circle-o"></i> 自定义工具条
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/detail-view.html">
+                        <i class="fa fa-circle-o"></i> 展开行
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/sub-table.html">
+                        <i class="fa fa-circle-o"></i> 嵌套子表格
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/multiple-table.html">
+                        <i class="fa fa-circle-o"></i> 多个表格
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/client-side-pagination.html">
+                        <i class="fa fa-circle-o"></i> 客户端分页
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/server-side-pagination.html">
+                        <i class="fa fa-circle-o"></i> 服务器端分页
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/pagination-custom-text.html">
+                        <i class="fa fa-circle-o"></i> 自定义分页文本
+                    </a>
+                    <a class="list-group-item" href="/tables/bootstrap-table/options/custom-ajax.html">
+                        <i class="fa fa-circle-o"></i> 自定义 Ajax
+                    </a>
+                </div>
+            </section>
+        </div>
+
+    </div>
+    <div class="page-main" style="margin-left:0;">
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">布尔配置项</h1>
+                <div class="page-header-actions">
+                    <a class="btn btn-inverse btn-round" href="http://bootstrap-table.wenzhixin.net.cn/zh-cn/"
+                       target="_blank">
+                        <i class="fa fa-language" aria-hidden="true"></i> 
+                        中文官网
+                    </a>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-body">
+                        <table id="table1"></table>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(function(){
+                    $('#table1').bootstrapTable({
+                        pagination: true,//分页
+                        search: true,//搜索
+                        url:"/datas/tables/data1.json",//异步数据
+                        columns: [{//列名
+                            field: 'id',
+                            title: 'Item ID'
+                        }, {
+                            field: 'name',
+                            title: 'Item Name'
+                        }, {
+                            field: 'price',
+                            title: 'Item Price'
+                        },{
+                            field: 'amount',
+                            title: 'Item amount'
+                        }],
+                        /* data: [{
+                            id: 1,
+                            name: 'Item 1',
+                            price: '$1'
+                        }, {
+                            id: 2,
+                            name: 'Item 2',
+                            price: '$2'
+                        }] */
+                    });
+                })
+            </script>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">Html 表格</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">从现有的、未格式化的 html 转化表格</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table data-toggle="table">
+                            <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>Stars</th>
+                                <th>Forks</th>
+                                <th>简介</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr id="tr-id-1" class="tr-class-1" data-title="bootstrap table">
+                                <td id="td-id-1" class="td-class-1" data-title="bootstrap table">
+                                    <a href="https://github.com/wenzhixin/bootstrap-table" target="_blank">bootstrap-table</a>
+                                </td>
+                                <td data-value="526">526</td>
+                                <td data-text="122">122</td>
+                                <td data-i18n="Description">基于 Bootstrap 的 jQuery
+                                    表格插件，通过简单的设置，就可以拥有强大的单选、多选、排序、分页，以及编辑、导出、过滤（扩展）等等的功能。
+                                </td>
+                            </tr>
+                            <tr id="tr-id-2" class="tr-class-2">
+                                <td id="td-id-2" class="td-class-2">
+                                    <a href="https://github.com/wenzhixin/multiple-select" target="_blank">multiple-select</a>
+                                </td>
+                                <td>288</td>
+                                <td>150</td>
+                                <td>一个用来选择多个元素的 jQuery 插件
+                                </td>
+                            </tr>
+                            <tr id="tr-id-3" class="tr-class-3">
+                                <td id="td-id-3" class="td-class-3">
+                                    <a href="https://github.com/wenzhixin/bootstrap-show-password" target="_blank">bootstrap-show-password</a>
+                                </td>
+                                <td>32</td>
+                                <td>11</td>
+                                <td>显示/隐藏密码的 Bootstrap 插件
+                                </td>
+                            </tr>
+                            <tr id="tr-id-4" class="tr-class-4">
+                                <td id="td-id-4" class="td-class-4">
+                                    <a href="https://github.com/wenzhixin/blog" target="_blank">博客</a>
+                                </td>
+                                <td>13</td>
+                                <td>4</td>
+                                <td>我的博客</td>
+                            </tr>
+                            <tr id="tr-id-5" class="tr-class-5">
+                                <td id="td-id-5" class="td-class-5">
+                                    <a href="https://github.com/wenzhixin/scutech-redmine" target="_blank">scutech-redmine</a>
+                                <td>6</td>
+                                <td>3</td>
+                                <td>Chrome 扩展工具</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">数据表格</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">从现有的、未格式化的 html 转化表格</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table3">
+                            <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>   
+            <script>
+                $(function(){
+                    $('#table3').bootstrapTable({
+                        url:"/datas/tables/data3.json",//异步数据
+                    }); 
+                })
+            </script> 
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">包含在模态框中</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTable">
+                            打开模态框
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">模态框</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table id="table4" data-toggle="table" data-height="199" data-url="/datas/tables/data2.json">
+                                <thead>
+                                <tr>
+                                    <th data-field="id">ID</th>
+                                    <th data-field="name">条目名称</th>
+                                    <th data-field="price">条目价格</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">表格样式</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>height</code>, 
+                                <code>classes</code>, 
+                                <code>striped</code>,
+                                <code>rowStyle</code> 
+                                和 <code>class</code>, 
+                                <code>width</code>, 
+                                <code>cellStyle</code>
+                                列选项设置样式
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table data-toggle="table" data-url="/datas/tables/data2.json"
+                               data-height="200" data-row-style="rowStyle">
+                            <thead>
+                                <tr>
+                                    <th data-field="id" class="col-md-2">ID</th>
+                                    <th data-field="name" class="col-md-6">
+                                        <i class="glyphicon glyphicon-star"></i>
+                                        条目名称
+                                    </th>
+                                    <th data-field="price" class="col-md-4">
+                                        <i class="glyphicon glyphicon-heart"></i>
+                                        条目价格
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-main">
+                <div class="page-header">
+                    <h1 class="page-title">无边框表格</h1>
+                </div>
+                <div class="page-content">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="panel-desc">
+                                    <code>classes</code> 选项设置为
+                                    <code>table table-no-bordered</code> 
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table id="table5" data-toggle="table" data-classes="table table-no-bordered"
+                                   data-url="/datas/tables/data2.json">
+                                <thead>
+                                    <tr>
+                                        <th data-field="id">ID</th>
+                                        <th data-field="name">条目名称</th>
+                                        <th data-field="price">条目价格</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">单元格对齐</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>align</code>, 
+                                <code>halign</code> 和 
+                                <code>valign</code>
+                                选项设置列和表头的对齐方式
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table6" data-toggle="table" data-height="160"
+                               data-url="/datas/tables/data2.json">
+                            <thead>
+                            <tr>
+                                <th data-field="id" data-halign="right" data-align="center">ID</th>
+                                <th data-field="name" data-halign="center" data-align="left">条目名称</th>
+                                <th data-field="price" data-halign="left" data-align="right">价格
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">基础排序</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>sortName</code>, 
+                                <code>sortOrder</code>, 
+                                <code>sortable</code>
+                                选项和 <coe>sortable</coe>, 
+                                <code>order</code> 
+                                列选项设置默认排序
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table7" data-toggle="table" data-height="160"
+                               data-url="/datas/tables/data2.json"
+                               data-sort-name="name" data-sort-order="desc">
+                            <thead>
+                            <tr>
+                                <th data-field="id" data-sortable="true">ID</th>
+                                <th data-field="name" data-sortable="true">条目名称</th>
+                                <th data-field="price" data-sortable="true">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">自定义排序</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 
+                                <code>sorter</code> 
+                                列选项定义自定义排序
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table8" data-toggle="table" data-height="160"
+                               data-url="/datas/tables/data2.json"
+                               data-sort-name="price" data-sort-order="desc">
+                            <thead>
+                            <tr>
+                                <th data-field="id" data-sortable="true">ID</th>
+                                <th data-field="name" data-sortable="true">条目名称</th>
+                                <th data-field="price" data-sortable="true" data-sorter="priceSorter">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>       
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">格式化</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">使用 <code>formatter</code> 列选项设置显示格式</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table9" data-toggle="table" data-height="160"
+                               data-url="/datas/tables/data2.json">
+                            <thead>
+                                <tr>
+                                    <th data-field="id" data-formatter="ID: %s">ID</th>
+                                    <th data-field="name" data-formatter="nameFormatter">条目名称</th>
+                                    <th data-field="price" data-formatter="priceFormatter">条目价格</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">基础列</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>showColumns</code>, 
+                                <code>minimumCountColumns</code> 选项和
+                                <code>visible</code>, 
+                                <code>switchable</code> 
+                                列选项设置显示用于切换的列菜单
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table10" data-toggle="table" data-height="260"
+                               data-url="/datas/tables/data2.json"
+                               data-show-columns="true" data-id-field="id">
+                            <thead>
+                            <tr>
+                                <th data-field="state" data-radio="true"></th>
+                                <th data-field="name" data-switchable="false">名称</th>
+                                <th data-field="price">价格</th>
+                                <th data-field="column1">第1列</th>
+                                <th data-field="column2" data-visible="false">第2列</th>
+                                <th data-field="column3" data-switchable="false">第3列</th>
+                                <th data-field="column4" data-visible="false">第4列</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">列分组</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 
+                                <code>rowspan</code>, 
+                                <code>colspan</code> 
+                                选项设置列表头
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table11" data-toggle="table" class="mb-0" data-height='200'
+                               data-url="/datas/tables/data2.json">
+                            <thead>
+                            <tr>
+                                <th colspan="2">条目详情</th>
+                                <th data-field="id" rowspan="2" data-valign="middle">ID</th>
+                            </tr>
+                            <tr>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">禁用复选框</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>checkboxHeader</code>, 
+                                <code>checkboxEnable</code> 选项和 
+                                <coe>sortable</coe>,
+                                <code>formatter</code> 
+                                列选项禁用复选框
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table12" data-toggle="table" data-click-to-select="true" 
+                               data-url="/datas/tables/data3.json">
+                            <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">自定义工具条</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">使用 <code>toolbar</code> 选项自定义工具条</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="toolbar">
+                            <div class="form-inline" role="form">
+                                <div class="form-group">
+                                    <span>偏移：</span>
+                                    <input name="offset" class="form-control w70" type="number" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <span>限制：</span>
+                                    <input name="limit" class="form-control w70" type="number" value="5">
+                                </div>
+                                <div class="form-group">
+                                    <input name="search" class="form-control" type="text" placeholder="查找">
+                                </div>
+                                <button id="ok" type="submit" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                        <!-- TODO: 此处需要后端接口 -->
+                        <!-- FIXME: toggle 按钮不显示图标 -->
+                        <table id="table13" data-toggle="table" data-toolbar="#toolbar"
+                               data-show-refresh="true"
+                               data-show-toggle="true" data-show-columns="true" data-query-params="queryParams"
+                               data-response-handler="responseHandler"
+                               data-url="/datas/tables/data1.json">
+                            <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">展开行</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>detailView</code> 
+                                和 <code>detailFormatter</code> 
+                                选项展开行
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table14" data-toggle="table" data-height="260" data-detail-view="true"
+                               data-detail-formatter="detailFormatter"
+                               data-url="/datas/tables/data1.json">
+                            <thead>
+                                <tr>
+                                    <th data-field="id">ID</th>
+                                    <th data-field="name">条目名称</th>
+                                    <th data-field="price">条目价格</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">嵌套子表格</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>onExpandRow</code> 
+                                事件处理详细视图
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table15" data-detail-view="true">
+                            <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">多个表格</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table data-toggle="table"
+                                       data-url="/datas/tables/data2.json">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="github.name" data-formatter="operateFormatter"
+                                            data-events="operateEvents">书签
+                                            1
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table data-toggle="table"
+                                       data-url="/datas/tables/data2.json">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="github.name" data-formatter="operateFormatter"
+                                            data-events="operateEvents">书签
+                                            2
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">客户端分页</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">使用 <code>pagination</code>, <code>sidePagination</code>, <code>pageNumber</code>,
+                                <code>pageSize</code>, <code>pageList</code> 选项来设置分页</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table16" data-toggle="table" data-height="460" data-pagination="true" data-search="true"
+                               data-url="/datas/tables/data1.json">
+                            <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">服务器端分页</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>sidePagination: 'server'</code> 
+                                选项来定义服务器端分页
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- TODO: 此处需要后端数据 -->
+                        <table id="table17" data-toggle="table"
+                               data-url="/datas/tables/data3.json"
+                               data-height="200" data-side-pagination="server" data-pagination="true"
+                               data-page-list="[5, 10, 20, 50, 100, 200]"
+                        >
+                            <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">自定义分页文本</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>paginationFirstText</code>, 
+                                <code>paginationPreText</code>,
+                                <code>paginationNextText</code>, 
+                                <code>paginationLastText</code> 
+                                选项来定义分页的文本内容
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table18" data-toggle="table" 
+                               data-url="/datas/tables/data3.json"
+                               data-pagination="true" data-page-size="5" data-page-list="[5,8,10]"
+                               data-pagination-first-text="第一页"
+                               data-pagination-pre-text="前一页" data-pagination-next-text="下一页"
+                               data-pagination-last-text="最后一页">
+                            <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">条目名称</th>
+                                <th data-field="price">条目价格</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">自定义 Ajax</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="panel-desc">
+                                使用 <code>ajax</code> 
+                                选项，来替换ajax调用的方法。应该与 jQuery ajax 方法具有相同的API。
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table19" data-toggle="table" data-height="200" data-ajax="ajaxRequest"
+                               data-side-pagination="server" data-pagination="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="id">ID</th>
+                                    <th data-field="name">条目名称</th>
+                                    <th data-field="price">条目价格</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(function(){
+                    $.ajax({
+                        url:'/datas/tables/data3.json',
+                        success:function(data){
+                            //console.log(data);
+                            $('#table19').bootstrapTable({
+                                url:data
+                            }); 
+                        }
+                    })
+                })
+            </script> 
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">方法</h1>
+            </div>
+            <div class="page-content">
+                <div class="panel">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>
+                                    方法名
+                                </th>
+                                <th>
+                                    说明
+                                </th>
+                                <th>
+                                    demo
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        getOptions
+                                    </h3>
+                                </td>
+                                <td>
+                                    使用 <code>ajax</code> 
+                                    选项，来替换ajax调用的方法。应该与 jQuery ajax 方法具有相同的API。
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('getOptions');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        getSelections
+                                    </h3>
+                                </td>
+                                <td>
+                                    返回所选的行，当没有选择任何行的时候返回一个空数组
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('getSelections');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        getAllSelections
+                                    </h3>
+                                </td>
+                                <td>
+                                    返回所有选择的行，包括搜索过滤前的，当没有选择任何行的时候返回一个空数组
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('getAllSelections');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        getData
+                                    </h3>
+                                </td>
+                                <td>
+                                    获取当前加载的数据
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('getData');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        getRowByUniqueId
+                                    </h3>
+                                </td>
+                                <td>
+                                    根据 uniqueId 获取行数据
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('getRowByUniqueId', 1);</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        load
+                                    </h3>
+                                </td>
+                                <td>
+                                    加载数据到表格中，旧数据会被替换
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('load', data);</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        append
+                                    </h3>
+                                </td>
+                                <td>
+                                    添加数据到表格在现有数据之后
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('append', data);</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        prepend
+                                    </h3>
+                                </td>
+                                <td>
+                                    插入数据到表格在现有数据之前
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('prepend', data);</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        remove
+                                    </h3>
+                                </td>
+                                <td>
+                                    从表格中删除数据，包括两个参数： field: 需要删除的行的 field 名称，values: 需要删除的行的值，类型为数组。
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('remove', {field: 'id', values: ids});</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        removeAll
+                                    </h3>
+                                </td>
+                                <td>
+                                    删除表格所有数据
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('removeAll');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        removeByUniqueId
+                                    </h3>
+                                </td>
+                                <td>
+                                    根据 uniqueId 删除指定的行
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('removeByUniqueId', 1);</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        insertRow
+                                    </h3>
+                                </td>
+                                <td>
+                                    插入新行，参数包括： index: 要插入的行的 index， row: 行的数据，Object 对象
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('insertRow', {index: 1, row: row});</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        updateRow
+                                    </h3>
+                                </td>
+                                <td>
+                                    更新指定的行，参数包括： index: 要更新的行的 index， row: 行的数据，Object 对象
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('updateRow', {index: 1, row: row});</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        updateByUniqueId
+                                    </h3>
+                                </td>
+                                <td>
+                                    更新指定的行，参数包括： id: 行 id，id 应该为 uniqueid， row: 新行的数据，Object 对象
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('updateByUniqueId', {id: 3, row: row});</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        showRow/hideRow
+                                    </h3>
+                                </td>
+                                <td>
+                                    显示/ 隐藏指定行
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('showRow', {index:1});</code>
+                                    <code>$table.bootstrapTable('hideRow', {index:1});</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        mergeCells
+                                    </h3>
+                                </td>
+                                <td>
+                                    将某些单元格合并到一个单元格，选项包含以下属性：index: 行索引，field: 字段名称，rowspan: 要合并的rowspan数量，colspan: 要合并的colspan数量
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('mergeCells', {index: 1, field: 'name', colspan: 2, rowspan: 3});</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        checkAll/uncheckAll
+                                    </h3>
+                                </td>
+                                <td>
+                                    选中/取消选中当前页面所有行
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('checkAll');</code>
+                                    <code>$table.bootstrapTable('uncheckAll');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        check/uncheck
+                                    </h3>
+                                </td>
+                                <td>
+                                    选中/取消选指定行，行索引从0开始
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('check', 1);</code>
+                                    <code>$table.bootstrapTable('uncheck', 1);</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        checkBy/uncheckBy
+                                    </h3>
+                                </td>
+                                <td>
+                                    从数组值中选中/取消选行
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('checkBy', {field:'id', values:[1, 2, 3]});</code>
+                                    <code>$table.bootstrapTable('uncheckBy', {field:'id', values:[1, 2, 3]});</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        refresh
+                                    </h3>
+                                </td>
+                                <td>
+                                    刷新远程服务器数据，可以设置 <code>{silent: true}</code> 
+                                    以静默方式刷新数据，并设置 <code>{url: newUrl}</code> 更改URL。 
+                                    要提供特定于此请求的查询参数，请设置 <code>{query: {foo: 'bar'}}</code>。
+                                </td>
+                                <td>
+                                    <code></code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        resetView
+                                    </h3>
+                                </td>
+                                <td>
+                                    重置引导表视图，如例如重置表高度
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('resetView');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        destroy
+                                    </h3>
+                                </td>
+                                <td>
+                                    销毁表格
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('destroy');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        showLoading/hideLoading
+                                    </h3>
+                                </td>
+                                <td>
+                                    显示/隐藏加载状态
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('showLoading');</code>
+                                    <code>$table.bootstrapTable('hideLoading');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        showColumn/hideCoulumn
+                                    </h3>
+                                </td>
+                                <td>
+                                    显示/隐藏指定列
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('showColumn', 'name');</code>
+                                    <code>$table.bootstrapTable('hideCoulumn', 'name');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        scrollTo
+                                    </h3>
+                                </td>
+                                <td>
+                                    滚动到指定位置，单位为 px，设置 'bottom' 表示跳到最后
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('scrollTo', 0);</code>
+                                    <code>$table.bootstrapTable('scrollTo', 'bottom');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        selectPage/prevPage/nextPage
+                                    </h3>
+                                </td>
+                                <td>
+                                    转到指定页/上一页/下一页
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('selectPage', 1);</code>
+                                    <code>$table.bootstrapTable('prevPage');</code>
+                                    <code>$table.bootstrapTable('nextPage');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        togglePagination
+                                    </h3>
+                                </td>
+                                <td>
+                                    切换分页选项
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('togglePagination');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        toggleView
+                                    </h3>
+                                </td>
+                                <td>
+                                    切换 card/table 视图
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('toggleView');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        refreshOptions
+                                    </h3>
+                                </td>
+                                <td>
+                                    刷新选项
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('refreshOptions');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        resetSearch
+                                    </h3>
+                                </td>
+                                <td>
+                                    设置搜索文本
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable('resetSearch', '1');</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        expandRow/collapseRow
+                                    </h3>
+                                </td>
+                                <td>
+                                    如果详细视图选项设置为 True，可展开/收起索引为 index 的行
+                                </td>
+                                <td>
+                                    <code>$table.bootstrapTable("expandRow", 1);</code>
+                                    <code>$table.bootstrapTable("collapseRow", 1);</code>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>
+                                        filterBy
+                                    </h3>
+                                </td>
+                                <td>
+                                    过滤表格数据（只能用于 client 端）， 你可以通过过滤 <code>{age: 10}</code> 来显示 age 等于 10 的数据。
+                                    您也可以使用数组来过滤，如：<code>{age: 10, hairColor: ["blue", "red", "green"]}</code> 找到 age 等于 10 的数据，hairColor 可以是 blue，red 或 green。
+                                    在本示例中，我们使用：<code>$table.bootstrapTable('filterBy', {id: [1, 2, 3]});</code>
+                                </td>
+                                <td>
+                                    <code></code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="page-header">
+                <h1 class="page-title">扩展</h1>
+            </div>
+            <div class="page-content">
+                
+            </div>
+          
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>

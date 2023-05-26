@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="/vendor/jquery-treegrid/jquery-treegrid.css">
+    <script src="/vendor/jquery-treegrid/jquery.treegrid.min.js"></script>
+
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="page-aside-fixed page-aside-left site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-tables">
+    <div class="page-header">
+        <h1 class="page-title">树形表格</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-inverse btn-round" href="https://github.com/maxazan/jquery-treegrid" target="_blank">
+                <i class="icon wb-link" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-body container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本示例</h4>
+                            <p>在表格上添加
+                                <code>data-plugin="treegrid"</code> 即可调用树形表格</p>
+                            <div class="example ">
+                                <table class="table table-bordered table-striped table-sm" data-plugin="treegrid">
+                                    <tr class="treegrid-1">
+                                        <td>根节点 1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-2 treegrid-parent-1">
+                                        <td>节点 1-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-3 treegrid-parent-1">
+                                        <td>节点 1-2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-4 treegrid-parent-3">
+                                        <td>节点 1-2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-5">
+                                        <td>根节点 2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-6 treegrid-parent-5">
+                                        <td>节点 2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-7 treegrid-parent-5">
+                                        <td>节点 2-2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-8 treegrid-parent-7">
+                                        <td>节点 2-2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">在其他列应用</h4>
+                            <p>如果要应用于其他列，可通过
+                                <code>data-tree-column="number"</code> 实现，其中 number 为对应列的索引值</code>
+                            </p>
+                            <div class="example ">
+                                <table class="table table-bordered table-striped table-sm" data-plugin="treegrid"
+                                       data-tree-column="1">
+                                    <tr class="treegrid-1">
+                                        <td>根节点</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-2 treegrid-parent-1">
+                                        <td>节点 1-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-3 treegrid-parent-1">
+                                        <td>节点 1-2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-4 treegrid-parent-3">
+                                        <td>节点 1-2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">保存表格状态</h4>
+                            <p>可通过
+                                <code>data-save-state="true"</code> 将表格状态保存到本地，操作表格并刷新本页查看效果</code>
+                            </p>
+                            <div class="example">
+                                <table class="table table-bordered table-striped table-sm" data-plugin="treegrid"
+                                       data-initial-state="collapsed" data-save-state="true">
+                                    <tr class="treegrid-1">
+                                        <td>根节点 1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-2 treegrid-parent-1">
+                                        <td>节点 1-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-3 treegrid-parent-1">
+                                        <td>节点 1-2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-4 treegrid-parent-3">
+                                        <td>节点 1-2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-5">
+                                        <td>根节点 2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-6 treegrid-parent-5">
+                                        <td>节点 2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-7 treegrid-parent-5">
+                                        <td>节点 2-2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-8 treegrid-parent-7">
+                                        <td>节点 2-2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">事件</h4>
+                            <p>本示例演示treegrid的各种事件，操作表格查看对应事件</code>
+                            </p>
+                            <div class="example ">
+                                <table class="table table-bordered table-striped table-sm" data-plugin="treegrid"
+                                       data-initial-state="collapsed" data-save-state="true">
+                                    <tr class="treegrid-1">
+                                        <td>根节点</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-2 treegrid-parent-1">
+                                        <td>节点 1-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-3 treegrid-parent-1">
+                                        <td>节点 1-2</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                    <tr class="treegrid-4 treegrid-parent-3">
+                                        <td>节点 1-2-1</td>
+                                        <td>其他信息</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-body container-fluid">
+                <div class="example-wrap">
+                    <h4 class="example-title">大量数据</h4>
+                    <p>本示例演示数据较多的情况</p>
+                    <table class="tree table table-bordered table-striped table-sm tree-table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    /* 基本示例 */
+    $('[data-plugin="treegrid"]').each(function(){
+        $(this).treegrid({
+            onChange:function(e){
+                console.log(e);
+            }
+        });
+        
+    })
+    
+    /* 大量数据 */
+    var count_root_elements=3;
+    var count_deep=3;
+    console.log('init');
+    for(var i=0; i< count_root_elements; i++){
+        console.log('add');
+        var tr=$("<tr></tr>").addClass("treegrid-"+i+"-0").appendTo($('.tree')).html("<td>Root node "+i+"</td><td>Additional info</td>");
+
+        for(var j=1; j<count_deep; j++){
+            $("<tr></tr>").addClass("treegrid-"+i+"-"+j).addClass("treegrid-parent-"+i+"-"+(j-1)).appendTo($('.tree')).html("<td>Child node "+i+"-"+j+"</td><td>Additional info</td>");
+        }
+    }
+    $('.tree').treegrid();
+    
+
+</script>
+
+
+</body>
+</html>

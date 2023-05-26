@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
+    <link rel="stylesheet" href="swiper/swiper.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/basic.css">
+    <script>
+      function autoScale(){
+          var winW = document.documentElement.clientWidth;
+          return Math.min (1,Math.min(winW / 750));
+      }
+      document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+      //1rem = 100px
+    </script>
+</head>
+<body>
+    <div class="swiper-container">
+
+        <div class="swiper-wrapper">
+            <section class="swiper-slide slide1">
+                <div class="wrap re flex">
+                    <img  src="images/demo.png" 
+                          class="item item1 animated" 
+                          animate-effect="zoomIn" 
+                          animate-duration="1.5s" 
+                          animate-delay="0s"
+                          animate-count='1'
+                          animate-mode='forwards' /> 
+                </div>
+            </section>
+            <section class="swiper-slide slide2">
+                <div class="wrap re flex">
+                    <img  src="images/demo.png" 
+                          class="item item1 animated" 
+                          animate-effect="bounceIn" 
+                          animate-duration="1.5s" 
+                          animate-delay="0s"
+                          animate-count='5' />
+                </div>
+            </section>
+            <section class="swiper-slide slide3">
+                <div class="wrap re flex">
+                    <img  src="images/demo.png" 
+                          class="item item1 animated" 
+                          animate-effect="fadeInRight" />
+                </div>
+            </section>
+        </div>
+        <div class="swiper-pagination"></div>  
+    </div>
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="swiper/swiper.min.js"></script>
+    <script>  
+        var mySwiper = new Swiper('.swiper-container', {
+            direction : 'vertical',
+            pagination: {
+              el: '.swiper-pagination',
+            },
+            //autoplay: true,//可选选项，自动滑动
+            //touchAngle : 10,//拖动角度
+            //loop:true,
+            // mousewheelControl : true,
+            on:{
+              init: function(){
+                //Swiper初始化了
+                //console.log('当前的slide序号是'+this.activeIndex);
+                setAnimate()
+              }, 
+              slideChangeTransitionStart: function(){
+                //console.log(this.activeIndex);//切换开始前
+              },
+              slideChangeTransitionEnd: function(){
+                //console.log(this.activeIndex);//切换结束时，告诉我现在是第几个slide
+                setAnimate()
+              },
+              transitionStart: function(){
+                //console.log(this.activeIndex);//过渡动画
+              },
+              transitionEnd: function(){
+                //console.log('过渡结束');
+              },
+              touchMoveOpposite(event){
+                //  console.log(event);//拖动角度
+              },
+            }
+        })
+
+        function setAnimate(){
+            $('.swiper-container .swiper-slide-active').siblings().removeClass('animated')
+            var animated = $('.swiper-container .swiper-slide-active').find('.animated')
+            $('.swiper-container .animated').attr('style','')
+            for(var i = 0;i < animated.length;i++){
+                var ele_animated = animated.eq(i);
+                
+                var effect   = ele_animated.attr('animate-effect'),
+                    duration = ele_animated.attr('animate-duration'),
+                    delay    = ele_animated.attr('animate-delay'),
+                    count    = ele_animated.attr('animate-count'),
+                    func     = ele_animated.attr('animate-function');
+                
+                ele_animated.css({
+                    'animation-name'            : effect   || "zoomIn",
+                    'animation-duration'        : duration || "1000ms", //花费时间
+                    'animation-timing-function' : func     || "ease",        //运行曲线
+                    'animation-delay'           : delay    || "0ms",    //延迟播放
+                    'animation-iteration-count' : count    || 1,    //播放次数
+                    'opacity'                   : 1
+                })
+            }
+        }
+
+    </script>
+</body>
+</html>

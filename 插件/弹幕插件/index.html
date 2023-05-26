@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+  <meta charset="utf-8">
+  <title>弹幕插件</title>
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+
+</head>
+<body>
+
+	<div id="container"></div>
+	<script src="barrageWall.js"></script>
+  <script>
+    // 1，实际调用时必须设置你的 弹幕墙id 和 弹幕的行数 并 初始化弹幕墙
+    var option = {
+        container: "#container", //弹幕墙的id
+        barrageLen: 15 //弹幕的行数
+    }
+    //初始化弹幕墙
+    barrageWall.init(option); 
+    //调用
+    barrageWall.upWall(userImg,userId, message) //头图地址 用户id 说的内容
+    //3，弹幕移动的动画效果由css实现，transform: translateX();
+  </script>
+</body>
+</html>

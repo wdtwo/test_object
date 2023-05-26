@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<link rel="stylesheet" href="/vendor/morris/morris.css"/>
+	<link rel="stylesheet" href="/vendor/chartist/chartist.css"/>
+	<link rel="stylesheet" href="/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css"/>
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/vendor/jquery-strength/jquery-strength.css">
+    <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables-bootstrap/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables-responsive/dataTables.responsive.css">
+    <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/vendor/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/vendor/switchery/switchery.css">
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/css/system/account.css">
+    <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/css/system/settings/display.css">
+
+	<style>
+		.bootbox .modal-dialog{width:360px}.product-filters{float:right!important}.product-filters>li>a{width:80px;border-radius:20px;text-align:center;line-height:20px;font-weight:400;color:#76838f}.product-filters>li>a:hover{color:#76838f}#productOverviewWidget .btn-sale{text-transform:uppercase;color:#37474f}#productOverviewWidget .dropdown-menu{text-transform:capitalize}#productOverviewWidget .ct-grids .ct-vertical{stroke-dasharray:6}#productOverviewWidget .ct-grids .ct-horizontal{stroke:none}#productOverviewWidget .ct-grids .ct-point-label{stroke:#fff;stroke-width:60px}#productOverviewWidget .ct-labels .ct-horizontal{display:block;padding-top:10px;font-size:14px;color:#76838f}#productOverviewWidget .ct-area{fill-opacity:.8}#productOverviewWidget .ct-series .ct-point,#productOverviewWidget .ct-series .ct-point-content{opacity:0;-webkit-transition:all .3s;transition:all .3s}#productOverviewWidget .ct-series:hover .ct-point,#productOverviewWidget .ct-series:hover .ct-point-content{opacity:1}#productOverviewWidget .ct-series.ct-series-a .ct-area{fill:#a57afa}#productOverviewWidget .ct-series.ct-series-a .ct-line{stroke:#a57afa;stroke-width:1px}#productOverviewWidget .ct-series.ct-series-a .ct-point{stroke:#9463f7;stroke-width:12px;cursor:pointer}#productOverviewWidget .ct-series.ct-series-a .ct-point-content{stroke:#fff;stroke-width:6px;stroke-linecap:round;pointer-events:none}#productOverviewWidget .ct-series.ct-series-b .ct-area{fill:#28c0de}#productOverviewWidget .ct-series.ct-series-b .ct-line{stroke:#28c0de;stroke-width:1px}#productOverviewWidget .ct-series.ct-series-b .ct-point{stroke:#0bb2d4;stroke-width:12px;cursor:pointer}#productOverviewWidget .ct-series.ct-series-b .ct-point-content{stroke:#fff;stroke-width:6px;stroke-linecap:round;pointer-events:none}#productOverviewWidget .nav-pills .nav-link{padding:10px 15px;border-radius:1000px}#productOptionsData{padding:80px 30px 30px}#productOptionsData .counter-number-group{font-size:36px}#productOptionsData .ct-chart{height:60px;width:200px;margin:10px auto}#browsersFlowWidget,#countriesVistsWidget{margin-bottom:0!important}#productOptionsData .ct-chart .ct-series-a .ct-bar,#productOptionsData .ct-chart .ct-series-b .ct-bar{stroke-width:4px}#productOptionsData .ct-chart[data-counter-type=productVist] .ct-series-a .ct-bar{stroke:#a57afa}#productOptionsData .ct-chart[data-counter-type=productVist] .ct-series-b .ct-bar{stroke:#28c0de}#productOptionsData .ct-chart[data-counter-type=productVistors] .ct-series-a .ct-bar{stroke:#ff5e97}#productOptionsData .ct-chart[data-counter-type=productVistors] .ct-series-b .ct-bar{stroke:#7d8efa}#productOptionsData .ct-chart[data-counter-type=productPageViews] .ct-series-a .ct-bar{stroke:#5cc99a}#productOptionsData .ct-chart[data-counter-type=productPageViews] .ct-series-b .ct-bar{stroke:#ffdc2e}#productOptionsData .ct-chart[data-counter-type=productBounceRate] .ct-series-a .ct-bar{stroke:#589ffc}#productOptionsData .ct-chart[data-counter-type=productBounceRate] .ct-series-b .ct-bar{stroke:#eb6709}#browsersFlowWidget{height:100%}#browsersFlowWidget .card-block{padding:0 15px}#browsersFlowWidget .card-block:after{content:'';display:block;clear:both}#countriesVistsWidget .card-block{padding-bottom:15px}#countriesVistsWidget img{width:auto}#countriesVistsWidget .table-responsive{border:0}.table-analytics>thead>tr>th{padding:15px 0;vertical-align:middle;color:#37474f}.table-analytics>tbody>tr>td{vertical-align:middle}#browsersFlowWidget tr:nth-of-type(even){background-color:#fafafa}#browsersFlowWidget td{padding:20px 10px 20px 0}#weekStackedBarChart{position:relative;max-width:350px;height:180px;margin:24px auto 0}#weekStackedBarChart .ct-chart-bar .ct-labels .ct-horizontal{display:block;padding-top:12px;text-align:center;font-size:14px;color:#76838f}#weekStackedBarChart .ct-chart-bar .ct-labels .ct-vertical{display:none}#weekStackedBarChart .ct-chart-bar .ct-grids .ct-grid{stroke:none}#weekStackedBarChart .ct-chart-bar .ct-series-a .ct-bar{stroke:#3e8ef7}#weekStackedBarChart .ct-chart-bar .ct-series-b .ct-bar{stroke:#f3f7f9}#browersVistsDonut{position:relative;height:250px;margin:0 auto}#browersVistsDonut svg path[fill=none]{opacity:0!important}#countriesVistsWidget td{padding:20px 10px 20px 0}#countriesVistsWidget td:last-child{font-size:0}#countriesVistsWidget .language{min-width:150px}#countriesVistsWidget .vists{min-width:65px}#countriesVistsWidget .vists-percent{min-width:210px}#countriesVistsWidget .progress{display:inline-block;width:80%;vertical-align:middle}#countriesVistsWidget .country-name{margin-left:20px}#countriesVistsWidget .progress-percent{display:inline-block;width:20%;font-size:14px;text-align:right;vertical-align:middle;color:#76838f}@media screen and (max-width:1400px){#browsersFlowWidget{margin-bottom:30px!important}}@media screen and (min-width:1200px) and (max-width:1400px){.col-lg-5,.col-lg-7{width:100%}}@media (max-width:1199.98px){#productOptionsData{padding-bottom:20px}#productOptionsData .counter{margin-bottom:40px}}@media screen and (min-width:568px) and (max-width:768px){#productOptionsData .col-xs-12{width:50%}}@media screen and (min-width:480px) and (max-width:567px){#productOptionsData .ct-chart{width:250px}}@media (max-width:479.98px){.product-filters{float:none!important;padding:10px 15px}.product-filters>li>a{width:50px;height:30px;padding:5px 8px;border-radius:15px;text-align:center;line-height:20px;font-weight:400;font-size:12px;color:#76838f}#productOverviewWidget .nav-pills .nav-link{padding:5px 8px}#productOverviewWidget .card-header-actions{float:none;margin:10px 0}#productOptionsData .ct-chart{width:200px}}@media screen and (max-width:360px){#productOptionsData .ct-chart{width:160px}#productOverviewWidget .nav-pills .nav-link{width:44px;padding:5px 6px;margin-right:3px;margin-left:3px}}
+	</style>
+
+	<!-- 插件 -->
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/artTemplate/template-web.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/jquery-strength/password_strength.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/jquery-strength/jquery-strength.min.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables-bootstrap/dataTables.bootstrap4.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables-responsive/dataTables.responsive.min.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/jquery-validation/jquery.validate.min.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/jquery-validation/localization/messages_zh.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/switchery/switchery.min.js"></script>
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/bootstrap-select/bootstrap-select.min.js"></script>
+
+	<!-- Page JS -->
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/js/system/log.js"></script><!-- Page JS -->
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/js/system/account/account.js"></script><!-- Page JS -->
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/js/system/account/message.js"></script><!-- Page JS -->
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/js/system/account/password.js"></script><!-- Page JS -->
+	<script src="http://cdn.admui.com/demo/iframe/2.1.0/js/system/settings/display.js"></script>
+
+
+
+</head>
+
+<body data-theme="base">
+    <div class="page animation-fade page-account">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card card-shadow text-center">
+                        <div class="card-header">
+                            <div class="card-header-content">
+                                <a class="avatar avatar-lg" href="javascript:;">
+                                    <img src="http://cdn.admui.com/demo/iframe/2.1.0/images/avatar.svg" alt="admin">
+                                </a>
+                                <h4 class="account-user">xiaxuan@admui_demo</h4>
+                                <p>上次登录2019-11-26 09:29:55</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row no-space">
+                                <div class="col-4">
+                                    <strong class="account-stat-count">48333</strong>
+                                    <span>登录</span>
+                                </div>
+                                <div class="col-4">
+                                    <strong class="account-stat-count msg-number">0</strong>
+                                    <span>消息</span>
+                                </div>
+                                <div class="col-4">
+                                    <strong class="account-stat-count log-number">44K+</strong>
+                                    <span>日志</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="panel">
+                        <div class="panel-body nav-tabs-animate">
+                            <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+                                <li class="nav-item news accout-msg" role="presentation">
+                                    <a class="nav-link active" href="#message" aria-controls="message" role="tab" data-toggle="tab">
+                                        <i class="icon fa-comment-o" aria-hidden="true"></i> 消息
+                                        <span class="badge badge-danger"></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item account-log">
+                                    <a class="nav-link" href="#log" aria-controls="log" role="tab" data-toggle="tab">
+                                        <i class="icon fa-file-text-o" aria-hidden="true"></i> 日志
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#password" aria-controls="password" role="tab" data-toggle="tab">
+                                        <i class="icon fa-key" aria-hidden="true"></i> 密码
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#display" aria-controls="display" role="tab" data-toggle="tab">
+                                        <i class="icon fa-magic" aria-hidden="true"></i> 显示
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-15">
+                                <div class="tab-pane animation-slide-left tab-message active" role="tabpanel" id="message">
+                                    <div id="messageLists">
+                                        <p class="text-center h-150 vertical-align">
+                                            <small class="vertical-align-middle opacity-four">消息加载中.....</small>
+                                        </p>
+                                        <script type="text/html" id="newMessge">
+                                 		   {{if pageList.length <1}}
+											<p class="text-center h-150 vertical-align no-message">
+												<small class="vertical-align-middle opacity-four">没有新消息</small>
+											</p>
+											{{else}}
+											<div class="list-group list-group-full">
+												{{each pageList}}
+												<div class="list-group-item" role="menuitem" data-id="{{$value.id }}" data-title="{{$value.title }}" data-content="{{$value.content}}">
+													<div class="media">
+														<div class="media-left">
+															<i class="icon {{$imports.iconType($value.type)}} white icon-circle" aria-hidden="true"></i>
+														</div>
+														<div class="media-body">
+															<h6 class="media-heading">
+																<a class="news-list" href="#">
+																	{{if $value.readFlag ===0}}
+																	<i class="icon wb-medium-point red-600" aria-hidden="true"></i>
+																	{{/if}}
+																	{{$value.title}}
+																</a>
+															</h6>
+															<time class="media-meta" datetime="{{$value.sendTime}}">{{$imports.timeMsg($value.sendTime) }}</time>
+														</div>
+														<div class="media-right">
+															{{ if $value.readFlag ===1}}
+															<a title="删除" class="btn btn-pure btn-default icon wb-close"></a>
+															{{else}}
+															<a title="标为已读" class="btn btn-pure btn-default icon wb-check"></a>
+															{{/if}}
+														</div>
+													</div>
+												</div>
+												{{/each}}
+											</div>
+											<nav id="paging" data-page="{{pageIndex}}" data-max-page="{{totalPage}}">
+												<ul class="pager pager-sm mb-0">
+													{{if pageIndex>1}}
+													<li class="previous">
+														<a href="javascript:;"><span aria-hidden="true">←</span> 上一页
+														</a>
+													</li>
+													{{/if}}
+													{{ if pageIndex < totalPage }}
+													<li class="next">
+														<a href="javascript:;">下一页 <span aria-hidden="true">→</span>
+														</a>
+													</li>
+													{{/if}}
+												</ul>
+											</nav>
+											{{/if}}
+										</script>
+                                    </div>
+                                </div>
+                                <div class="tab-pane animation-slide-left" role="tabpanel" id="log">
+                                    <div class="table-responsive">
+                                    <table class="table table-bordered table-hover text-nowrap dataTable table-striped w-full" id="logList" data-column-defs='[{ "orderable": false, "targets": 2}]' data-order='[[5, "desc"]]'>
+                                        <thead>
+                                            <tr>
+                                                <th>路径</th>
+                                                <th>名称</th>
+                                                <th>参数</th>
+                                                <th>用户</th>
+                                                <th>用户IP</th>
+                                                <th>时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>路径</th>
+                                                <th>名称</th>
+                                                <th>参数</th>
+                                                <th>用户</th>
+                                                <th>用户IP</th>
+                                                <th>时间</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane animation-slide-left" role="tabpanel" id="password">
+                                            <form id="accountMsg" class="message-form" method="post">
+                                                <div class="form-group">
+                                                    <h5>修改密码</h5>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="oldPwd" class="form-control" placeholder="请输入原来的密码" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="newPwd" class="form-control" id="newPwd" placeholder="请输入新密码" autocomplete="off" data-plugin="strength">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="confirm" class="form-control" placeholder="请再次输入新密码" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary">确认修改</button>
+                                                </div>
+                                            </form>
+                                </div>
+                                <div class="tab-pane animation-slide-left tab-display" role="tabpanel" id="display">
+                                    <form id="displayForm" class="form-horizontal py-30">
+                                        <input type="hidden" id="userId" name="userId" value="10010102" />
+                                        <div class="form-group row pb-20">
+                                            <label class="col-md-2 col-form-label">导航条颜色：</label>
+                                            <div class="col-md-10" id="skintoolsNavbar">
+                                                <ul class="list-unstyled list-inline color-radio">
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-primary">
+                                                            <input type="radio"  name="navigationColor"  value="bg-blue-600" checked="checked">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-brown">
+                                                            <input type="radio" name="navigationColor" value="bg-brown-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-cyan">
+                                                            <input type="radio" name="navigationColor" value="bg-cyan-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-green">
+                                                            <input type="radio" name="navigationColor" value="bg-green-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-grey">
+                                                            <input type="radio" name="navigationColor" value="bg-grey-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-indigo">
+                                                            <input type="radio" name="navigationColor" value="bg-indigo-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-orange">
+                                                            <input type="radio" name="navigationColor" value="bg-orange-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-pink">
+                                                            <input type="radio" name="navigationColor" value="bg-pink-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-purple">
+                                                            <input type="radio"  name="navigationColor" value="bg-purple-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-red">
+                                                            <input type="radio"  name="navigationColor" value="bg-red-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-teal">
+                                                            <input type="radio"  name="navigationColor" value="bg-teal-600">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-yellow">
+                                                            <input type="radio"  name="navigationColor" value="bg-yellow-700">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <div class="checkbox-custom checkbox-primary mt-10">
+                                                    <input type="checkbox"  id="navbarDisplay" name="acrossFlag"  value="navbar-inverse" checked="checked">
+                                                    <label for="navbarDisplay">通栏显示</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row pb-20">
+                                            <label class="col-md-2 col-form-label">菜单主题：</label>
+                                            <div class="col-md-10">
+                                                <select id="skintoolsSidebar" name="menuTheme" data-plugin="selectpicker">
+                                                    <option value="site-menubar-dark" selected="selected">深色主题</option>
+                                                    <option value="site-menubar-light">浅色主题</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row pb-10">
+                                            <label class="col-md-2 col-form-label">菜单显示：</label>
+                                            <div class="col-md-10">
+                                                <div class="radio-inline radio-custom radio-primary">
+                                                    <input type="radio" id="menuUnfold"  name="menuDisplay"  value="site-menubar-unfold" checked="checked">
+                                                    <label for="menuUnfold">默认展开</label>
+                                                </div>
+                                                <div class="radio-inline radio-custom radio-primary">
+                                                    <input type="radio" id="menuFold"  name="menuDisplay"  value="site-menubar-fold">
+                                                    <label for="menuFold">默认收起</label>
+                                                </div>
+                                                <div class="mt-10 hidden" id="menuFoldSetting">
+                                                    <span>鼠标经过菜单时显示：</span>
+                                                    <div class="btn-group" data-toggle="buttons">
+                                                        <label class="btn btn-xs btn-outline btn-dark "  for="textIconKeep">
+                                                            <input type="radio" id="textIconKeep" autocomplete="off" hidden="hidden"   name="menuTxtIcon" value="site-menubar-keep">文字
+                                                        </label>
+                                                        <label class="btn btn-xs btn-outline btn-dark "  for="textIconAlt">
+                                                            <input type="radio" id="textIconAlt" autocomplete="off" hidden="hidden"  name="menuTxtIcon" value="site-menubar-fold-alt">图标
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="form-text">仅在可视区域宽度大于768px生效</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">主题颜色：</label>
+                                            <div class="col-md-10" id="skintoolsPrimary">
+                                                <ul class="list-unstyled list-inline color-radio">
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-primary">
+                                                            <input type="radio"  name="themeColor"  value="primary" checked="checked">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-brown">
+                                                            <input type="radio" name="themeColor"  value="brown">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-cyan">
+                                                            <input type="radio" name="themeColor"  value="cyan">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-green">
+                                                            <input type="radio" name="themeColor"  value="green">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-grey">
+                                                            <input type="radio" name="themeColor"  value="grey">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-indigo">
+                                                            <input type="radio" name="themeColor"  value="indigo">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-orange">
+                                                            <input type="radio" name="themeColor"  value="orange">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-pink">
+                                                            <input type="radio" name="themeColor"  value="pink">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-purple">
+                                                            <input type="radio" name="themeColor"  value="purple">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-red">
+                                                            <input type="radio" name="themeColor"  value="red">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-teal">
+                                                            <input type="radio" name="themeColor"  value="teal">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="radio-custom radio-yellow">
+                                                            <input type="radio" name="themeColor"  value="yellow">
+                                                            <label></label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-10 offset-md-2 mt-20">
+                                                <button type="submit" class="btn btn-primary" name="save" value="true">保存</button>
+                                                <button type="button" class="btn btn-outline btn-default" name="reset" value="reset" id="skintoolsReset">恢复默认</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

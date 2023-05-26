@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加试题</title>
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet"><!--单选框复选框-->
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row wrapper white-bg page-heading">
+        <div class="wrapper wrapper-content form-horizontal">
+			<div class="row m-t form-group">
+				<div class="col-sm-2 col-sm-offset-2 control-label">所属题库：</div>
+				<div class="col-sm-2">
+					<select class="form-control">
+						<option value="">所属题库</option>
+					</select>
+				</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-2 control-label">试题类型：</div>
+				<div class="col-sm-2">
+					<select class="form-control">
+						<option value="">单选项</option>
+					</select>
+				</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-2 control-label">题库难度：</div>
+				<div class="col-sm-2">
+					<select class="form-control">
+						<option value="">常规</option>
+					</select>
+				</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-2 control-label">分数：</div>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" />
+				</div>
+				<div class="col-sm-4 text-success control-label" style="text-align: left;">*要求录入整数</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-2 control-label">选项设置：</div>
+				<div class="col-sm-8">
+					<span class="btn btn-primary" id="sel_add">增加选项</span>
+					<div class="row form-group">
+						<div class="col-sm-12 m-t">
+							<div class="radio i-checks pull-left">
+                                <label class="no-padding"><span class="m-r pull-left xx" style="width:40px;">选项A</span><input type="radio" value="option2" name="a"><i></i></label>
+                           </div><input type="text" class="form-control pull-left m-l" style="width:200px;" />
+						</div>
+						<div class="col-sm-12 m-t">
+							<div class="radio i-checks pull-left">
+                                <label class="no-padding"><span class="m-r pull-left xx" style="width:40px;">选项B</span><input type="radio" value="option2" name="a"><i></i></label>
+                           </div><input type="text" class="form-control pull-left m-l" style="width:200px;" />
+                            <span class="btn btn-primary pull-left m-l del">删除</span>
+						</div>
+						<div class="col-sm-12 m-t">
+							<div class="radio i-checks pull-left">
+                                <label class="no-padding"><span class="m-r pull-left xx" style="width:40px;">选项C</span><input type="radio" value="option2" name="a"><i></i></label>
+                           </div><input type="text" class="form-control pull-left m-l" style="width:200px;" />
+                            <span class="btn btn-primary pull-left m-l del">删除</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-2 control-label">试题状态：</div>
+				<div class="col-sm-6">
+					<div class="form-group no-margins">
+                        <label class="radio-inline i-checks">
+                            <input type="radio" name="b" value="option1">开放</label>
+                        <label class="radio-inline i-checks">
+                            <input type="radio" name="b" value="option2">关闭</label>
+                        <span class=" text-success control-label">*学生自测可见</span>
+                    </div>
+				</div>
+			</div>
+        	<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-2 control-label">备注：</div>
+				<div class="col-sm-4">
+					<textarea class="form-control" name="" rows="5" cols="100"></textarea>
+				</div>
+			</div>
+        	<div class="hr-line-dashed">
+        		<div class="pull-right m-t-lg">
+        			<span class="btn btn-primary m-r">确定</span>
+        			<span class="btn btn-default m-r" style="color:#333;">取消</span>
+        		</div>
+        	</div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/content.min.js"></script>
+    <script src="js/plugins/iCheck/icheck.min.js"></script><!--单选框复选框-->
+    <script>
+    	console.log(222);
+        $(function() {
+        	//初始化checkbox radio样式
+		    function btn_default(){
+		    	$(".i-checks").iCheck({
+			        checkboxClass: "icheckbox_square-green",
+			        radioClass: "iradio_square-green",
+			    })
+		    }
+		    btn_default();
+		    //新增选项
+	        var zimu = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
+	        $('#sel_add').on('click',function(){
+	        	var row = $('#sel_add + .row .col-sm-12');
+	        	var len = row.length <= 10 ? row.length : false;
+	        	if(len == false){
+	        		return false;
+	        	}
+	        	var z_l = row.eq(len - 1).find('.xx').text().split('选项')[1];
+	        	console.log(row.length);
+	        	var z_i = zimu.indexOf(z_l) + 1;
+	        	var	z_m = zimu[z_i]; 
+	        	var text = '<div class="col-sm-12 m-t"><div class="radio i-checks pull-left"><label class="no-padding"><span class="m-r pull-left xx" style="width:40px;">选项' + z_m + '</span><input type="radio" value="option'+z_i+'" name="a"><i></i></label></div><input type="text" class="form-control pull-left m-l" style="width:200px;" /><span class="btn btn-primary pull-left m-l del">删除</span></div>'
+	        	$('#sel_add + .row').append(text);
+	        	btn_default();
+	        	btn_del();
+	        })
+	        //删除按钮
+	        function btn_del(){
+		        $('#sel_add + .row .del').unbind('click');
+		        $('#sel_add + .row .del').on('click',function(){
+		        	var t = $(this);
+		        	if(t && confirm('确定删除数据？')){
+		        		t.parent().remove();
+		        	}
+		        })
+	        }
+	        btn_del();
+		});
+    </script>
+</body>
+</html>

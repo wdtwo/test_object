@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加知识</title>
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet"><!--单选框复选框-->
+    <!--文本编辑器start-->
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <!--文本编辑器end-->
+    <!--上传-->
+    <link href="custom/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="custom/js/jquery-2.0.3.min.js"></script>
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/plugins/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <link href="css/plugins/cropper/cropper.min.css" rel="stylesheet">
+    <link href="css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href="css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+    
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="custom/css/custom_style.css"/>
+</head>
+<body>
+    <div class="row wrapper white-bg page-heading">
+        <div class="wrapper wrapper-content form-horizontal">
+        	<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-1 control-label">知识标题：</div>
+				<div class="col-sm-4 col-md-3">
+					<input type="text" class="form-control" />
+				</div>
+				<div class="col-sm-5 text-primary control-label" style="text-align: left;">*</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-1 control-label">知识分类：</div>
+				<div class="col-sm-4 col-md-3">
+					<select class="form-control">
+						<option value="" data-order='1'>一级</option>
+						<option value="" data-order='2'>二级</option>
+						<option value="" data-order='3'>二级</option>
+						<option value="" data-order='4'>二级</option>
+						<option value="" data-order='5'>二级</option>
+						<option value="" data-order='6'>二级</option>
+						<option value="" data-order='7'>二级</option>
+						<option value="" data-order='8'>二级</option>
+						<option value="" data-order='9'>二级</option>
+						<option value="" data-order='10'>二级</option>
+					</select>
+				</div>
+				
+				<div class="col-sm-4 text-primary control-label text-left">
+					* 默认显示父级，若有下级选择父级后显示子级项并必选
+				</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-1 control-label">查看品牌：</div>
+				<div class="col-sm-4 col-md-3">
+					<select class="form-control">
+						<option value="">常规</option>
+					</select>
+				</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-1 control-label">知识内容：</div>
+				<div class="col-sm-6">
+                    <div class="summernote">
+                    </div>
+				</div>
+				<div class="col-sm-2 control-label text-primary text-left">
+					* 图文信息
+				</div>
+			</div>
+			<div class="row m-t file_g">
+				<div class="col-sm-2 col-sm-offset-1 control-label">上传附件：</div>
+				<div class="col-sm-6">
+					<table class="table">
+						<!--<thead>
+							<tr>
+								<th>文件名</th>
+								<th>操作</th>
+							</tr>
+						</thead>-->
+						<tbody>
+							<tr>
+								<td>111.jpg</td>
+								<td>
+									<a class="text-primary del">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>111.jpg</td>
+								<td>
+									<a class="text-primary del">删除</a>
+								</td>
+							</tr>
+						</tbody>
+						<tbody></tbody>
+					</table>
+					<div class="btn btn-primary btn-file"> 
+						<i class="glyphicon glyphicon-folder-open"></i> &nbsp;选择文件 … 
+						<input id="file" type="file" name="file[]" multiple="multiple">
+					</div>
+					<span class="text-primary control-label m-l">
+						* 可多选
+					</span>
+				</div>
+			</div>
+			<div class="row m-t">
+				<div class="col-sm-2 col-sm-offset-1 control-label">是否启用：</div>
+				<div class="col-sm-6">
+					<div class="form-group no-margins">
+                        <label class="radio-inline i-checks">
+                            <input type="radio" name="b" value="option1">是
+                        </label>
+                        <label class="radio-inline i-checks">
+                            <input type="radio" name="b" value="option2">否
+                        </label>
+                    </div>
+				</div>
+			</div>
+        	<div class="hr-line-dashed">
+        		<div class="pull-right m-t-lg">
+        			<span class="btn btn-primary m-r">确定</span>
+        			<span class="btn btn-default m-r" style="color:#333;">取消</span>
+        		</div>
+        	</div>
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/content.min.js"></script>
+    <script src="js/plugins/iCheck/icheck.min.js"></script><!--单选框复选框--><br />
+    <!--文本编辑器start-->
+    <script src="js/plugins/summernote/summernote.min.js"></script>
+    <script src="js/plugins/summernote/summernote-zh-CN.js"></script>
+    <script>
+        $(document).ready(function(){$(".summernote").summernote({lang:"zh-CN"})});var edit=function(){$("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true})};var save=function(){$("#eg").removeClass("no-padding");var aHTML=$(".click2edit").code();$(".click2edit").destroy()};
+    </script>
+    <!--文本编辑器end-->
+    <script>
+    	console.log(111);
+        $(function() {
+        	//初始化checkbox radio样式
+		    function btn_default(){
+		    	$(".i-checks").iCheck({
+			        checkboxClass: "icheckbox_square-green",
+			        radioClass: "iradio_square-green",
+			    })
+		    }
+		    btn_default();
+		    //上传初始化属性
+		});
+		
+		
+		//上传事件绑定
+		$('#file').on('change',function(){
+			new fileUpDate($(this));
+		})
+		//上传方法
+		var fileUpDate = function(t){
+			var tbody = t.parents('.file_g').find('tbody');
+				tbody.eq(1).empty();
+			//var fileAccept = t.val().split(".")[1];//获取上传文件的后缀
+			//获取多文件上传的所有文件名
+			var filePaths = t[0].files;//或者这样写 document.getElementById("id").files;
+			console.log(filePaths);
+			for(var i=0;i<filePaths.length; i++ ){
+				filePaths[i].name;
+				console.log($('#file').val());
+				var txt = '<tr><td colspan="2">' + filePaths[i].name + '</td></tr>';
+				tbody.eq(1).append(txt);
+			}
+		}
+		//上传删除按钮
+		$('.file_g .del').on('click',function(){
+			var t = $(this);
+			if(confirm("确认删除？")){
+				t.parents('tr').remove();
+			}else{
+				return false;
+			}
+		})
+    </script>
+</body>
+</html>

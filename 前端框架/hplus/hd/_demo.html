@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo</title>
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <style>
+    	pre {
+    		margin-top:10px;
+    	}
+    </style>
+</head>
+<body>
+    <div class="row white-bg page-header">
+    	<div class="col-sm-1 m-t text-right"><h2>按钮</h2></div>
+        <div class="col-sm-11 m-t">
+        	<h3>通用</h3>
+        	<pre>span.btn.btn-default</pre>
+			<span class="btn btn-default">btn-default</span>        	
+        	<span class="btn btn-primary">btn-primary</span> 
+        	<span class="btn btn-success">btn-success</span> 
+        	<span class="btn btn-info">btn-info</span> 
+        	<span class="btn btn-warning">btn-warning</span> 
+        	<span class="btn btn-danger">btn-danger</span> 
+        	<span class="btn btn-white">btn-white</span> 
+        	<span class="btn btn-link">btn-link</span> 
+        	<h3>按钮组</h3>
+        	<pre>div.btn-group>span.btn.btn-white*5 </pre>
+        	<div class="btn-group">
+        		<span class="btn btn-white"><i class="fa fa-chevron-left"></i></span>
+        		<span class="btn btn-white active">1</span>
+        		<span class="btn btn-white">2</span>
+        		<span class="btn btn-white">3</span>
+        		<span class="btn btn-white"><i class="fa fa-chevron-right"></i></span>
+        	</div>
+        	<pre>div.btn-toolbar>div.btn-group*2>span.btn.btn-white</pre>
+        	<div class="btn-toolbar">
+        		<div class="btn-group">
+	        		<span class="btn btn-white">上一页</span>
+	        		<span class="btn btn-white">1</span>
+	        		<span class="btn btn-white">2</span>
+	        		<span class="btn btn-white">3</span>
+	        		<span class="btn btn-white">4</span>
+	        	</div>
+	        	<div class="btn-group">
+	        		<span class="btn btn-white">5</span>
+	        		<span class="btn btn-white">6</span>
+	        		<span class="btn btn-white">7</span>
+	        		<span class="btn btn-white">下一页</span>
+	        	</div>
+        	</div>
+        	<h3>图标按钮</h3>
+        	<pre>span.btn.btn-success>i.fa.fa-check</pre>
+        	<div>
+        		<span class="btn btn-success"><i class="fa fa-check"></i> success</span>
+        		<span class="btn btn-danger">银行 <i class="fa fa-bank"></i></span>
+        	</div>
+        	<h3>按钮切换</h3>
+        	<pre>span.btn.btn-success        //自定义属性： data-toggle="button"</pre>
+        	<div>
+        		<span data-toggle='button' class="btn btn-success">按钮</span>
+        		<span data-toggle='button' class="btn btn-success">按钮</span>
+        		<div class="btn-group">
+        			<span data-toggle='button' class="btn btn-success">按钮</span>
+        			<span data-toggle='button' class="btn btn-success">按钮</span>
+        			<span data-toggle='button' class="btn btn-success">按钮</span>
+        		</div>
+        	</div>
+        	<h3>3D按钮</h3>
+        	<pre>button.btn.btn-success.dim>i.fa.fa-check      //需要是button标签<br />button.btn.btn-success.dim.btn-outline>i.fa.fa-check
+</pre>
+        	<div>
+        		<button class="btn btn-success dim"><i class="fa fa-check"></i></button>
+        		<button class="btn btn-success dim btn-outline"><i class="fa fa-chain"></i></button>
+        	</div>
+        	
+        	<h3>圆形按钮</h3>
+        	<pre>span.btn.btn-success.btn-circle>i.fa.fa-check<br />span.btn.btn-success.btn-circle.btn-outline>i.fa.fa-check</pre>
+        	<div>
+        		<span class="btn btn-success btn-circle"><i class="fa fa-link"></i></span>
+        		<span class="btn btn-success btn-outline btn-circle"><i class="fa fa-link"></i></span>
+        	</div>
+        	<h3>圆角按钮</h3>
+        	<pre>span.btn.btn-success.btn-rounded<br />span.btn.btn-success.btn-rounded.btn-outline</pre>
+        	<div>
+				<span class="btn btn-success btn-rounded">按钮</span>        		
+        		<span class="btn btn-success btn-rounded btn-outline">按钮</span>
+        	</div>
+        	<h3>下拉按钮</h3>
+        	<div>
+        		<div class="btn-group">
+        			<div class="btn btn-primary dropdown-toggle" data-toggle='dropdown'>操作<i class="caret"></i></div>
+        			<ul class="dropdown-menu">
+        				<li><a href="#">置顶</a></li>
+        				<li><a href="#">修改</a></li>
+        				<li><a href="#" class="font-bold">禁用</a></li>
+        				<li class="divider"></li>
+        				<li><a href="#">删除</a></li>
+        			</ul>
+        		</div>
+        	</div>
+        	<div class="hr-line-dashed"></div>
+        </div>
+    </div>
+    
+    <div class="row white-bg page-header">
+    	<div class="col-md-1 m-t text-right">
+    		<h2>表格</h2>
+    	</div>
+    	<div class="col-md-11 m-t">
+    		<h3>基本</h3>
+    		<pre>table.table 	//基本
+table.table-bordered 		//边框
+table.table-striped 		//隔行换色
+table.table-hover 			//hover变色</pre>
+    		<table class="table table-bordered table-striped table-hover">
+    			<thead>
+    				<tr>
+    					<th>#</th>
+    					<th>姓名</th>
+    					<th>性别</th>
+    					<th>年龄</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<tr>
+	    				<td>1</td>
+	    				<td>g</td>
+	    				<td>n</td>
+	    				<td>11</td>
+	    			</tr>
+	    			<tr>
+	    				<td>2</td>
+	    				<td>g</td>
+	    				<td>n</td>
+	    				<td>11</td>
+	    			</tr>
+	    			<tr>
+	    				<td>3</td>
+	    				<td>g</td>
+	    				<td>n</td>
+	    				<td>11</td>
+	    			</tr>
+    			</tbody>
+    		</table>
+    		<div class="hr-line-dashed"></div>
+    	</div>
+    </div>
+    <div class="row white-bg page-header">
+    	<div class="col-md-1 text-right m-t">
+    		<h2>排版</h2>
+    	</div>
+    	
+    	<div class="col-md-11 m-t">
+    		<h3>标题</h3>
+    		<pre>h1 h2 h3 h4 h5 h6 p</pre>
+    		<div>
+    			<h1>标题h1</h1>
+	    		<h2>标题h2</h2>
+	    		<h3>标题h3</h3>
+	    		<h4>标题h4</h4>
+	    		<h5>标题h5</h5>
+	    		<h6>标题h6</h6>
+	    		<p>Bootstrap中文网携手猎聘网共同为码农打造的高薪工作直达频道。好工作都在这里啦！</p>
+    		</div>
+    		<h3>列表</h3>
+    		<pre>ul.unstyled 	//去掉小图标</pre>
+    		<div>
+    			<ul class="unstyled">
+    				<li>每个人都有一个死角， 自己走不出来，别人也闯不进去。</li>
+    				<li>每个人都有一个死角， 自己走不出来，别人也闯不进去。</li>
+    				<li>每个人都有一个死角， 自己走不出来，别人也闯不进去。</li>
+    			</ul>    			
+    		</div>
+    		<h3>文字颜色</h3>
+    		<div>
+    			<pre>p.text-muted</pre>
+    			<p class="text-muted">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    			<pre>p.text-primary</pre>
+    			<p class="text-primary">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    			<pre>p.text-success</pre>
+    			<p class="text-success">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    			<pre>p.text-infor</pre>
+    			<p class="text-infor">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    			<pre>p.text-warning</pre>
+    			<p class="text-warning">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    			<pre>p.text-danger</pre>
+    			<p class="text-danger">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    		</div>
+    		<h3>引用</h3>
+    		<pre>blockquote>p+small>strong+cite</pre>
+    		<div>
+    			<blockquote>
+    				<p>大弦嘈嘈如急雨，小弦切切如私雨。二十四桥明月夜，玉人何处教吹箫。</p>
+    				<small><strong>杜牧</strong>-<cite>《寄扬州韩绰判官》</cite></small>
+    			</blockquote>
+    		</div>
+    		<h3>对齐</h3>
+    		<pre>p.text-left
+p.text-center
+p.text-right</pre>
+    		<div>
+    			<p class="text-left">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    			<p class="text-center">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    			<p class="text-right">每个人都有一个死角， 自己走不出来，别人也闯不进去。</p>
+    		</div>
+    		<h3>地址</h3>
+    		<pre>address>strong+br+br+abbr</pre>
+    		<div>
+    			<address>
+    				<strong>阿里巴巴集团.</strong>
+    				<br />
+    				上海市闵行区绿地科技岛广场A座2606室
+    				<br />
+    				<abbr title="phone">tel:123456789</abbr>
+    			</address>
+    		</div>
+    		<h3>分组列表</h3>
+    		<pre>ul.list-group>li.list-group-item>span.badge.badge-primary</pre>
+    		<div>
+    			<ul class="list-group">
+    				<li class="list-group-item">
+    					<span class="badge badge-primary">11</span>
+    					每个人都有一个死角， 自己走不出来，别人也闯不进去。
+    				</li>
+    				<li class="list-group-item">
+    					<span class="badge badge-info">1</span>
+    					每个人都有一个死角， 自己走不出来，别人也闯不进去。
+    				</li>
+    				<li class="list-group-item">
+    					<span class="badge badge-danger">123</span>
+    					每个人都有一个死角， 自己走不出来，别人也闯不进去。
+    				</li>
+    				<li class="list-group-item">
+    					<span class="badge badge-success">99</span>
+    					每个人都有一个死角， 自己走不出来，别人也闯不进去。
+    				</li>
+    			</ul>
+    		</div>
+    		<pre>div.list-group>a.list-group-item>h3.list-group-item-heading+p.list-group-item-text</pre>
+    		<div>
+    			<div class="list-group">
+    				<a href="#" class="list-group-item active">
+    					<h3 class="list-group-item-heading">广西白龙洞题壁诗</h3>
+    					<p class="list-group-item-text">
+    						挺身登峻岭，举目照遥空。毁佛崇天帝，移民复古风。临军称将勇，玩洞羡诗雄。剑气冲星斗，文光射日虹。
+    					</p>
+    				</a>
+    				<a href="#" class="list-group-item">
+    					<h3>广西白龙洞题壁诗</h3>
+    					<p class="list-group-item-text">
+    						挺身登峻岭，举目照遥空。毁佛崇天帝，移民复古风。临军称将勇，玩洞羡诗雄。剑气冲星斗，文光射日虹。
+    					</p>
+    				</a>
+    			</div>
+    		</div>
+    		<h3>wells</h3>
+    		<div>
+    			<pre>div.well>h3+p</pre>
+    			<div class="well">
+    				<h3>默认效果</h3>
+    				<p>把 Well 用在元素上，能有嵌入（inset）的的简单效果。</p>
+    			</div>
+    			<pre>div.well.well-lg>h3+p</pre>
+    			<div class="well well-lg">
+    				<h3>可选类</h3>
+    				<p>
+    					通过.well-lg，.well-sm可选修饰类，可以控制此组件的内补（padding）和圆角的设置。
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <div class="row page-header">
+    	<div class="col-md-1 text-right">
+    		<h2>任务清单</h2>
+    	</div>
+    	<div class="col-md-11">
+    		<h3>任务清单</h3>
+    		<pre>js/jquery-ui-1.10.4.min.js 	//拖动引用
+$(document).ready(function(){$(".sortable-list").sortable({connectWith:".connectList"}).disableSelection()}); 	//拖动调用
+ul.sortable-list.connectList 	//拖动css
+//代码
+div.ibox>div.ibox-content>div.input-group(input.form-control+span.input-group-btn>button.btn.btn-white>i.fa.fa-plus)+ul.sortable.connectList.agile-list>li.agile.detail>a.btn+i.fa.fa-clock-o</pre>
+    		<div class="row">
+    			<div class="col-md-4">
+    				<div class="ibox">
+    					<div class="ibox-content">
+    						<h4>任务列表</h4>
+    						<p class="small"><i class="fa fa-hand-o-up"></i>在列表之间拖动任务面板</p>
+    						<div class="input-group">
+    							<input type="text" class="form-control" />
+    							<span class="input-group-btn">
+    								<button class="btn btn-white"><i class="fa fa-plus"></i> 添加</button>
+    							</span>
+    						</div>
+    						<ul class="sortable-list connectList agile-list">
+    							<li class="warning-element">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-white btn-xs">标记</a>
+    									<i class="fa fa-clock-o"></i>2016-01-01
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    						</ul>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-4">
+    				<div class="ibox">
+    					<div class="ibox-content">
+    						<h4>任务列表</h4>
+    						<p class="small"><i class="fa fa-hand-o-up"></i>在列表之间拖动任务面板</p>
+    						<div class="input-group">
+    							<input type="text" class="form-control" />
+    							<span class="input-group-btn">
+    								<button class="btn btn-white"><i class="fa fa-plus"></i> 添加</button>
+    							</span>
+    						</div>
+    						<ul class="sortable-list connectList agile-list">
+    							<li class="warning-element">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-white btn-xs">标记</a>
+    									<i class="fa fa-clock-o"></i>2016-01-01
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    						</ul>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-4">
+    				<div class="ibox">
+    					<div class="ibox-content">
+    						<h4>任务列表</h4>
+    						<p class="small"><i class="fa fa-hand-o-up"></i>在列表之间拖动任务面板</p>
+    						<div class="input-group">
+    							<input type="text" class="form-control" />
+    							<span class="input-group-btn">
+    								<button class="btn btn-white"><i class="fa fa-plus"></i> 添加</button>
+    							</span>
+    						</div>
+    						<ul class="sortable-list connectList agile-list">
+    							<li class="warning-element">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-white btn-xs">标记</a>
+    									<i class="fa fa-clock-o"></i>2016-01-01
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    							<li class="info-element agile-list">
+    								加强过程管理，及时统计教育经费使用情况，做到底码清楚
+    								<div class="agile-detail">
+    									<a href="#" class="pull-right btn btn-success btn-xs">确定</a>
+    									<i class="fa fa-clock-o"></i>2016-11-11
+    								</div>
+    							</li>
+    						</ul>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="row page-header">
+    	<div class="col-md-1 text-right">
+    		<h2>选项卡&面板</h2>
+    	</div>
+		<div class="col-md-11">
+			<h3>基本面板</h3>
+			<pre>div.ibox>div.ibox-title(h5+div.ibox-tools>a.close-link>i.fa.fa-times)+div.ibox-content>h2+p</pre>
+			<div>
+				<div class="ibox">
+					<div class="ibox-title gray-bg">
+						<h5>基本面板</h5>
+						<div class="ibox-tools">
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<h2>Bootstrap</h2>
+						<p>
+							简洁、直观、强悍的前端开发框架，让web开发更迅速、简单。
+						</p>
+					</div>
+				</div>
+			</div>
+			<h3>Bootstrap面板 <span class="small">自定义背景</span></h3>
+			<pre>div.panel.panel-default>div.panel-heading+div.panel-body</pre>
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									默认面板
+								</div>
+								<div class="panel-body">
+									通过 .panel-heading 可以很简单地为面板加入一个标题容器。你也可以通过添加设置了 .panel-title 类的标签，添加一个预定义样式的标题。 为了给链接设置合适的颜色，务必将链接放到带有 .panel-title 类的标题标签内。
+								</div>
+								<div class="panel-footer">
+									面板Footer
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									成功
+								</div>
+								<div class="panel-body">
+									通过 .panel-heading 可以很简单地为面板加入一通过 .panel-heading 可以很简单地为面板加入一
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h3>折叠面板</h3>
+			<pre></pre>
+		</div>    	
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!--拖拽start-->
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+    <script>
+        $(document).ready(function(){$(".sortable-list").sortable({connectWith:".connectList"}).disableSelection()});
+    </script>
+    <!--拖拽end-->
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="/vendor/chartist/chartist.css">
+	<link rel="stylesheet" href="/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+
+	<style>
+		#ecommerceChartView .chart-menu button,#ecommerceRecentOrder .table-menu button{border:0}
+		#ecommerceRecentOrder .table-row .card-block .table th,#ecommerceRevenue .pie-view .pie-left h5,#ecommerceRevenue .pie-view .pie-right h5,.info-panel .content-text{white-space:nowrap}
+		.bootbox .modal-dialog{width:360px}
+		.info-panel .btn-floating{box-shadow:none}
+		.info-panel .content-text>i{top:-10px}
+		#ecommerceChartView .chart-action{float:right}
+		#ecommerceChartView .ct-grid{stroke-dasharray:10 5}
+		#ecommerceChartView .ct-line{stroke-width:4px}
+		#ecommerceChartView .ct-point,
+		#ecommerceChartView .ct-point-content{opacity:0;cursor:pointer;-webkit-transition:all .3s;transition:all .3s}
+		#ecommerceChartView .ct-point-content{stroke:#fff;stroke-width:4px;stroke-linecap:round;pointer-events:none}
+		#ecommerceChartView .ct-series:hover .ct-point{opacity:.8}
+		#ecommerceChartView .ct-series:hover .ct-point-content{opacity:1}
+		#ecommerceChartView .ct-series-a .ct-area{fill:#ffd9e6;fill-opacity:.2}
+		#ecommerceChartView .ct-series-a .ct-line,
+		#ecommerceChartView .ct-series-a .ct-point{stroke:#e6155e}
+		#ecommerceChartView .ct-series-a .ct-line{stroke-opacity:.5}
+		#ecommerceChartView .ct-series-b .ct-line,
+		#ecommerceChartView .ct-series-b .ct-point{stroke:#7231f5}
+		#ecommerceChartView .ct-series-b .ct-line{stroke-opacity:.5}
+		#ecommerceChartView .ct-series-b .ct-area{fill:#eae1fc;fill-opacity:.2}
+		#ecommerceRecentOrder .table-row .card-block{border:0;padding:0 20px}
+		#ecommerceRecentOrder .table-row .card-block .table{margin-bottom:0}
+		#ecommerceRecentOrder .table-row .card-block .table td{vertical-align:middle;height:100px;font-size:14px;padding:20px 8px}
+		#ecommerceRecentOrder .table-row .card-block .table td span{border-radius:4px;padding:5px 15px}
+		#ecommerceRevenue .card-block{padding:20px 10px 35px}
+		#ecommerceRevenue .card-block .ct-label.ct-horizontal.ct-end{font-size:14px;font-weight:400}
+		#ecommerceRevenue .card-block .ct-series-a line.ct-bar{stroke:#926dde}
+		#ecommerceRevenue .card-block .ct-series-b line.ct-bar{stroke:#57c7d4}
+		#ecommerceRevenue .ct-series .ct-bar-fill{stroke:#f3f7f9;stroke-width:20px}
+		#ecommerceRevenue .pie-view{margin:20px 0}
+		#ecommerceRevenue .pie-view::after{display:block;clear:both;content:""}
+		#ecommerceRevenue .pie-view .pie-left .pie-progress.pie-progress-sm,
+		#ecommerceRevenue .pie-view .pie-right .pie-progress.pie-progress-sm{min-width:120px;max-width:120px}
+		#ecommerceRevenue .pie-view .pie-left h5+p,
+		#ecommerceRevenue .pie-view .pie-right h5+p{margin-bottom:15px}
+		@media (max-width:991.98px){
+			.pie-view .pie-progress.pie-progress-sm{max-width:200px!important;min-width:50px!important}
+		}
+		@media (min-width:992px) and (max-width:1330px){
+			.pie-view .pie-progress.pie-progress-sm{min-width:100px!important;max-width:100px!important}
+			#ecommerceRevenue .pie-view{margin-top:72px}
+		}
+		@media (min-width:1489px){
+			#ecommerceRevenue .barChart .ct-series .ct-bar{stroke-width:20px}
+		}
+		@media (min-width:992px) and (max-width:1489px){
+			#ecommerceRevenue .barChart .ct-series .ct-bar,
+			#ecommerceRevenue .barChart .ct-series .ct-bar-fill{stroke-width:15px}
+			#ecommerceRevenue .ct-series-a{-webkit-transform:translateX(3px);transform:translateX(3px)}
+			#ecommerceRevenue .ct-series-b{-webkit-transform:translateX(-3px);transform:translateX(-3px)}
+		}
+		@media (min-width:429px) and (max-width:992px){
+			#ecommerceRevenue .barChart .ct-series .ct-bar{stroke-width:20px}
+		}
+		@media (max-width:429px){
+			#ecommerceRevenue .barChart .ct-series .ct-bar,
+			#ecommerceRevenue .barChart .ct-series .ct-bar-fill{stroke-width:15px}
+			#ecommerceRevenue .ct-series-a{-webkit-transform:translateX(3px);transform:translateX(3px)}
+			#ecommerceRevenue .ct-series-b{-webkit-transform:translateX(-3px);transform:translateX(-3px)}
+		}
+		@media (max-width:570px){
+			#ecommerceChartView .chart-action{position:relative;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);float:none;margin:10px 0}
+			#ecommerceChartView .card-block{overflow-x:scroll}
+		}
+		@media screen and (max-width:380px){
+			#ecommerceChartView .nav-pills .nav-link{padding:2px 8px;margin-right:3px;margin-left:3px}
+		}
+
+	</style>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-ecommerce">
+    <div class="page-header">
+        <h1 class="page-title font-size-26 font-weight-300">电商</h1>
+    </div>
+    <div class="page-content container-fluid">
+        <div class="row" data-plugin="matchHeight" data-by-row="true">
+
+            <div class="col-xl-3 col-md-6 info-panel">
+                <div class="card card-shadow">
+                    <div class="bg-white p-20">
+                        <button type="button" class="btn btn-floating btn-sm btn-warning">
+                            <i class="icon wb-shopping-cart"></i>
+                        </button>
+                        <span class="ml-15 font-weight-400">订单</span>
+                        <div class="content-text text-center mb-0">
+                            <i class="text-danger icon wb-triangle-up font-size-20"> </i>
+                            <span class="font-size-40 font-weight-300">399</span>
+                            <p class="blue-grey-400 font-weight-300 m-0">+45% 同比增长</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 info-panel">
+                <div class="card card-shadow">
+                    <div class="bg-white p-20">
+                        <button type="button" class="btn btn-floating btn-sm btn-danger">
+                            <i class="icon fa fa-yen"></i>
+                        </button>
+                        <span class="ml-15 font-weight-400">收入</span>
+                        <div class="content-text text-center mb-0">
+                            <i class="text-success icon wb-triangle-down font-size-20"> </i>
+                            <span class="font-size-40 font-weight-300">&yen;18,628</span>
+                            <p class="blue-grey-400 font-weight-300 m-0">+45% 同比增长</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 info-panel">
+                <div class="card card-shadow">
+                    <div class="bg-white p-20">
+                        <button type="button" class="btn btn-floating btn-sm btn-success">
+                            <i class="icon wb-eye"></i>
+                        </button>
+                        <span class="ml-15 font-weight-400">访客</span>
+                        <div class="content-text text-center mb-0">
+                            <i class="text-danger icon wb-triangle-up font-size-20"> </i>
+                            <span class="font-size-40 font-weight-300">23,456</span>
+                            <p class="blue-grey-400 font-weight-300 m-0">+25% 同比增长</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 info-panel">
+                <div class="card card-shadow">
+                    <div class="bg-white p-20">
+                        <button type="button" class="btn btn-floating btn-sm btn-primary">
+                            <i class="icon wb-user"></i>
+                        </button>
+                        <span class="ml-15 font-weight-400">买家</span>
+                        <div class="content-text text-center mb-0">
+                            <i class="text-danger icon wb-triangle-up font-size-20"> </i>
+                            <span class="font-size-40 font-weight-300">4,367</span>
+                            <p class="blue-grey-400 font-weight-300 m-0">+25% 同比增长</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-12" id="ecommerceChartView">
+                <div class="card card-shadow">
+                    <div class="card-header card-header-transparent py-20">
+                        <div class="btn-group dropdown chart-menu">
+                            <button type="button" class="btn btn-outline btn-default dropdown-toggle" data-toggle="dropdown">
+                                产品销售
+                            </button>
+                            <div class="dropdown-menu animate" role="menu">
+                                <a class="dropdown-item" href="javascript:;" role="menuitem">销售</a>
+                                <a class="dropdown-item" href="javascript:;" role="menuitem">总销售额</a>
+                                <a class="dropdown-item" href="javascript:;" role="menuitem">利润</a>
+                            </div>
+                        </div>
+                        <ul class="nav nav-pills nav-pills-rounded chart-action" id="chartViewNav">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#scoreLineToDay">本日</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#scoreLineToWeek">本周</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">本月</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content bg-white p-20">
+                        <div class="ct-chart tab-pane active" id="scoreLineToDay"></div>
+                        <div class="ct-chart tab-pane" id="scoreLineToWeek"></div>
+                        <div class="ct-chart tab-pane" id="scoreLineToMonth"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-8" id="ecommerceRecentOrder">
+                <div class="card card-shadow table-row">
+                    <div class="card-header card-header-transparent p-20">
+                        <div class="btn-group dropdown table-menu">
+                            <button type="button" class="btn btn-outline btn-default dropdown-toggle" data-toggle="dropdown">
+                                最近订单
+                            </button>
+                            <div class="dropdown-menu animate" role="menu">
+                                <a class="dropdown-item" href="javascript:;" role="menuitem">销售</a>
+                                <a class="dropdown-item" href="javascript:;" role="menuitem">总销售额</a>
+                                <a class="dropdown-item" href="javascript:;" role="menuitem">利润</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>图片</th>
+                                <th>产品</th>
+                                <th>买家</th>
+                                <th>进度</th>
+                                <th>状态</th>
+                                <th>编号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <img src="http://cdn.admui.com/demo/iframe/2.1.0/images/products/imac.png" width="40" alt="iMac">
+                                </td>
+                                <td>iMac</td>
+                                <td>南学斌</td>
+                                <td>2016.9.22</td>
+                                <td>
+                                    <span class="badge badge-success font-weight-300">已完成</span>
+                                </td>
+                                <td>98BC85SD84</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="http://cdn.admui.com/demo/iframe/2.1.0/images/products/iphone.png" width="40" alt="iPhone">
+                                </td>
+                                <td>iPhone</td>
+                                <td>吕佳</td>
+                                <td>2016.9.22</td>
+                                <td>
+                                    <span class="badge badge-warning font-weight-300">待发货</span>
+                                </td>
+                                <td>98SA3C9SC</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="http://cdn.admui.com/demo/iframe/2.1.0/images/products/applewatch.png" width="40" alt="apple_watch">
+                                </td>
+                                <td>apple Watch</td>
+                                <td>赵烁利</td>
+                                <td>2016.9.22</td>
+                                <td>
+                                    <span class="badge badge-success font-weight-300">已完成</span>
+                                </td>
+                                <td>98BC85SD84</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="http://cdn.admui.com/demo/iframe/2.1.0/images/products/macmouse.png" width="40" alt="mac_mouse">
+                                </td>
+                                <td>mac Mouse</td>
+                                <td>付于倩</td>
+                                <td>2016.9.22</td>
+                                <td>
+                                    <span class="badge badge-default font-weight-300">待发货</span>
+                                </td>
+                                <td>98SA3C9SC</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4" id="ecommerceRevenue">
+                <div class="card card-shadow text-center pt-10">
+                    <h3 class="card-header card-header-transparent blue-grey-700 font-size-14 mb-20">收入</h3>
+                    <div class="bg-white">
+                        <div class="ct-chart barChart"></div>
+                        <div class="pie-view">
+                            <div class="col-6 pie-left float-left text-center">
+                                <h5 class="blue-grey-500 font-size-14 font-weight-300">总收入</h5>
+                                <p class="font-size-20 blue-grey-700">
+                                    9,362,74 </p>
+                                <div class="pie-progress pie-progress-sm" data-valuemax="100" data-valuemin="0"
+                                     data-barcolor="#a58add" data-size="100" data-barsize="4" data-goal="60"
+                                     aria-valuenow="60" role="progressbar">
+                                    <span class="pie-progress-number">60%</span>
+                                </div>
+                            </div>
+                            <div class="col-6 pie-right float-right text-center">
+                                <h5 class="blue-grey-500 font-size-14 font-weight-300">线上收入</h5>
+                                <p class="font-size-20 blue-grey-700">
+                                    6,734,58 </p>
+                                <div class="pie-progress pie-progress-sm" data-valuemax="100" data-valuemin="0"
+                                     data-barcolor="#77d6e1" data-size="100" data-barsize="4" data-goal="78"
+                                     aria-valuenow="78" role="progressbar">
+                                    <span class="pie-progress-number">78%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="/vendor/chartist/chartist.js"></script>
+<script src="/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+
+<script src="http://cdn.admui.com/demo/iframe/2.1.0/js/examples/pages/home/ecommerce.js"></script>
+
+</body>
+</html>

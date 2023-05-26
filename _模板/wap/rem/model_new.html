@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title></title>
+	<link href="citypicker/jquery-weui.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/basic.css" rel="stylesheet" type="text/css" />
+	
+	<style>
+		button,input {
+			font-size:.28rem;
+		}
+	</style>
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 750));
+        }
+        document.querySelectorAll('html')[0].style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+    </script>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="citypicker/jquery-weui.min.js"></script>
+    <script src="citypicker/city-picker.min.js"></script>
+</head>
+<body>
+
+	<!-- <style>
+		header {
+			position: fixed;top:0;left:50%;z-index:999999;
+			margin-left:-3.75rem;
+			width:7.5rem;height:1rem;
+			background: white;
+			box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.1);
+			display: flex;flex-direction: row;justify-content: space-between;align-items: center;
+			padding:0 .3rem;
+		}
+		header img {
+			display: block;
+		}
+	    header a {
+			color:black;
+			font-size: .28rem;height:1rem;
+			position: relative;
+			display: flex;flex-direction: column;justify-content: center;align-items: flex-end;
+			text-align: right;
+			line-height: 1;
+		}
+		header a span {
+			font-size: .3rem;
+			font-style: italic;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+	</style>
+	
+	<header>
+		<img src="" alt="img">	
+		<a href="tel:000">
+			电话号码
+			<span>12345678901</span>
+		</a>
+	</header> -->
+
+	<style>
+		header {
+			position: fixed;top:0;left:50%;z-index:999999;
+			margin-left:-3.75rem;
+			width:7.5rem;height:1rem;
+			background: white;
+			box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.1);
+			display: flex;flex-direction: row;justify-content: space-between;align-items: center;
+			padding:0 .3rem;
+			font-size: .28rem;
+		}
+		header img {
+			display: block;
+		}
+		.menu-box {
+			position: fixed;top:0;left:-50%;z-index:999998;
+			margin-left:-3.75rem;
+			width:7.5rem;height:100rem;
+			background: rgba(0, 0, 0, .1);
+			padding-top: 1rem;
+			opacity: 0;
+			transition: all ease .5s;
+		}
+		.menu-box.show {
+			left:50%;
+			opacity: 1;
+		}
+		.menu-box menu {
+			width:4rem;
+			height:100%;
+			background: black;
+		}
+		.menu-box menu a {
+			margin:0 .4rem;
+			height:1.1rem;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			font-size:.28rem;
+			color:white;
+			border-bottom: 1px solid rgba(255, 255, 255, .5);
+		}
+	</style>
+	<header>
+		<span class="menu-btn">btn</span>
+		<img src="" alt="img">
+		<span>btn</span>
+	</header>
+	<div class="menu-box">
+		<menu>
+			<a href="">首页</a>
+			<a href="">品牌介绍</a>
+			<a href="">品牌介绍</a>
+			<a href="">品牌介绍</a>
+			<a href="">品牌介绍</a>
+			<a href="">品牌介绍</a>
+		</menu>
+	</div>
+	<script>
+		$('.menu-btn').on('click',function(){
+			var menu = $('.menu-box');
+			if(menu.hasClass('show')){
+				menu.removeClass('show')
+			}else{
+				menu.addClass('show')
+			}
+		})
+		$('.menu-box').on('click',function(e){
+			$(this).removeClass('show')
+		})
+		$('.menu-box menu').on('click',function(e){
+			e.stopPropagation();
+		})
+	</script>
+
+
+
+	<!-- <style>
+		footer {position: fixed;bottom:0;left:50%;z-index:999999;margin-left:-3.75rem;width:7.5rem;height:1rem;background: black;display: flex;flex-direction: row;justify-content: space-between;align-items: center;}
+	    footer a {color:white!important;font-size: .28rem;width:33.33%;height:1rem;position: relative;display: flex;flex-direction: column;justify-content: center;align-items: center;}
+	    footer a:not(:last-child):before {content: "";position: absolute;right:0;top:.3rem;height:.4rem;border-right:1px solid white;}
+	</style>
+	<footer>
+		<a href="">电话咨询</a>
+		<a href="">利润估算</a>
+		<a href="">加盟优惠</a>
+	</footer>
+ -->
+	<div class="wrap">
+
+		<div style="height:1.5rem;"></div>
+
+		<style>
+.custom-counter {
+	padding:0 .3rem;
+	color:#181818;
+}
+.custom-counter .custom-tit {
+	font-size: .38rem;
+	font-weight: bold;
+	padding:.3rem 0;
+	text-align: center;
+}
+.custom-counter .custom-input-group {
+	font-size: .28rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: .2rem;
+}
+.custom-counter .custom-input-group span {
+	width:1.2rem;
+	text-align: right;
+}
+.custom-counter .custom-input-group span:last-child{
+	text-align: left;
+	color:#888;
+}
+.custom-counter .custom-input-group input,
+.custom-counter .custom-input-group button {
+	flex:1;
+	border:1px solid #999;
+	height:.8rem;
+	color:#181818;
+	font-size: .28rem;
+	margin:0 .2rem;
+	padding:0 .2rem;
+}
+.custom-counter .custom-input-group button {
+	background: #181818;
+	border:1px solid #181818;
+	color:white;
+	margin:.2rem .8rem 0;
+}
+.custom-counter .custom-tips {
+	padding:.1rem 0 0;
+	font-size: .24rem;
+	color:#bbb;
+}
+		</style>
+		<div class="custom-counter">
+			<div class="custom-tit">
+				酒店投资计算器
+			</div>
+			<div class="custom-input-group">
+				<span>房租</span>
+				<input type="tel" placeholder="建议数值15-200" />
+				<span>万元/年</span>
+			</div>
+			<div class="custom-input-group">
+				<span>房间数量</span>
+				<input type="tel" placeholder="建议数值30-200" />
+				<span>间</span>
+			</div>
+			<div class="custom-input-group">
+				<span>房价</span>
+				<input type="tel" placeholder="建议数值99-299" />
+				<span>元/间夜</span>
+			</div>
+			<div class="custom-input-group">
+				<span>出租率</span>
+				<input type="tel" placeholder="建议数值0-100" />
+				<span>%</span>
+			</div>
+			<div class="custom-input-group">
+				<span>手机号</span>
+				<input type="tel" placeholder="请输入您的手机号" />
+				<span></span>
+			</div>
+			<div class="custom-input-group">
+				<button>发送至手机</button>
+			</div>
+			<div class="custom-tips">
+				*投资计算器预估结果仅供参考，不代表实质性判断或承诺。
+			</div>
+		</div>
+
+		<hr style="margin:.5rem 0;">
+
+	    <!--加盟咨询-->
+	    <style>
+.custom-message3 {
+	padding:0 .3rem;
+	color:#181818;
+}
+.custom-message3 .custom-tit {
+	font-size: .38rem;
+	font-weight: bold;
+	padding:.3rem 0;
+	text-align: center;
+}
+.custom-message3 .custom-select {
+	font-size: .28rem;
+	color:#181818;
+}
+.custom-message3 .custom-select dd {
+	margin-top: .1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	user-select: none;
+}
+.custom-message3 .custom-select div {
+	width:31%;
+	height:.6rem;
+	border:1px solid #181818;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: .24rem;
+}
+.custom-message3 .custom-select div.active {
+	background: #181818;
+	color:white;
+}
+.custom-message3 .custom-input-group {
+	font-size: .28rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: .2rem;
+}
+.custom-message3 .custom-input-group span {
+	width:1.3rem;
+	text-align: right;
+}
+.custom-message3 .custom-input-group span:last-child{
+	text-align: left;
+	color:#888;
+}
+.custom-message3 .custom-input-group .custom-sex {
+	width:2.3rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding:0 .2rem;
+}
+.custom-message3 .custom-input-group .custom-sex label {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	user-select: none;
+}
+.custom-message3 .custom-input-group .custom-sex i {
+	width:.2rem;
+	height:.2rem;
+	border:1px solid black;
+	border-radius: 1rem;
+	display: block;
+	margin-right: .05rem;
+}
+.custom-message3 .custom-input-group .custom-sex label.active i {
+	background: black;
+}
+.custom-message3 .custom-input-group input,
+.custom-message3 .custom-input-group button,
+.custom-message3 .custom-input-group textarea {
+	flex:1;
+	border:1px solid #999;
+	height:.8rem;
+	color:#181818;
+	font-size: .28rem;
+	padding:0 .2rem;
+}
+.custom-message3 .custom-input-group button {
+	background: #181818;
+	border:1px solid #181818;
+	color:white;
+	margin:.2rem 0 0;
+}
+.custom-message3 .custom-input-group.custom-column {
+	flex-wrap: wrap;
+}
+.custom-message3 .custom-input-group textarea {
+	width:100%;
+	height:1.4rem;
+	padding:.2rem;
+	flex:none;
+	margin-top: .15rem;
+}
+.custom-message3 .custom-tips {
+	padding:.1rem 0 0;
+	font-size: .24rem;
+	color:#bbb;
+}
+	    </style>
+	    <div class="custom-message3">
+			<div class="custom-tit">加盟咨询</div>
+	  		<dl class="custom-select">
+	  			<dt>我想了解</dt>
+	  			<dd>
+	  				<div class="active">投资金额</div>
+	  				<div>加盟资料</div>
+	  				<div>加盟费用</div>
+	  				<div>加盟条件</div>
+					<div>加盟支持</div>
+					<div>加盟支持</div>
+	  			</dd>
+			</dl>
+			<div class="custom-input-group custom-column">
+				<div>其他(选填)</div>
+				<textarea name="" rows="" cols="" placeholder="在这里输入您想知道的其它问题,我们将尽快与您取得联系."></textarea>
+			</div>
+			<div class="custom-input-group">
+				<input type="text" placeholder="请输入您的姓名" />
+				<div class="custom-sex">
+					<label class="active">
+						<i></i>
+						先生
+					</label>
+					<label>
+						<i></i>
+						女士
+					</label>
+				</div>
+			</div>
+			<div class="custom-input-group">
+				<input type="text" placeholder="请输入您的姓名" />
+			</div>
+			<div class="custom-input-group">
+				<input type="tel" placeholder="请输入您的手机号" />
+			</div>
+			<div class="custom-input-group">
+				<button>发 送</button>
+			</div>
+			<div class="custom-tips">
+				*投资计算器预估结果仅供参考，不代表实质性判断或承诺。
+			</div>
+	  	</div>
+
+		<hr style="margin:50px 0;">
+		  	
+		<style>
+.custom-message4 {
+	padding:0 .3rem;
+	color:#181818;
+}
+.custom-message4 .custom-tit {
+	font-size: .38rem;
+	font-weight: bold;
+	padding:.3rem 0;
+	text-align: center;
+}
+.custom-message4 .custom-select {
+	font-size: .28rem;
+	color:#181818;
+	margin-bottom: .2rem;
+}
+.custom-message4 .custom-select dd {
+	margin-top: .1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	user-select: none;
+}
+.custom-message4 .custom-select div {
+	width:31%;
+	height:.6rem;
+	border:1px solid #181818;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: .24rem;
+}
+.custom-message4 .custom-select div.active {
+	background: #181818;
+	color:white;
+}
+.custom-message4 .custom-input-group {
+	font-size: .28rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: .2rem;
+}
+.custom-message4 .custom-input-group span {
+	width:.7rem;
+	text-align: right;
+}
+.custom-message4 .custom-input-group span:last-child{
+	text-align: left;
+	color:#888;
+}
+.custom-message4 .custom-input-group input,
+.custom-message4 .custom-input-group button {
+	flex:1;
+	border:1px solid #999;
+	height:.8rem;
+	color:#181818;
+	font-size: .28rem;
+	margin-left:.2rem;
+	padding:0 .2rem;
+}
+.custom-message4 .custom-input-group button {
+	background: #181818;
+	border:1px solid #181818;
+	color:white;
+	margin:.2rem 0 0;
+}
+.custom-message4 .custom-tips {
+	padding:.1rem 0 0;
+	font-size: .24rem;
+	color:#bbb;
+}
+		</style>
+		<div class="custom-message4">
+			<div class="custom-tit">
+				加盟咨询
+			</div>
+			<dl class="custom-select">
+				<dt>我想了解</dt>
+				<dd>
+					<div class="active">投资金额</div>
+					<div>加盟资料</div>
+					<div>加盟费用</div>
+					<div>加盟条件</div>
+				    <div>加盟支持</div>
+				    <div>加盟支持</div>
+				</dd>
+		    </dl>
+			<div class="custom-input-group">
+				<span>姓名</span>
+				<input type="text" placeholder="请输入您的姓名" />
+			</div>
+			<div class="custom-input-group">
+				<span>电话</span>
+				<input type="tel" placeholder="请输入您的手机号" />
+			</div>
+			<div class="custom-input-group">
+				<button>提交</button>
+			</div>
+			<div class="custom-tips">
+				*投资计算器预估结果仅供参考，不代表实质性判断或承诺。
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		$(".custom-message3 dd div").on('click',function(){
+	    	var t = $(this);
+	    	if(t.hasClass('active')){
+	    		t.removeClass('active')
+	    	}else{
+	    		t.addClass('active')
+	    	}
+	    })
+		$(".custom-message4 dd div").on('click',function(){
+	    	var t = $(this);
+	    	if(t.hasClass('active')){
+	    		t.removeClass('active')
+	    	}else{
+	    		t.addClass('active')
+	    	}
+	    })
+	</script>
+
+	<input id="demo3" readonly type="text" value="山东省 青岛市 黄岛区" placeholder="请输入您所在的省份/城市" />
+	<script>
+		//三级联动
+        $("#demo3").cityPicker({
+            title: "请选择地区",
+			showDistrict: false, //是否显示地区选择
+            showProvince: true,  //是否显示省份选择
+            onChange: function (picker, values, displayValues) {
+                //console.log(values, displayValues);
+                province = displayValues[0];//名称，山东省
+                city = displayValues[1];
+                area = displayValues[2];
+                provCode=values[0];//编码370000
+                cityCode=values[1];
+                areaCode=values[2];
+                //console.log("province==="+province+"====city=="+city+"==area==="+area);
+            }
+        });
+	
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,3565 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    
+    <link rel="stylesheet" href="/vendor/jquery-datatables/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="/vendor/jquery-datatables/dataTables.responsive.css">
+
+    <!-- Page CSS-->
+    <!-- <link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/css/examples/tables/datatable.css"> -->
+    <script src="/vendor/jquery-datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/jquery-datatables/dataTables.bootstrap4.js"></script>
+    <script src="/vendor/jquery-datatables/dataTables.responsive.min.js"></script>
+    <script>
+        /* 汉化 */
+        var oLanguage={
+            "oAria": {
+                "sSortAscending": ": 升序排列",
+                "sSortDescending": ": 降序排列"
+            },
+            "oPaginate": {
+                "sFirst": "首页",
+                "sLast": "末页",
+                "sNext": "下页",
+                "sPrevious": "上页"
+            },
+            "sEmptyTable": "没有相关记录",
+            "sInfo": "第 _START_ 到 _END_ 条记录，共 _TOTAL_ 条",
+            "sInfoEmpty": "第 0 到 0 条记录，共 0 条",
+            "sInfoFiltered": "(从 _MAX_ 条记录中检索)",
+            "sInfoPostFix": "",
+            "sDecimal": "",
+            "sThousands": ",",
+            "sLengthMenu": "每页显示条数: _MENU_",
+            "sLoadingRecords": "正在载入...",
+            "sProcessing": "正在载入...",
+            "sSearch": "搜索:",
+            "sSearchPlaceholder": "",
+            "sUrl": "",
+            "sZeroRecords": "没有相关记录"
+        }
+        $.fn.dataTable.defaults.oLanguage=oLanguage;
+
+        /* 中文排序 */
+        // oSort是排序类型数组, 'chinese-asc'是自己定义的类型的排序(*-asc || *-desc)名称
+        // 插件应该会根据表格中的内容的类型(string, number, chinese)进行比较排序，
+        // 如果以chinese类型来排序则用oSort['chinese-asc']和oSort['chinese-desc']的方法
+        // oSort对应的function里面自定义比较方法
+        jQuery.fn.dataTableExt.oSort['chinese-asc'] = function(x,y) {
+            //javascript自带的中文比较函数，具体用法可自行查阅了解
+            return x.localeCompare(y);
+        };
+        
+        jQuery.fn.dataTableExt.oSort['chinese-desc'] = function(x,y) {
+            return y.localeCompare(x);
+        };
+        
+        // aTypes是插件存放表格内容类型的数组
+        // reg赋值的正则表达式，用来判断是否是中文字符
+        // 返回值push到aTypes数组，排序时扫描该数组，'chinese'则调用上面两个方法。返回null默认是'string'
+        jQuery.fn.dataTableExt.aTypes.push(function(sData) {
+            var reg =/^[\u4e00-\u9fa5]{0,}$/;
+            if(reg.test(sData)) {
+                return 'chinese';
+            }
+            return null;
+        });
+
+    </script>
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="page-aside-fixed page-aside-left site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-tables">
+    <div class="page-header">
+        <h1 class="page-title">DataTables</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-inverse btn-round" href="https://github.com/maxazan/jquery-treegrid" target="_blank">
+                <i class="icon wb-link" aria-hidden="true"></i> 官网
+            </a>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">零配置</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 默认情况已启用一些功能，搜索、 排序、 分页等功能已经开启，如本示例所示</p>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="demo1"
+                    data-plugin="dataTable">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>职位</th>
+                            <th>工作地点</th>
+                            <th>年龄</th>
+                            <th>入职时间</th>
+                            <th>年薪</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>姓名</th>
+                            <th>职位</th>
+                            <th>工作地点</th>
+                            <th>年龄</th>
+                            <th>入职时间</th>
+                            <th>年薪</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>李霞</td>
+                            <td>系统架构师</td>
+                            <td>北京</td>
+                            <td>61</td>
+                            <td>2011/04/25</td>
+                            <td>&yen;320,800</td>
+                        </tr>
+                        <tr>
+                            <td>杜重治</td>
+                            <td>会计</td>
+                            <td>上海</td>
+                            <td>63</td>
+                            <td>2011/07/25</td>
+                            <td>&yen;170,750</td>
+                        </tr>
+                        <tr>
+                            <td>陈锋</td>
+                            <td>初级开发者</td>
+                            <td>深圳</td>
+                            <td>66</td>
+                            <td>2009/01/12</td>
+                            <td>&yen;86,000</td>
+                        </tr>
+                        <tr>
+                            <td>郑伯宁</td>
+                            <td>高级JavaScript开发者</td>
+                            <td>北京</td>
+                            <td>22</td>
+                            <td>2012/03/29</td>
+                            <td>&yen;433,060</td>
+                        </tr>
+                        <tr>
+                            <td>施华军</td>
+                            <td>会计</td>
+                            <td>上海</td>
+                            <td>33</td>
+                            <td>2008/11/28</td>
+                            <td>&yen;162,700</td>
+                        </tr>
+                        <tr>
+                            <td>吴书振</td>
+                            <td>集成专家</td>
+                            <td>南京</td>
+                            <td>61</td>
+                            <td>2012/12/02</td>
+                            <td>&yen;372,000</td>
+                        </tr>
+                        <tr>
+                            <td>张宁</td>
+                            <td>销售代表</td>
+                            <td>深圳</td>
+                            <td>59</td>
+                            <td>2012/08/06</td>
+                            <td>&yen;137,500</td>
+                        </tr>
+                        <tr>
+                            <td>马世波</td>
+                            <td>集成专家</td>
+                            <td>上海</td>
+                            <td>55</td>
+                            <td>2010/10/14</td>
+                            <td>&yen;327,900</td>
+                        </tr>
+                        <tr>
+                            <td>张章</td>
+                            <td>Javascript开发者</td>
+                            <td>深圳</td>
+                            <td>39</td>
+                            <td>2009/09/15</td>
+                            <td>&yen;205,500</td>
+                        </tr>
+                        <tr>
+                            <td>张竹影</td>
+                            <td>软件工程师</td>
+                            <td>北京</td>
+                            <td>23</td>
+                            <td>2008/12/13</td>
+                            <td>&yen;103,600</td>
+                        </tr>
+                        <tr>
+                            <td>韩庆福</td>
+                            <td>办公室主管</td>
+                            <td>广州</td>
+                            <td>30</td>
+                            <td>2008/12/19</td>
+                            <td>&yen;90,560</td>
+                        </tr>
+                        <tr>
+                            <td>刘勇</td>
+                            <td>客户服务</td>
+                            <td>北京</td>
+                            <td>22</td>
+                            <td>2013/03/03</td>
+                            <td>&yen;342,000</td>
+                        </tr>
+                        <tr>
+                            <td>张忆湫</td>
+                            <td>大区经理</td>
+                            <td>深圳</td>
+                            <td>36</td>
+                            <td>2008/10/16</td>
+                            <td>&yen;470,600</td>
+                        </tr>
+                        <tr>
+                            <td>尚志兴</td>
+                            <td>高级营销设计师</td>
+                            <td>广州</td>
+                            <td>43</td>
+                            <td>2012/12/18</td>
+                            <td>&yen;313,500</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                <script>
+                    $(function () {
+                        $('#demo1').DataTable();
+                    });
+                </script>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">功能启用/禁用</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>如果你不想使用 DataTables 的某项特性，那么你可以禁用它，下面的例子展示了只启用查找功能(默认是启用的)</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-paging="false" data-ordering="false" data-info="false"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "paging":   false,
+        "ordering": false,
+        "info":     false
+    }));
+</pre>
+<p>需引入的文件</p>
+<pre>
+    &lt;link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables-bootstrap/dataTables.bootstrap4.css"&gt;
+    &lt;script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables/jquery.dataTables.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables-bootstrap/dataTables.bootstrap4.js"&gt;&lt;/script&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+       
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">默认排序</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>在 DataTables 初始化时你可以使用order选项指定列怎么排序，order可以接受多个二维数组数据，数组第一个位置为第几列，第二个位置为标示asc(升序)或desc(降序)</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-order="[[3,&quot;desc&quot;]]"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "order": [[ 3, "desc" ]]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-order="[[3,&quot;desc&quot;]]"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">多列排序</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 允许同时指定多个列排序，有很多不同的方法来实现：</p>
+                <ul>
+                    <li>用户按住
+                        <code>shift</code>，鼠标分别点击第一列，第二列等等，可以实现多列同时排序</li>
+                    <li>给每列加上
+                        <code>columns.orderData</code> 选项,即如果指定列排序时，第一列有相同数据，则按照第二列排序</li>
+                    <li>使用
+                        <code>columns.orderData</code> 选项给多列排序，比如
+                        <code>[ [0,'asc'], [1,'asc'] ]</code>
+                    </li>
+                    <li>使用
+                        <code>order()</code> 方法实现多列排序，详细参见api</li>
+                </ul>
+                <p>注意，可以使用orderMulti 选项来禁用用户按住shift点击多列排序</p>
+                <p>下面本示例告诉大家怎么使用columns.orderData选项来进行多列排序</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-column-defs="[{targets:[0],orderData:[0,1]},{targets:[1],orderData:[1,0]},{targets:[4],orderData:[4,0]}]"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            columnDefs: [{
+              targets: [ 0 ],
+              orderData: [ 0, 1 ]  //如果第一列进行排序，有相同数据则按照第二列顺序排列
+            }, {
+              targets: [ 1 ],
+              orderData: [ 1, 0 ]  //如果第二列进行排序，有相同数据则按照第一列顺序排列
+            }, {
+              targets: [ 4 ],
+              orderData: [ 4, 0 ]  //如果第五列进行排序，有相同数据则按照第一列顺序排列
+            }]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-column-defs="[{targets:[0],orderData:[0,1]},{targets:[1],orderData:[1,0]},{targets:[4],orderData:[4,0]}]"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">多个表格</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 可以初始化多个表格，只需要使用jquery的选择器即可</p>
+                <p>这些表都是独立（即用户控制一个表上分页不会影响其他表格），但它们共享给定的初始化参数 （例如如果你指定的国际化文件，所有的表将显示你指定的语言)。此外，API 可以一起操作或者独立操作</p>
+                <p>
+                    下面本示例展示的是一行代码显示两个表格，通过
+                    <code>table.display</code> 选择器
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full datatable-example text-nowrap" 
+    data-plugin="dataTable"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">隐藏列</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>有些数据不希望显示在屏幕上，或者需要什么条件才会显示，你可以使用
+                    <code>columns.visible</code> 选项来实现</p>
+                <p>被隐藏的列依然是表格的一部分，通过
+                    <code>column().visible()</code> 方法来显示</p>
+                <p>被隐藏的列既然是表格的一部分，那么用户也可以搜索和访问被隐藏的列的相关内容</p>
+                <p>下面的例子展示了
+                    <b>工作地点</b>和
+                    <b>年龄</b>两列不显示（隐藏的列不会生成dom，他存在于DT的内部数据中），并且不能被搜索到</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-column-defs="[{&quot;targets&quot;:[2],&quot;visible&quot;:false,&quot;searchable&quot;:false},{&quot;targets&quot;:[3],&quot;visible&quot;:false}]"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "columnDefs": [
+              {
+                "targets": [ 2 ],
+                "visible": false,
+                "searchable": false
+              },
+              {
+                "targets": [ 3 ],
+                "visible": false
+              }
+            ]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-column-defs="[{&quot;targets&quot;:[2],&quot;visible&quot;:false,&quot;searchable&quot;:false},{&quot;targets&quot;:[3],&quot;visible&quot;:false}]"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">复杂表头(合并列/合并行)</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>在使用表格的时候总会遇到要分组列的情况，DataTables 完全支持合并列/合并行，下面的例子告诉你怎么使用</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">DOM定位</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 默认会打开部分特性，比如搜索框，分页显示等等，或许你不喜欢 DataTables
+                    这样去布局，可能你想把分页按钮放在底部的中间，搜索框放在顶部的左上角，不用担心datatables考虑到这个问题，使用dom选项就可以灵活配置各个特性的位置
+                </p>
+                <p>DataTables 定义了10个字符表示不同的组件</p>
+                <ul>
+                    <li>
+                        <code>l</code> -
+                        <code>L</code>ength changing 每页显示多少条数据选项</li>
+                    <li>
+                        <code>f</code> -
+                        <code>F</code>iltering input 搜索框</li>
+                    <li>
+                        <code>t</code> - The
+                        <code>T</code>able 表格</li>
+                    <li>
+                        <code>i</code> -
+                        <code>I</code>nformation 表格信息</li>
+                    <li>
+                        <code>p</code> -
+                        <code>P</code>agination 分页按钮</li>
+                    <li>
+                        <code>r</code> - p
+                        <code>R</code>ocessing 加载等待显示信息</li>
+                    <li>
+                        <code>&lt;</code> 和
+                        <code>&gt;</code> - div elements 一个div元素</li>
+                    <li>
+                        <code>&lt;</code>"#id" 和
+                        <code>&gt;</code> - div with an id 指定id的div元素</li>
+                    <li>
+                        <code>&lt;</code>"class" 和
+                        <code>&gt;</code> - div with a class 指定样式名的div元素</li>
+                    <li>
+                        <code>&lt;</code>"#id.class" 和
+                        <code>&gt;</code> - div with an id and class 指定id和样式的div元素</li>
+                </ul>
+            </div>
+            <div class="panel-body">
+
+                <div class="panel">
+                    <h3>demo1</h3>
+<pre>
+    &lt;div class="wrapper"&gt;
+        { filter }
+        { length }
+        { info }
+        { paging }
+        { table }
+    &lt;/div&gt;
+</pre>
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-dom="<&quot;top&quot;i>rt<&quot;bottom&quot;flp><&quot;clear&quot;>"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "dom": '<"top"i>rt<"bottom"flp><"clear">'
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full my-15 text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable"  
+    data-dom="<&quot;top&quot;i>rt<&quot;bottom&quot;flp><&quot;clear&quot;>"&gt;
+</pre>
+                </div>
+                
+                <div class="panel">
+                    <h3>demo2</h3>
+<pre>
+    &lt;div&gt;
+        { length }
+        { filter }
+        &lt;div&gt;
+            { table }
+        &lt;/div&gt;
+        { info }
+        { paging }
+    &lt;div&gt;
+</pre>
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-dom="<&quot;top&quot;i>rt<&quot;bottom&quot;flp><&quot;clear&quot;>"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "dom": '<"top"i>rt<"bottom"flp><"clear">'
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full my-15 text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable"  
+    data-dom="<&quot;top&quot;i>rt<&quot;bottom&quot;flp><&quot;clear&quot;>"&gt;
+</pre>
+                </div>
+            
+            
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">表格自适应</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>通常你可能会想要你的表格跟着页面大小的变化而变化。下面的例子展示了，表格设置了width为100%，表格随着页面的大小变化自动适应。请尝试改变浏览器窗口的大小看看效果</p>
+                <p>在 Admui 中,只需要给表格添加
+                    <code>.w-full</code>,即可实现表格自适应</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample" data-plugin="dataTable"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">保存状态</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 设置
+                    <code>stateSave</code> 选项后，可以保存最后一次分页信息、排序信息，当页面刷新，或者重新进入这个页面，恢复上次的状态</p>
+                <p>这个状态的保存用了html5的本地储存和session储存，这样更加有效率。如果你的数据是异步获取的，你可以使用
+                    <code>stateSaveCallback</code> 和
+                    <code>stateLoadCallback</code> 选项
+                </p>
+                <p>默认情况下，这个状态会保存2小时，如果你希望设置的时间更长，通过设置参数
+                    <code>stateDuration</code> 来初始化表格</p>
+                <p>这个参数值也可以控制是本地储存(0~更大)还是session储存(-1)</p>
+                <p>下面的例子展示了 DataTables 设置
+                    <code>stateSave</code> 选项初始化后，实现的状态保存</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-stateSave="true"
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-stateSave="true"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">不同的分页样式</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>默认情况下 DataTables 的分页就是上一页、下一页和6个页数按钮，这适合大部分情况。不过也有用户不喜欢这样，DataTables 提供了四个模式供用户选择，通过设置
+                    pagingType选项来配置</p>
+                <ul>
+                    <li>
+                        <code>simple</code> - 只有上一页、下一页两个按钮</li>
+                    <li>
+                        <code>simple_numbers</code> - 除了上一页、下一页两个按钮还有页数按钮，DataTables 默认是这个</li>
+                    <li>
+                        <code>full</code> - 有四个按钮首页、上一页、下一页、末页</li>
+                    <li>
+                        <code>full_numbers</code> - 除首页、上一页、下一页、末页四个按钮还有页数按钮</li>
+                </ul>
+                <p>下面的例子展示了
+                    <code>full_numbers</code> 类型的分页</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-paging-type="full_numbers"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "pagingType":   "full_numbers"
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-paging-type="full_numbers"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">垂直滚动条</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>如果在一个固定高度的容器里放表格，这个时候可能需要用到垂直滚动条，才能展示所有数据。</p>
+                <p>开启垂直滚动条很简单，只要设置
+                    <code>scrollY</code> 和
+                    <code>scrollCollapse</code> 选项即可</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-scroll-y="200px" data-scroll-collapse="true" data-paging="false"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "scrollY":        "200px",
+            "scrollCollapse": true,
+            "paging":         false
+        }));
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-scroll-y="200px" 
+    data-scroll-collapse="true" 
+    data-paging="false"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">垂直滚动条 - 动态高度</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示垂直滚动条,它使用CSS3
+                    <code>vh</code> 作为单位,以便根据浏览器窗口大小动态调整高度,
+                    <code>vh</code> 实际上是浏览器高度的百分比,因此,在该示例中使用的
+                    <code>50vh</code> 是窗口高度的50％。当窗口调整大小时，视口大小将会动态更新
+                </p>
+                <p>请调整浏览器大小查看效果</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-scroll-y="50vh" data-scroll-collapse="true" data-paging="false"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "scrollY":        "50vh",
+            "scrollCollapse": true,
+            "paging":         false
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-scroll-y="50vh" 
+    data-scroll-collapse="true" 
+    data-paging="false"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">水平滚动条</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>开启水平滚动条，设置
+                    <code>scrollX</code> 选项</p>
+                <p>在本示例中还给表格添加了
+                    <code>.text-nowrap</code>，使
+                    <code>th,td</code> 文字内容在一行里</p>
+                <p>注意:Admui 默认开启了 DataTables 的
+                    <code>responsive</code> 选项,需将
+                    <code>responsive</code> 设为
+                    <code>false</code> 才能预览本页效果
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-scroll-x="true" data-responsive="false"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "scrollX":    true,
+            "responsive": false
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample" data-plugin="dataTable" data-scroll-x="true" data-responsive="false"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">水平和垂直滚动条</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>同时开启水平和垂直滚动条</p>
+                <p>注意:Admui 默认开启了 DataTables 的
+                    <code>responsive</code> 选项,需将
+                    <code>responsive</code> 设为
+                    <code>false</code> 才能预览本页效果
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-scroll-x="true" data-scroll-y="200" data-responsive="false"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "scrollX":    true,
+            "scrollY":    200,
+            "responsive": false
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-scroll-x="true" 
+    data-scroll-y="200" 
+    data-responsive="false"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title">高级初始化</h1>
+    </div>
+    <div class="page-content">
+        
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">DOM/jQuery 事件</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>
+                    <code>table</code> 上分配的事件在用户交互时非常有用，但是我们需要知道，DataTables 会在需要是从
+                    <code>DOM</code> 中添加或删除行，因此，这可能会导致事件出现一些问题</p>
+                <p>处理这种情况的最好办法之一是通过使用事件委托与 jQuery 的
+                    <code>on</code> 方法，如本例所示。 本示例还使用 DataTables 的
+                    <code>row().data()</code> 方法检索有关所选行的数据，我们可以在在
+                    <code>toastr</code> 中显示所选行信息</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+        $('#dataTableExample tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+            toastr.info('您单击了"' + data[0] + '"的行');
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">DataTables 事件</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 有几个自定义事件，你可以用代码处理这些，比如当搜索事件触发的时候你要处理什么事情。本示例演示使用当触发了搜索、排序、分页事件后打印日志</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        var eventFired = function (type) {
+            var n = $('#dataTableEventDemoInfo')[0];
+            n.innerHTML += '<div>' + type + ' 事件 - ' + new Date().getTime() + '</div>';
+            n.scrollTop = n.scrollHeight;
+        };
+    
+        $('#dataTableExample')
+            .on('order.dt', function () {
+                eventFired('排序');
+            })
+            .on('search.dt', function () {
+                eventFired('查找');
+            })
+            .on('page.dt', function () {
+                eventFired('分页');
+            })
+            .DataTable($.concatCpt('dataTable'));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列渲染</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了把年龄列隐藏，通过
+                    <code>columns.render</code> 方法把年龄的值拼接到姓名列</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "columnDefs": [
+                {
+                    "render": function (data, type, row) {
+                        return data + ' (' + row[3] + ')';
+                    },
+                    "targets": 0
+                },
+                {
+                    "visible": false,
+                    "targets": [3]
+                }
+            ]
+        }));
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">自定义长度菜单</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>使用
+                    <code>lengthMenu</code> 选项来初始化选项，此选项支持两种参数方式，一种是一维数组，一种是二维数组，此例子演示的是二维数组的用法</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">多个表格操作元素</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>你可以使用
+                    <code>dom</code> 来定位 DataTables 的一些控件，比如搜索框，分页控件等等，此例子演示了在表格上面和下面同时显示长度菜单，分页菜单和搜索框</p>
+                <p>注意，很明显表格控件应该只要使用一次</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "dom": '<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>'
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">隐藏列的复杂的表头</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>通过
+                    <code>rowspan</code> /
+                    <code>colspan</code> 制作复杂的表头，下面的例子演示如何隐藏"年龄"一列</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+        $('#dataTableExample tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+            toastr.info('您单击了"' + data[0] + '"的行');
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">把HTML转化为DT内部数据对象</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 使用
+                    <code>dom</code> 作为数据源的时候，DataTables 会读表格中的信息到一个内部的一个数组储存，而你可以通过
+                    <code>columns.data</code> 属性定义获取到， 如果你是使用ajax获取数据，那么这个属性将告诉 DataTables 如何去取数据源中对应列的数据，如果是
+                    <code>dom</code> 数据源，这个属性将告诉你数据写入的位置</p>
+                <p>下面的例子演示了如果绑定数据到 DataTables</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "columns": [
+                {"data": "姓名"},
+                {"data": "职位"},
+                {"data": "工作地点"},
+                {"data": "年龄"},
+                {"data": "入职时间"},
+                {"data": "年薪"}
+            ]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">HTML5 data-* 属性 - 表格选项</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>我们可以使用HTML5
+                    <code>data-*</code> 属性定义初始化选项。定义的这些属性名会被 DataTables 读取，并结合 JavaScript 的配置初始化(
+                    <code>data-*</code> 优先)。
+                </p>
+                <p>请注意，属性值必须包含有效的 JSON 数据或 JavaScript 语言，根据 jQuery 的
+                    <code>$().data()</code> 方法，如果字符串中包含英文双引号
+                    <code>"</code> ，则应将双引号转义为
+                    <code>&amp;quot;</code>
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-page-length="25" data-order="[[1,&quot;asc&quot;]]"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full" 
+    id="dataTableExample" 
+    data-plugin="dataTable" 
+    data-page-length="25" 
+    data-order="[[1,&quot;asc&quot;]]"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Html5 data-* 属性 - 单元格数据</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>在有些情况下，显示的数据可能不是用来排序的，只是为了直观的展示给用户看，比如电话号码
+                    <code>0000-0000000</code>，中间有一个"-"，对于程序排序不怎么好处理 html5 有
+                    <code>data-sort</code> 或者
+                    <code>data-order</code> 来排序 ，
+                    <code>data-filter</code> 或者
+                    <code>data-search</code> 来搜索，下面的例子演示了，显示的和搜索的是不同数据
+                </p>
+                <p>以"姓名"为例，显示的是汉字，搜索则使用拼音</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-page-length="25" data-order="[[1,"asc"]]"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    });
+</pre>
+<p>需引入的文件</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" 
+    id="dataTableExample" 
+    data-page-length="25" 
+    data-order="[[1,&quot;asc&quot;]]"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">默认设置</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>在多个页面使用 DataTables，你可能将
+                    <code>dom</code> 设置为公共的值，让所有的表格都有相同的布局，这个时候你可以使用
+                    <code>$.fn.dataTable.defaults</code> 当设置此对象后，所有 DataTables 在初始化的时候都会使用这个参数设置</p>
+                <p>此例子演示了默认禁用搜索和排序功能</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $.extend(true, $.fn.dataTable.defaults, {
+            "searching": false,
+            "ordering": false
+        });
+    
+        $(document).ready(function () {
+            $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">创建行回调</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>此例子演示了，当"年薪"大于400000的时候用高亮显示，注意
+                    <code>columns.createdCell</code> 选项也可以实现同样的效果</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "createdRow": function (row, data, index) {
+                if (data[5].replace(/[\¥,]/g, '') * 1 > 400000) {
+                    $('td', row).eq(5).css('font-weight', "bold").css("color", "red");
+                }
+            }
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">行分组</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>此例子演示了以"工作地点"分组数据，同时隐藏"工作地点"这一列</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                   
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        var table = $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "columnDefs": [
+                {"visible": false, "targets": 2}
+            ],
+            "order": [[2, 'asc']],
+            "displayLength": 25,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({page: 'current'}).nodes();
+                var last = null;
+    
+                api.column(2, {page: 'current'}).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '' + group + ''
+                        );
+    
+                        last = group;
+                    }
+                });
+            }
+        }));
+    
+        // 分组排序
+        $('#dataTableExample tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                table.order([2, 'desc']).draw();
+            }
+            else {
+                table.order([2, 'asc']).draw();
+            }
+        });
+    });
+</pre>
+<p>需引入的文件</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">表格foot回调</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>此例子演示通过
+                    <code>footerCallback</code> 回调函数统计"年薪"总额</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+    
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                    i.replace(/[\¥,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+    
+                // 所有页
+                var total = api
+                    .column(5)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+    
+                // 当前页
+                var pageTotal = api
+                    .column(5, {page: 'current'})
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+    
+                // 更新foot
+                $(api.column(5).footer()).html(
+                    '￥' + pageTotal + ' ( 共计：￥' + total + ')'
+                );
+            }
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">自定义工具按钮元素</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>此例子其实就是dom的高级应用，熟练使用
+                    <code>dom</code>，可以把给 Datatables 添加自定义按钮或者其他工具，使其看起来是一个整体 </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "dom": '<"dt-dom-toolbar">frtip'
+        }));
+    
+        $("div.dt-dom-toolbar").html('自定义文字、图片等等');
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">高级排序控制</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了：</p>
+                <ol>
+                    <li>第1列默认排序</li>
+                    <li>第2列默认排序</li>
+                    <li>第3列只升序</li>
+                    <li>第4列降序排序，其次是升序，然后再升序</li>
+                    <li>第5列只降序</li>
+                    <li>第6列默认排序</li>
+                </ol>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "aoColumns": [
+                null,
+                null,
+                {"orderSequence": ["asc"]},
+                {"orderSequence": ["desc", "asc", "asc"]},
+                {"orderSequence": ["desc"]},
+                null
+            ]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="page-header">
+        <h1 class="page-title">数据源</h1>
+    </div>
+    
+    <div class="page-content">
+
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ajax数据源</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 可以通过
+                    <code>ajax</code> 设置ajax数据源获取json数据</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "ajax": "/data/examples/tables/data-tables/dt-ajax.json"
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full" 
+    data-plugin="dataTable" 
+    data-ajax="/data/examples/tables/data-tables/dt-ajax.json"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">JavaScript数据源</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 也可以直接接受一个js数组来初始化表格</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var dataSet=[
+        ["李霞","系统架构师","北京","61","2011/04/25","¥320,800"],
+        ["杜重治","会计","上海","63","2011/07/25","¥170,750"],
+        ["陈锋","初级开发者","深圳","66","2009/01/12","¥86,000"],
+        ["郑伯宁","高级JavaScript开发者","北京","22","2012/03/29","¥433,060"],
+        ["施华军","会计","上海","33","2008/11/28","¥162,700"],
+        ["吴书振","集成专家","南京","61","2012/12/02","¥372,000"],
+        ["张宁","销售代表","深圳","59","2012/08/06","¥137,500"],
+        ["马世波","集成专家","上海","55","2010/10/14","¥327,900"],
+        ["张章","Javascript开发者","深圳","39","2009/09/15","¥205,500"],
+        ["张竹影","软件工程师","北京","23","2008/12/13","¥103,600"],
+        ["韩庆福","办公室主管","广州","30","2008/12/19","¥90,560"],
+        ["刘勇","客户服务","北京","22","2013/03/03","¥342,000"],
+        ["张忆湫","大区经理","深圳","36","2008/10/16","¥470,600"],
+        ["尚志兴","高级营销设计师","广州","43","2012/12/18","¥313,500"],
+        ["杜若芳","大区经理","广州","19","2010/03/17","¥385,750"],
+        ["杨乔松","营销设计师","广州","66","2012/11/27","¥198,500"],
+        ["闫跃进","CEO","南京","64","2010/06/09","¥725,000"],
+        ["孙凯","系统管理员","南京","59","2009/04/10","¥237,500"],
+        ["赖祥校","软件工程师","广州","41","2012/10/13","¥132,000"],
+        ["郭晖","人事主管","北京","35","2012/09/26","¥217,500"],
+        ["贺光明","技术主管","南京","30","2011/09/03","¥345,000"],
+        ["邓小燕","CMO","南京","40","2009/06/25","¥675,000"],
+    ];
+
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        data: dataSet,
+        columns: [
+            { title: "姓名" },
+            { title: "职位" },
+            { title: "工作地点" },
+            { title: "年龄" },
+            { title: "入职时间" },
+            { title: "年薪" }
+        ]
+
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">服务器处理</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DOM 数据源是 DataTables 最基本的用法，下面演示了html静态数据使用 DataTables 实现过滤，排序，分页</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-processing="true" data-server-side="true" data-ajax="路径"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+   
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table 
+    class="table table-bordered table-hover dataTable table-striped w-full" 
+    data-plugin="dataTable" 
+    data-processing="true" 
+    data-server-side="true" 
+    data-ajax="/data/examples/tables/data-tables/dt-server-processing.json"&gt;
+</pre>
+<p>data</p>
+<pre>
+    {
+        "draw": 0,
+        "recordsTotal": 57,
+        "recordsFiltered": 57,
+        "data": [
+            ["李霞","系统架构师","北京","61","2011/04/25","¥320,800"],
+            ["杜重治","会计","上海","63","2011/07/25","¥170,750"],
+            ["陈锋","初级开发者","深圳","66","2009/01/12","¥86,000"],
+            ["郑伯宁","高级JavaScript开发者","北京","22","2012/03/29","¥433,060"],
+            ["施华军","会计","上海","33","2008/11/28","¥162,700"],
+            ["吴书振","集成专家","南京","61","2012/12/02","¥372,000"],
+            ["张宁","销售代表","深圳","59","2012/08/06","¥137,500"],
+            ["马世波","集成专家","上海","55","2010/10/14","¥327,900"],
+            ["张章","Javascript开发者","深圳","39","2009/09/15","¥205,500"],
+            ["张竹影","软件工程师","北京","23","2008/12/13","¥103,600"],
+            ["韩庆福","办公室主管","广州","30","2008/12/19","¥90,560"],
+            ["刘勇","客户服务","北京","22","2013/03/03","¥342,000"],
+            ["张忆湫","大区经理","深圳","36","2008/10/16","¥470,600"],
+            ["尚志兴","高级营销设计师","广州","43","2012/12/18","¥313,500"],
+            ["杜若芳","大区经理","广州","19","2010/03/17","¥385,750"],
+            ["杨乔松","营销设计师","广州","66","2012/11/27","¥198,500"],
+            ["闫跃进","CEO","南京","64","2010/06/09","¥725,000"],
+            ["孙凯","系统管理员","南京","59","2009/04/10","¥237,500"],
+            ["赖祥校","软件工程师","广州","41","2012/10/13","¥132,000"],
+            ["郭晖","人事主管","北京","35","2012/09/26","¥217,500"],
+            ["贺光明","技术主管","南京","30","2011/09/03","¥345,000"],
+            ["邓小燕","CMO","南京","40","2009/06/25","¥675,000"],
+        ]
+    }
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="page-header">
+        <h1 class="page-title">API</h1>
+    </div>
+    
+    <div class="page-content">
+        
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加行</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了通过点击按钮添加一条数据到表格中</p>
+                <p>
+                    <code>row.add()</code> 添加一行</p>
+                <p>
+                    <code>rows.add()</code>添加多行（注意多了一个s）</p>
+                <p>需要注意的是，你调用这个方法后需要重绘表格（调用
+                    <code>draw()</code>）才能看到效果</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var t = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    var counter = 1;
+
+    $('#DTddRow').on('click', function () {
+        t.row.add([
+            counter + '.1',
+            counter + '.2',
+            counter + '.3',
+            counter + '.4',
+            counter + '.5'
+        ]).draw(false);
+
+        counter++;
+    });
+
+    // 自动添加第一行的数据
+    $('#DTddRow').click();
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;button type="button" class="btn btn-success mb-15" id="DTAddRow">添加行&lt;/button>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap"
+           id="dataTableExample">
+</pre>
+                </div>
+            </div>
+        </div>
+       
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">给每一列添加搜索框</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了在每一列上添加一个搜索框</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    // 安装 - 在foot每个单元格中添加文本框
+    $('#dataTableExample tfoot th').each(function () {
+        var title = $('#dataTableExample thead th').eq($(this).index()).text();
+        $(this).html('&lt;input class="form-control" type="text" placeholder="查找 ' + title + '">');
+    });
+    // DataTable
+    var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    // 查找
+    table.columns().eq(0).each(function (colIdx) {
+        $('input', table.column(colIdx).footer()).on('keyup change', function () {
+            table
+                .column(colIdx)
+                .search(this.value)
+            .draw();
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">给每一列添加下拉框搜索</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了在每一列添加下拉框搜索</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        initComplete: function () {
+            var api = this.api();
+            api.columns().indexes().flatten().each(function (i) {
+                var column = api.column(i);
+                var select = $('&lt;select class="form-control">&lt;option value="">--请选择--&lt;/option>&lt;/select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+                column.data().unique().sort().each(function (d, j) {
+                    select.append('&lt;option value="' + d + '">' + d + '&lt;/option>')
+                });
+            });
+        }
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">高亮鼠标停留的行和列</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了用户的光标是在一个表中，突出的行和列，如果你有很多狭窄的列非常有用</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var lastIdx = null;
+    var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    $('#dataTableExample tbody')
+        .on('mouseover', 'td', function () {
+            var colIdx = table.cell(this).index().column;
+            if (colIdx !== lastIdx) {
+                $(table.cells().nodes()).removeClass('highlight');
+                $(table.column(colIdx).nodes()).addClass('highlight');
+            }
+        })
+        .on('mouseleave', function () {
+            $(table.cells().nodes()).removeClass('highlight');
+        });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">显示行的附加信息</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了Ajax调用服务器来获得行的附加信息</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    /* 格式化详情功能 - 根据需要修改 */
+    function format(d) {
+        // `d` 是该行的原始数据对象
+        return '&lt;table class="table table-bordered text-nowrap pl-50 mb-0" cellpadding="5">' +
+            '&lt;tr>' +
+            '&lt;td>姓名：&lt;/td>' +
+            '&lt;td>' + d.name + '&lt;/td>' +
+            '&lt;/tr>' +
+            '&lt;tr>' +
+            '&lt;td>分机号码：&lt;/td>' +
+            '&lt;td>' + d.extn + '&lt;/td>' +
+            '&lt;/tr>' +
+            '&lt;tr>' +
+            '&lt;td>备注：&lt;/td>' +
+            '&lt;td>添加详细信息（如图片等）&lt;/td>' +
+            '&lt;/tr>' +
+            '&lt;/table>';
+    }
+
+    $(function () {
+        var table = $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "ajax": "/data/examples/tables/data-tables/dt-ajax-2.json",
+            "columns": [
+                {
+                    "class": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {"data": "name"},
+                {"data": "position"},
+                {"data": "office"},
+                {"data": "salary"}
+            ],
+            "order": [[1, 'asc']]
+        }));
+        // 展开关闭详情时的事件监听
+        $('#dataTableExample tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+            if (row.child.isShown()) {
+                // 本行已展开
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // 展开本行
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+<p>data</p>
+<pre>
+    {
+        "data": [
+            {
+                "name": "李霞",
+                "position": "系统架构师",
+                "salary": "¥320,800",
+                "start_date": "2011/04/25",
+                "office": "北京",
+                "extn": "5421"
+            },
+            {
+                "name": "杜重治",
+                "position": "会计",
+                "salary": "¥170,750",
+                "start_date": "2011/07/25",
+                "office": "上海",
+                "extn": "8422"
+            },
+            {
+                "name": "陈锋",
+                "position": "初级开发者",
+                "salary": "¥86,000",
+                "start_date": "2009/01/12",
+                "office": "深圳",
+                "extn": "1562"
+            },
+            {
+                "name": "郑伯宁",
+                "position": "高级JavaScript开发者",
+                "salary": "¥433,060",
+                "start_date": "2012/03/29",
+                "office": "北京",
+                "extn": "6224"
+            },
+            {
+                "name": "施华军",
+                "position": "会计",
+                "salary": "¥162,700",
+                "start_date": "2008/11/28",
+                "office": "上海",
+                "extn": "5407"
+            }
+        ]
+    }
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">选择行</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了怎么获取选中行数</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+
+    $('#dataTableExample tbody').on('click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
+
+    $('#DTSelectRow').click(function () {
+        toastr.info('选中了 ' + table.rows('.selected').data().length + ' 行数据');
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;button type="button" class="btn btn-success mb-15" id="DTSelectRow">获取选中行数&lt;/button>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full">
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">选择行并删除</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了怎么获取选中行数</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+
+    $('#dataTableExample tbody').on('click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
+
+    $('#DTSelectRow').click(function () {
+        toastr.info('选中了 ' + table.rows('.selected').data().length + ' 行数据');
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;button type="button" class="btn btn-success mb-15" id="DTDelRow">删除选中行数&lt;/button>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full">
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">表单输入框</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示从表中获取所有的输入的元素</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    $('#DTSubmitBtn').click(function() {
+        var data = table.$('input, select').serialize();
+        console.log(data)
+        toastr.info("将向服务器提交以下数据：&lt;br>" + data.substr(0, 120) + '...');
+        return false;
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;button type="button" class="btn btn-success mb-15" id="DTSubmitBtn">提交表单&lt;/button>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample">
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加索引列</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了在表格每一列加上索引</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var t = $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "columnDefs": [{
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        }],
+        "order": [[1, 'asc']]
+    }));
+    t.on('order.dt search.dt',
+        function () {
+            t.column(0, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap"
+       id="dataTableExample">
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">动态显示/隐藏列</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示了
+                    <code>column().visible()</code> 方法来隐藏显示列，通过点击列按钮动态切换</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var table = $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "scrollY": "200px",
+        "paging": false
+    }));
+    
+    $('#DTToggleBtn .btn').on('click', function (e) {
+        // 获取 API 对象
+        var column = table.column($(this).attr('data-column'));
+    
+        // 显示切换
+        column.visible(!column.visible());
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;&gt;
+    &lt;span> 隐藏列：&lt;/span>
+    &lt;div class="btn-group mb-15" data-toggle="buttons" id="DTToggleBtn">
+        &lt;label class="btn btn-primary" data-column="0">
+            &lt;input type="checkbox" autocomplete="off"> 姓名
+        &lt;/label>
+        &lt;label class="btn btn-primary" data-column="1">
+            &lt;input type="checkbox" autocomplete="off"> 职位
+        &lt;/label>
+        &lt;label class="btn btn-primary" data-column="2">
+            &lt;input type="checkbox" autocomplete="off"> 工作地点
+        &lt;/label>
+        &lt;label class="btn btn-primary" data-column="3">
+            &lt;input type="checkbox" autocomplete="off"> 年龄
+        &lt;/label>
+        &lt;label class="btn btn-primary" data-column="4">
+            &lt;input type="checkbox" autocomplete="off"> 入职时间
+        &lt;/label>
+        &lt;label class="btn btn-primary" data-column="5">
+            &lt;input type="checkbox" autocomplete="off"> 年薪
+        &lt;/label>
+    &lt;/div>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full">
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">在回调方法中使用API</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>有时候希望给表格绑定的数据行绑定一些事件，这个时候你需要用到
+                    <code>initComplete</code> 、
+                    <code>rowCallback</code> 这些回调方法，下面的示例演示了，当表格加载完后给表格的td绑定点击事件，取到值后进行搜索
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "initComplete": function () {
+            var api = this.api();
+            api.$('td').click(function () {
+                api.search(this.innerHTML).draw();
+            });
+        }
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full">&lt;/table>
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">带垂直滚动条和Bootstrap Tabs控件</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示带滚动条的 DataTables 如何与 Bootstrap Tabs 结合使用(或在任何类似的地方，table 元素在初始化时是隐藏的)</p>
+                <p>这里需要特别注意的是，浏览器在初始化时没有给 DataTables 可参考的值(如高度)，这会导致在启用滚动条时出现错位的情况 </p>
+                <p>当 table 显示时，可以通过
+                    <code>columns.adjust()</code> 方法来矫正错位</p>
+                <p>本示例演示如何使用 Bootstrap
+                    <code>shown.bs.tab</code> 事件调用此方法，使用
+                    <code>$.fn.dataTable.tables()</code> 运行
+                    <code>columns.adjust()</code>
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#DTExample a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $.fn.dataTable.tables({visible: true, api: true}).columns.adjust();
+    });
+    
+    $('#DTExample table.dataTable').DataTable($.concatCpt('dataTable', {
+        ajax: '/data/examples/tables/data-tables/dt-ajax.json',
+        scrollY: 200,
+        scrollCollapse: true,
+        paging: false
+    });
+    
+    // 将搜索应用于第二个表格
+    $('#myTable2')DataTable($.concatCpt('dataTable')).search('北京').draw();
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;&gt;
+    &lt;div class="nav-tabs-horizontal" data-approve="nav-tabs">
+        &lt;ul class="nav nav-tabs nav-tabs-line" role="tablist">
+            &lt;li class="nav-item">
+                &lt;a class="nav-link active" data-toggle="tab" href="#tab-table1" aria-controls="tab-table1" role="tab">表格1&lt;/a>&lt;/li>
+            &lt;li class="nav-item">
+                &lt;a class="nav-link" data-toggle="tab" href="#tab-table2" aria-controls="tab-table2" role="tab">表格2&lt;/a>&lt;/li>
+        &lt;/ul>
+        &lt;div class="tab-content pt-20">
+            &lt;div class="tab-pane active" id="tab-table1" role="tabpanel">
+                &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap"
+                       id="myTable1">
+</pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    
+    <div class="page-header">
+        <h1 class="page-title">高级初始化</h1>
+        
+    </div>
+    
+    <div class="page-content">
+        
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">搜索API（正则表达式）</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>对于表格来说，搜索是一个常见操作，DataTables 为用户提供了许多方法来搜索，一种是全局
+                    <code>search()</code> API,一种是单列
+                    <code>column().search()</code> API</p>
+                <p>不过需要注意的是，使用上面的方法操作表格后，还记得要使用
+                    <code>draw()</code> 方法重绘表格才能看到效果</p>
+                <p>不管是全局还是单列，DataTables 都可以让你的搜索更智能，你可以用智能搜索（也就是默认的）或者使用正则</p>
+                <p>下面的例子展示了各种不同的搜索选项</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    function filterGlobal() {
+        $('#dataTableExample')DataTable($.concatCpt('dataTable')).search(
+            $('#global_filter').val(),
+            $('#global_regex').prop('checked'),
+            $('#global_smart').prop('checked')
+        ).draw();
+    }
+    
+    function filterColumn(i) {
+        $('#dataTableExample')DataTable($.concatCpt('dataTable').column(i).search(
+            $('#col' + i + '_filter').val(),
+            $('#col' + i + '_regex').prop('checked'),
+            $('#col' + i + '_smart').prop('checked')
+        ).draw();
+    }
+    
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    
+        $('input.global_filter').on('keyup click', function () {
+            filterGlobal();
+        });
+    
+        $('input.column_filter').on('keyup click', function () {
+            filterColumn($(this).parents('tr').attr('data-column'));
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;&gt;
+    &lt;table class="table table-bordered">
+        &lt;thead>
+        &lt;tr>
+            &lt;th>目标列&lt;/th>
+            &lt;th>搜索文本&lt;/th>
+            &lt;th>使用正则&lt;/th>
+            &lt;th>使用智能搜索&lt;/th>
+        &lt;/tr>
+        &lt;/thead>
+        &lt;tbody>
+        &lt;tr id="filter_global">
+            &lt;td>全局搜索&lt;/td>
+            &lt;td>
+                &lt;input type="text" class="form-control form-control-sm global_filter" id="global_filter">
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="global_filter" id="global_regex">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="global_filter" id="global_smart" checked="checked">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+        &lt;/tr>
+        &lt;tr id="filter_col1" data-column="0">
+            &lt;td>姓名&lt;/td>
+            &lt;td>
+                &lt;input type="text" class="form-control form-control-sm column_filter" id="col0_filter">
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col0_regex">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col0_smart" checked="checked">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+        &lt;/tr>
+        &lt;tr id="filter_col2" data-column="1">
+            &lt;td>职位&lt;/td>
+            &lt;td>
+                &lt;input type="text" class="form-control form-control-sm column_filter" id="col1_filter">
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col1_regex">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col1_smart" checked="checked">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+        &lt;/tr>
+        &lt;tr id="filter_col3" data-column="2">
+            &lt;td>工作地点&lt;/td>
+            &lt;td>
+                &lt;input type="text" class="form-control form-control-sm column_filter" id="col2_filter">
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col2_regex">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col2_smart" checked="checked">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+        &lt;/tr>
+        &lt;tr id="filter_col4" data-column="3">
+            &lt;td>年龄&lt;/td>
+            &lt;td>
+                &lt;input type="text" class="form-control form-control-sm column_filter" id="col3_filter">
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col3_regex">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col3_smart" checked="checked">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+        &lt;/tr>
+        &lt;tr id="filter_col5" data-column="4">
+            &lt;td>入职时间&lt;/td>
+            &lt;td>
+                &lt;input type="text" class="form-control form-control-sm column_filter" id="col4_filter">
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col4_regex">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col4_smart" checked="checked">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+        &lt;/tr>
+        &lt;tr id="filter_col6" data-column="5">
+            &lt;td>年薪&lt;/td>
+            &lt;td>
+                &lt;input type="text" class="form-control form-control-sm column_filter" id="col5_filter">
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col5_regex">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+            &lt;td>
+                &lt;div class="checkbox-custom checkbox-primary">
+                    &lt;input type="checkbox" class="column_filter" id="col5_smart" checked="checked">
+                    &lt;label>&lt;/label>
+                &lt;/div>
+            &lt;/td>
+        &lt;/tr>
+        &lt;/tbody>
+    &lt;/table>
+    &lt;hr>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample">
+</pre>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title">DataTables AJAX</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ajax数据源（数组）</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例展示 DataTables 最简单的 Ajax 数据源的用法</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "ajax": "/data/examples/tables/data-tables/dt-ajax.json"
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full" data-plugin="dataTable" data-ajax="data/examples/tables/dataTables/dt-ajax.json"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ajax数据源（对象）</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>通过使用
+                    <code>columns.data</code> 选项用于告诉 DataTables 找到每一列的数据源对象中对应的属性</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "ajax": "http://cdn.admui.com/demo/iframe/2.1.0/data/examples/tables/data-tables/dt-ajax-2.json",
+        "columns": [
+            { "data": "name" },
+            { "data": "position" },
+            { "data": "office" },
+            { "data": "extn" },
+            { "data": "start_date" },
+            { "data": "salary" }
+        ]
+    }));
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">嵌套对象数据（对象）</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>该示例展示了 DataTables 使用对象数据，在最简单的情况下可以读取任意对象的属性，而且只要符合javascript标准，可以扩展到n层的嵌套对象/数组</p>
+                <p>下面的
+                    <code>hr</code> 对象包含了
+                    <code>position</code>、
+                    <code>salary</code>、
+                    <code>start_date</code> 三个属性，
+                    <code>contact</code> 包含两个数据，通过数组下标的方式取值 </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "ajax": "/data/examples/tables/data-tables/dt-ajax-1.json",
+        "columns": [
+            {"data": "name"},
+            {"data": "hr.position"},
+            {"data": "contact.0"},
+            {"data": "contact.1"},
+            {"data": "hr.start_date"},
+            {"data": "hr.salary"}
+        ]
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">嵌套对象数据（数组）</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>该示例展示了 DataTables 使用对象数据，在最简单的情况下可以读取任意对象的属性，而且只要符合javascript标准，可以扩展到n层的嵌套对象/数组</p>
+                <p>下面的
+                    <code>hr</code> 对象包含了
+                    <code>position</code>、
+                    <code>salary</code>、
+                    <code>start_date</code> 三个属性，
+                    <code>contact</code> 包含两个数据，通过数组下标的方式取值 </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "ajax": "/data/examples/tables/data-tables/dt-ajax-3.json",
+        "columns": [
+            {"data": "name"},
+            {"data": "hr.0"},
+            {"data": "office"},
+            {"data": "extn"},
+            {"data": "hr.2"},
+            {"data": "hr.1"}
+        ]
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">正交数据</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>所谓正交数据即显示的数据和排序的过滤的可以互不相同，互补干扰，做到数据与显示分离</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "ajax": "/data/examples/tables/data-tables/dt-ajax-4.json",
+        columns: [
+            {data: "name"},
+            {data: "position"},
+            {data: "office"},
+            {data: "extn"},
+            {
+                data: {
+                    _: "start_date.display",
+                    sort: "start_date.timestamp"
+                }
+            },
+            {data: "salary"}
+        ]
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">给一列生成自定义内容</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>在某些情况下你可能需要自动创建内容，这时你可以使用
+                    <code>columns.render</code> 参数，来渲染每一行数据</p>
+                <p>对于简单的静态的数据可以使用
+                    <code>columns.defaultContent</code> 参数</p>
+                <p>本示例演示如何使用
+                    <code>columns.defaultContent</code> 在表的最后一列中创建按钮并添加点击事件，通过
+                    <code>row().data()</code> 方法得到这行的数据，并打印出相关信息
+                </p>
+                <p>此外注意到列中的
+                    <code>columns.data</code> 选项已被设置为
+                    <code>null</code>，表示列不会获得数据源对象的信息。</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var table = $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "ajax": "/data/examples/tables/data-tables/dt-ajax.json",
+        "columnDefs": [{
+            "targets": -1,
+            "data": null,
+            "defaultContent": '&lt;button class="btn btn-outline btn-default btn-sm">查看&lt;/button>'
+        }]
+    }));
+    
+    $('#dataTableExample tbody').on('click', 'button', function () {
+        var data = table.row($(this).parents('tr')).data();
+        toastr.info(data[0] + " 的年薪是：" + data[5]);
+    });
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">自定义数据源属性</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>当从 Ajax 源加载数据，在默认情况下，数据表将寻找要使用返回的对象的数据参数中的数据 （例如 {"data"： [……]}）。 通过使用 ajax 选项的
+                    <code>dataSrc</code> 启动选项来改变属性
+                </p>
+                <p>
+                    <code>dataSrc</code> 有许多用法如下：</p>
+                <ul>
+                    <li>作为一个字符串，如
+                        <code>dataSrc: 'myData'</code>，本示例展示次用法</li>
+                    <li>为空字符串，如
+                        <code>dataSrc:""</code>
+                    </li>
+                    <li>作为一个方法，如
+                        <code>dataSrc： function(json) {}</code> （您可以从 XML 转换到一个 Javascript 对象）</li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "ajax": "/data/examples/tables/data-tables/dt-ajax-5.json",
+        // 默认为data，这里定义为demo
+        "dataSrc": "demo"
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">不指定数据源属性</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>当从 Ajax 源加载数据，在默认情况下，数据表将寻找要使用返回的对象的数据参数中的数据 （例如 {"data"： [……]}）。 通过使用 ajax 选项的
+                    <code>dataSrc</code> 启动选项来改变属性
+                </p>
+                <p>
+                    <code>dataSrc</code> 有许多用法如下：</p>
+                <ul>
+                    <li>作为一个字符串，如
+                        <code>dataSrc: 'myData'</code>
+                    </li>
+                    <li>为空字符串，如
+                        <code>dataSrc:""</code>，本示例展示次用法</li>
+                    <li>作为一个方法，如
+                        <code>dataSrc： function(json) {}</code> （您可以从 XML 转换到一个 Javascript 对象）</li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "ajax": {
+            "url": "/data/examples/tables/data-tables/dt-ajax-6.json",
+            "dataSrc": ""
+        },
+        "columns": [
+            {"data": "name"},
+            {"data": "position"},
+            {"data": "office"},
+            {"data": "extn"},
+            {"data": "start_date"},
+            {"data": "salary"}
+        ]
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">延迟渲染数据以提高速度</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>当处大数据量时，你可以寻求改善 DataTables 的运行的速度。使用
+                    <code>deferRender</code> 选项，可以做到这一点，让 DataTables 延迟渲染</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "ajax": "/data/examples/tables/data-tables/dt-ajax.json",
+        "deferRender": true
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title">DataTables 服务器模式</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">服务器处理</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 有许多方法来获取你的数据，如果你的数据量比较大，这个时候你需要使用服务器模式来处理你的数据。 在服务器模式下，所有的分页，搜索，排序等操作，DataTables
+                    都会交给服务器去处理。所以每次绘制
+                    DataTables， 都会请求一次服务器获取需要的数据。</p>
+                <p>通过配置
+                    <code>serverSide</code> 这个属性来打开 DataTables 的服务器模式，下面的例子展示了 DataTables 打开服务器模式。</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/employee/all"
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">自定义http变量</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>使用 DataTables 的服务器端处理选项时，向服务器发送额外信息通常很有用。这是通过使用
+                    <code>ajax.data</code> 选项来完成的，可以使用两种不同的方式之一：</p>
+                <ul>
+                    <li>
+                        <code>object</code> - 要发送到服务器的对象数据。 这对于向请求中添加静态数据非常有用</li>
+                    <li>
+                        <code>function</code> - 通过函数返回要发送到服务器的对象数据，参数为发送的数据，可以通过参数添加附加数据</li>
+                </ul>
+                <p>本示例演示
+                    <code>ajax</code> 的
+                    <code>ajax.data</code> 作为函数将自定义的数据发送到服务器端。</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/employee/all",
+            "data": function (d) {
+                d.myKey = "myValue";
+                // d.custom = $('#myInput').val();
+                // ……
+            }
+        }
+    }));
+</pre>
+<p>data</p>
+<pre>
+    {
+        recordsFiltered: 57,
+        data: [
+            [
+                "李霞",
+                "系统架构师",
+                "北京",
+                "61",
+                "2011/04/25",
+                "¥320800"
+            ],
+            [
+                "杜重治",
+                "会计",
+                "上海",
+                "63",
+                "2011/07/25",
+                "¥170750"
+            ]
+        ]
+    }
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">以post方式传输数据</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>默认情况下，DataTables 获取服务器端处理数据的 Ajax 请求是 HTTP GET 请求。但是有时可能需要使用 POST。可以通过
+                    <code>ajax</code> 来完成</p>
+                <p>当作为对象提供时，ajax 选项直接映射到 jQuery ajax 选项（即任何可以在jQuery的Ajax函数中使用的选项也可以在DataTable的ajax选项中使用）</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/employee/all/post",
+            "type": "POST"
+        },
+        "columns": [
+            {"data": "name"},
+            {"data": "title"},
+            {"data": "base"},
+            {"data": "age"},
+            {"data": "hireDate"},
+            {"data": "salary"}
+        ]
+    }));
+</pre>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">自动给行添加id属性</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>通常当使用服务器端处理时，您会发现在每一行上都有一个特定的ID（例如来自数据库的主键值）是很有用的。 通过使用每行的数据源对象的属性
+                    <code>DT_RowId</code>（可以使用rowId选项配置此属性名称）为每行指定要应用的ID，DataTables
+                    将自动为您添加它（注意，这同样适用于Ajax和Javascript加载的数据以及服务器端处理）
+                </p>
+                <p>本示例演示了用于向 table 中添加信息的
+                    <code>DT_RowId</code>。另外，使用对象作为数据源</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/employee/all/get",
+        "columns": [
+            {"data": "name"},
+            {"data": "title"},
+            {"data": "base"},
+            {"data": "age"},
+            {"data": "hireDate"},
+            {"data": "salary"}
+        ]
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">对象数据源</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 期望服务器端处理的默认数据格式是一个2D数据数据（行和列）。 但是，这对于服务器端环境通常不够灵活，或者您可能希望在数据源中添加比在 table
+                    中显示所需的更多信息（如数据库中的行ID）。对于这些情况，DataTable
+                    支持读取对象以及数组的数据。）</p>
+                <p>本示例演示服务器使用对象数组进行响应，其中 DataTables 将查找并使用由为每列指定的
+                    <code>columns.data</code> 属性指定的每个属性。</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/employee/all/get",
+        "columns": [
+            {"data": "name"},
+            {"data": "title"},
+            {"data": "base"},
+            {"data": "age"},
+            {"data": "hireDate"},
+            {"data": "salary"}
+        ]
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">行详情</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例演示使用 DataTable 的显示和隐藏父表中父行的子行。通常用于显示有关行的其他信息，特别是当您希望传达有关行的更多信息，却不占用父表的空间时</p>
+                <p>本示例演示服务器使用对象数组进行响应，其中 DataTables 将查找并使用由为每列指定的
+                    <code>columns.data</code> 属性指定的每个属性。</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    function format(d) {
+        return '入职时间: ' + d.hireDate + '
+    ' +
+            '年薪: ' + d.salary + '
+    ' +
+            '子行可以放置一些您希望显示的信息，如图片，链接，表格等';
+    }
+    
+    $(function () {
+        var dt = $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/employee/all/get",
+            "columns": [
+                {
+                    "class": "details-control",
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ""
+                },
+                {"data": "name"},
+                {"data": "title"},
+                {"data": "base"},
+                {"data": "age"}
+    
+            ],
+            "order": [[1, 'asc']]
+        }));
+    
+        // 数组跟踪显示行详细信息的ID
+        var detailRows = [];
+    
+        $('#dataTableExample tbody').on('click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = dt.row(tr);
+            var idx = $.inArray(tr.attr('id'), detailRows);
+    
+            if (row.child.isShown()) {
+                tr.removeClass('details');
+                row.child.hide();
+    
+                // 从'open'数组中移除
+                detailRows.splice(idx, 1);
+            }
+            else {
+                tr.addClass('details');
+                row.child(format(row.data())).show();
+    
+                // 向'open'数组添加
+                if (idx === -1) {
+                    detailRows.push(tr.attr('id'));
+                }
+            }
+        });
+    
+        // 在每次绘制时，循环'detailRows'数组并显示子行
+        dt.on('draw', function () {
+            $.each(detailRows, function (i, id) {
+                $('#' + id + ' td.details-control').trigger('click');
+            });
+        });
+    });
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">行选中</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>当您希望在 DataTables 中含有用户可选择的行时，使用基于 DOM 的数据时并没有问题，但是当使用服务器端处理时，DataTables 不会在页面/查找等上保留 DOM
+                    行元素。因此，您需要保留用户作为选择的行的记录，并在每次绘制上将它们标记为已选择
+                </p>
+                <p>在本示例中演示使用分配给
+                    <code>tr</code> 元素的唯一ID（通过使用
+                    <code>DT_RowId</code> 属性自动完成的，该属性作为服务器为每行给出的对象的一部分）来跟踪选择哪些行并重新选择
+                </p>
+                <p>如果您需要一个更完整，更容易使用行选择，请查看
+                    <a href="https://datatables.net/extras/select">Select extension</a>
+                    。
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    var selected = ['0', '2', '4', '7', '9','13', '15', '19', '26','34', '44', '47'];
+    $("#dataTableExample").DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/employee/all/get",
+        "columns": [
+            {"data": "name"},
+            {"data": "title"},
+            {"data": "base"},
+            {"data": "age"},
+            {"data": "hireDate"},
+            {"data": "salary"}
+        ],
+        "rowCallback": function (row, data) {
+            if ($.inArray(data.DT_RowId, selected) !== -1) {
+                $(row).addClass('selected');
+            }
+        }
+    }));
+
+    $('#dataTableExample tbody').on('click', 'tr', function () {
+        var id = this.id;
+        var index = $.inArray(id, selected);
+
+        if (index === -1) {
+            selected.push(id);
+        } else {
+            selected.splice(index, 1);
+        }
+
+        $(this).toggleClass('selected');
+    });
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">JSONP数据源</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>JSONP 是允许从任何服务器使用 JSON 数据的几种方法之一（浏览器具有XSS保护规则，出于安全原因，将阻止标准 Ajax 请求远程资源）。可使用
+                    <code>ajax</code> 的
+                    <code>dataType</code>，将其设为
+                    <code>JSONP</code>，使 DataTable 从任何域加载服务器端源数据</p>
+                <p>当作为对象提供时，ajax选项直接映射到jQuery ajax选项（即任何可以在jQuery的Ajax函数中使用的选项也可以在DataTable的ajax选项中使用）</p>
+                <p>本示例演示 DataTables 的跨域请求</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/employee/all",
+            "dataType": "jsonp"
+        }
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">延迟加载数据</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>当使用带有服务器端处理的 DataTables 时，默认为 DataTables 自动进行 Ajax 调用并加载数据，删除表中可能已经存在的任何内容。然而当表的第一页已经在 HTML
+                    中预加载时（这可能是为了确保可访问性或性能原因），会产生一些问题
+                </p>
+                <p>可以使用
+                    <code>deferLoading</code> 初始化属性覆盖Ajax调用获取第一页数据。它用于两个目的，首先声明需要延迟加载，但还要告诉 DataTables
+                    在完整表中有多少条记录以便正确显示信息和分页等 </p>
+                <p>在本示例中，HTML页面已经有前10行数据可用，所以我们使用
+                    <code>deferLoading</code> 来告诉 DataTables 这个数据是可用的，它应该等待排序，分页等完成之后，然后再创建 Ajax 请求。
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/employee/all",
+        "deferLoading": 57
+    }));
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">分页加载数据，减少ajax请求</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>服务器端处理可能在您的服务器上比较麻烦，因为它对于每个绘制请求都要对服务器进行Ajax调用。在访问量比较大的网站上，可能会造成 DDoS 攻击</p>
+                <p>本示例演示了通过缓存来减少对服务器进行的Ajax调用的技术。如果有缓存数据，则使用缓存数据，如果没有缓存数据，则使用Ajax请求。</p>
+                <p>注意，缓存仅用于分页，因为在使用服务器端处理时，完整数据集仅在服务器上可用</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $.fn.dataTable.pipeline = function (opts) {
+        // Configuration options
+        var conf = $.extend({
+            pages: 5,     // number of pages to cache
+            url: '/employee/query',      // script url
+            data: null,   // function or object with parameters to send to the server
+                          // matching how `ajax.data` works in DataTables
+            method: 'GET' // Ajax HTTP method
+        }, opts);
+    
+        // Private variables for storing the cache
+        var cacheLower = -1;
+        var cacheUpper = null;
+        var cacheLastRequest = null;
+        var cacheLastJson = null;
+    
+        return function (request, drawCallback, settings) {
+            var ajax = false,json;
+            var requestStart = request.start;
+            var drawStart = request.start;
+            var requestLength = request.length;
+            var requestEnd = requestStart + requestLength;
+    
+            if (settings.clearCache) {
+                // API requested that the cache be cleared
+                ajax = true;
+                settings.clearCache = false;
+            }
+            else if (cacheLower < 0 || requestStart < cacheLower || requestEnd > cacheUpper) {
+                // outside cached data - need to make a request
+                ajax = true;
+            }
+            else if (JSON.stringify(request.order) !== JSON.stringify(cacheLastRequest.order) ||
+                JSON.stringify(request.columns) !== JSON.stringify(cacheLastRequest.columns) ||
+                JSON.stringify(request.search) !== JSON.stringify(cacheLastRequest.search)
+            ) {
+                // properties changed (ordering, columns, searching)
+                ajax = true;
+            }
+    
+            // Store the request for checking next time around
+            cacheLastRequest = $.extend(true, {}, request);
+    
+            if (ajax) {
+                // Need data from the server
+                if (requestStart < cacheLower) {
+                    requestStart = requestStart - (requestLength * (conf.pages - 1));
+    
+                    requestStart = requestStart < 0 ? 0 : requestStart;
+                }
+    
+                cacheLower = requestStart;
+                cacheUpper = requestStart + (requestLength * conf.pages);
+    
+                request.start = requestStart;
+                request.length = requestLength * conf.pages;
+    
+                // Provide the same `data` options as DataTables.
+                if ($.isFunction(conf.data)) {
+                    // As a function it is executed with the data object as an arg
+                    // for manipulation. If an object is returned, it is used as the
+                    // data object to submit
+                    var d = conf.data(request);
+    
+                    request = d === true ?  $.extend(request, d) : request;
+                }
+                else if ($.isPlainObject(conf.data)) {
+                    // As an object, the data given extends the default
+                    $.extend(request, conf.data);
+                }
+    
+                settings.jqXHR = $.ajax({
+                    "type": conf.method,
+                    "url": conf.url,
+                    "data": request,
+                    "dataType": "json",
+                    "cache": false,
+                    "success": function (json) {
+                        cacheLastJson = $.extend(true, {}, json);
+    
+                        if (cacheLower !== drawStart) {
+                            json.data.splice(0, drawStart - cacheLower);
+                        }
+                        if (requestLength >= -1) {
+                            json.data.splice(requestLength, json.data.length);
+                        }
+    
+                        drawCallback(json);
+                    }
+                });
+            }
+            else {
+                json = $.extend(true, {}, cacheLastJson);
+                json.draw = request.draw; // Update the echo for each response
+                json.data.splice(0, requestStart - cacheLower);
+                json.data.splice(requestLength, json.data.length);
+    
+                drawCallback(json);
+            }
+        };
+    };
+    
+    // Register an API method that will empty the pipelined data, forcing an Ajax
+    // fetch on the next draw (i.e. `table.clearPipeline().draw()`)
+    $.fn.dataTable.Api.register('clearPipeline()', function () {
+        return this.iterator('table', function (settings) {
+            settings.clearCache = true;
+        });
+    });
+    
+    
+    //
+    // DataTables initialisation
+    //
+    $(document).ready(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "processing": true,
+            "serverSide": true,
+            "ajax": $.fn.dataTable.pipeline({
+                url: '/employee/query',
+                pages: 5 // number of pages to cache
+            }),
+            "columns": [
+                {"data": "name"},
+                {"data": "title"},
+                {"data": "base"},
+                {"data": "age"},
+                {"data": "hireDate"},
+                {"data": "salary"}
+            ]
+        }));
+    });
+</pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title">DataTables 插件</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">API插件方法</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables API是一个完全可扩展的设计，使用
+                    <code>$.fn.dataTable.Api.register</code> 方法可以很容易的添加函数</p>
+                <p>这个函数接受两个参数：第一个被添加的方法的名称(jquery的链式层次),第二个是函数本身</p>
+                <p>本示例展示了如何把
+                    <code>sum()</code> 方法添加到api中，得到一列的总和。 由于链式的写法，可以让
+                    <code>sum()</code> 方法作用到任何一个被选中的列，也可以限制到当前页过滤后的数据或者所有页面。 这个是使用
+                    <code>column()</code> 方法来完成的</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $.fn.dataTable.Api.register('column().data().sum()', function () {
+            return this.reduce(function (a, b) {
+                var x = parseFloat(a) || 0;
+                var y = parseFloat(b) || 0;
+                return x + y;
+            });
+        });
+    
+        var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    
+        $('&lt;button type="button" class="btn btn-outline btn-default">点击计算所有行里年龄列的总和&lt;/button>')
+            .prependTo('#dataTableExampleButton')
+            .on('click', function () {
+                toastr.info('所有行的年龄总和为：' + table.column(3).data().sum());
+            });
+    
+        $('&lt;button type="button" class="btn btn-outline btn-default">点击计算可见行年龄列的总和&lt;/button>')
+            .prependTo('#dataTableExampleButton')
+            .on('click', function () {
+                toastr.info('可见行的年龄总和为：' + table.column(3, {page: 'current'}).data().sum());
+            });
+    });
+</pre>
+<p>需引入的文件</p>
+<pre>
+    &lt;&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">排序插件（类型检测）</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>尽管 DataTables 可以自动排序字母或者数字，但是在处理更复杂的数据格式，他还可以自定义排序的规则</p>
+                <p>下面的例子告诉大家如何写一个自定义的排序规则</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $.fn.dataTable.ext.type.detect.unshift(
+            function (d) {
+                return d === '低' || d === '中' || d === '高' ?
+                    'salary-grade' :
+                    null;
+            }
+        );
+        $.fn.dataTable.ext.type.order['salary-grade-pre'] = function (d) {
+            switch (d) {
+                case '低':
+                    return 1;
+                case '中':
+                    return 2;
+                case '高':
+                    return 3;
+            }
+            return 0;
+        };
+        $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">排序插件（无类型检测）</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>本示例和另一个有点不同，这个是针对所有列，所以不能加入类型判断。 本示例用上了
+                    <code>columns.typeOption</code> 属性，同样使用了
+                    <code>$.fn.dataTable.ext.type.order</code> 方法定义了排序的规则
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $.fn.dataTable.ext.type.order['salary-grade-pre'] = function (d) {
+            switch (d) {
+                case '低':
+                    return 1;
+                case '中':
+                    return 2;
+                case '高':
+                    return 3;
+            }
+            return 0;
+        };
+    
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "columnDefs": [{
+                "type": "salary-grade",
+                "targets": -1
+            }]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">自定义过滤 - 范围搜索</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>下面的例子告诉大家，怎么实现范围（数字、日期）的搜索</p>
+                <p>使用
+                    <code>$.fn.dataTable.ext.search</code> 实现，他实际上是一个数组方法，具体用法看下面的例子</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $.fn.dataTable.ext.search.push(
+            function (settings, data, dataIndex) {
+                var min = parseInt($('#DTMinAge').val(), 10);
+                var max = parseInt($('#DTMaxAge').val(), 10);
+                var age = parseFloat(data[3]) || 0;
+    
+                if (( isNaN(min) && isNaN(max) ) ||
+                    ( isNaN(min) && age <= max ) ||
+                    ( min <= age && isNaN(max) ) ||
+                    ( min <= age && age <= max )) {
+                    return true;
+                }
+                return false;
+            }
+        );
+    
+        var table = $('#dataTableExample').DataTable($.concatCpt('dataTable'));
+    
+        $('#DTMinAge, #DTMaxAge').keyup(function () {
+            table.draw();
+        });
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;div class="form-inline example-box mb-20" role="form">
+        &lt;div class="form-group">
+            &lt;label for="DTMinAge">最小年龄:&lt;/label>
+            &lt;input type="text" class="form-control" id="DTMinAge" name="DTMinAge" placeholder="最小年龄">
+        &lt;/div>
+        &lt;div class="form-group">
+            &lt;label for="DTMaxAge">最大年龄:&lt;/label>
+            &lt;input type="text" class="form-control" id="DTMaxAge" name="DTMaxAge" placeholder="最大年龄">
+        &lt;/div>
+    &lt;/div>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full">
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">DOM对象排序</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>下面的例子只是一个示例作用，你可以随意扩展，不限于select和input，排序的值和显示的值可以不一样</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>JavaScript</p>
+<pre>
+    /* Initialise the table with the required column ordering data types */
+    $(function () {
+        /* Create an array with the values of all the input boxes in a column */
+        $.fn.dataTable.ext.order['dom-text'] = function (settings, col) {
+            return this.api().column(col, {order: 'index'}).nodes().map(function (td, i) {
+                return $('input', td).val();
+            });
+        };
+
+        /* Create an array with the values of all the input boxes in a column, parsed as numbers */
+        $.fn.dataTable.ext.order['dom-text-numeric'] = function (settings, col) {
+            return this.api().column(col, {order: 'index'}).nodes().map(function (td, i) {
+                return $('input', td).val() * 1;
+            });
+        };
+
+        /* Create an array with the values of all the select options in a column */
+        $.fn.dataTable.ext.order['dom-select'] = function (settings, col) {
+            return this.api().column(col, {order: 'index'}).nodes().map(function (td, i) {
+                return $('select', td).val();
+            });
+        };
+
+        /* Create an array with the values of all the checkboxes in a column */
+        $.fn.dataTable.ext.order['dom-checkbox'] = function (settings, col) {
+            return this.api().column(col, {order: 'index'}).nodes().map(function (td, i) {
+                return $('input', td).prop('checked') ? '1' : '0';
+            });
+        };
+
+        $('#dataTableExample').DataTable($.concatCpt('dataTable', {
+            "columns": [
+                null,
+                {"orderDataType": "dom-text-numeric"},
+                {"orderDataType": "dom-select"},
+                {"orderDataType": "dom-text", type: 'string'},
+                null,
+                null
+            ]
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped w-full text-nowrap" id="dataTableExample"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">固定表头</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>使用 dataTables.fixedHeader.min.js 插件实现固定表头 </p>
+                <ul>
+                    <li>
+                        <code>header: true</code> - 表头停靠在顶部</li>
+                    <li>
+                        <code>footer: true</code> - 表头停靠在底部</li>
+                    <li>
+                        <code>headerOffset: 100</code> - 表头停靠在顶部的位置</li>
+                    <li>
+                        <code>footerOffset: 100</code> - 表头停靠在底部的位置</li>
+                </ul>
+                <p>
+                    <b>注意：</b>如果要使用固定表头，请勿在
+                    <code>table</code> 上添``
+                    <code>.w-full</code>，可用
+                    <code>width="100%"</code> 代替</p>
+                <p>下面的例子展示了
+                    <code>hearder: true</code> 表头停靠在顶部的情况
+                </p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-plugin="dataTable" data-fixed-header="true"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#exampleFixedHeader').DataTable($.concatCpt('dataTable', {
+            pagingType: 'full_numbers',
+            fixedHeader: {
+                header: true,
+                headerOffset: offsetTop
+            }
+        }));
+    });
+</pre>
+<p>HTML</p>
+<pre>
+    &lt;table class="table table-bordered table-hover dataTable table-striped text-nowrap" id="exampleFixedHeader"&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">导出文件</h3>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <p>DataTables 可以通过buttons组件导出文件</p>
+                <p>注意：导出pdf文件建议通过打印另存为pdf文件，有利于排版成自己想要的格式。如果你不喜欢，也可以使用buttons组件导出pdf文件</p>
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <p>Data Api</p>
+<pre>
+    data-dom="<&quot;row&quot;<&quot;col-xs-6&quot;B><&quot;col-xs-6&quot;f>><&quot;row&quot;<&quot;col-xs-12&quot;tr>><&quot;row&quot;<&quot;col-sm-5&quot;i><&quot;col-sm-7&quot;p>>" data-plugin="dataTable" data-buttons="copy,excel,csv,print"
+</pre>
+                    <p>JavaScript</p>
+<pre>
+    $(function () {
+        $('#dataTableExample').DataTable($.concatCpt('dataTable',{
+            dom: '<"row"<"col-6"<"d-none d-sm-block"B>><"col-6"f>><"row"<"col-12"tr>><"row"<"col-md-5"i><"col-md-7"p>>',
+            buttons: {
+                dom: {
+                    container: {
+                        className: 'btn-group btn-group-sm'
+                    },
+                    button: {
+                        className: 'btn btn-default btn-outline'
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: '拷贝'
+                    },
+                    {
+                        extend: 'excel',
+                        text: '导出 Excel'
+                    },
+                    {
+                        extend: 'csv',
+                        text: '导出 CSV'
+                    },
+                    {
+                        extend: 'print',
+                        text: '打印'
+                    }
+                ]
+            }
+        }));
+    });
+</pre>
+<p>需引入的文件</p>
+<pre>
+    &lt;&gt;
+    <!-- CSS -->
+    &lt;link rel="stylesheet" href="http://cdn.admui.com/demo/iframe/2.1.0/vendor/datatables-bootstrap/dataTables.bootstrap4.css">
+
+    <!-- JS -->
+    &lt;script src="/vendor/datatables/jquery.dataTables.min.js">&lt;/script>
+    &lt;script src="/vendor/datatables-bootstrap/dataTables.bootstrap4.js">&lt;/script>
+    &lt;script src="/vendor/datatables-buttons/dataTables.buttons.min.js" data-deps="dataTables">&lt;/script>
+    &lt;script src="/vendor/datatables-buttons/buttons.print.min.js">&lt;/script>
+    &lt;script src="/vendor/datatables-buttons/buttons.html5.min.js">&lt;/script>
+</pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+
+
+

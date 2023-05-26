@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+
+	<!-- select2 select扩展及美化 -->
+	<link rel="stylesheet" href="/vendor/select2/select2.css"/>
+	<script src="/vendor/select2/select2.full.min.js"></script>
+	<script src="/vendor/select2/i18n/zh-CN.js"></script>
+	<!-- bootstrap-select select扩展及美化 -->
+	<link rel="stylesheet" href="/vendor/bootstrap-select/bootstrap-select.css"/>
+	<script src="/vendor/bootstrap-select/bootstrap-select.js"></script>
+	<!-- multi-select select多选 -->
+	<link rel="stylesheet" href="/vendor/multi-select/multi-select.css"/>
+	<script src="/vendor/multi-select/jquery.multi-select.js"></script>
+	<!-- typeahead.js搜索建议提示 -->
+	<link rel="stylesheet" href="/vendor/typeahead/typeahead.css" />
+	<script src="/vendor/typeahead/bloodhound.min.js"></script>
+	<script src="/vendor/typeahead/typeahead.jquery.min.js"></script>
+	<!-- cxSelect级联选择 -->
+	<script src="/vendor/jquery.cxselect/jquery.cxselect.js"></script>
+
+	<style>
+		.bootbox .modal-dialog{width:360px}.bootstrap-select{width:100%!important}.datepair-wrap{position:relative}.input-daterange-wrap{float:left}.input-daterange-to{float:left;width:40px;height:2.287rem;line-height:2.287rem;text-align:center}@media (max-width:1360px){.input-daterange-to,.input-daterange-wrap{display:block;float:none}}
+	</style>
+
+</head>
+
+<body class="site-contabs-open site-menubar-unfold">
+<div class="page animation-fade page-forms">
+    <div class="page-header">
+        <h1 class="page-title">下拉选择</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="javascript:;">首页</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">表单</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">高级表单元素</a>
+            </li>
+            <li class="breadcrumb-item active">下拉列表</li>
+        </ol>
+    </div>
+    <div class="page-content container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Select 2（select扩展及美化）
+                    <small>
+                        <a class="example-plugin-link" href="https://select2.github.io" target="_blank">官网</a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本</h4>
+                            <p>
+                                <code>data-plugin="select2"</code>
+                            </p>
+                            <div class="example">
+
+                                <select class="form-control" data-plugin="select2">
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">选项分组</h4>
+                            <p>
+                                <code>multiple</code>
+                            </p>
+                            <div class="example">
+                                <select class="form-control" multiple data-plugin="select2">
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">占位符</h4>
+                            <p>
+                                <code>data-placeholder="请选择品牌"</code>
+                            </p>
+                            <div class="example">
+                                <select class="form-control" data-plugin="select2" data-placeholder="请选择品牌"
+                                    data-allow-clear="true">
+                                    <option></option>
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">最少选择项</h4>
+                            <p>
+                                <code>data-minimum-input-length=""</code>
+                            </p>
+                            <div class="example">
+                                <select class="form-control" data-plugin="select2" data-minimum-input-length="2">
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">禁用</h4>
+                            <p>
+                                <code>disabled</code>
+                            </p>
+                            <div class="example">
+                                <select class="form-control" data-plugin="select2" disabled>
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select class="form-control" multiple data-plugin="select2" disabled>
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">颜色</h4>
+                            <p>可通过添加
+                                <code>.select2-primary</code>,
+                                <code>.select2-success</code>,
+                                <code>.select2-info</code>,
+                                <code>.select2-waring</code>,
+                                <code>.select2-danger</code> 来改变其颜色
+                            </p>
+                            <div class="example">
+                                <div class="select2-primary">
+                                    <select class="form-control" multiple="multiple" data-plugin="select2">
+                                        <option value="js" selected>JavaScript</option>
+                                        <option value="html">HTML</option>
+                                        <option value="node" selected>Node.js</option>
+                                        <option value="css">CSS</option>
+                                        <option value="java">Java</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="example">
+                                <div class="select2-success">
+                                    <select class="form-control" multiple="multiple" data-plugin="select2">
+                                        <option value="js" selected>JavaScript</option>
+                                        <option value="html">HTML</option>
+                                        <option value="node" selected>Node.js</option>
+                                        <option value="css">CSS</option>
+                                        <option value="java">Java</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="example">
+                                <div class="select2-warning">
+                                    <select class="form-control" multiple="multiple" data-plugin="select2">
+                                        <option value="js" selected>JavaScript</option>
+                                        <option value="html">HTML</option>
+                                        <option value="node" selected>Node.js</option>
+                                        <option value="css">CSS</option>
+                                        <option value="java">Java</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="example">
+                                <div class="select2-danger">
+                                    <select class="form-control" multiple="multiple" data-plugin="select2">
+                                        <option value="js" selected>JavaScript</option>
+                                        <option value="html">HTML</option>
+                                        <option value="node" selected>Node.js</option>
+                                        <option value="css">CSS</option>
+                                        <option value="java">Java</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="example">
+                                <div class="select2-info">
+                                    <select class="form-control" multiple="multiple" data-plugin="select2">
+                                        <option value="js" selected>JavaScript</option>
+                                        <option value="html">HTML</option>
+                                        <option value="node" selected>Node.js</option>
+                                        <option value="css">CSS</option>
+                                        <option value="java">Java</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Bootstrap Select（select扩展及美化）
+                    <small>
+                        <a class="example-plugin-link" href="http://silviomoreto.github.io/bootstrap-select" target="_blank">
+							官网
+                        </a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本</h4>
+                            <div class="example">
+                                <select data-plugin="selectpicker">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <p>也可以使用分组</p>
+                            <div class="example">
+                                <select data-plugin="selectpicker" title='请选择品牌'>
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <p>可以使用
+                                <code>.show-tick</code> 来为
+                                <code>select</code> 添加选中图标</p>
+                            <div class="example">
+                                <select class="show-tick" data-plugin="selectpicker">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <p>可以通过
+                                <code>.show-menu-arrow</code> 让下拉列表显示箭头</p>
+                            <div class="example">
+                                <select class="show-menu-arrow" data-plugin="selectpicker">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">样式</h4>
+                            <p>可以通过
+                                <code>data-style</code> 属性改变其样式</p>
+                            <div class="example">
+                                <select data-plugin="selectpicker" data-style="btn-outline btn-primary">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select data-plugin="selectpicker" data-style="btn-outline btn-info">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select data-plugin="selectpicker" data-style="btn-outline btn-success">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select data-plugin="selectpicker" data-style="btn-outline btn-warning">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select data-plugin="selectpicker" data-style="btn-outline btn-danger">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">选择多个</h4>
+                            <p>可以通过
+                                <code>data-max-option</code> 属性设置最大选中项，也可以用于分组</p>
+                            <div class="example">
+                                <select multiple data-plugin="selectpicker" data-max-options="2">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select multiple data-plugin="selectpicker">
+                                    <optgroup label="A 字母开头" data-max-options="2">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头" data-max-options="1">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">选中项显示格式</h4>
+                            <p>可以使用
+                                <code>data-selected-text-format</code> 属性 来指定
+                                <code>multiple select</code> 选中项如何显示
+                            </p>
+                            <div class="example">
+                                <select data-plugin="selectpicker" multiple data-selected-text-format="count">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select data-plugin="selectpicker" multiple data-selected-text-format="count > 3">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">即时搜索</h4>
+                            <p>可以使用
+                                <code>data-live-search="true"</code> 属性来实现即时搜索</p>
+                            <div class="example">
+                                <select data-plugin="selectpicker" data-live-search="true">
+                                    <option value="AC BMW">A AC宝马</option>
+                                    <option value="Aston Martin">A 阿斯顿马丁</option>
+                                    <option value="Audi">A 奥迪</option>
+                                    <option value="Brabus">B 巴博斯</option>
+                                    <option value="Porsche">B 保时捷</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">标题转换</h4>
+                            <p>可以使用
+                                <code>title</code> 来改变选中项的显示标题 </p>
+                            <div class="example">
+                                <select data-plugin="selectpicker">
+                                    <option title="AC BMW">A AC宝马</option>
+                                    <option title="Aston Martin">A 阿斯顿马丁</option>
+                                    <option title="Audi">A 奥迪</option>
+                                    <option title="Brabus">B 巴博斯</option>
+                                    <option title="Porsche">B 保时捷</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">选项分割线</h4>
+                            <p>可以通过添加
+                                <code>data-divider="true"</code> 的
+                                <code>&lt;option&gt;</code> 来实现</p>
+                            <div class="example">
+                                <select data-plugin="selectpicker">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Mac">macOS</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="" data-divider="true">&nbsp;</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">选项图标</h4>
+                            <p>为选项或者分组项添加
+                                <code>data-icon</code> 属性</p>
+                            <div class="example">
+                                <select data-plugin="selectpicker">
+                                    <option data-icon="fa fa-windows" value="Windows">Windows</option>
+                                    <option data-icon="fa fa-apple" value="Mac">macOS</option>
+                                    <option data-icon="fa fa-linux" value="Linux">Linux</option>
+                                    <option data-icon="fa fa-desktop" value="other">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">选项副标题</h4>
+                            <p>为选项或者分组项添加
+                                <code>data-subtext</code> 属性</p>
+                            <div class="example">
+                                <select data-plugin="selectpicker">
+                                    <option data-subtext="Windows">Windows</option>
+                                    <option data-subtext="Mac">macOS</option>
+                                    <option data-subtext="Linux">Linux</option>
+                                    <option data-subtext="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="example">
+                                <select data-plugin="selectpicker" data-show-subtext="true">
+                                    <option data-subtext="Windows">Windows</option>
+                                    <option data-subtext="Mac">macOS</option>
+                                    <option data-subtext="Linux">Linux</option>
+                                    <option value="" data-divider="true">&nbsp;</option>
+                                    <option data-subtext="other">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Multi-Select（select多选）
+                    <small>
+                        <a class="example-plugin-link" href="http://loudev.com/" target="_blank">官网</a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+                        <div class="example-wrap m-md-0">
+                            <h4 class="example-title">简单示例</h4>
+                            <div class="example">
+                                <select class="form-control" data-plugin="multiSelect">
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">公共方法</h4>
+                            <div class="example">
+                                <select class="multi-select-methods form-control">
+                                    <optgroup label="A 字母开头">
+                                        <option value="AC BMW">A AC宝马</option>
+                                        <option value="Aston Martin">A 阿斯顿马丁</option>
+                                        <option value="Audi">A 奥迪</option>
+                                    </optgroup>
+                                    <optgroup label="B 字母开头">
+                                        <option value="Brabus">B 巴博斯</option>
+                                        <option value="Porsche">B 保时捷</option>
+                                        <option value="Po Chun">B 宝骏</option>
+                                        <option value="BMW">B 宝马</option>
+                                        <option value="Beijing">B 北京汽车</option>
+                                        <option value="BAW">B 北汽制造</option>
+                                        <option value="Benz">B 奔驰</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="example-buttons">
+                                <button class="btn btn-primary btn-outline" id="buttonSelectAll" type="button">
+                                	选择全部
+                                </button>
+                                <button class="btn btn-primary btn-outline" id="buttonDeselectAll" type="button">
+									取消全部选择
+                                </button>
+                                <button class="btn btn-primary btn-outline" id="buttonAdd" type="button">
+                                	添加一项
+                                </button>
+                                <button class="btn btn-primary btn-outline" id="buttonRefresh" type="button">
+                                	刷新
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Typeahead（搜索建议提示）
+                    <small>
+                        <a class="example-plugin-link" href="http://twitter.github.com/typeahead.js" target="_blank">
+							官网
+                        </a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本</h4>
+                            <div class="example">
+                                <form autocomplete="off">
+                                    <input type="text" class="form-control" id="exampleTypeaheadBasic" placeholder="请填写国家">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap m-sm-0">
+                            <h4 class="example-title">异步加载</h4>
+                            <div class="example">
+                                <form autocomplete="off">
+                                    <input type="text" class="form-control" id="exampleTypeaheadPrefetch" placeholder="请填写国家">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">样式</h4>
+                            <div class="example">
+                                <form autocomplete="off">
+                                    <div class="input-search clearfix">
+                                        <input type="text" class="form-control" id="exampleTypeaheadStyle" name="exampleTypeaheadStyle"
+                                            placeholder="查找...">
+                                        <button type="submit" class="input-search-btn">
+                                            <i class="icon wb-search" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    cxSelect (级联选择)
+                    <small>
+                        <a class="example-plugin-link" href="https://github.com/ciaoca/cxSelect" target="_blank">
+							官网
+                        </a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">国内省市区联动</h4>
+                            <div class="example">
+                                <form class="form-inline" id="cityChina">
+                                    <div class="form-group">
+                                        <select class="form-control province" data-first-title="请选择省份"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control city" data-first-title="请选择城市"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control area" data-first-title="请选择县区"></select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">设置默认值及选项标题</h4>
+                            <div class="example">
+                                <form class="form-inline" id="cityChinaVal" data-url="/datas/city-data.json">
+                                    <div class="form-group">
+                                        <select class="form-control province" data-first-title="请选择省份">
+                                            <option value="浙江省" selected>浙江省</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control city" data-first-title="请选择城市">
+                                            <option value="杭州市" selected>杭州市</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control area" data-first-title="请选择县区">
+                                            <option value="西湖区" selected>西湖区</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap m-sm-0">
+                            <h4 class="example-title">全球主要国家城市联动</h4>
+                            <div class="example">
+                                <form class="form-inline" id="globalLocation" >
+                                    <div class="form-group">
+                                        <select class="form-control country" data-first-title="请选择国家">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control state" data-first-title="请选择省份" data-required="true">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control city" data-first-title="请选择城市" data-required="true">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control region" data-first-title="请选择县区" data-required="true">
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">自定义选项</h4>
+                            <div class="example">
+                                <form class="form-inline" id="customData">
+                                    <div class="form-group">
+                                        <select class="form-control first" data-first-title="请选择第一级">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control second" data-first-title="请选择第二级" data-required="true">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control third" data-first-title="请选择第三级" data-required="true">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control fourth" data-first-title="请选择第四级" data-required="true">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control fifth" data-first-title="请选择第五级" data-required="true">
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	/* select2 */
+	$('[data-plugin="select2"]').select2();
+	//select2插件赋值
+	/*var select_id = $("#select_id").val();
+    arr = select_id.split(",");//注意：arr为select的id值组成的数组
+    $('#id').val(arr).trigger('change');*/
+	//select2多选，取值，在下拉框中选中以后，获取到选择的id值
+	/*$('#id').change(function(){
+		var o=document.getElementById('id').getElementsByTagName('option');
+    	var all="";
+		onsole.log(o[1]);
+		for(var i=0;i<o.length;i++){
+			if(o[i].selected){
+				all+=o[i].value+",";
+			}
+		}
+		all = all.substr(0, all.length - 1);//去掉末尾的逗号
+		$("#bumen").val(all);//赋值给隐藏的文本框
+	})*/
+
+	/* bootstrap select */
+	//https://developer.snapappointments.com/bootstrap-select/examples/
+	$('[data-plugin="selectpicker"]').selectpicker({
+		iconBase: 'icon',
+    	tickIcon: 'wb-check',
+	});
+	/* Multi-Select */
+	//http://loudev.com/
+	$('[data-plugin="multiSelect"]').multiSelect();
+	$('.multi-select-methods').multiSelect({});
+	$("#buttonSelectAll").on('click',function(){
+		$('.multi-select-methods').multiSelect('select_all');
+	})
+	$("#buttonDeselectAll").on('click',function(){
+		$('.multi-select-methods').multiSelect('deselect_all');
+	})
+	$("#buttonAdd").on('click',function(){
+		$('.multi-select-methods').multiSelect(
+			'addOption',
+			{
+				value: 'test',
+				text: 'test',
+				index: 0,
+				nested: 'optgroup_label'
+			}
+		);
+	})
+	$("#buttonRefresh").on('click',function(){
+		$('.multi-select-methods').multiSelect('refresh');
+	})
+
+	/*  typeahead.js */
+	//http://twitter.github.io/typeahead.js/examples/
+
+	var substringMatcher = function(strs) {
+		return function findMatches(q, cb) {
+    		var matches, substringRegex;
+		    // an array that will be populated with substring matches
+		    matches = [];
+		    // regex used to determine if a string contains the substring `q`
+		    substrRegex = new RegExp(q, 'i');
+		    // iterate through the pool of strings and for any string that
+		    // contains the substring `q`, add it to the `matches` array
+		    $.each(strs, function(i, str) {
+		        if (substrRegex.test(str)) {
+		       	 matches.push(str);
+		        }
+		    });
+
+        	cb(matches);
+    	};
+	};
+	var states = [
+		'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California','Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii','Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana','Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota','Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire','New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota','Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island','South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont','Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+	];
+	$('#exampleTypeaheadBasic').typeahead(
+		{
+		    hint: true,
+		    highlight: true,
+		    minLength: 1
+		},
+		{
+		    name: 'states',
+		    source: substringMatcher(states)
+		}
+	);
+	//异步
+	var bestPictures = new Bloodhound({
+	    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+	    queryTokenizer: Bloodhound.tokenizers.whitespace,
+	    prefetch: '/datas/demo2.json',
+	    remote: {
+		    url: '/datas/%QUERY.json',
+		    wildcard: '%QUERY'
+	    }
+	});
+	$('#exampleTypeaheadPrefetch').typeahead(
+		null, {
+		    name: 'best-pictures',
+		    display: 'value',
+		    source: bestPictures
+		}
+	);
+	$('#exampleTypeaheadStyle').typeahead(
+		{
+		    hint: true,
+		    highlight: true,
+		    minLength: 1
+		},
+		{
+		    name: 'states',
+		    source: substringMatcher(states)
+		}
+	);
+
+	/* cxSelect */
+	//https://github.com/ciaoca/cxSelect
+
+	$('#cityChina').cxSelect({
+        url : "/datas/city-data.json",
+	    selects : ['province', 'city', 'area'],  // selects 为数组形式，请注意顺序
+	    emptyStyle : 'none'
+	});
+	$('#cityChinaVal').cxSelect({
+	    selects: ['province', 'city', 'area'],  // selects 为数组形式，请注意顺序
+	    emptyStyle: 'none'
+	});
+	$('#globalLocation').cxSelect({
+	    url: '/datas/global-data.json',
+        selects : ['country', 'state', 'city', 'region'],  // selects 为数组形式，请注意顺序
+	    emptyStyle: 'none',
+	});
+
+	$('#customData').cxSelect({
+	    emptyStyle: 'none',
+        selects: ['first', 'second', 'third', 'fourth', 'fifth'],
+        jsonName: 'name',
+        jsonValue: 'value',
+        jsonSub: 'sub',
+        data: [
+            {name:'A', value: '1', sub: [
+                {name: 'A-1', value: '2', sub: [
+                    {name: 'A-1-1', value: '11'}
+                ]},
+                {name: 'A-2', value: '3', sub: [
+                    {name: 'A-2-1', value: '34'}
+                ]}
+            ]},
+            {name:'B', value: '5', sub: [
+                {name: 'B-1', value: '8', sub: [
+                    {name: 'B-1-1', value: '16', sub: [
+                        {name: 'B-1-1-1', value: '18', sub: [
+                            {name: 'B-1-1-1-1', value: '20'}
+                        ]}
+                    ]},
+                    {name: 'B-1-2', value: '16'}
+                ]}
+            ]}
+        ]
+	});
+
+
+
+
+</script>
+
+
+</body>
+</html>

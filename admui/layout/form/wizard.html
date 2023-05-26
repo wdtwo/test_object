@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <style>
+		.bootbox .modal-dialog{width:360px}
+		.wizard-pane{position:absolute;top:0;visibility:hidden;opacity:0;-webkit-transition:opacity .2s ease;transition:opacity .2s ease}
+		.wizard-pane.active{position:relative;visibility:visible;opacity:1}
+		.wizard-pane.activing{visibility:visible}
+		.wizard-content{position:relative;padding:0;-webkit-transition:height .2s ease;transition:height .2s ease}
+		.panel-body>.wizard-buttons,.tab-content>.wizard-buttons{margin-top:22px}
+		.color-active{color:#3e8ef7!important}
+		.color-error{color:#ff4c52!important}
+		.color-done{color:#11c26d!important}
+    </style>
+
+</head>
+
+<body class="site-contabs-open site-menubar-unfold">
+
+	<div class="page animation-fade page-forms">
+	    <div class="page-header">
+	        <h1 class="page-title">表单向导</h1>
+	        <ol class="breadcrumb">
+	            <li class="breadcrumb-item">
+	                <a>首页</a>
+	            </li>
+	            <li class="breadcrumb-item">
+	                <a href="javascript:;">表单</a>
+	            </li>
+	            <li class="breadcrumb-item active">表单向导</li>
+	        </ol>
+	        <div class="page-header-actions">
+	            <a class="btn btn-default btn-outline btn-round" href="https://github.com/amazingSurge/jquery-wizard"
+	               target="_blank">
+	                <i class="icon wb-link" aria-hidden="true"></i>
+					官网
+	            </a>
+	        </div>
+	    </div>
+	    <div class="page-content container-fluid">
+	        <div class="row">
+	            <div class="col-lg-6">
+	                <div class="panel">
+	                    <div class="panel-heading">
+	                        <h3 class="panel-title">普通</h3>
+	                    </div>
+
+
+	                    <div class="panel-body" id="exampleWizardForm">
+	                        <div class="steps steps-sm row" data-by-row="true" role="tablist">
+	                            <div class="step col-md-4" data-target="#exampleAccount" role="tab">
+	                                <span class="step-number">1</span>
+	                                <div class="step-desc">
+	                                    <span class="step-title">账户</span>
+	                                    <p>请登录您的账户</p>
+	                                </div>
+	                            </div>
+	                            <div class="step col-md-4" data-target="#exampleBilling" role="tab">
+	                                <span class="step-number">2</span>
+	                                <div class="step-desc">
+	                                    <span class="step-title">订单</span>
+	                                    <p>完成订单支付</p>
+	                                </div>
+	                            </div>
+	                            <div class="step col-md-4" data-target="#exampleGetting" role="tab">
+	                                <span class="step-number">3</span>
+	                                <div class="step-desc">
+	                                    <span class="step-title">完成</span>
+	                                    <p>等待发货</p>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="wizard-content">
+	                            <div class="wizard-pane active" id="exampleAccount" role="tabpanel">
+	                                <form id="exampleAccountForm">
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputUserName">用户名</label>
+	                                        <input
+	                                        	type="text"
+	                                        	class="form-control"
+	                                        	id="inputUserName"
+	                                        	name="username"
+	                                            required="required">
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputPassword">密码</label>
+	                                        <input
+	                                        	type="password"
+	                                        	class="form-control"
+	                                        	id="inputPassword"
+	                                        	name="password"
+	                                            required="required">
+	                                    </div>
+	                                </form>
+	                            </div>
+	                            <div class="wizard-pane" id="exampleBilling" role="tabpanel">
+	                                <form id="exampleBillingForm">
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputCardNumber">信用卡</label>
+	                                        <input
+	                                        	type="text"
+	                                        	class="form-control"
+	                                        	id="inputCardNumber"
+	                                        	name="number"
+	                                            placeholder="卡号">
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputCVV">CVV码</label>
+	                                        <input
+	                                        	type="text"
+	                                        	class="form-control"
+	                                        	id="inputCVV"
+	                                        	name="cvv"
+	                                            placeholder="CVV码">
+	                                    </div>
+	                                </form>
+	                            </div>
+	                            <div class="wizard-pane" id="exampleGetting" role="tabpanel">
+	                                <div class="text-center my-20">
+	                                    <i class="icon wb-check font-size-40" aria-hidden="true"></i>
+	                                    <h4>我们已经收到您的订单，稍后会为您安排发货</h4>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                </div>
+	            </div>
+
+	            <div class="col-lg-6">
+
+	                <div class="panel" id="exampleWizardFormContainer">
+	                    <div class="panel-heading">
+	                        <h3 class="panel-title">链式效果</h3>
+	                    </div>
+	                    <div class="panel-body">
+	                        <div class="pearls row">
+	                            <div class="pearl current col-4">
+	                                <div class="pearl-icon"><i class="icon wb-user" aria-hidden="true"></i></div>
+	                                <span class="pearl-title">账户信息</span>
+	                            </div>
+	                            <div class="pearl col-4">
+	                                <div class="pearl-icon"><i class="icon wb-payment" aria-hidden="true"></i></div>
+	                                <span class="pearl-title">订单信息</span>
+	                            </div>
+	                            <div class="pearl col-4">
+	                                <div class="pearl-icon"><i class="icon wb-check" aria-hidden="true"></i></div>
+	                                <span class="pearl-title">完成</span>
+	                            </div>
+	                        </div>
+	                        <div class="wizard-content">
+	                            <div class="wizard-pane active" id="exampleAccountWizard" role="tabpanel">
+	                                <form id="exampleAccountFormWizard">
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputUserNameOne">用户名</label>
+	                                        <input type="text" class="form-control" id="inputUserNameOne" name="username"
+	                                               required="required">
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputPasswordOne">密码</label>
+	                                        <input type="password" class="form-control" id="inputPasswordOne"
+	                                               name="password"
+	                                               required="required">
+	                                    </div>
+	                                </form>
+	                            </div>
+	                            <div class="wizard-pane" id="exampleBillingOne" role="tabpanel">
+	                                <form id="exampleBillingFormWizard">
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputCardNumberOne">信用卡</label>
+	                                        <input type="text" class="form-control" id="inputCardNumberOne" name="number"
+	                                               placeholder="卡号">
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <label class="col-form-label" for="inputCVVOne">CVV码</label>
+	                                        <input type="text" class="form-control" id="inputCVVOne" name="cvv"
+	                                               placeholder="CVV码">
+	                                    </div>
+	                                </form>
+	                            </div>
+	                            <div class="wizard-pane" id="exampleGettingOne" role="tabpanel">
+	                                <div class="text-center my-20">
+	                                    <h4>请确认您的订单</h4>
+	                                    <div class="table-responsive">
+	                                        <table class="table table-hover text-right">
+	                                            <thead>
+	                                            <tr>
+	                                                <th class="text-center">序号</th>
+	                                                <th>产品</th>
+	                                                <th class="text-right">重量</th>
+	                                                <th class="text-right">运费</th>
+	                                                <th class="text-right">总计</th>
+	                                            </tr>
+	                                            </thead>
+	                                            <tbody>
+	                                            <tr>
+	                                                <td class="text-center">1</td>
+	                                                <td class="text-left">三星Note炸弹</td>
+	                                                <td>32</td>
+	                                                <td>&yen;75</td>
+	                                                <td>&yen;2152</td>
+	                                            </tr>
+	                                            <tr>
+	                                                <td class="text-center">2</td>
+	                                                <td class="text-left">U盘</td>
+	                                                <td>15</td>
+	                                                <td>&yen;169</td>
+	                                                <td>&yen;4169</td>
+	                                            </tr>
+	                                            <tr>
+	                                                <td class="text-center">3</td>
+	                                                <td class="text-left">2T移动硬盘</td>
+	                                                <td>69</td>
+	                                                <td>&yen;49</td>
+	                                                <td>&yen;1260</td>
+	                                            </tr>
+	                                            </tbody>
+	                                        </table>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                    </div>
+	                </div>
+
+	            </div>
+	        </div>
+
+	        <div class="row">
+	            <div class="col-lg-6">
+
+	                <div class="panel" id="exampleWizardPager">
+	                    <div class="panel-heading">
+	                        <div class="panel-actions"></div>
+	                        <h3 class="panel-title">分页</h3>
+	                    </div>
+	                    <div class="panel-body">
+	                        <div class="wizard-content">
+	                            <div class="wizard-pane active" role="tabpanel">
+									近日沃尔沃宣布将联合瑞典汽车安全公司奥托立夫(AUTOLIV)成立一个独立子公司，该公司将专攻瞄准未来车型自动驾驶技
+									术相关的研发。奥托立夫公司(AUTOLIV)是在瑞典设立的一家国际跨国公司，公司多年来研发汽车电子安全系统、电子控制单元，汽车方向盘系统以及夜视
+									和雷达传感系统，新的合作能够让新公司吸取Autoliv多年来在汽车驾驶安全配件制造方面的经验，研发未来用于沃尔沃或其它厂商的无人驾驶软件系统。
+	                            </div>
+	                            <div class="wizard-pane" role="tabpanel">
+									在试运营期间，Jio将向全印度人免费提供服务，直到今年年底。在免费期过后，其数据流量月资费也低至每月149卢比（约合15元人民币）。安巴尼上周在公司年度全体大会上对投资者说：“任何、所有能实现数字化的东西都将快速走向数字化，生活将走向数字化。”目前，只有五分之一的印度成年人口能够上网。在印度，公共WiFi热点极少。城市贫困区缺乏高速宽带所需的基础设备，更不用说乡村地区了。
+	                            </div>
+	                            <div class="wizard-pane" role="tabpanel">
+									车轮查违章与百度地图推出《中国车主违章地图大数据》报告，江苏高居“违章停车”榜首，在全国范围内，江苏、湖北、山东、浙江以及北京五个省市中的车主违章比例最高，其中江苏省以高达11.52%的比例遥遥领先。另外，江苏、湖北、山东三省的“马路杀手”已经超过了全国人口最多的广东省。有62.38%是不按规定行驶，26.18%超速、7.13%违章停车、2.82%无视尾号限行、1.49%不系安全带和不带头盔。
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+
+	            </div>
+
+	            <div class="col-lg-6">
+
+	                <div class="panel" id="exampleWizardProgressbar">
+	                    <div class="panel-heading">
+	                        <div class="panel-actions">
+	                            <div class="progress progress-xs">
+	                                <div class="progress-bar progress-bar-animated" style="width: 33.3%">
+	                                    <span class="sr-only">1/3</span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <h3 class="panel-title">进度条</h3>
+	                    </div>
+	                    <div class="panel-body">
+	                        <div class="wizard-content">
+	                            <div class="wizard-pane active" role="tabpanel">
+									近日沃尔沃宣布将联合瑞典汽车安全公司奥托立夫(AUTOLIV)成立一个独立子公司，该公司将专攻瞄准未来车型自动驾驶技
+									术相关的研发。奥托立夫公司(AUTOLIV)是在瑞典设立的一家国际跨国公司，公司多年来研发汽车电子安全系统、电子控制单元，汽车方向盘系统以及夜视
+									和雷达传感系统，新的合作能够让新公司吸取Autoliv多年来在汽车驾驶安全配件制造方面的经验，研发未来用于沃尔沃或其它厂商的无人驾驶软件系统。
+	                            </div>
+	                            <div class="wizard-pane" role="tabpanel">
+									在试运营期间，Jio将向全印度人免费提供服务，直到今年年底。在免费期过后，其数据流量月资费也低至每月149卢比（约合15元人民币）。安巴尼上周在公司年度全体大会上对投资者说：“任何、所有能实现数字化的东西都将快速走向数字化，生活将走向数字化。”目前，只有五分之一的印度成年人口能够上网。在印度，公共WiFi热点极少。城市贫困区缺乏高速宽带所需的基础设备，更不用说乡村地区了。
+	                            </div>
+	                            <div class="wizard-pane" role="tabpanel">
+									车轮查违章与百度地图推出《中国车主违章地图大数据》报告，江苏高居“违章停车”榜首，在全国范围内，江苏、湖北、山东、浙江以及北京五个省市中的车主违章比例最高，其中江苏省以高达11.52%的比例遥遥领先。另外，江苏、湖北、山东三省的“马路杀手”已经超过了全国人口最多的广东省。有62.38%是不按规定行驶，26.18%超速、7.13%违章停车、2.82%无视尾号限行、1.49%不系安全带和不带头盔。
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<script src="/vendor/jquery-wizard/jquery-wizard.js"></script>
+	<script>
+
+		$('#exampleWizardForm').on('wizard::init', function (e) {
+			console.log(e,'初始化');
+		}).on('wizard::next', function (e) {
+			//console.log(e,'下一步');
+		}).on('wizard::back', function (e) {
+			//console.log(e,'上一步');
+		}).on('wizard::finish', function (e) {
+			//console.log(e,'完成');
+		}).on('wizard::beforeChange', function (e) {
+			//console.log(e,'触发前');
+		}).on('wizard::afterChange', function (e) {
+			//console.log(e,'触发后');
+		}).wizard({
+			step: '.steps-sm > div',
+			templates: {
+			    buttons: function(){
+			        const options = this.options;
+			        return `
+				        <div class="wizard-buttons">
+					        <a class="wizard-back btn btn-primary" href="#${this.id}" data-wizard="back">
+					      		${options.buttonLabels.back}
+					        </a>
+					        <a class="wizard-next btn btn-primary" href="#${this.id}" data-wizard="next">
+					      		${options.buttonLabels.next}
+					        </a>
+					        <a class="wizard-finish btn btn-primary" href="#${this.id}" data-wizard="finish">
+					      		${options.buttonLabels.finish}
+					        </a>
+				        </div>
+			        `;
+			    }
+			},
+	        onBeforeShow: function(step){
+	            step.$element.tab('show');
+	        },
+	        onFinish: function(){
+	            alert('finish');
+	        },
+	        classes: {
+			    step: {
+			        done	: 'done',
+			        error	: 'error',
+			        active	: 'current',
+			        disabled: 'disabled',
+			        activing: 'activing',
+			        loading	: 'loading'
+			    },
+			    pane: {
+			        active	: 'active',
+			        activing: 'activing'
+			    },
+			    button: {
+			        hide	: 'hide',
+			        disabled: 'disabled'
+			    }
+		    },
+		    autoFocus: true,
+			keyboard: true,
+			enableWhenVisited: false,
+			buttonLabels: {
+			    next: 'Next',
+			    back: 'Back',
+			    finish: 'Finish'
+			},
+			loading: {
+			    show: function(step) { },
+			    hide: function(step) { },
+			    fail: function(step) { }
+			},
+			cacheContent: false,
+			validator: function(step) {
+			    return true;
+			},
+			getPane: function(index, step) {
+		    	return this.$element.find('.wizard-content').children().eq(index);
+		    },
+
+		    buttonsAppendTo: 'this',
+
+		})
+
+
+
+
+		/*AIzaSyA8GihF_vqL0IHHiDoTob8G8eOJHSXX2tw*/
+
+
+
+
+
+
+
+
+
+
+
+
+		/* 参数 */
+		/*$.wizard.setDefaults({
+		  step: '.wizard-steps > li',
+
+		  getPane: function(index, step) {
+		    return this.$element.find('.wizard-content').children().eq(index);
+		  },
+
+		  buttonsAppendTo: 'this',
+		  templates: {
+		    buttons: function() {
+		        const options = this.options;
+		        return `
+		        <div class="wizard-buttons">
+			        <a class="wizard-back" href="#${this.id}" data-wizard="back" role="button">
+			      		${options.buttonLabels.back}
+			        </a>
+			        <a class="wizard-next" href="#${this.id}" data-wizard="next" role="button">
+			      		${options.buttonLabels.next}
+			        </a>
+			        <a class="wizard-finish" href="#${this.id}" data-wizard="finish" role="button">
+			      		${options.buttonLabels.finish}
+			        </a>
+		        </div>
+		      `;
+		    }
+		  },
+		  classes: {
+		    step: {
+		      done: 'done',
+		      error: 'error',
+		      active: 'current',
+		      disabled: 'disabled',
+		      activing: 'activing',
+		      loading: 'loading'
+		    },
+		    pane: {
+		      active: 'active',
+		      activing: 'activing'
+		    },
+		    button: {
+		      hide: 'hide',
+		      disabled: 'disabled'
+		    }
+		  },
+		  autoFocus: true,
+		  keyboard: true,
+		  enableWhenVisited: false,
+		  buttonLabels: {
+		    next: 'Next',
+		    back: 'Back',
+		    finish: 'Finish'
+		  },
+		  loading: {
+		    show: function(step) { },
+		    hide: function(step) { },
+		    fail: function(step) { }
+		  },
+		  cacheContent: false,
+		  validator: function(step) {
+		    return true;
+		  },
+		  onInit: null,
+		  onNext: null,
+		  onBack: null,
+		  onReset: null,
+
+		  onBeforeShow: null,
+		  onAfterShow: null,
+		  onBeforeHide: null,
+		  onAfterHide: null,
+		  onBeforeLoad: null,
+		  onAfterLoad: null,
+
+		  onBeforeChange: null,
+		  onAfterChange: null,
+
+		  onStateChange: null,
+
+		  onFinish: null
+		})*/
+
+		/* 基础调用 */
+		//$('.exampleWizardForm').wizard('goTo', 0);
+		/*var api = $('.exampleWizardForm').data('wizard');
+		api.goTo(0);*/
+
+
+
+		//转到特定步骤。
+		/*$('.exampleWizardForm').wizard('goTo', 1);
+		$('.exampleWizardForm').wizard('moveTo', '50%');
+
+		//获取步长
+		$('.exampleWizardForm').wizard('length');
+
+		//获取步骤实例的进一步使用
+		var step = $('.exampleWizardForm').wizard('get', 1);
+		//获取当前显示的步骤实例
+		var step = $('.exampleWizardForm').wizard('current');
+		//获取当前显示的步骤索引
+		var index = $('.exampleWizardForm').wizard('currentIndex');
+		//获取最后的索引
+		var index = $('.exampleWizardForm').wizard('lastIndex');
+
+		//进行下一步
+		$('.exampleWizardForm').wizard('next');
+		//返回上一步
+		$('.exampleWizardForm').wizard('back');
+		//回到第一步
+		$('.exampleWizardForm').wizard('first');
+		//当前步骤为最后一步时完成向导
+		$('.exampleWizardForm').wizard('finish');
+		//重置向导
+		$('.exampleWizardForm').wizard('reset');
+		//销毁向导实例。
+		$('.exampleWizardForm').wizard('destroy');*/
+
+		//事件
+		//$('.exampleWizardForm').on('wizard::init', function (e) {
+		//	console.log(e);
+		    // on instance ready
+		    /*
+		    init	首次设置实例时触发。
+			ready	当实例准备好可以使用API​​时触发。
+			next	在调用实例方法时触发。
+			back	在调用实例方法时触发。
+			reset	在调用实例方法时触发。
+			beforeChange	在更改步骤之前会触发此事件。
+			afterChange		更改步骤后会触发此事件。
+			finish	向导完成后触发。
+			destroy	实例销毁时触发
+			*/
+
+
+		//});
+
+		//如果必须使用具有相同名称空间的其他插件，只需调用该$.wizard.noConflict方法即可将其还原。
+		//$.wizard.noConflict();
+
+	</script>
+</body>
+</html>

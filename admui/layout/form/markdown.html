@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="/vendor/bootstrap-markdown/bootstrap-markdown-custom.css">
+    <script src="/vendor/bootstrap-markdown/bootstrap-markdown.js"></script>
+    <script src="/vendor/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
+    <script src="/vendor/marked/marked.js"></script>
+
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-forms">
+    <div class="page-header">
+        <h1 class="page-title">Markdown编辑器</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>首页</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">表单</a>
+            </li>
+            <li class="breadcrumb-item active">Markdown编辑器</li>
+        </ol>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="https://github.com/toopay/bootstrap-markdown" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content container-fluid">
+        <div class="row">
+            <div class="col-xl-6">
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">标准模式</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <strong>Bootstrap-Markdown</strong> 支持实时预览，全屏编辑，所见即所得。 </p>
+                        <div class="example">
+                            <form>
+                                <textarea name="content" data-plugin="markdown" data-language="zh" data-iconlibrary="fa"
+                                          rows="11">*斜体*或_斜体_
+**粗体**
+***加粗斜体***
+~~删除线~~
+
+这是一个一级标题
+============================
+这是一个二级标题</title>-----------------------------------------------
+
+# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+
+欢迎访问[Admui](http://www.admui.com)
+
+我经常去的几个网站[Admui][1]、[百度][2]
+[1]:http://www.admui.com "Admui"
+[2]:http://www.baidu.com "百度"
+
+- 无序列表项 一
+- 无序列表项 二
+- 无序列表项 三
+1. 有序列表项 一
+2. 有序列表项 二
+3. 有序列表项 三
+
+> 打开书本。
+> 打开电灯。
+</textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-6">
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">内联模式</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>添加 <code class="prettyprint">data-provide=&quot;markdown-editable&quot;</code></p>
+                        <div class="example">
+                            <div data-plugin="markdown-editable" data-iconlibrary="fa" data-provide="markdown-editable">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+    $('[data-plugin="markdown"]').markdown({
+        autofocus:false,//自动获取焦点
+        savable:true,//显示保存按钮
+        hideable:false,//保存后隐藏
+        width:'inherit',
+        height:'inherit',
+        iconlibrary:'fa',//图标库 fa octicons glyph
+        language:'zh-CN',//语言
+        
+        /* 事件 */
+        onShow: function(e){
+            console.log("Showing "+e.$textarea.prop("tagName").toLowerCase()+"#" +e.$textarea.attr("id")+" as Markdown Editor...")
+            $('[data-plugin="markdown-editable"]').html(marked(e.getContent()))
+        },
+        onPreview: function(e) {
+            var previewContent
+
+            if (e.isDirty()) {
+            var originalContent = e.getContent()
+                previewContent = "Prepended text here..." + "\n"+ originalContent + "\n" +"Apended text here..."
+            } else {
+                previewContent = "Default content"
+            }
+
+            return previewContent
+        },
+        onSave: function(e) {
+           // console.log("Saving '"+e.getContent()+"'...")
+        },
+        onChange: function(e){
+            //console.log(e.getContent())
+            $('[data-plugin="markdown-editable"]').html(marked(e.getContent()))
+            
+        },
+        onFocus: function(e) {
+            //console.log("Focus triggered!")
+        },
+        onBlur: function(e) {
+            //console.log("Blur triggered!")
+        }
+    })
+
+
+</script>
+
+</body>
+</html>
