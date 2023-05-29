@@ -656,8 +656,8 @@ button.btn:active {
 
 .box i {
     display: none;
-    width: 0.18rem;
-    height:0.18rem;
+    width: 0.25rem;
+    height:0.25rem;
     border-radius: 100rem;
     position: absolute;
     left:-0.25rem;
