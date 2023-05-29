@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>立即缴费</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css" />
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 1080));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+	
+</head>
+<body>
+	<div class="wrap">
+		<div class="box">
+			<div>
+				<div>
+					<img src="images/ico-car3.png" alt="">
+					鲁B123456
+				</div>
+			</div>
+			<div>
+				<div>到期</div>
+				<p>2023-05-05</p>
+			</div>
+
+
+		</div>
+		
+
+		<div class="logo">
+			<img src="images/logo.png" alt="尚美数智">
+		</div>
+	</div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script>
+		let height = $(window).height()
+		let top1 = $('html,body').scrollTop()
+		let logo = $('.logo')
+		$(window).scroll(function(){
+			scrollLogo()
+		})
+		function scrollLogo(){
+			if($(window).scrollTop()+height-50 >= document.getElementsByTagName('body')[0].scrollHeight){
+				logo.addClass('mid')
+			}else{
+				logo.removeClass('mid')
+			}
+		}
+		scrollLogo()
+
+		let closeEle = document.querySelectorAll('.close')
+		for(let i = 0;i < closeEle.length;i++){
+			bindDelete(closeEle[i])
+		}
+		let x1 = 0;
+		let x2 = 0;
+		function bindDelete(ele){
+			ele.addEventListener('touchstart',function (e) {
+				x1 = e.touches[0].clientX
+			});
+			ele.addEventListener('touchmove',function (e) {
+				x2 = e.touches[0].clientX
+				if(x2 - x1 < 0){
+					if(parseInt(x2 - x1) >=-100){
+						$(this).find('.content').css('transform',`translateX(${(x2 - x1)}px)`)
+					}
+				}else{
+
+				}
+			});
+			ele.addEventListener('touchend',function (e) {
+				console.log(x2 - x1);
+				if(x2 - x1 < -50){
+					$(this).addClass('active')
+				}else{
+					$(this).removeClass('active')
+					$(this).find('.content').css('transform',`translateX(0px)`)
+				}
+			});
+		}
+
+		$('.del').click(function(){
+			if(confirm('确定要删除吗?')){
+				let box = $(this).parents('.box')
+				box.slideUp()
+				setTimeout(function(){
+					box.remove()
+				},2000)
+			}
+		})
+
+	</script>
+</body>
+</html>

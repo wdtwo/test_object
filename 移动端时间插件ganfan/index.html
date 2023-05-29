@@ -138,42 +138,7 @@
 			}
 		});
 		dateMulti.show();
-		//提交
-		$('.submit').click(function(){
-			console.log($('.toast_div'));
-			console.log(time.length);
-			if(time.length <=0){
-				showMessage('请选择时间!',1500,true);
-				return false;
-			}
-			// if(!$('#user').val()){
-			// 	showMessage('请填写姓名!',1500,true);
-			// 	return false;
-			// }
-			if($('#floor').val() == 0){
-				showMessage('请选择楼层!',1500,true);
-				return false;
-			}
-			$.ajax({
-				url:'/',
-				method:'get',
-				data:{
-					time:time
-				},
-				success:function(){
-					showMessage('提交成功!',2000,true);
-					setTimeout(function(){
-						//关闭窗口
-						window.close();
-						//关闭安卓系统的手机
-						document.addEventListener('WeixinJSBridgeReady', function(){ WeixinJSBridge.call('closeWindow'); }, false);
-						//关闭ios系统的手机
-						WeixinJSBridge.call('closeWindow');
-						wx.closeWindow();
-					},20000)
-				}
-			})
-		})
+		
 	</script>
 </body>
 </html>
