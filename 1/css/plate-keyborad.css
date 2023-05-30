@@ -1,0 +1,54 @@
+#plate-keyborad {
+    position: fixed;
+    left:0;
+    bottom:0;
+    z-index: 8;
+    width: 100%;
+    padding:0.3rem 0;
+    background-color: #eef0f4;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1.7rem;
+}
+#plate-keyborad .keyborad-area,
+#plate-keyborad .keyborad-letter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 10.8rem;
+}
+#plate-keyborad .keyborad-area div,
+#plate-keyborad .keyborad-letter div{
+    width: 0.87rem;
+    height:0.87rem;
+    border-radius: 0.1rem;
+    background-color: white;
+    font-size: 0.44rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin:0.1rem;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
+#plate-keyborad .keyborad-area div:not(.disabled):active,
+#plate-keyborad .keyborad-letter div:not(.disabled):active {
+    box-shadow: -1px -1px rgba(0, 0, 0, 0.1);
+}
+#plate-keyborad div.disabled {
+    color:#e8e8e8;
+}
+#plate-keyborad div.del {
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NiIgaGVpZ2h0PSI0NiIgdmlld0JveD0iMCAwIDQ2IDQ2Ij48cGF0aCBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00MiwzOUgxOGExLjk5LDEuOTksMCwwLDEtLjQ2Mi0wLjA1OSwzLjI2OCwzLjI2OCwwLDAsMS0yLjg4LS45MDZMMS45MTQsMjUuMjkxYTMuMjc3LDMuMjc3LDAsMCwxLDAtNC42MzRMMTQuNjU3LDcuOTE0YTMuMjY4LDMuMjY4LDAsMCwxLDMuMDA5LS44OEExLjk5MywxLjk5MywwLDAsMSwxOCw3SDQyYTQsNCwwLDAsMSw0LDRWMzVBNCw0LDAsMCwxLDQyLDM5Wk0zNy43LDE2Ljg0N0wzMS41MywyM2w2LjE0NSw2LjE0NWExLjA4NywxLjA4NywwLDEsMS0xLjUzNywxLjUzN0wyOS45OTEsMjQuNTRsLTYuMTI4LDYuMTE2YTEuMDg2LDEuMDg2LDAsMCwxLTEuNTM3LTEuNTM0TDI4LjQ1NSwyMywyMi4zLDE2Ljg1MWExLjA4NywxLjA4NywwLDAsMSwxLjUzNy0xLjUzN2w2LjE1NSw2LjE1NSw2LjE2OC02LjE1NkExLjA4NiwxLjA4NiwwLDEsMSwzNy43LDE2Ljg0N1oiLz48L3N2Zz4=") no-repeat center center;
+    background-size: 0.4rem auto;
+    background-color: white;
+    width: 1.84rem;
+}
+#plate-keyborad .keyborad-letter {
+    display: none;
+}

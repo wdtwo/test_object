@@ -13,6 +13,7 @@
 	<title>立即缴费</title>
 	<link href="css/basic.css?v=3" rel="stylesheet" type="text/css" />
 	<link href="css/toast.css" rel="stylesheet" type="text/css" />
+	<link href="iosselect/iosSelect.css" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
             var winW = document.documentElement.clientWidth;
@@ -46,7 +47,11 @@
 			<div class="m-b-50 f46 c-73">
 				王重阳
 			</div>
-			<select name="" id="">
+			<div>                     
+				<input type="hidden" name="bank_id" id="bankId" value="">                     
+				<span id="showBank" class="select">1个月</span>  
+			</div>        
+			<!-- <select name="" id="">
 				<option value="1">1个月</option>
 				<option value="2">2个月</option>
 				<option value="3">3个月</option>
@@ -59,7 +64,7 @@
 				<option value="10">10个月</option>
 				<option value="11">11个月</option>
 				<option value="12">12个月</option>
-			</select>
+			</select> -->
 			<div class="c-b8 f44 flex flex-jus-start m-t-40">
 				<span class="date-start">0000-00-00</span>
 				<img src="images/ico-move2.svg" class="w45 m-0-20" alt="">
@@ -199,6 +204,7 @@
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/toast.js"></script>
 	<script src="js/dayjs.min.js"></script>
+	<script src="iosselect/iosSelect.js"></script>
 	<script>
 		let height = $(window).height()
 		let top1 = $('html,body').scrollTop()
@@ -207,7 +213,7 @@
 			scrollLogo()
 		})
 		function scrollLogo(){
-			console.log($(window).scrollTop() + height,document.getElementsByTagName('body')[0].scrollHeight);
+			//console.log($(window).scrollTop() + height,document.getElementsByTagName('body')[0].scrollHeight);
 			if($(window).scrollTop() + height >= document.getElementsByTagName('body')[0].scrollHeight){
 				logo.addClass('mid')
 			}else{
@@ -219,12 +225,12 @@
 		let dateStart = "2023-05-05"
 		//默认增加月数
 		let monthLen = 1
-		$('select').on('change',function(){
-			let t = $(this)
-			let v = t.val()
-			changeNum(v)
-			setDate(dateStart,v)
-		})
+		// $('select').on('change',function(){
+		// 	let t = $(this)
+		// 	let v = t.val()
+		// 	changeNum(v)
+		// 	setDate(dateStart,v)
+		// })
 		//计算钱数
 		function changeNum(num){
 			$('.month-show').html(num)
@@ -251,6 +257,45 @@
 			},2000)
 		})
 
+		
+
+		var showBankDom = $('#showBank');
+		var bankIdDom = $('#bankId');
+		showBankDom.on('click', function () {
+			var bankId = showBankDom.attr('id');
+			var bankName = showBankDom.attr('value');
+			var bankSelect = new IosSelect(1, 
+				[[
+					{'id': '1', 'value': '1个月'},
+					{'id': '2', 'value': '2个月'},
+					{'id': '3', 'value': '3个月'},
+					{'id': '4', 'value': '4个月'},
+					{'id': '5', 'value': '5个月'},
+					{'id': '6', 'value': '6个月'},
+					{'id': '7', 'value': '7个月'},
+					{'id': '8', 'value': '8个月'},
+					{'id': '9', 'value': '9个月'},
+					{'id': '10', 'value': '10个月'},
+					{'id': '11', 'value': '11个月'},
+					{'id': '12', 'value': '12个月'},
+				]],
+				{
+					container: '.container',
+					title: '选择时长',
+					itemHeight: 50,
+					itemShowCount: 3,
+					oneLevelId: bankId,
+					callback: function (selectOneObj) {
+						monthLen = selectOneObj.id
+						bankIdDom.value = selectOneObj.id
+						showBankDom.html(selectOneObj.value)
+						showBankDom.attr('id',selectOneObj.id) 
+						showBankDom.attr('value',selectOneObj.value)
+						changeNum(monthLen)
+						setDate(dateStart,monthLen) 
+					}
+			});
+		});
 	</script>
 </body>
 </html>

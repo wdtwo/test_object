@@ -880,8 +880,8 @@ b {
 }
 
 .add-plate li,#app li{
-    width: 1.15rem;
-    height: 1.15rem;
+    width: 1rem;
+    height: 1rem;
     background-color: white;
     box-shadow: 0 0 0.15rem rgba(0,0,0,0.15) inset;
     border-radius: 0.1rem;
@@ -890,7 +890,14 @@ b {
     justify-content: center;
     align-items: center;
 }
-
+.add-plate li div {
+    font-size: 0.18rem;
+    color:#30cb33;
+    text-align: center;
+}
+.add-plate li.active {
+    box-shadow: 0 0 0.25rem rgba(56, 117, 198, 0.425) inset;
+}
 .btn-submit {
     width: 4.2rem;
     height:1.15rem;
@@ -935,10 +942,11 @@ b {
 .plate-card-box2 {
     padding:.45rem;
 }
-select {
+select,.select {
     display: block;
     width: 100%;
     height:1.15rem;
+    line-height: 1.15rem;
     box-shadow: 0 0 0.15rem rgba(0,0,0,0.15) inset;
     appearance: none;
     border:none;
@@ -952,10 +960,11 @@ select {
     background-color: white;
     outline: none;
 }
-input {
+input,.input {
     display: block;
     width: 100%;
     height:1.15rem;
+    line-height: 1.15rem;
     box-shadow: 0 0 0.15rem rgba(0,0,0,0.15) inset;
     appearance: none;
     border:none;

@@ -12,6 +12,7 @@
 	<meta name="format-detection" content="email=no">
 	<title>车辆换绑</title>
 	<link href="css/basic.css?v=3" rel="stylesheet" type="text/css" />
+	<link href="css/plate-keyborad.css" rel="stylesheet" type="text/css" />
 	<link href="css/toast.css" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
@@ -21,7 +22,16 @@
         document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
         //1rem = 100px
 	</script>
-	
+	<style>
+		#plate-keyborad {
+			transform: translateY(100%);
+			opacity: 0;
+		}
+		#plate-keyborad.show {
+			transform: translateY(0%);
+			opacity: 1;
+		}
+	</style>
 </head>
 <body>
 	<div class="wrap">
@@ -58,7 +68,8 @@
 				<img src="images/ico-move.svg" class="w100 block">
 			</div>
 			<div class="re plate-addtime">
-				<input type="text" value="" maxlength="8" placeholder="被转入的车牌">
+				<!-- <input type="text" value="" maxlength="8" placeholder="被转入的车牌"> -->
+				<p class="input">被转入的车牌</p>
 				<div class="btn-over">
 					<img src="images/ico-search.svg" class="block w100p">
 				</div>
@@ -100,13 +111,13 @@
 	<div class="toast_div" style="width:3rem;height:3rem;"></div>
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/dayjs.min.js"></script>
+	<script src="js/plate-keyborad.js"></script>
 	<script src="js/toast.js"></script>
 	<script>
 		
 		//剩余天数
 		let residue = 100
 		$('.residue').html(residue)
-		
 		//得到获取的剩余时间以后计算结束时间
 		function setDate(date,len){
 			//显示添加时间
@@ -118,41 +129,17 @@
 			//增加后的日期
 			$('.date-end').html(nextMonth.format('YYYY-MM-DD'))
 		}
-
-		//输入的车牌长度大于7以后显示确定按钮
-		$('.plate-addtime input').on('keyup',function(){
-			let t = $(this)
-			let val = t.val()
-			t.val(val.toUpperCase()) //小写转大写
-			if(t.val().length>= 7){
-				t.parent().find('div').addClass('show')
-			}else{
-				t.parent().find('div').removeClass('show')
-			}
-		})
 		//查找车牌事件
-		let isMatch = false
 		$('.plate-addtime div').click(function(){
-			const pattern = /^[\u4e00-\u9fa5]{1}[A-HJ-NP-Z]{1}[A-HJ-NP-Z0-9]{5,6}$/;
-			let str = $('.plate-addtime input').val()
-
-			isMatch = pattern.test(str);
-			if(isMatch){
-				setDate("2023-05-05",residue) //开始日期,增加天数
-			}else{
-				showtoastFromDiv("请输入正确的车牌号码")
-			}
+			setDate("2023-05-05",residue) //开始日期,增加天数
+			$('#plate-keyborad').removeClass('show')
 		})
 		//提交
 		$('.btn-submit').click(function(){
-			if(!isMatch){
-				return false;
-			}
-			if($('.plate-addtime input').val().length < 7){
-				showtoastFromDiv("请输入正确的车牌")
+			if($('.plate-addtime .input').html().length < 7){
+				showtoastFromDiv("请输入完整的车牌")
 				return false
 			}
-			
 			//提交成功提示
 			$('.success').addClass("current")
 			setTimeout(function(){
@@ -160,7 +147,6 @@
 				window.location.href = './index.html'
 			},2000)
 		})
-
 		//显示提示
 		function showtoastFromDiv(str){
 			$('.toast_div').toast({
@@ -168,6 +154,25 @@
 				duration:2000
 			});
 		}
+		//键盘实例化
+		let borad = new plateKeyBorad({callback:function(obj){
+			console.log(obj);
+			if(obj.list.length <= 0){
+				$('.input').html("被转入的车牌")
+				return false;
+			}
+			$('.input').html(obj.list.join(''))
+			let div = $('.plate-addtime div')
+			if(obj.list.length>= 7){
+				div.addClass('show')
+			}else{
+				div.removeClass('show')
+			}
+		}})
+		$('.input').on('click',function(){
+			$('#plate-keyborad').addClass('show')
+		})
+
 	</script>
 </body>
 </html>

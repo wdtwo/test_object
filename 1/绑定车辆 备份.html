@@ -12,7 +12,6 @@
 	<meta name="format-detection" content="email=no">
 	<title>绑定车辆</title>
 	<link href="css/basic.css?v=3" rel="stylesheet" type="text/css" />
-	<link href="css/plate-keyborad.css" rel="stylesheet" type="text/css" />
 	<link href="css/toast.css" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
@@ -23,7 +22,35 @@
         //1rem = 100px
 	</script>
 	<style>
-		
+		#mixed-keyboard-box {
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			z-index: 10;
+			width: 10.8rem;
+			height: 8rem;
+			/* display: none; */
+		}
+		div#input-widget {
+			height:16%!important;
+		}
+		div#mode-switcher{
+			background: none!important;			
+		}
+		div#mode-switcher::before {
+			font-size: 0.3rem;
+			white-space: pre;
+			margin-top: 0.35rem;
+			display: block;
+		}
+		div#mode-switcher.modeof-0::before {
+			color:#3875c6!important;
+			content:'新能源';
+		}
+		div#mode-switcher.modeof-5::before {
+			color:#3875c6;
+			content:'燃油车';
+		}
 		
     </style>
 </head>
@@ -38,7 +65,6 @@
 				王重阳
 			</div>
 			<ul class="add-plate flex flex-jus-between">
-				<li></li>
 				<li></li>
 				<li></li>
 				<li></li>
@@ -68,14 +94,46 @@
 	</div>
 	<div class="toast_div" style="width:3rem;height:3rem;"></div>
 	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/plate-keyborad.js"></script>
+	<script src="js/MixedKeyboard.js"></script>  
 	<script src="js/toast.js"></script>  
 	<script>
 		var number = "";
 		let plateLen = 7
 		let name = ""
 		let over = false //判断车牌是否填写完整
-		
+		function native_callback_onokkey(){
+			//console.log("当前车牌[OK]");
+		}
+		function native_callback_completed(number, isAutoCompleted){
+			//console.log("当前车牌[完成]：" + number + ", 自动完成:" + isAutoCompleted);
+		}
+		function native_callback_changed(number, isCompleted){
+			console.log("当前车牌[变更]：" + number + ", 已完成:" + isCompleted);
+			name = isCompleted
+			addPlate(isCompleted)
+			over = number
+		}
+		function native_callback_show_message(message){
+			console.log(message);
+			if(message == "车牌类型：新能源车牌"){
+				plateLen = 8
+				addPlate(name)
+				over = false
+			}else{
+				plateLen = 7
+				addPlate(name)
+				over = name.length == 7
+			}
+			showtoastFromDiv(message)
+		}
+		function addPlate(str){
+			let ele = $('.add-plate')
+			let strr = ""
+			for(let i = 0;i < plateLen;i++){
+				strr += str[i] ? `<li>${str[i]}</li>` : `<li></li>`
+			}
+			ele.html(strr)
+		}
 		//显示提示
 		function showtoastFromDiv(str){
 			$('.toast_div').toast({
@@ -83,6 +141,8 @@
 				duration:2000
 			});
 		}
+
+
 		let lock556 = false
 		//提交
 		$('.btn-submit').click(function(){
@@ -101,38 +161,6 @@
 				window.location.href = './index.html'
 			},2000)
 		})
-
-
-
-		//车牌数组暴露出来
-		let list = []
-		//绑定单独
-		let li = $('.add-plate li')
-		li.on('click',function(){
-			let index = $(this).index()
-			//如果当前位置或者前一个位置有值则可以点击
-			if(list[index] || list[index-1] ){
-				borad.change(index)
-				li.eq(index).addClass('active').siblings().removeClass()
-			}
-		})
-		//键盘实例化
-		let borad = new plateKeyBorad({callback:function(obj){
-			list = obj.list
-			console.log(list);
-			for(let i = 0;i <= 7;i++){
-				li.eq(i).html(obj.list[i] ? obj.list[i] : "")
-			}
-			li.eq(obj.list.length <= 7 ? obj.list.length : 7).addClass('active').siblings().removeClass()
-			if(obj.list.length <= 7){
-				li.eq(7).html("<div>新<br>能源</div>")
-			}
-			over = obj.list.length >= 7
-		}})
-		//设置默认值
-		li.eq(7).html("<div>新<br>能源</div>")
-		li.eq(0).addClass('active')
-		
 	</script>
 </body>
 </html>
