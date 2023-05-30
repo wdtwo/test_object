@@ -122,7 +122,8 @@
 		//输入的车牌长度大于7以后显示确定按钮
 		$('.plate-addtime input').on('keyup',function(){
 			let t = $(this)
-			console.log(t.val().length);
+			let val = t.val()
+			t.val(val.toUpperCase()) //小写转大写
 			if(t.val().length>= 7){
 				t.parent().find('div').addClass('show')
 			}else{
@@ -130,11 +131,23 @@
 			}
 		})
 		//查找车牌事件
+		let isMatch = false
 		$('.plate-addtime div').click(function(){
-			setDate("2023-05-05",residue) //开始日期,增加天数
+			const pattern = /^[\u4e00-\u9fa5]{1}[A-HJ-NP-Z]{1}[A-HJ-NP-Z0-9]{5,6}$/;
+			let str = $('.plate-addtime input').val()
+
+			isMatch = pattern.test(str);
+			if(isMatch){
+				setDate("2023-05-05",residue) //开始日期,增加天数
+			}else{
+				showtoastFromDiv("请输入正确的车牌号码")
+			}
 		})
 		//提交
 		$('.btn-submit').click(function(){
+			if(!isMatch){
+				return false;
+			}
 			if($('.plate-addtime input').val().length < 7){
 				showtoastFromDiv("请输入正确的车牌")
 				return false
