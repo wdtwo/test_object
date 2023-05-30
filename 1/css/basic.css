@@ -591,6 +591,122 @@ body {font-size:0.28rem;}
     margin:0 auto;
 }
 
+
+.success {
+    width: 100%;
+    height:100%;
+    background-color: rgba(0,0,0,.3);
+    position: fixed;
+    left:0;
+    top:0;
+    z-index: 999;
+    display: none;
+    padding-bottom: 30%;
+}
+.success.current {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.success .box {
+    width : 6rem;
+    height :6rem;
+    background: white;
+    border-radius: 0.2rem;
+}
+.success .txt {
+    opacity: 0;
+    transform: translateY(0.3rem);
+}
+.success i {
+    width: .5rem;
+    height:.5rem;
+    position: absolute;
+    right:.25rem;
+    top:.25rem;
+    background: url(../images/close.png) no-repeat;
+    background-size: 100% auto;
+    opacity: 0;
+}
+.done {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    margin: 20px auto;
+    box-shadow: inset 0px 0px 0px #7ac142;
+}
+.done .circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #7ac142;
+    fill: none;
+}
+.done .check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+}
+.current .done {
+    animation: fill-green 0.5s ease-in-out 0.5s forwards, scale 0.3s ease-in-out 0.7s both;
+}
+.current .done .circle {
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.current .done .check {
+    animation: stroke 0.7s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+.current.success .txt {
+    animation: txt 1s ease 0.8s forwards;
+}
+.current.success i {
+    animation: txt 1s ease 0.8s forwards;
+}
+@keyframes txt {
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.2, 1.2, 1);
+    }
+    80% {
+        transform: scale3d(0.8, 0.8, 1);
+    }
+}
+@keyframes fill-green {
+    100% {
+        box-shadow: inset 0px 0px 0px 25px #7ac142;
+    }
+}
+@keyframes fill-red {
+    100% {
+        box-shadow: inset 0px 0px 0px 25px #e74c3c;
+    }
+}
+
+
+
+
+
+
+
 .box {
     background-color: rgba(255, 255, 255, 255);
     border:none;
@@ -819,7 +935,7 @@ select {
     display: block;
     width: 100%;
     height:1.15rem;
-    box-shadow: 0 0 0.1rem rgba(0,0,0,0.15) inset;
+    box-shadow: 0 0 0.15rem rgba(0,0,0,0.15) inset;
     appearance: none;
     border:none;
     padding:0 0.5rem;
@@ -830,8 +946,26 @@ select {
     background-position: 95% 0.3rem;
     background-size: 0.5rem auto;
     background-color: white;
+    outline: none;
 }
-
+input {
+    display: block;
+    width: 100%;
+    height:1.15rem;
+    box-shadow: 0 0 0.15rem rgba(0,0,0,0.15) inset;
+    appearance: none;
+    border:none;
+    padding:0 0.5rem;
+    color:#c7c7c7;
+    font-size: 0.44rem;
+    border-radius: 0.1rem;
+    background-color: white;
+    outline: none;
+    color:#888;
+}
+input::-webkit-input-placeholder {
+    color:#b8b8b8;
+}
 .w26 {
     width: .26rem;
 }
@@ -840,6 +974,12 @@ select {
 }
 .w45 {
     width: .45rem;
+}
+.w54 {
+    width: .54rem;
+}
+.w100 {
+    width: 1rem;
 }
 .pay-list {
 }
@@ -868,6 +1008,30 @@ select {
 .pay-list img {
     width: .82rem;
 }
-
-
-
+.warning {
+    color:#ff4040;
+}
+.plate-addtime div {
+    position: absolute;
+    right:0.3rem;
+    top:0.35rem;
+    width: 0.5rem;
+    height:0.5rem;
+    display: none;
+}
+.plate-addtime div.show {
+    display: block;
+}
+.add-date-box {
+    display: none;
+}
+.toast_div {
+    position: fixed!important;
+    width: auto!important;
+    height:auto!important;
+    z-index:20;
+    left:50%;
+    transform: translateX(-50%);
+    bottom:8rem;
+    white-space: nowrap;
+}

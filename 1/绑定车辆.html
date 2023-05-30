@@ -51,19 +51,11 @@
 			color:#3875c6;
 			content:'燃油车';
 		}
-		.toast_div {
-			position: fixed!important;
-			width: 7rem!important;
-			height:3rem!important;
-			z-index:20;
-			left:50%;
-			transform: translateX(-50%);
-			bottom:8rem;
-		}
+		
     </style>
 </head>
 <body>
-	<div class="toast_div" style="width:3rem;height:3rem;"></div>
+	
 	<div class="wrap">
 		<div class="box bind-car f46 c-73 p-b-150">
 			<div class="m-b-30">
@@ -89,7 +81,18 @@
 		<div class="logo mid">
 			<img src="images/logo.png" alt="尚美数智">
 		</div>
+		<div class="success">
+			<div class="box flex flex-column re">
+				<div class="svg" style="transform: scale(1.656);">
+					<svg class="done" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 52 52">
+						<path class="check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+					</svg>
+				</div>
+				<div class="m-t-70 f44 f-w-b c-555 txt">提交成功!</div>
+			</div>
+		</div>
 	</div>
+	<div class="toast_div" style="width:3rem;height:3rem;"></div>
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/MixedKeyboard.js"></script>  
 	<script src="js/toast.js"></script>  
@@ -97,27 +100,29 @@
 		var number = "";
 		let plateLen = 7
 		let name = ""
+		let over = false //判断车牌是否填写完整
 		function native_callback_onokkey(){
-			console.log("当前车牌[OK]");
+			//console.log("当前车牌[OK]");
 		}
 		function native_callback_completed(number, isAutoCompleted){
-			console.log("当前车牌[完成]：" + number + ", 自动完成:" + isAutoCompleted);
+			//console.log("当前车牌[完成]：" + number + ", 自动完成:" + isAutoCompleted);
 		}
 		function native_callback_changed(number, isCompleted){
-			//console.log($('#mode-switcher'));
-			//$('#mode-switcher').click()
 			console.log("当前车牌[变更]：" + number + ", 已完成:" + isCompleted);
 			name = isCompleted
 			addPlate(isCompleted)
+			over = number
 		}
 		function native_callback_show_message(message){
 			console.log(message);
 			if(message == "车牌类型：新能源车牌"){
 				plateLen = 8
 				addPlate(name)
+				over = false
 			}else{
 				plateLen = 7
 				addPlate(name)
+				over = name.length == 7
 			}
 			showtoastFromDiv(message)
 		}
@@ -129,7 +134,7 @@
 			}
 			ele.html(strr)
 		}
-		
+		//显示提示
 		function showtoastFromDiv(str){
 			$('.toast_div').toast({
 				content:str,
@@ -137,6 +142,25 @@
 			});
 		}
 
+
+		let lock556 = false
+		//提交
+		$('.btn-submit').click(function(){
+			if(lock556){
+				lock556 = false
+			}
+			if(!over){
+				showtoastFromDiv('请输入完整的车牌')
+				return false
+			}
+			//提交成功提示
+			$('.success').addClass("current")
+			setTimeout(function(){
+				lock556 = true
+				//跳转页面
+				window.location.href = './index.html'
+			},2000)
+		})
 	</script>
 </body>
 </html>

@@ -11,7 +11,8 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="email=no">
 	<title>立即缴费</title>
-	<link href="css/basic.css?v=4" rel="stylesheet" type="text/css" />
+	<link href="css/basic.css?v=5" rel="stylesheet" type="text/css" />
+	<link href="css/toast.css" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
             var winW = document.documentElement.clientWidth;
@@ -33,7 +34,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="flex flex-column flex-item-end c-b8 f34">
+			<div class="flex flex-column flex-item-end c-b8 f42">
 				<div>到期</div>
 				<p>2023-05-05</p>
 			</div>
@@ -59,10 +60,10 @@
 				<option value="11">11个月</option>
 				<option value="12">12个月</option>
 			</select>
-			<div class="c-b8 f40 flex flex-jus-start m-t-35">
-				2023-06-06
+			<div class="c-b8 f44 flex flex-jus-start m-t-40">
+				<span class="date-start">0000-00-00</span>
 				<img src="images/ico-move2.svg" class="w45 m-0-20" alt="">
-				2023-06-06
+				<span class="date-end">0000-00-00</span>
 			</div>
 			<div class="c-b8 f46 m-t-80">
 				<span class="month-show">1</span> 
@@ -103,7 +104,30 @@
 					</div>
 				</li>
 				<li>
-					<span class="c-b8 t-c w100p t-c">没有更多了</span>
+					<div class="flex flex-jus-start">
+						<img src="images/ico-rmb.svg" class="block">
+						<div class="m-l-30">
+							<div class="c-active m-b-10">
+								<small class="f34">¥</small>
+								<b class="f62">168</b>
+							</div>
+							<div class="f38">缴费日期: 2023-06-06</div>
+						</div>
+					</div>
+					<div class="t-r f40">
+						<div>
+							2023-06-06
+						</div>
+						<div>
+							至
+						</div>
+						<div>
+							2023-07-07
+						</div>
+					</div>
+				</li>
+				<li>
+					<span class="c-b8 t-c w100p t-c f38">没有更多了</span>
 				</li>
 			</ul>
 		</div>
@@ -113,8 +137,22 @@
 		<div class="logo">
 			<img src="images/logo.png" alt="尚美数智">
 		</div>
+
+		<div class="success">
+			<div class="box flex flex-column re">
+				<div class="svg" style="transform: scale(1.656);">
+					<svg class="done" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 52 52">
+						<path class="check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+					</svg>
+				</div>
+				<div class="m-t-70 f44 f-w-b c-555 txt">提交成功!</div>
+			</div>
+		</div>
 	</div>
+	<div class="toast_div" style="width:3rem;height:3rem;"></div>
 	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/toast.js"></script>
+	<script src="js/dayjs.min.js"></script>
 	<script>
 		let height = $(window).height()
 		let top1 = $('html,body').scrollTop()
@@ -130,19 +168,41 @@
 			}
 		}
 		scrollLogo()
-
+		//开始时间
+		let dateStart = "2023-05-05"
+		//默认增加月数
+		let monthLen = 1
 		$('select').on('change',function(){
 			let t = $(this)
 			let v = t.val()
 			changeNum(v)
+			setDate(dateStart,v)
 		})
-
+		//计算钱数
 		function changeNum(num){
 			$('.month-show').html(num)
 			$('.prize').html(num*168)
 		}
+		//计算结束日期
+		function setDate(date,len){
+			//开始时间
+			$('.date-start').html(date)
+			const today = dayjs(date); // 获取当前日期
+			const nextMonth = today.add(len, 'month'); // 增加一个月
+			//增加后的日期
+			$('.date-end').html(nextMonth.format('YYYY-MM-DD'))
+		}
+		setDate(dateStart,monthLen) //开始日期,增加月数
 
-
+		//提交
+		$('.btn-submit').click(function(){
+			//提交成功提示
+			$('.success').addClass("current")
+			setTimeout(function(){
+				//跳转页面
+				window.location.href = './index.html'
+			},2000)
+		})
 
 	</script>
 </body>
