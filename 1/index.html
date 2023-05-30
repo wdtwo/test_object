@@ -11,7 +11,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="email=no">
 	<title>车辆管理</title>
-	<link href="css/basic.css?v=1" rel="stylesheet" type="text/css" />
+	<link href="css/basic.css?v=2" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
             var winW = document.documentElement.clientWidth;
@@ -78,6 +78,7 @@
 	</div>
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script>
+		let lock = false //防止点击按钮会划出删除
 		let height = $(window).height()
 		let top1 = $('html,body').scrollTop()
 		let logo = $('.logo')
@@ -105,7 +106,7 @@
 			});
 			ele.addEventListener('touchmove',function (e) {
 				x2 = e.touches[0].clientX
-				if(x2 - x1 < 0){
+				if(x2 - x1 < 0 && !lock){
 					if(parseInt(x2 - x1) >=-100){
 						$(this).find('.content').css('transform',`translateX(${(x2 - x1)}px)`)
 					}
@@ -114,13 +115,15 @@
 				}
 			});
 			ele.addEventListener('touchend',function (e) {
-				console.log(x2 - x1);
-				if(x2 - x1 < -50){
+				console.log(Math.abs(x2),x2 , x1 , x2 - x1);
+				if(Math.abs(x2) > 30 && x2 - x1 < -50 && !lock){
 					$(this).addClass('active')
 				}else{
 					$(this).removeClass('active')
 					$(this).find('.content').css('transform',`translateX(0px)`)
 				}
+				x2 = 0 
+				x1 = 0
 			});
 		}
 
@@ -133,8 +136,13 @@
 				},2000)
 			}
 		})
+		
 		//跳转链接
 		$('button').click(function(e){
+			lock = true
+			setTimeout(function(){
+				lock = false
+			},1500)
 			e.stopPropagation;
 			let t = $(this).attr('href')
 			if(t){

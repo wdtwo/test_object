@@ -11,7 +11,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="email=no">
 	<title>立即缴费</title>
-	<link href="css/basic.css?v=3" rel="stylesheet" type="text/css" />
+	<link href="css/basic.css?v=4" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
             var winW = document.documentElement.clientWidth;
@@ -65,12 +65,13 @@
 				2023-06-06
 			</div>
 			<div class="c-b8 f46 m-t-80">
-				<span>1</span> <img src="images/ico-x.svg" class="w30">
+				<span class="month-show">1</span> 
+				<img src="images/ico-x.svg" class="w30">
 				<span>168</span>
 				<span class="f40">= </span>
 				<span class="c-active m-l-15">
 					<small class="f42">¥</small>
-					<b class="f68">168</b>
+					<b class="f68 prize">168</b>
 				</span>
 			</div>
 			<button class="btn-submit">立即支付</button>
@@ -86,10 +87,10 @@
 								<small class="f34">¥</small>
 								<b class="f62">168</b>
 							</div>
-							<div class="f40">缴费日期: 2023-06-06</div>
+							<div class="f38">缴费日期: 2023-06-06</div>
 						</div>
 					</div>
-					<div class="t-c f40">
+					<div class="t-r f40">
 						<div>
 							2023-06-06
 						</div>
@@ -129,6 +130,18 @@
 			}
 		}
 		scrollLogo()
+
+		$('select').on('change',function(){
+			let t = $(this)
+			let v = t.val()
+			changeNum(v)
+		})
+
+		function changeNum(num){
+			$('.month-show').html(num)
+			$('.prize').html(num*168)
+		}
+
 
 
 	</script>
