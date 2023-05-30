@@ -12,6 +12,7 @@
 	<meta name="format-detection" content="email=no">
 	<title>绑定车辆</title>
 	<link href="css/basic.css" rel="stylesheet" type="text/css" />
+	<link href="css/toast.css" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
             var winW = document.documentElement.clientWidth;
@@ -41,17 +42,28 @@
 			white-space: pre;
 			margin-top: 0.35rem;
 			display: block;
-			content:'新能源';
 		}
 		div#mode-switcher.modeof-0::before {
-			color:#999;
+			color:#3875c6!important;
+			content:'新能源';
 		}
 		div#mode-switcher.modeof-5::before {
 			color:#3875c6;
+			content:'燃油车';
+		}
+		.toast_div {
+			position: fixed!important;
+			width: 7rem!important;
+			height:3rem!important;
+			z-index:20;
+			left:50%;
+			transform: translateX(-50%);
+			bottom:8rem;
 		}
     </style>
 </head>
 <body>
+	<div class="toast_div" style="width:3rem;height:3rem;"></div>
 	<div class="wrap">
 		<div class="box bind-car f46 c-73 p-b-150">
 			<div class="m-b-30">
@@ -80,7 +92,7 @@
 	</div>
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/MixedKeyboard.js"></script>  
-
+	<script src="js/toast.js"></script>  
 	<script>
 		var number = "";
 		let plateLen = 7
@@ -107,6 +119,7 @@
 				plateLen = 7
 				addPlate(name)
 			}
+			showtoastFromDiv(message)
 		}
 		function addPlate(str){
 			let ele = $('.add-plate')
@@ -116,11 +129,13 @@
 			}
 			ele.html(strr)
 		}
-
-		// $('.add-plate').click(function(){
-		// 	$('#mixed-keyboard-box').show()
-		// })
-
+		
+		function showtoastFromDiv(str){
+			$('.toast_div').toast({
+				content:str,
+				duration:2000
+			});
+		}
 
 	</script>
 </body>

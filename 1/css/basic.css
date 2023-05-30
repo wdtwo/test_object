@@ -650,7 +650,7 @@ button.btn {
     line-height: 1;
     border-radius: 0.1rem;
 }
-button.btn:active {
+button:active {
     box-shadow: 0 0 0.2rem rgba(0,0,0,0.3) inset;
 }
 
@@ -705,7 +705,7 @@ button.btn:active {
     justify-content: center;
     align-items: center;
     color:white;
-    font-size: 0.5rem;
+    font-size: 0.44rem;
 }
 .box.close .content {
     transition: all ease .2s;
@@ -782,17 +782,86 @@ button.btn:active {
     text-align: center;
     border:none;
     outline: none;
-    margin:1.75rem auto 0;
+    margin:1rem auto 0;
     display: block;
 }
 
+.plate-card {
+    background-color: #3875c6;
+    border-radius: 0.1rem;
+    height:1rem;
+    line-height: 1rem;
+    font-size: 0.4rem;
+    color:white;
+    padding:0 .3rem 0 .17rem;
+    position: relative;
+}
+.plate-card::before {
+    content: "";
+    position: absolute;
+    left:2%;
+    top:3%;
+    width: 96%;
+    height:92%;
+    border:0.01rem solid white;
+    border-radius: 0.1rem;
+}
+.plate-card img {
+    width: .55rem;
+    display: block;
+    margin-right: 0.2rem;
+}
+.plate-card-box {
+    padding:.35rem .45rem .4rem .3rem;
+}
 
+select {
+    display: block;
+    width: 100%;
+    height:1.15rem;
+    box-shadow: 0 0 0.2rem rgba(0,0,0,0.15) inset;
+    appearance: none;
+    border:none;
+    padding:0 0.5rem;
+    color:#c7c7c7;
+    font-size: 0.44rem;
+    border-radius: 0.1rem;
+}
 
+.w26 {
+    width: .26rem;
+}
+.w30 {
+    width: .3rem;
+}
 
-
-
-
-
+.pay-list {
+}
+.pay-list ul li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.4rem 0.45rem 0.4rem 0.4rem;
+    position: relative;
+    color:#b8b8b8;
+}
+.pay-list ul li::after {
+    content: "";
+    position: absolute;
+    left:0;
+    bottom:0;
+    width: 100%;
+    height:1px;
+    background: url(../images/hr.png);
+    background-size: auto 1px;
+}
+.pay-list ul li:last-child:after {
+    display: none;
+}
+.pay-list img {
+    width: .82rem;
+}
 
 
 

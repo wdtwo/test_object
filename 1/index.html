@@ -38,8 +38,8 @@
 			</div>
 			<hr>
 			<div class="car-list-manage">
-				<button class="btn m-r-20">立即续费</button>
-				<button class="btn">时间转移</button>
+				<button class="btn m-r-20" href="./立即缴费.html">立即续费</button>
+				<button class="btn btn-time-move">车辆换绑</button>
 			</div>
 		</div>
 		<div class="box close">
@@ -57,8 +57,8 @@
 				</div>
 				<hr>
 				<div class="car-list-manage">
-					<button class="btn m-r-20">立即续费</button>
-					<button class="btn btn-time-move">时间转移</button>
+					<button class="btn m-r-20" href="./立即缴费.html">立即续费</button>
+					<button class="btn btn-time-move">车辆换绑</button>
 				</div>
 				<div class="del">
 					删除
@@ -131,6 +131,14 @@
 				setTimeout(function(){
 					box.remove()
 				},2000)
+			}
+		})
+		//跳转链接
+		$('button').click(function(e){
+			e.stopPropagation;
+			let t = $(this).attr('href')
+			if(t){
+				window.location.href = t
 			}
 		})
 
