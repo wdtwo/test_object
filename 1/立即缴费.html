@@ -207,7 +207,8 @@
 			scrollLogo()
 		})
 		function scrollLogo(){
-			if($(window).scrollTop() + height-50 >= document.getElementsByTagName('body')[0].scrollHeight){
+			console.log($(window).scrollTop() + height,document.getElementsByTagName('body')[0].scrollHeight);
+			if($(window).scrollTop() + height >= document.getElementsByTagName('body')[0].scrollHeight){
 				logo.addClass('mid')
 			}else{
 				logo.removeClass('mid')
