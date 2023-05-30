@@ -755,13 +755,13 @@ hr {
     padding:0.4rem 0 0.4rem 0.45rem;
 }
 button.btn {
-    border:none;
+    border: none;
     outline: none;
     background-color: #3875c6;
-    color:white;
-    width: 2.2rem;
-    height:0.76rem;
-    font-size: 0.34rem;
+    color: white;
+    width: 2.5rem;
+    height: 0.8rem;
+    font-size: 0.4rem;
     text-align: center;
     line-height: 1;
     border-radius: 0.1rem;
@@ -769,7 +769,9 @@ button.btn {
 button:active {
     box-shadow: 0 0 0.2rem rgba(0,0,0,0.3) inset;
 }
-
+b {
+    font-weight: bold!important;
+}
 .box i {
     display: none;
     width: 0.25rem;
@@ -792,12 +794,14 @@ button:active {
 }
 .box.open .car-plate .time-over {
     color:#b8b8b8;
+    line-height: 1.4;
 }
 .box.close .car-plate {
     color:#e8e8e8;
 }
 .box.close .car-plate .time-over {
     color:#e8e8e8;
+    line-height: 1.4;
 }
 .box.close .btn-time-move {
     display: none;
