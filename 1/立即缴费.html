@@ -11,7 +11,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="email=no">
 	<title>立即缴费</title>
-	<link href="css/basic.css?v=2" rel="stylesheet" type="text/css" />
+	<link href="css/basic.css?v=3" rel="stylesheet" type="text/css" />
 	<script>
         function autoScale(){
             var winW = document.documentElement.clientWidth;
@@ -38,7 +38,7 @@
 				<p>2023-05-05</p>
 			</div>
 		</div>
-		<div class="box plate-card-box">
+		<div class="box plate-card-box2">
 			<div class="m-b-30 f46 c-73">
 				信息技术中心-研发二部
 			</div>
@@ -59,18 +59,18 @@
 				<option value="11">11个月</option>
 				<option value="12">12个月</option>
 			</select>
-			<div class="c-b8 f32 flex flex-jus-start m-t-35">
+			<div class="c-b8 f40 flex flex-jus-start m-t-35">
 				2023-06-06
-				<img src="images/ico-move2.svg" class="w30 m-0-20" alt="">
+				<img src="images/ico-move2.svg" class="w45 m-0-20" alt="">
 				2023-06-06
 			</div>
-			<div class="c-b8 f44 m-t-80">
-				<span>1</span> <img src="images/ico-x.svg" class="w26">
+			<div class="c-b8 f46 m-t-80">
+				<span>1</span> <img src="images/ico-x.svg" class="w30">
 				<span>168</span>
-				<span class="f36">= </span>
+				<span class="f40">= </span>
 				<span class="c-active m-l-15">
-					<small class="f34">¥</small>
-					<span class="f62">168</span>
+					<small class="f42">¥</small>
+					<b class="f68">168</b>
 				</span>
 			</div>
 			<button class="btn-submit">立即支付</button>
@@ -86,33 +86,10 @@
 								<small class="f34">¥</small>
 								<b class="f62">168</b>
 							</div>
-							<div>缴费日期: 2023-06-06</div>
+							<div class="f40">缴费日期: 2023-06-06</div>
 						</div>
 					</div>
-					<div class="t-c">
-						<div>
-							2023-06-06
-						</div>
-						<div>
-							至
-						</div>
-						<div>
-							2023-07-07
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="flex flex-jus-start">
-						<img src="images/ico-rmb.svg" class="block">
-						<div class="m-l-30">
-							<div class="c-active m-b-10">
-								<small class="f34">¥</small>
-								<b class="f62">168</b>
-							</div>
-							<div>缴费日期: 2023-06-06</div>
-						</div>
-					</div>
-					<div class="t-c">
+					<div class="t-c f40">
 						<div>
 							2023-06-06
 						</div>
@@ -129,7 +106,6 @@
 				</li>
 			</ul>
 		</div>
-
 
 		<div class="w100p p-t-130"></div>
 
@@ -154,46 +130,6 @@
 		}
 		scrollLogo()
 
-		let closeEle = document.querySelectorAll('.close')
-		for(let i = 0;i < closeEle.length;i++){
-			bindDelete(closeEle[i])
-		}
-		let x1 = 0;
-		let x2 = 0;
-		function bindDelete(ele){
-			ele.addEventListener('touchstart',function (e) {
-				x1 = e.touches[0].clientX
-			});
-			ele.addEventListener('touchmove',function (e) {
-				x2 = e.touches[0].clientX
-				if(x2 - x1 < 0){
-					if(parseInt(x2 - x1) >=-100){
-						$(this).find('.content').css('transform',`translateX(${(x2 - x1)}px)`)
-					}
-				}else{
-
-				}
-			});
-			ele.addEventListener('touchend',function (e) {
-				console.log(x2 - x1);
-				if(x2 - x1 < -50){
-					$(this).addClass('active')
-				}else{
-					$(this).removeClass('active')
-					$(this).find('.content').css('transform',`translateX(0px)`)
-				}
-			});
-		}
-
-		$('.del').click(function(){
-			if(confirm('确定要删除吗?')){
-				let box = $(this).parents('.box')
-				box.slideUp()
-				setTimeout(function(){
-					box.remove()
-				},2000)
-			}
-		})
 
 	</script>
 </body>

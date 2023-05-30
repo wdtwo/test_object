@@ -812,7 +812,9 @@ button:active {
 .plate-card-box {
     padding:.35rem .45rem .4rem .3rem;
 }
-
+.plate-card-box2 {
+    padding:.45rem;
+}
 select {
     display: block;
     width: 100%;
@@ -824,6 +826,9 @@ select {
     color:#c7c7c7;
     font-size: 0.44rem;
     border-radius: 0.1rem;
+    background: url(../images/icon-down.svg) no-repeat;
+    background-position: 95% 0.3rem;
+    background-size: 0.5rem auto;
     background-color: white;
 }
 
@@ -833,7 +838,9 @@ select {
 .w30 {
     width: .3rem;
 }
-
+.w45 {
+    width: .45rem;
+}
 .pay-list {
 }
 .pay-list ul li {
