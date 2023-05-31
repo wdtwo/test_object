@@ -35,49 +35,44 @@
 </head>
 <body>
 	<div class="wrap">
-		<div class="box plate-card-box">
-			<div class=" flex flex-jus-between">
-				<div class="flex">
-					<div class="plate-card">
-						<div class="flex flex-jus-start">
-							<img src="images/ico-car3.svg" />
-							鲁B123456
-						</div>
+		<div class="box plate-card-box flex flex-jus-between">
+			<div class="flex">
+				<div class="plate-card">
+					<div class="flex flex-jus-start">
+						<img src="images/ico-car3.svg" />
+						鲁B123456
 					</div>
 				</div>
-				<div class="flex flex-column flex-item-end c-b8 f42">
-					<div>到期</div>
-					<p>2023-05-05</p>
-				</div>
 			</div>
-			<div class="p-t-45"></div>
-			<hr>
-			<div class="m-t-50">
-				<div class="m-b-30 f46 c-73">
-					信息技术中心-研发二部
-				</div>
-				<div class="m-b-50 f46 c-73">
-					王重阳
-				</div>
+			<div class="flex flex-column flex-item-end c-b8 f42">
+				<div>到期</div>
+				<p>2023-05-05</p>
 			</div>
 		</div>
 		<div class="box plate-card-box2">
-			
-			<div class="m-t-20 m-b-40 f42 c-999">
-				转入的车牌
-				<!-- <img src="images/ico-move.svg" class="w100 block"> -->
+			<div class="m-b-30 f46 c-73">
+				信息技术中心-研发二部
+			</div>
+			<div class="m-b-50 f46 c-73">
+				王重阳
+			</div>
+
+			<input type="text" value="鲁B123456" readonly>
+
+			<div class="c-b8 f40 m-t-40">
+				<span>剩余</span>
+				<span class="f54 c-active m-0-5 residue">0</span>
+				<span>天</span>
+			</div>
+			<div class="flex m-t-20 m-b-40">
+				<img src="images/ico-move.svg" class="w100 block">
 			</div>
 			<div class="re plate-addtime">
-				<ul class="add-plate flex flex-jus-between f46 c-b8">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
+				<!-- <input type="text" value="" maxlength="8" placeholder="被转入的车牌"> -->
+				<p class="input">被转入的车牌</p>
+				<div class="btn-over">
+					<img src="images/ico-search.svg" class="block w100p">
+				</div>
 			</div>
 
 			<div class="c-b8 f40 m-t-40 add-date-box">
@@ -134,14 +129,14 @@
 			//增加后的日期
 			$('.date-end').html(nextMonth.format('YYYY-MM-DD'))
 		}
-
-		//查找车牌方法
-		setDate("2023-05-05",residue) //开始日期,增加天数
-		//$('#plate-keyborad').removeClass('show')
-		
+		//查找车牌事件
+		$('.plate-addtime div').click(function(){
+			setDate("2023-05-05",residue) //开始日期,增加天数
+			$('#plate-keyborad').removeClass('show')
+		})
 		//提交
 		$('.btn-submit').click(function(){
-			if(list.length < 7){
+			if($('.plate-addtime .input').html().length < 7){
 				showtoastFromDiv("请输入完整的车牌")
 				return false
 			}
@@ -160,56 +155,24 @@
 			});
 		}
 		//键盘实例化
-		// let borad = new plateKeyBorad({callback:function(obj){
-		// 	console.log(obj);
-		// 	if(obj.list.length <= 0){
-		// 		$('.input').html("被转入的车牌")
-		// 		return false;
-		// 	}
-		// 	$('.input').html(obj.list.join(''))
-		// 	let div = $('.plate-addtime div')
-		// 	if(obj.list.length>= 7){
-		// 		div.addClass('show')
-		// 	}else{
-		// 		div.removeClass('show')
-		// 	}
-		// }})
-		// $('.input').on('click',function(){
-		// 	$('#plate-keyborad').addClass('show')
-		// })
-
-
-		//车牌数组暴露出来
-		let list = []
-		//绑定单独
-		let li = $('.add-plate li')
-		li.on('click',function(){
-			let index = $(this).index()
-			//如果当前位置或者前一个位置有值则可以点击
-			if(list[index] || list[index-1] ){
-				borad.change(index)
-				li.eq(index).addClass('active').siblings().removeClass()
-			}
-		})
-		//键盘实例化
 		let borad = new plateKeyBorad({callback:function(obj){
-			list = obj.list
-			//console.log(list);
-			for(let i = 0;i <= 7;i++){
-				li.eq(i).html(obj.list[i] ? obj.list[i] : "")
+			console.log(obj);
+			if(obj.list.length <= 0){
+				$('.input').html("被转入的车牌")
+				return false;
 			}
-			li.eq(obj.list.length <= 7 ? obj.list.length : 7).addClass('active').siblings().removeClass()
-			if(obj.list.length <= 7){
-				li.eq(7).html("<div>新<br>能源</div>")
+			$('.input').html(obj.list.join(''))
+			let div = $('.plate-addtime div')
+			if(obj.list.length>= 7){
+				div.addClass('show')
+			}else{
+				div.removeClass('show')
 			}
-			over = obj.list.length >= 7
 		}})
-		//设置默认值
-		li.eq(7).html("<div>新<br>能源</div>")
-		$('.add-plate').click(function(){
-			$("#plate-keyborad").addClass('show')
-			li.eq(0).addClass('active')
+		$('.input').on('click',function(){
+			$('#plate-keyborad').addClass('show')
 		})
+
 	</script>
 </body>
 </html>

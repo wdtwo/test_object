@@ -1024,7 +1024,7 @@ input::-webkit-input-placeholder {
 .warning {
     color:#ff4040;
 }
-.plate-addtime div {
+/* .plate-addtime div {
     position: absolute;
     right:0.3rem;
     top:0.35rem;
@@ -1034,7 +1034,7 @@ input::-webkit-input-placeholder {
 }
 .plate-addtime div.show {
     display: block;
-}
+} */
 .add-date-box {
     display: none;
 }
