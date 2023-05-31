@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title></title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css" />
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 750));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+	
+</head>
+<body>
+
+	<div class="wrap">
+
+
+
+	</div>
+	<script src="js/dayjs.min.js"></script>
+	<script src="js/datepicker.js"></script>
+	<script>
+
+		let a = new datePicker({
+			dateDefault:"2023-04-08",//默认日期
+			dateStart:"2023-03-31",//开始日期
+			dateEnd:"2023-04-20",//结束日期
+			disabled:["2023-04-05"],//禁用的时间
+			multiple:3,//多选 1是单选 0时间段
+			dateDefaultMultiple:["2023-04-08","2023-04-09","2023-04-10"],//添加多个的默认时间
+			callback:function(e){
+				console.log(e);
+			}
+		})
+
+	</script>
+</body>
+</html>
