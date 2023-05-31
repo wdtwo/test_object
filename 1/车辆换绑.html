@@ -135,8 +135,7 @@
 			$('.date-end').html(nextMonth.format('YYYY-MM-DD'))
 		}
 
-		//查找车牌方法
-		//setDate("2023-05-05",residue) //开始日期,增加天数
+		
 		
 		//提交
 		$('.btn-submit').click(function(){
@@ -200,6 +199,10 @@
 			li.eq(obj.list.length <= 7 ? obj.list.length : 7).addClass('active').siblings().removeClass()
 			if(obj.list.length <= 7){
 				li.eq(7).html("<div>新<br>能源</div>")
+			}
+			if(obj.list.length <= 6){
+				//查找车牌方法
+				setDate("2023-05-05",residue) //开始日期,增加天数
 			}
 			over = obj.list.length >= 7
 		}})
