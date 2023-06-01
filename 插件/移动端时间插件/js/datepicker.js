@@ -55,7 +55,7 @@ var datePicker = function(obj){
                     dateSave.push(v)
                 }
             }
-            console.log(dateSave);
+            //console.log(dateSave);
 
             //第一个默认值
             if(dateSave.length > 0){
