@@ -26,14 +26,12 @@
 
 	<div class="wrap">
 
-		<button onclick="abc()">destory</button>
-
 	</div>
 	<script src="./js/dayjs.min.js"></script>
-	<script src="./js/datepicker.js"></script>
+	<script src="./js/datepicker.min.js"></script>
 	<script>
 
-		let a = new datePicker({
+		let del = new datePicker({
 			dateDefault:"2023-05-28",//默认日期 默认选中会覆盖默认禁用
 			dateStart:"2023-03-31",//开始日期 不包含
 			dateEnd:"2023-04-20",//结束日期
@@ -45,7 +43,7 @@
 			}
 		})
 		function abc(){
-			a.destory()
+			del.destory()
 		}
 	</script>
 </body>
