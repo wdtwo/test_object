@@ -691,7 +691,12 @@ body {font-size:0.28rem;}
     background-color: #3875c6;
     color:white;
 }
-#datepicker .date-day li.active.disabled {
+#datepicker .date-day li.range {
+    background-color: #98b7e0;
+    color:white;
+}
+#datepicker .date-day li.active.disabled,
+#datepicker .date-day li.range.disabled {
     color:white;
     background-color: #ccc;
 }

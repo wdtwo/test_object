@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title></title>
+	<link href="./css/basic.css" rel="stylesheet" type="text/css" />
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 750));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+	
+</head>
+<body>
+
+	<div class="wrap">
+
+	</div>
+	<script src="./js/dayjs.min.js"></script>
+	<script src="./js/datepickerslot.min.js"></script>
+	<script>
+
+		let a = new datePicker({
+			disabled:["2023-04-05"],//禁用的时间
+			dateStart:"2023-03-31",//开始日期 不包含
+			dateEnd:"2023-05-30",//结束日期
+			dateDefault:{
+				start:"2023-04-02",
+				end:"2023-04-20"
+			},//添加默认时间
+			callback:function(e){
+				console.log(e);
+			}
+		})
+	</script>
+</body>
+</html>
