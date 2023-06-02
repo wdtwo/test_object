@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+    <title>iOSselect | iosselect</title>
+    <meta name="generator" content="Jekyll v3.8.5" />
+    <meta property="og:title" content="iOSselect" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="description" content="webapp模仿ios下拉菜单" />
+    <meta property="og:description" content="webapp模仿ios下拉菜单" />
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      <h1><a href="http://www.pengwf.com/iosselect/">iosselect</a></h1>
+      <h1 id="iosselect">iOSselect</h1>
+      <p>html下拉菜单select在安卓和IOS下表现不一样，iosselect正是为统一下拉菜单样式而生，我们以IOS下select的交互和样式为蓝本，开发了这一组件。</p>
+      <h2 id="官网">官网</h2>
+      <p>http://zhoushengfe.com/iosselect/website/index.html</p>
+      <p>备用网址: https://www.pengwf.com/iosselect/index.html</p>
+      <h3 id="特点">特点</h3>
+      <ul>
+        <li>0依赖，只需引用一个js和css即可</li>
+        <li>样式可自己定制，也可使用默认样式</li>
+        <li>一个页面同时实例化多个组件</li>
+        <li>jquery zepto angular vue react均适用</li>
+        <li>支持最多6级级联</li>
+        <li>支持设置高度和高度单位</li>
+        <li>适用于android和iOS设备(PC端支持IE9+，不过PC端上滑动体验不太实用)</li>
+      </ul>
+      <h3 id="起步">起步</h3>
+      <ul>
+        <li>npm</li>
+      </ul>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">npm</span> <span class="nx">install</span> <span class="nx">iosselect</span>
+      </code></pre></div></div>
+      <ul>
+        <li>下载文件</li>
+      </ul>
+
+      <p>点击下载文件到项目目录中，在HTML文件中插入以下代码，并按需调整路径。</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/static/css/iosSelect.css"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"/static/js/iosSelect.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+      </code></pre></div></div>
+
+      <ul>
+        <li>实例化组件</li>
+      </ul>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">data</span><span class="o">=</span><span class="p">[{</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10001</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">演示数据1</span><span class="dl">'</span><span class="p">},{</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10002</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">演示数据2</span><span class="dl">'</span><span class="p">}];</span>
+      <span class="kd">var</span> <span class="nx">showDom</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#showDom</span><span class="dl">'</span><span class="p">);</span><span class="c1">// 绑定一个触发元素</span>
+      <span class="kd">var</span> <span class="nx">valDom</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#valDom</span><span class="dl">'</span><span class="p">);</span>  <span class="c1">// 绑定一个存储结果的元素</span>
+      <span class="nx">showDom</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>  <span class="c1">// 添加监听事件</span>
+          <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">showDom</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">];</span>             <span class="c1">// 获取元素的data-id属性值</span>
+          <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">showDom</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="dl">'</span><span class="s1">value</span><span class="dl">'</span><span class="p">];</span>        <span class="c1">// 获取元素的data-value属性值</span>
+        <span class="c1">// 实例化组件</span>
+          <span class="kd">var</span> <span class="nx">example</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">IosSelect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>               <span class="c1">// 第一个参数为级联层级，演示为1</span>
+              <span class="p">[</span><span class="nx">data</span><span class="p">],</span>                             <span class="c1">// 演示数据</span>
+              <span class="p">{</span>
+                  <span class="na">container</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.container</span><span class="dl">'</span><span class="p">,</span>             <span class="c1">// 容器class</span>
+                  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">演示标题</span><span class="dl">'</span><span class="p">,</span>                    <span class="c1">// 标题</span>
+                  <span class="na">itemHeight</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>                      <span class="c1">// 每个元素的高度</span>
+                  <span class="na">itemShowCount</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>                    <span class="c1">// 每一列显示元素个数，超出将隐藏</span>
+                  <span class="na">oneLevelId</span><span class="p">:</span> <span class="nx">val</span><span class="p">,</span>                     <span class="c1">// 第一级默认值</span>
+                  <span class="na">callback</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selectOneObj</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 用户确认选择后的回调函数</span>
+                      <span class="nx">valDom</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">selectOneObj</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+                      <span class="nx">showDom</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">selectOneObj</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+                      <span class="nx">showDom</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">selectOneObj</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+                      <span class="nx">showDom</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="dl">'</span><span class="s1">value</span><span class="dl">'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">selectOneObj</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+                  <span class="p">}</span>
+          <span class="p">});</span>
+      <span class="p">});</span>
+      </code></pre></div></div>
+
+<h3 id="demos">Demos</h3>
+
+<ul>
+  <li>一级级联，银行选择</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/one/bank.html</p>
+
+<ul>
+  <li>二级级联，三国杀将领组合选</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/two/sanguokill.html</p>
+
+<ul>
+  <li>三级级联，省市区选择</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/three/area.html</p>
+
+<ul>
+  <li>viewport缩放时处理方案</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/rem/bank.html</p>
+
+<ul>
+  <li>日期选择器 三级联动，通过方法获取数据，并且有加载中效果</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/datepicker/date.html</p>
+
+<ul>
+  <li>日期时间选择器，共五级，通过方法获取数据</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/five/time.html</p>
+
+<ul>
+  <li>日期时间选择器，共6级，通过方法获取数据</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/six/time.html</p>
+
+<ul>
+  <li>AJAX获取数据</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/ajax/area2.html</p>
+
+<ul>
+  <li>出场动画／退场动画</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/one/animate.html</p>
+
+<ul>
+  <li>组件实例化多次</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/one/multi.html</p>
+
+<ul>
+  <li>AngularJS 异步加载</li>
+</ul>
+
+<p>https://www.pengwf.com/iosselect/demo/ajax/angular/index.html#/components</p>
+
+<h3 id="如果要修改菜单项里样式请自行修改样式比如">如果要修改菜单项里样式，请自行修改样式，比如：</h3>
+
+<p>.ios-select-widget-box ul li</p>
+
+<h3 id="参数说明">参数说明</h3>
+
+<h4 id="level">level</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 1
+type:    number
+</code></pre></div></div>
+
+<p>数据的层级，最多支持6层</p>
+
+<h4 id="data">data</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: undefined
+type:    ...Array
+</code></pre></div></div>
+
+<p>[oneLevelData[, twoLevelData[, threeLevelData[, fourLevelData[, fiveLevelData[, sixLevelData]]]]]] 可以用数组，也可以用方法。
+6项分别对应级联1,2,3,4,5,6项，每一项又是一个数组或方法
+如果是数组：
+每一项数组中包含一系列对象，每个对象必须要有id,作为该条数据在该项数组中的唯一标识，value作为显示值，parentId是可选属性，作为关联的标志，数据形如：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var iosProvinces = [
+  {"id": "130000', "value": "河北省", "parentId": "0"}
+];
+var iosCitys = [
+  {"id":"130100","value":"石家庄市","parentId":"130000"},
+];
+</code></pre></div></div>
+
+<p>当我们选择河北省时，就到城市中找到parentId为河北省id的数据，然后展示出来。
+点击查看demo：
+https://www.pengwf.com/iosselect/demo/three/area.html</p>
+
+<p>如果是方法：
+传入一个方法，在方法中获取数据，该方法有该列前序列的选中值和回调方法。
+如果是第一列的方法，可如下定义：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">oneFun</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="nx">callback</span><span class="p">(</span><span class="nx">arr1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>如果是第二列的方法，可如下定义：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">twoFun</span><span class="p">(</span><span class="nx">oneLevelId</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="nx">callback</span><span class="p">(</span><span class="nx">arr2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>如果第三列，可如下定义方法：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">threeFun</span><span class="p">(</span><span class="nx">oneLevelId</span><span class="p">,</span> <span class="nx">twoLevelId</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">arr3</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="nx">callback</span><span class="p">(</span><span class="nx">arr3</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>依次类推，第六列获取数据的方法可如下定义：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sixFun</span><span class="p">(</span><span class="nx">oneLevelId</span><span class="p">,</span> <span class="nx">twoLevelId</span><span class="p">,</span> <span class="nx">threeLevelId</span><span class="p">,</span> <span class="nx">fourLevelId</span><span class="p">,</span> <span class="nx">fiveLevelId</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">arr6</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="nx">callback</span><span class="p">(</span><span class="nx">arr6</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>在方法里可以根据前序列的选中值定义需要的数据，比如年月日，当年月变化时，可根据年月选中值，设置日期的取值范围。</p>
+
+<p>具体可参考demo中的日期选择器和日期时间选择器。
+点击查看demo：
+https://www.pengwf.com/iosselect/demo/datepicker/date.html</p>
+
+<p>如何ajax获取数据</p>
+
+<p><img src="./ajax.jpg" alt="image" /></p>
+
+<h4 id="options">options</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:    object
+</code></pre></div></div>
+
+<p>其余选项，含以下几个属性：</p>
+
+<h4 id="optionscontainer">options.container</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: ''
+type:    string
+</code></pre></div></div>
+
+<p>实例化后的对象包裹元素，可选项</p>
+
+<h4 id="optionscallback">options.callback</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: undefined
+type:    function
+</code></pre></div></div>
+
+<p>选择完毕后的回调函数，必选项
+options.callback(selectOneObj, selectTwoObj, selectThreeObj, selectFourObj, selectFiveObj, selectSixObj) selectNumberObj为每级对应选中项，包含对应数据的所有字段及dom对象</p>
+
+<h4 id="optionsfallback">options.fallback</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: undefined
+type:    function
+</code></pre></div></div>
+
+<p>选择取消后的回调函数，可选项</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fallback: function (e) {
+	console.log(e);
+},
+</code></pre></div></div>
+
+<h4 id="optionsmaskcallback">options.maskCallback</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: undefined     type:    function
+</code></pre></div></div>
+
+<p>点击背景层关闭组件时触发的方法，可选项</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fallback: maskCallback (e) {
+	console.log(e);
+},
+</code></pre></div></div>
+
+<h4 id="optionstitle">options.title</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: ''
+type:    string
+</code></pre></div></div>
+
+<p>显示标题，可选项</p>
+
+<h4 id="optionssuretext">options.sureText</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: '确定'
+type:    string
+</code></pre></div></div>
+
+<p>设置确定按钮文字，可选项</p>
+
+<h4 id="optionsclosetext">options.closeText</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: '取消'
+type:    string
+</code></pre></div></div>
+
+<p>设置取消按钮文字，可选项</p>
+
+<h4 id="optionsitemheight">options.itemHeight</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 35
+type:    number
+</code></pre></div></div>
+
+<p>每一项的高度，可选项</p>
+
+<h4 id="optionsitemshowcount">options.itemShowCount</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 7
+type:    number
+</code></pre></div></div>
+
+<p>组件展示的项数，可选项，可选3,5,7,9，不过不是3,5,7,9则展示7项</p>
+
+<h4 id="optionsheaderheight">options.headerHeight</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 44
+type:    number
+</code></pre></div></div>
+
+<p>组件标题栏高度，可选项</p>
+
+<h4 id="optionscssunit">options.cssUnit</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 'px'
+type:    string
+</code></pre></div></div>
+
+<p>元素css尺寸单位，可选项，可选px或者rem</p>
+
+<h4 id="optionsaddclassname">options.addClassName</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: ''
+type:    string
+</code></pre></div></div>
+
+<p>组件额外类名，用于自定义样式，可选项</p>
+
+<h4 id="optionsrelation">options.relation</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: [0, 0, 0, 0, 0]
+type:    ...Array
+</code></pre></div></div>
+
+<p>[oneTwoRelation, twoThreeRelation, threeFourRelation, fourFiveRelation, fiveSixRelation]
+可选项。如果数据是数组(非方法)，各级选项之间通过parentId关联时，需要设置；如果是通过方法获取数据，不需要该参数。</p>
+
+<h4 id="optionsrelationonetworelation">options.relation.oneTwoRelation</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 0
+type:    number
+</code></pre></div></div>
+
+<p>第一列和第二列是否通过parentId关联，可选项</p>
+
+<h4 id="optionsrelationtwothreerelation">options.relation.twoThreeRelation</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 0
+type:    number
+</code></pre></div></div>
+
+<p>第二列和第三列是否通过parentId关联，可选项</p>
+
+<h4 id="optionsrelationthreefourrelation">options.relation.threeFourRelation</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 0
+type:    number
+</code></pre></div></div>
+
+<p>第三列和第四列是否通过parentId关联，可选项</p>
+
+<h4 id="optionsrelationfourfiverelation">options.relation.fourFiveRelation</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 0
+type:    number
+</code></pre></div></div>
+
+<p>第四列和第五列是否通过parentId关联，可选项</p>
+
+<h4 id="optionsrelationfivesixrelation">options.relation.fiveSixRelation</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: 0
+type:    number
+</code></pre></div></div>
+
+<p>第五列和第六列是否通过parentId关联，可选项</p>
+
+<h4 id="optionsonelevelid">options.oneLevelId</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:    string
+</code></pre></div></div>
+
+<p>实例展示时，第一级数据默认选中值，可选项，默认为第一级数据第一项id</p>
+
+<h4 id="optionstwolevelid">options.twoLevelId</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:    string
+</code></pre></div></div>
+
+<p>实例展示时，第二级数据默认选中值，可选项，默认为第二级数据第一项id</p>
+
+<h4 id="optionsthreelevelid">options.threeLevelId</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:    string
+</code></pre></div></div>
+
+<p>实例展示时，第三级数据默认选中值，可选项，默认为第三级数据第一项id</p>
+
+<h4 id="optionsfourlevelid">options.fourLevelId</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:    string
+</code></pre></div></div>
+
+<p>实例展示时，第四级数据默认选中值，可选项，默认为第四级数据第一项id</p>
+
+<h4 id="optionsfivelevelid">options.fiveLevelId</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:    string
+</code></pre></div></div>
+
+<p>实例展示时，第五级数据默认选中值，可选项，默认为第五级数据第一项id</p>
+
+<h4 id="optionssixlevelid">options.sixLevelId</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:    string
+</code></pre></div></div>
+
+<p>实例展示时，第6级数据默认选中值，可选项，默认为第6级数据第一项id</p>
+
+<h4 id="optionsshowloading">options.showLoading</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: false
+type:    boolean
+</code></pre></div></div>
+
+<p>实例展示时，在数据加载之前下拉菜单是否显示加载中的效果，建议ajax获取数据时设置为true</p>
+
+<h4 id="optionsshowanimate">options.showAnimate</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default: false
+type:    boolean
+</code></pre></div></div>
+
+<p>是否显示入场动画和退场动画，如需自定义动画效果，请覆写.fadeInUp .layer和.fadeOutDown .layer的css3动画。PS:动画时间为0.5秒。</p>
+
+<h4 id="方法">方法</h4>
+<h4 id="close">close</h4>
+<p>关闭已实例化的组件</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object.close();
+</code></pre></div></div>
+
+<h4 id="事件">事件</h4>
+
+<h4 id="iosselectcreated">IosSelectCreated</h4>
+<p>组件创建完毕事件</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener('IosSelectCreated', function(e) {
+		console.log(e);
+});
+</code></pre></div></div>
+<h4 id="iosselectdestroyed">IosSelectDestroyed</h4>
+<p>组件销毁事件</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener('IosSelectDestroyed', function(e) {
+		console.log(e);
+});
+</code></pre></div></div>
+
+  </body>
+</html>
