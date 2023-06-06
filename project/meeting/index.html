@@ -23,127 +23,124 @@
 	
 </head>
 <body>
-	<div class="wrap" id="app">
-	<canvas id="background"></canvas>
-	<div class="top flex flex-jus-between">
-		<div class="f40 flex flex-jus-start c-white">
-			<img src="./images/ico-floor.svg" class="w58 block m-r-15"/>
-			{{floor}}
-		</div>
-		<div class="flex flex-column">
-			<img src="./images/logo.png" class="w170 block" />
-		</div>
-		<div class="f34 flex flex-jus-end c-white">
-			<img src="./images/ico-time.svg" class="w58 block m-r-15"/>
-			<div id="time">{{time}}</div>
-		</div>
-	</div>
-
-	<div class="content flex flex-jus-between">
-		<!-- 当前会议 -->
-		<div class="progress f40 c-333" v-if="nowType">
-			<div class="p-b-35">
-				当前会议
-				<small class="c-green f30 countdown">({{nowType && countdown}})</small>
-			</div>
-			<div class="m-b-10 nowrap">
-				{{nowType && nowName}}
-			</div>
-			<div class="m-b-10">
-				{{nowType && nowTime}}
-			</div>
-			<div class="m-b-10 nowrap">{{nowType && nowDepartment}}</div>
-			<div class="m-b-35">
-				{{nowType && nowOrganizer}}
+	<div class="wrap" id="app" :class="show">
+		<canvas id="background"></canvas>
+		<div class="top flex flex-jus-between">
+			<div class="f40 flex flex-jus-start c-white">
+				<img src="./images/ico-floor.svg" class="w58 block m-r-15"/>
+				{{floor}}
 			</div>
 			<div class="flex flex-column">
-				<img :src="nowQRcode" class="block w220" >
-				<div class="f30 t-c p-t-10">扫码参会</div>
+				<img src="./images/logo.png" class="w170 block" />
 			</div>
-		</div>
-		<!-- 当前暂无会议 -->
-		<div class="progress no-meeting-progress flex flex-column f40 c-333 o5" v-else>
-			<img src="./images/ico-booking.svg" class="w270 block o8">
-			<div class="o8 m-t-50">
-				当前暂无会议
+			<div class="f34 flex flex-jus-end c-white">
+				<img src="./images/ico-time.svg" class="w58 block m-r-15"/>
+				<div id="time">{{time}}</div>
 			</div>
 		</div>
 
-
-		<!-- 会议排期 -->
-		<div class="waiting f40" v-if="tableList.length>0">
-			<table>
-				<thead>
-					<tr>
-						<th class="td1">会议排期</th>
-						<th class="td2">会议时间</th>
-						<th class="td3">召集人</th>
-						<th class="td4">召集部门</th>
-					</tr>
-				</thead>
-			</table>
-			<div class="m-t-40 w100p box">
-				<table>
-					<tbody>
-						<tr v-for="v in tableList" :key="v.id">
-							<td class="td1">
-								<i></i>
-								<div class="nowrap td11">
-									{{v.name}}
-								</div>
-							</td>
-							<td class="td2">
-								<div>{{v.time}}</div>
-							</td>
-							<td class="td3">
-								<div>{{v.department}}</div>
-							</td>
-							<td class="td4">
-								<div class="nowrap td41">
-									{{v.organizer}}
-								</div>
-							</td>
-						</tr>
-						
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="waiting no-waiting o5" v-else>
-			<table>
-				<thead>
-					<tr>
-						<th class="td1">会议排期</th>
-						<th class="td2">会议时间</th>
-						<th class="td3">召集人</th>
-						<th class="td4">召集部门</th>
-					</tr>
-				</thead>
-			</table>
-			<div class=" flex flex-column f40 c-333" style="height:100%">
-				<img src="./images/ico-booking.svg" class="w270 block o8">
-				<div class="o8 m-t-50">
-					当前排期会议
+		<div class="content flex flex-jus-between">
+			<!-- 当前会议 -->
+			<div class="progress f40 c-333" v-if="nowType">
+				<div class="p-b-35">
+					当前会议
+					<small class="c-green f30 countdown">({{nowType && countdown}})</small>
+				</div>
+				<div class="m-b-10 nowrap">
+					{{nowType && nowName}}
+				</div>
+				<div class="m-b-10">
+					{{nowType && nowTime}}
+				</div>
+				<div class="m-b-10 nowrap">{{nowType && nowDepartment}}</div>
+				<div class="m-b-35">
+					{{nowType && nowOrganizer}}
+				</div>
+				<div class="flex flex-column">
+					<img :src="nowQRcode" class="block w220" >
+					<div class="f30 t-c p-t-10">扫码参会</div>
 				</div>
 			</div>
-			
+			<!-- 当前暂无会议 -->
+			<div class="progress no-meeting-progress flex flex-column f40 c-333 o5" v-else>
+				<img src="./images/ico-booking.svg" class="w270 block o8">
+				<div class="o8 m-t-50">
+					当前暂无会议
+				</div>
+			</div>
+
+
+			<!-- 会议排期 -->
+			<div class="waiting f40" v-if="tableList.length>0">
+				<table>
+					<thead>
+						<tr>
+							<th class="td1">会议排期</th>
+							<th class="td2">会议时间</th>
+							<th class="td3">召集人</th>
+							<th class="td4">召集部门</th>
+						</tr>
+					</thead>
+				</table>
+				<div class="m-t-40 w100p box">
+					<table>
+						<tbody>
+							<tr v-for="v in tableList" :key="v.id">
+								<td class="td1">
+									<i></i>
+									<div class="nowrap td11">
+										{{v.name}}
+									</div>
+								</td>
+								<td class="td2">
+									<div>{{v.time}}</div>
+								</td>
+								<td class="td3">
+									<div>{{v.department}}</div>
+								</td>
+								<td class="td4">
+									<div class="nowrap td41">
+										{{v.organizer}}
+									</div>
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="waiting no-waiting o5" v-else>
+				<table>
+					<thead>
+						<tr>
+							<th class="td1">会议排期</th>
+							<th class="td2">会议时间</th>
+							<th class="td3">召集人</th>
+							<th class="td4">召集部门</th>
+						</tr>
+					</thead>
+				</table>
+				<div class=" flex flex-column f40 c-333" style="height:100%">
+					<img src="./images/ico-booking.svg" class="w270 block o8">
+					<div class="o8 m-t-50">
+						当前排期会议
+					</div>
+				</div>
+				
+			</div>
 		</div>
-	</div>
 
 
 
 
 
-	<div class="footer">
-		<div>
-			让所有人在任何城镇都能住上好酒店
+		<div class="footer">
+			<div>
+				让所有人在任何城镇都能住上好酒店
+			</div>
 		</div>
-	</div>
-
-
 	</div>
 	
-	<script src="./js/jquery-1.11.3.min.js"></script>
 	<script src="./js/vue.js"></script>
 	<script src="./js/axios.min.js"></script>
 	<script src="./js/dayjs.min.js"></script>
@@ -162,8 +159,9 @@
 				nowTime:"00:00 - 00:00",//当前会议时间段
 				nowDepartment:"暂无",//当前会议组织人
 				nowOrganizer:"暂无",//当前会议部门
-				nowQRcode:'./images/qrcode.jpg',//二维码
+				nowQRcode:'images/qrcode.jpg',//二维码
 				tableList:[],//排期列表
+				show:"show"
 			},
 			methods:{
 				getTime: function(){
@@ -200,13 +198,6 @@
 				}
 			},
 			mounted:function(){
-				//如果有会议则调用
-				if(this.nowType){
-					this.down = window.setInterval(()=>{
-						this.countDown(11,30)//11:30结束
-					},1000)
-				}
-				
 
 				window.setInterval(()=>{
 					this.getTime()
@@ -214,32 +205,36 @@
 
 				console.log(window.location.href);
 				if(window.location.href.includes('v=')){
-					let v = window.location.href.split('v=')[1]
-					if(v == 1){
-						this.tableList.push(
-							{id:1,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-							{id:2,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-							{id:3,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-							{id:4,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-							{id:5,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-							{id:6,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-							{id:7,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-							{id:8,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
-						)
-						this.nowType= true
-						this.nowName = "项目开发研讨"
-						this.nowTime= "13:00 - 14:00"
-						this.nowDepartment= "杜甫"
-						this.nowOrganizer= "信息技术中心"
-						this.nowQRcode= './images/qrcode.jpg'
-						//this.countdown= "12:00"
-						let arr = this.nowTime.split(" - ")[1].split(':')
-						this.down = window.setInterval(()=>{
-							this.countDown(arr[0],arr[1])//11:30结束
-						},1000)
-					}
+					setTimeout(function(){
+						let v = window.location.href.split('v=')[1]
+						if(v == 1){
+							this.tableList.push(
+								{id:1,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:2,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:3,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:4,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:5,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:6,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:7,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:8,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+							)
+							this.nowType= true
+							this.nowName = "项目开发研讨"
+							this.nowTime= "13:00 - 14:00"
+							this.nowDepartment= "杜甫"
+							this.nowOrganizer= "信息技术中心"
+							this.nowQRcode= './images/qrcode.jpg'
+							//this.countdown= "12:00"
+							//通过结束时间截取获得计算剩余会议时间
+							let arr = this.nowTime.split(" - ")[1].split(':')
+							this.down = window.setInterval(()=>{
+								this.countDown(arr[0],arr[1])//11:30结束
+							},1000)
+						}
+					},1000)
+					
 				}
-				
+
 				//添加排期
 				//this.tableList.push({id:1,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"})
 				//get请求
