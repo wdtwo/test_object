@@ -178,7 +178,7 @@
 					// 转换时间戳为小时和分钟表示
 					let { hours, minutes } = this.convertTimestampToHoursMinutes(end.valueOf() - day.getTime());
 					// 输出结果
-					$(".countdown").html(`(${this.zero(hours)}:${this.zero(minutes)})`)
+					this.countdown = `(${this.zero(hours)}:${this.zero(minutes)})`
 					if(hours <= 0 && minutes <= 0){
 						console.log('会议结束');
 						this.nowType = false;
