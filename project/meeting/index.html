@@ -204,7 +204,7 @@
 				},1000)
 
 				console.log(window.location.href);
-				setTimeout(function(){
+				setTimeout(()=>{
 					if(window.location.href.includes('v=')){
 						let v = window.location.href.split('v=')[1]
 						if(v == 1){
