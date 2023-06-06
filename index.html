@@ -210,9 +210,9 @@
 
 				console.log(window.location.href);
 				setTimeout(()=>{
-					if(window.location.href.includes('v=')){
-						let v = window.location.href.split('v=')[1]
-						if(v == 1){
+					//if(window.location.href.includes('v=')){
+					//	let v = window.location.href.split('v=')[1]
+					//	if(v == 1){
 							this.tableList.push(
 								{id:1,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
 								{id:2,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
@@ -235,8 +235,8 @@
 							this.down = window.setInterval(()=>{
 								this.countDown(arr[0],arr[1])//11:30结束
 							},1000)
-						}
-					}
+						//}
+					//}
 					this.show = "show"
 				},500)
 				//添加排期
