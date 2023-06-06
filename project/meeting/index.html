@@ -161,7 +161,7 @@
 				nowOrganizer:"暂无",//当前会议部门
 				nowQRcode:'images/qrcode.jpg',//二维码
 				tableList:[],//排期列表
-				show:"show"
+				show:""
 			},
 			methods:{
 				getTime: function(){
@@ -204,8 +204,8 @@
 				},1000)
 
 				console.log(window.location.href);
-				if(window.location.href.includes('v=')){
-					setTimeout(function(){
+				setTimeout(function(){
+					if(window.location.href.includes('v=')){
 						let v = window.location.href.split('v=')[1]
 						if(v == 1){
 							this.tableList.push(
@@ -231,10 +231,10 @@
 								this.countDown(arr[0],arr[1])//11:30结束
 							},1000)
 						}
-					},1000)
-					
-				}
-
+					}else{
+						this.show = "show"
+					}
+				},1000)
 				//添加排期
 				//this.tableList.push({id:1,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"})
 				//get请求
@@ -354,12 +354,12 @@
 	init();
 	animate();
 
-	// 调整画布大小时重新设置大小
-	window.addEventListener("resize", function() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-		init();
-	});
+	// // 调整画布大小时重新设置大小
+	// window.addEventListener("resize", function() {
+	// 	canvas.width = window.innerWidth;
+	// 	canvas.height = window.innerHeight;
+	// 	init();
+	// });
 	
 </script>
 
