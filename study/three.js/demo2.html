@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body {
+            margin:0;
+            padding:0;
+            height:100%;
+            /* background-color: #eee; */
+        }
+        #cvs {
+            margin:0;
+            padding:0;
+            margin:50px auto 0;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <canvas id="cvs"></canvas>
+
+    <script src="src/three.min.js"></script>
+    <script>
+        console.log(THREE);
+        //创造画布
+        const scene = new THREE.Scene()
+        //创造一个几何体
+        const geometry = new THREE.BoxGeometry(1,1,1)
+        //创造一个网格属性
+        const material = new THREE.MeshBasicMaterial({color:'red'})
+        //把网格属性绑定到几何体
+        const cube = new THREE.Mesh(geometry,material)
+        cube.position.x = 1
+        //把绑定后的几何体放到画布内
+        scene.add(cube)
+
+        //添加平行光
+        const ambient = new THREE.AmbientLight('white',.9)
+        //ambient.position.set(0,500,0)
+        scene.add(ambient)
+        //点光源
+        const point = new THREE.PointLight('white',1)
+        point.position.set(100,80,80)
+        scene.add(point)
+        //环境光
+        const direction = new THREE.DirectionalLight('white',.9)
+        direction.position.set(100,100,100)
+        scene.add(direction)
+        const sizes = {
+            width:800,
+            height:600
+        }
+
+        //添加一个相机
+        const camera = new THREE.PerspectiveCamera(75,sizes.width/sizes.height)
+        //设置相机位置
+        //camera.position.x = 1.5
+        //camera.position.y = 1.5
+        camera.position.z = 3
+
+        //把相机添加到画布
+        scene.add(camera)
+
+
+        //把创建好的画布渲染到canvas中
+        const renderer = new THREE.WebGLRenderer({
+            canvas:document.querySelector('#cvs')
+
+        })
+        renderer.setSize(sizes.width,sizes.height)
+        renderer.render(scene,camera)
+    </script>
+
+</body>
+</html>
