@@ -42,18 +42,18 @@
 		<div class="content flex flex-jus-between">
 			<!-- 当前会议 -->
 			<div class="progress f40 c-333" v-if="nowType">
-				<div class="p-b-35">
+				<div class="p-b-55">
 					当前会议
 					<small class="c-green f30 countdown">({{nowType && countdown}})</small>
 				</div>
-				<div class="m-b-10 nowrap">
+				<div class="m-b-20 nowrap">
 					{{nowType && nowName}}
 				</div>
-				<div class="m-b-10">
+				<div class="m-b-20">
 					{{nowType && nowTime}}
 				</div>
-				<div class="m-b-10 nowrap">{{nowType && nowDepartment}}</div>
-				<div class="m-b-35">
+				<div class="m-b-20 nowrap">{{nowType && nowDepartment}}</div>
+				<div class="m-b-50 nowrap">
 					{{nowType && nowOrganizer}}
 				</div>
 				<div class="flex flex-column">
@@ -126,13 +126,8 @@
 						暂无排期会议
 					</div>
 				</div>
-				
 			</div>
 		</div>
-
-
-
-
 
 		<div class="footer">
 			<div>
@@ -145,7 +140,6 @@
 	<script src="/project/meeting/js/axios.min.js"></script>
 	<script src="/project/meeting/js/dayjs.min.js"></script>
 	<script>
-
 		let app = new Vue({
 			el: '#app', // 绑定Vue实例的挂载点
 			data: {
@@ -201,20 +195,18 @@
 				//一分钟刷新一次测试
 				window.setInterval(()=>{
 					window.location.reload();
-				},60000)
-
-				
+				},20000)
 				window.setInterval(()=>{
 					this.getTime()
 				},1000)
-
-				console.log(window.location.href);
+				this.getTime()
+				//console.log(window.location.href);
 				setTimeout(()=>{
 					//if(window.location.href.includes('v=')){
-					//	let v = window.location.href.split('v=')[1]
+						let v = window.location.href.split('v=')[1]
 					//	if(v == 1){
 							this.tableList.push(
-								{id:1,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:1,name:"项目开发研讨项目开发研讨项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
 								{id:2,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
 								{id:3,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
 								{id:4,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
@@ -222,12 +214,17 @@
 								{id:6,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
 								{id:7,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
 								{id:8,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:9,name:"项目开发研讨项目开发研讨项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:10,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:11,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:12,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
+								{id:13,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"},
 							)
 							this.nowType= true
-							this.nowName = "项目开发研讨"
-							this.nowTime= "13:00 - 13:48"
+							this.nowName = "项目开发研讨项目开发研讨项目开发研讨"
+							this.nowTime= "13:00 - 14:00"
 							this.nowDepartment= "杜甫"
-							this.nowOrganizer= "信息技术中心"
+							this.nowOrganizer= "信息技术中心信息技术中心信息技术中心"
 							this.nowQRcode= '/project/meeting/images/qrcode.jpg'
 							//this.countdown= "12:00"
 							//通过结束时间截取获得计算剩余会议时间
@@ -238,7 +235,7 @@
 						//}
 					//}
 					this.show = "show"
-				},500)
+				},50)
 				//添加排期
 				//this.tableList.push({id:1,name:"项目开发研讨",time:"12:00-13:00",department:"杜甫",organizer:"信息技术中心"})
 				//get请求
