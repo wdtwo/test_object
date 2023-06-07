@@ -44,7 +44,7 @@
 			<div class="progress f40 c-333" v-if="nowType">
 				<div class="p-b-60">
 					当前会议
-					<small class="c-green f30 countdown">({{nowType && countdown}})</small>
+					<!-- <small class="c-green f30 countdown">({{nowType && countdown}})</small> -->
 				</div>
 				<div class="m-b-25 nowrap">
 					{{nowType && nowName}}
@@ -195,7 +195,7 @@
 				//一分钟刷新一次测试
 				window.setInterval(()=>{
 					window.location.reload();
-				},20000)
+				},300000)
 				window.setInterval(()=>{
 					this.getTime()
 				},1000)
