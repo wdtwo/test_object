@@ -146,6 +146,8 @@
 	<script src="./js/dayjs.min.js"></script>
 	<script>
 
+		var currentTime = dayjs().format('LLL');
+  		console.log(currentTime); // 2023年6月7日 下午8:30
 		let app = new Vue({
 			el: '#app', // 绑定Vue实例的挂载点
 			data: {
@@ -167,7 +169,7 @@
 				getTime: function(){
 					//当前时间
 					var day = dayjs(Date());
-					this.time= day.format("YYYY-MM-DD hh:mm:ss")
+					this.time= day.format("YYYY-MM-DD HH:mm:ss")
 				},
 				//倒计时
 				countDown:function(hour,minute){
