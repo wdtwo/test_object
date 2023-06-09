@@ -11,8 +11,91 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="format-detection" content="email=no">
         <title></title>
-        <link href="css/basic.css?a=12" rel="stylesheet" type="text/css" />
-        <link href="css/toast.css" rel="stylesheet" type="text/css" />
+        <link href="css/basic.css" rel="stylesheet" type="text/css" />
+        <link href="toast/toast.css" rel="stylesheet" type="text/css" />
+		<style>
+			html,body,.wrap {
+				width: 100%;
+				height:100%;
+				overflow: hidden;
+				background-color: black;
+			}
+			#videoElement {
+				background-color: black;
+				/* transform: rotateY(180deg); */
+				display: block;
+				margin:0 auto;
+				width: 100%;
+				height:100%;
+			}
+			.shadow {
+				position: absolute;
+				left:0;
+				top:0;
+				z-index: 200;
+				width: 100%;
+				height:100%;
+				background: url(./images/2.png) no-repeat top center;
+				background-size: 100% auto;
+			}
+			.shadow img {
+				display: block;
+				width: 3rem;
+			}
+			.btn {
+				width: 100%;
+				height:2.5rem;
+				background: black;
+				position: absolute;
+				left:0;
+				z-index:3;
+				bottom:0;
+				display: none;
+			}
+			.btn div {
+				width: 1.6rem;
+				height:1.6rem;
+				background: url(./images/btn.png) no-repeat center center;
+				background-size: 100% auto;
+			}
+			canvas {
+				position: absolute;
+				left:100%;
+				top:100%;
+				z-index: 9;
+			}
+			.loading {
+				position: absolute;
+				left:0;
+				top:0;
+				width: 100%;
+				height:100%;
+				background-color: rgba(0,0,0, .7);
+				display: none;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				z-index: 9;
+			}
+			.loading.curr {
+				display: flex;
+			}
+			.loading img {
+				display: block;
+				width: 1rem;
+			}
+			.cz {
+				display: none;
+			}
+			.switch {
+				position: absolute;right:1rem;bottom:1rem;z-index:99;
+				display: none;
+			}
+			.switch img {
+				display: block;
+				width: 0.5rem;
+			}
+		</style>
 		<script>
 	        function autoScale(){
 	            var winW = document.documentElement.clientWidth;
@@ -52,9 +135,9 @@
 		<video id="videoElement" loop preload playsinline webkit-playsinline></video>
 		<canvas id="canvas"></canvas>
 	</div>
-	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/requestAnimationFrame.js"></script>
-	<script src="js/toast.js"></script>
+	<script src="toast/toast.js"></script>
 	<script src="js/exif.js"></script>
 	<script>
 		var video = document.getElementById("videoElement");
@@ -107,8 +190,8 @@
 					},					
 					function videoError(error) {	
 						$('#filebtn').show();
-						$('.toast_div').toast({
-							content:"调用摄像头失败,<br />点击屏幕调用摄像头!",
+						$('body').toast({
+							content:"点击屏幕调用摄像头!",
 							duration:3000
 						});			
 					}
@@ -116,8 +199,8 @@
 			} else {
 				$('#filebtn').show();
 				
-				$('.toast_div').toast({
-					content:"调用摄像头失败,<br />点击屏幕调用摄像头!",
+				$('body').toast({
+					content:"点击屏幕调用摄像头!",
 					duration:3000
 				});
 			}
@@ -299,7 +382,7 @@
 			$('.loading').addClass("curr")
 			localStorage.setItem('img',imgSrc)
 			setTimeout(function(){
-				window.location.href = "./show.html"
+				window.location.href = "./访客填写.html"
 			},2000)
 			return false;
 			$.ajax({
@@ -323,7 +406,7 @@
 		}
 		//提示
 		function showtoast(str){
-			$('.toast_div').toast({
+			$('body').toast({
 				content:str,
 				duration:3000
 			});

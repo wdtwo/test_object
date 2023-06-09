@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>我的访客</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css"/>
+	<link href="iosselect/iosSelect.css" rel="stylesheet" type="text/css">
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 1080));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+	
+</head>
+<body>
+	<div class="wrap p-b-150">
+		<div class="p-t-70 p-l-70 p-r-70">
+
+
+			<div class="nodata none flex flex-column f44 c-aaa p-t-120">
+				<img src="images/ico-notdata.svg" class="block w300">
+				<p class="m-t-20">暂无访客</p>
+			</div>
+
+
+			<!-- 待审核状态添加 changestate -->
+			<div class="content p-b-30 changestate">
+				<div class="state c-666">
+					<div>商务来访</div>
+					<p class="state-wait">待审核</p>
+					<!-- <p class="state-success">已审核</p>
+					<p class="state-reject">已驳回</p> -->
+				</div>
+				<div class="flex flex-jus-start">
+					<div class="person m-r-45">
+						<img src="images/ico-person.svg">
+					</div>
+					<div class="h335 flex flex-column flex-jus-between flex-item-start p-b-10">
+						<div class="f44 c-333 flex">
+							李白
+							<a href="tel:132131231" class="f36 c-active tel m-l-15 m-t-5">
+								13215487945
+							</a>
+						</div>
+						<div class="f36 c-aaa lh16">
+							370546754125478956<br>
+							鲁B57465<br>
+							凯利电子厂
+						</div>
+					</div>
+				</div>
+				<div class="f44 c-666 t-c p-t-30">
+					2023/06/06 08:30  -  2023/06/06 18:00
+				</div>
+			</div>
+			<div class="content p-b-30 changestate">
+				<div class="state c-666">
+					<div>商务来访</div>
+					<p class="state-wait">待审核</p>
+					<!-- <p class="state-success">已审核</p>
+					<p class="state-reject">已驳回</p> -->
+				</div>
+				<div class="flex flex-jus-start">
+					<div class="person m-r-45">
+						<img src="images/ico-person.svg">
+					</div>
+					<div class="h335 flex flex-column flex-jus-between flex-item-start p-b-10">
+						<div class="f44 c-333 flex">
+							李白
+							<a href="tel:132131231" class="f36 c-active tel m-l-15 m-t-5">
+								13215487945
+							</a>
+						</div>
+						<div class="f36 c-aaa lh16">
+							370546754125478956<br>
+							鲁B57465<br>
+							凯利电子厂
+						</div>
+					</div>
+				</div>
+				<div class="f44 c-666 t-c p-t-30">
+					2023/06/06 08:30  -  2023/06/06 18:00
+				</div>
+			</div>
+		</div>
+
+		<img src="images/logo.png" class="logo m-b-50">
+		<div class="footer f44 c-white flex">
+			<a href="/我的访客.html" class="flex">
+				<img src="./images/ico-footer1.svg">
+				我的访客
+			</a>	
+			<a href="./新增访客.html" class="flex">
+				<img src="./images/ico-footer2.svg">
+				新增访客
+			</a>	
+			<a href="./邀请来访.html" class="flex">
+				<img src="./images/ico-footer3.svg">
+				邀请来访
+			</a>	
+		</div>
+	</div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="iosselect/iosSelect.js"></script>
+	<script>
+
+		//审批选择框
+		var data = [
+			{'id': '1', 'value': '同意'},
+			{'id': '2', 'value': '拒绝'},
+		];
+		$('.changestate').click(function(){
+			let t = $(this)
+			console.log(t.data("state"));
+			if(!t.data("state")){
+				new IosSelect(1, 
+					[data],
+					{
+						container: '.container',
+						title: '审批',
+						itemHeight: 50,
+						itemShowCount: 3,
+						callback: function (selectOneObj) {
+							console.log(selectOneObj);
+							let str,className;
+							if(selectOneObj.id == 1){
+								str = '已审批'
+								className = "state-success"
+								
+							}else{
+								str = '已驳回'
+								className = "state-reject"
+							}
+							t.find('.state p').html(str)
+							t.find('.state p').attr('class',className)
+							t.data("state",true)
+						}
+					}
+				);
+			}
+		})
+	</script>
+</body>
+</html>

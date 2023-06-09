@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>访客凭条</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css"/>
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 1080));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+	
+</head>
+<body>
+	<div class="wrap p-b-150 card-page">
+		<div class="p-t-70 p-l-70 p-r-70">
+			<!-- 待审核状态添加 changestate -->
+			<div class="content p-b-30 flex flex-column">
+				<div class="card-person">
+					<!-- <img src="images/ico-person.svg"> -->
+					<img src="images/demo.jpg">
+				</div>
+				<div class="f60 c-666 m-t-25">
+					李白
+				</div>
+				<ul class="m-t-85 c-666 f40">
+					<li class="flex flex-jus-start">
+						<img src="images/ico-tel.svg">
+						<span>13214575465</span>
+					</li>
+					<li class="flex flex-jus-start">
+						<img src="images/ico-id.svg">
+						<span>370546754125478956</span>
+					</li>
+					<li class="flex flex-jus-start">
+						<img src="images/ico-car.svg">
+						<span>鲁B57465</span>
+					</li>
+					<li class="flex flex-jus-start">
+						<img src="images/ico-address.svg">
+						<span>凯利电子厂</span>
+					</li>
+				</ul>
+				<div class="f44 c-999 m-t-80">
+					来访 : <span>2023-06-06 08:00</span><br>
+					离访 : <span>2023-06-06 08:00</span>
+				</div>
+				<div class="f36 c-cf t-c m-t-40">
+					让所有人在任何城镇都能住上好酒店
+				</div>
+			</div>
+		</div>
+		<!-- <img src="images/logo.png" class="logo m-b-50"> -->
+	</div>
+</body>
+</html>
