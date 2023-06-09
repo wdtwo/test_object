@@ -915,7 +915,7 @@ a.tel {
 }
 .input-search .search-list ul li {
     width: 100%;
-    padding:0.2rem;
+    padding:0.35rem;
     border-bottom: 0.01rem solid #efefef;
 }
 .input-search .search-list ul li:last-child {
