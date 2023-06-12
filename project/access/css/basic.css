@@ -626,7 +626,7 @@ body {
     border-radius: 0.2rem;
     box-shadow: 0 .05rem 0.15rem rgba(0,0,0,0.15);
     padding:.46rem .35rem;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
     position: relative;
 }
 .content .state {
