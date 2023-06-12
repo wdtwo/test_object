@@ -63,21 +63,21 @@
 					<input type="tel" placeholder="请输入电话号码" class="tel">
 				</div>
 				<div class="input-group sel" data-sel='[{"id":"1","value":"身份证"},{"id":"2","value":"护照"},{"id":"3","value":"驾驶证"}]'>
-					<input type="text" value="身份证" readonly>
+					<input type="text" value="身份证" class="cardsel" readonly>
+				</div>
+				<div class="input-group required">
+					<input type="tel" placeholder="请输入证件号码" class="idcard" maxlength="18">
 				</div>
 				<div class="input-group">
-					<input type="tel" placeholder="请输入证件号码" maxlength="18">
+					<input type="text" placeholder="请输入车牌号码" class="carcard">
 				</div>
 				<div class="input-group">
-					<input type="tel" placeholder="请输入车牌号码">
+					<input type="text" placeholder="请输入单位名称" class="companyname">
 				</div>
 				<div class="input-group">
-					<input type="tel" placeholder="请输入单位名称">
+					<textarea placeholder="备注" class="notes"></textarea>
 				</div>
-				<div class="input-group">
-					<textarea placeholder="备注"></textarea>
-				</div>
-				<div class="input-group">
+				<div class="input-group flex flex-jus-end">
 					<button class="submit">立即应邀</button>
 				</div>
 			</div>
@@ -184,10 +184,48 @@
 				});
 				return false;
 			}
+			if(dayjs($('.starttime').val()).valueOf() >= dayjs($('.endtime').val()).valueOf()){
+				console.log('请选择正确的访问时间');
+				$('body').toast({
+					content:'请选择正确的访问时间',
+					duration:2000
+				});
+				return false;
+			}
+
+
+			var pattern
+			let cardSel = $('.cardsel').val()
+			if(cardSel == "身份证"){
+				// 正则表达式验证身份证号
+				pattern = /(^\d{15}$)|(^\d{17}([0-9]|X)$)/;
+			}
+			if(cardSel == "护照"){
+				// 正则表达式验证护照
+				pattern = /^[GE][0-9]{8}$/;
+			}
+			if(cardSel == "驾驶证"){
+				// 正则表达式验证驾驶证
+				pattern = /^[0-9]{12}$/;
+			}
+			// 验证证件号码
+			if(!pattern.test($('.idcard').val())){
+				console.log('请填写正确的证件号码');
+				$('body').toast({
+					content:'请填写正确的证件号码',
+					duration:2000
+				});
+				return false;
+			}
+
+			
 			//提交数据
 
 			//打开提示窗
 			$('.success').addClass('current')
+			window.setTimeout(function(){
+				window.location.href = './访客做凭条.html'
+			},2000)
 
 		})
 
