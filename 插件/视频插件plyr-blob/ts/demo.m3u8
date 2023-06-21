@@ -1,0 +1,15 @@
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.000000,
+http://test.wdtwo.com/object/blob/ts/demo0.ts
+#EXTINF:1.360000,
+http://test.wdtwo.com/object/blob/ts/demo1.ts
+#EXTINF:2.400000,
+http://test.wdtwo.com/object/blob/ts/demo2.ts
+#EXTINF:10.000000,
+http://test.wdtwo.com/object/blob/ts/demo3.ts
+#EXTINF:5.240000,
+http://test.wdtwo.com/object/blob/ts/demo4.ts
+#EXT-X-ENDLIST

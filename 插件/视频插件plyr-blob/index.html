@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
+    <script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
+    <script src="https://cdn.rawgit.com/video-dev/hls.js/18bb552/dist/hls.min.js"></script>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        html,body {
+            height:100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div style="display: flex;justify-content: center;align-items: center;width:100%;height:100%;">
+        <video controls crossorigin playsinline poster="111.jpg"></video>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const source = './ts/demo.m3u8';
+            const video = document.querySelector('video');
+            const player = new Plyr(video, {
+                captions: {active: true, update: true, language: 'en'}
+            });
+            if (!Hls.isSupported()) {
+                video.src = source;
+            } else {
+                const hls = new Hls();
+                hls.loadSource(source);
+                hls.attachMedia(video);
+                window.hls = hls;
+                player.on('languagechange', () => {
+                    setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
+                });
+            }
+            window.player = player;
+    });
+    </script>
+</body>
+</html>

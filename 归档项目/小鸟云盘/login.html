@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雲盤登錄</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <style>
+       *{margin:0;padding:0;}html,body,.view{width:100%;height:100%;overflow:hidden;}.view{display:flex;flex-direction:row;justify-content:center;align-items:center;}.flex{display:flex;flex-direction:row;justify-content:flex-end;align-items:flex-end;padding-right:7.5%;}.login{min-width:400px;background:white;box-shadow:0 0 15px rgba(0,0,0,0.1);border-radius:5px;padding:30px 0;}.title{font-size:32px;font-family:'ZCOOL XiaoWei',sans-serif;text-align:center;margin-bottom:25px;}.input-text{width:80%;height:30px;border:1px solid rgba(0,0,0,0.1);box-shadow:0;border-radius:5px;font-size:14px;padding:0 10px;display:block;margin:0 auto 13px;outline:none;}.input-text:focus{border:1px solid #409eff;}.input-btn{display:block;padding:0 15px;height:32px;border:none;background:#409eff;border-radius:5px;cursor:pointer;color:white;font-size:12px;margin-left:8px;}.input-btn:active{box-shadow:0 0 5px rgba(0,0,0,0.25) inset;}.input-btn.disabled{opacity:0.6;cursor:not-allowed;box-shadow:none!important;} 
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    
+    <div class="view">
+        <div class="login">
+            <div class="title">小鳥雲盤</div>
+            <input type="text" class="input-text" name="username" placeholder="用戶名" autocomplete="off" >
+            <input type="password" class="input-text" name="password" placeholder="密碼">
+            <div class="flex">
+                <input type="submit" class="input-btn submit" value="登錄">
+                <input type="button" class="input-btn disabled" value="註冊">
+            </div>
+        </div>
+    </div>
+    <script src="./src/mouse.min.js"></script>
+    <script type="text/javascript">
+        $.shuicheMouse({
+            type:11,
+            color:"rgba(187,67,128,1)"
+        })
+    </script>
+    <script>
+        let lock = false
+        $('.submit').click(function(){
+            if($("[name=username]").val().length < 6){
+                alert("用戶名小於六位")
+                return
+            }
+            if($("[name=password]").val().length < 6){
+                alert("密碼小於六位")
+                return
+            }
+            
+            if(lock){
+                return false;
+            }
+            lock = true
+            $.ajax({
+                url:"./verifyLogin.php",
+                method:"post",
+                data:{
+                    "username":$("[name=username]").val(),
+                    "password":$("[name=password]").val()
+                },
+                success(res){
+                    lock = false;
+                    //console.log(res);
+                    if(res.status == 200){
+                        window.location.href = "/index.html"
+                    }else{
+                        alert(JSON.parse(res).message)
+                    }
+                },
+                error(err){
+                    lock = false;
+                    //console.log(err);
+                    alert("請求服務器出錯!")
+                }
+            })
+        })
+
+    </script>
+</body>
+</html>

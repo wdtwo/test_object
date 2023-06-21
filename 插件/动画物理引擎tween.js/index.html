@@ -1,0 +1,538 @@
+<!DOCTYPE html> 
+<html lang="zh-cn">
+	<head>
+		<title>Tween.js / hello world!</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style>
+			* {
+				margin:0;
+				padding:0;
+				box-sizing: border-box;
+				font-size: 12px;
+			}
+			.box {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				position:absolute; top: 10px; left: 10px; width: 80px; height: 80px; background: #a0dde9;
+			}
+			.flex {
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-start;
+				align-items: flex-start;
+				flex-wrap: wrap;
+			}
+			.flex-center {
+				justify-content: center!important;
+				align-items: center!important;
+			}
+			ul {
+				width:100%;
+				height:auto;
+				padding:15px;
+			}
+			ul li {
+				width:200px;
+				height:200px;
+				background-color: #efefef;
+				position: relative;
+				list-style: none;
+				margin-right: 15px;
+				margin-bottom: 15px;
+				text-align: center;
+			}
+			ul.motion_curve li div.box {
+				width:10px;
+				height:10px;
+			}
+			#box4-1,
+			#box4-2,
+			#box4-3 {
+				width:50px;
+				height:50px;
+				background:white;
+				margin:5px;
+			}
+			#box5,#box6,#box7 {
+				width:50px;
+				height:50px;
+				background:white;
+				margin:5px;
+				position: absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+		<script src="src/Tween.js"></script>
+		<script src="js/createGraph.js"></script>
+	</head>
+	<body>
+		<h2>基本用法</h2>
+		<ul class="flex">
+			<li><div id="box1" class="box">基本用法</div></li>
+			<li id="box2">循环产生多个并绑定动画</li>
+			<li id="box3"></li>
+			<li class="flex flex-center">
+				<div id="box4-1" data-rotation="0" class="flex flex-center">once</div>
+				<div id="box4-2" data-rotation="0" class="flex flex-center">3 repeat</div>
+				<div id="box4-3" data-rotation="0" class="flex flex-center">Infinity</div>
+			</li>
+			<li class="flex flex-center">
+				<div id="box5" data-left="0" data-top="0" class="flex flex-center">步骤递进</div>
+			</li>
+			<li class="flex flex-center">
+				<div id="box6" data-rotation="0" data-x="0" data-y="0" class="flex flex-center">往复运动</div>
+			</li>
+			<li class="flex" style="padding:10px;justify-content: flex-end;">
+				<div>
+					<button id="start">start</button>
+					<button id="stop">stop</button>
+				</div>
+				<div id="box7" class="flex flex-center"></div>
+			</li>
+			<li id="box8">
+				
+			</li>
+		</ul>
+		<h2>动画过渡效果</h2>
+		<ul class="motion_curve flex">
+			<li>Linear.None<div id="animate1" class="box"></div></li>
+			<li>Quadratic.In<div id="animate2" class="box"></div></li>
+			<li>Quadratic.Out<div id="animate3" class="box"></div></li>
+			<li>Quadratic.InOut<div id="animate4" class="box"></div></li>
+			<li>Cubic.In<div id="animate5" class="box"></div></li>
+			<li>Cubic.Out<div id="animate6" class="box"></div></li>
+			<li>Cubic.InOut<div id="animate7" class="box"></div></li>
+			<li>Quartic.In<div id="animate8" class="box"></div></li>
+			<li>Quartic.Out<div id="animate9" class="box"></div></li>
+			<li>Quartic.InOut<div id="animate10" class="box"></div></li>
+			<li>Quintic.In<div id="animate11" class="box"></div></li>
+			<li>Quintic.Out<div id="animate12" class="box"></div></li>
+			<li>Quintic.InOut<div id="animate13" class="box"></div></li>
+			<li>Sinusoidal.In<div id="animate14" class="box"></div></li>
+			<li>Sinusoidal.Out<div id="animate15" class="box"></div></li>
+			<li>Sinusoidal.InOut<div id="animate16" class="box"></div></li>
+			<li>Exponential.In<div id="animate17" class="box"></div></li>
+			<li>Exponential.Out<div id="animate18" class="box"></div></li>
+			<li>Exponential.InOut<div id="animate19" class="box"></div></li>
+			<li>Circular.In<div id="animate20" class="box"></div></li>
+			<li>Circular.Out<div id="animate21" class="box"></div></li>
+			<li>Circular.InOut<div id="animate22" class="box"></div></li>
+			<li>Elastic.In<div id="animate23" class="box"></div></li>
+			<li>Elastic.Out<div id="animate24" class="box"></div></li>
+			<li>Elastic.InOut<div id="animate25" class="box"></div></li>
+			<li>Back.In<div id="animate26" class="box"></div></li>
+			<li>Back.Out<div id="animate27" class="box"></div></li>
+			<li>Back.InOut<div id="animate28" class="box"></div></li>
+			<li>Bounce.In<div id="animate29" class="box"></div></li>
+			<li>Bounce.Out<div id="animate30" class="box"></div></li>
+			<li>Bounce.InOut<div id="animate31" class="box"></div></li>
+		</ul>
+		<h2>补间动画</h2>
+		<ul class="flex">
+			<li>
+				Linear
+				<div id="inter1"></div>
+			</li>
+			<li>
+				Bezier
+				<div id="inter2"></div>
+			</li>
+			<li>
+				CatmullRom
+				<div id="inter3"></div>
+			</li>
+			<li>
+				start === end
+				<div id="inter4"></div>
+			</li>
+			<li>
+				1
+				<div id="inter5"></div>
+			</li>
+			<li>
+				2
+				<div id="inter6"></div>
+			</li>
+		</ul>
+
+		
+		<script>
+			//随机颜色
+			function randomColor(){
+				return `rgba(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},1)`;
+			}
+			//把过渡的过程显示出来
+			function animate(){
+				requestAnimationFrame(animate);
+				TWEEN.update();
+			}
+			animate()
+
+			//demo1
+			{
+				let box1 = document.querySelectorAll('#box1')[0];
+				let position = {x:10,y:10}
+				let demo1 = new TWEEN.Tween(position)
+					.delay(500)
+					.to({x:110,y:110},1000)
+					.easing(TWEEN.Easing.Elastic.InOut)
+					.onUpdate(function(){
+						box1.style.cssText = `left:${this.x}px;top:${this.y}px;`;
+					})
+				let demo1Back = new TWEEN.Tween(position)
+					.delay(500)
+					.to({x:10,y:10},1000)
+					.easing(TWEEN.Easing.Elastic.InOut)
+					.onUpdate(function(){
+						box1.style.cssText = `left:${this.x}px;top:${this.y}px;`;
+					})
+					demo1.chain(demo1Back)//执行完后接下一个动作
+					demo1Back.chain(demo1)//反复执行
+					demo1.start();
+			}
+			
+			//demo2
+			{
+				let box2 = document.querySelectorAll('#box2')[0];
+				for(let item in new Array(10).fill(1)){
+					let ele = document.createElement('div');
+						ele.style.cssText = `
+							border-radius:100px;
+							width:40px;
+							height:5px;
+							background:${randomColor()};
+							position:absolute;
+							left:10px;
+							top:${item*17+20}px;
+						`;
+					let eleObj = {x:20,ele:ele}
+					let tween = new TWEEN.Tween(eleObj)
+						.delay(Math.floor(Math.random()*500))
+						.to({x:130},2000)
+						.easing(TWEEN.Easing.Back.Out)
+						.onUpdate(function(){
+							this.ele.style.left = `${this.x}px`;
+						})
+					let tweenBack = new TWEEN.Tween(eleObj)
+						.delay(Math.floor(Math.random()*500))
+						.to({x:20},2000)
+						.easing(TWEEN.Easing.Back.Out)
+						.onUpdate(function(){
+							this.ele.style.left = `${this.x}px`;
+						})
+					box2.appendChild(eleObj.ele)
+					
+					tween.chain(tweenBack)
+					tweenBack.chain(tween)
+					tween.start();
+				}
+			}
+
+			//demo3
+			{
+				let box3 = document.querySelectorAll('#box3')[0];
+				let canvas = document.createElement('canvas');
+					canvas.style.cssText = 'background:#ccc';
+					canvas.width = 200;
+					canvas.height = 200;
+					box3.appendChild(canvas);
+				let ctx = canvas.getContext('2d');
+				let index = 0;
+				//ctx.clearRect(0,0,200,200);
+				for(let y = 0;y < 100;y++){
+					for(let x = 0;x < 100;x++){
+						ctx.fillStyle = `rgba(0,0,0,1)`;
+						ctx.fillRect(x*2,y*2,2,2);
+						let temp = { value : 0 }
+						var tween = new TWEEN.Tween(temp)
+							.to({ value: 1 }, 6000)
+							.delay((0.002*++index + Math.random()) * 700)
+							.easing(TWEEN.Easing.Elastic.InOut)
+							.onUpdate(function() {
+								ctx.fillStyle = `rgba(${Math.floor(this.value * 0xff)},0,0,1)`;
+								ctx.fillRect(x*10,y*10,10,10);
+							});
+						var tweenBack = new TWEEN.Tween(temp)
+							.to({ value: 0 }, 6000)
+							.delay((0.002*++index + Math.random()) * 700)
+							.easing(TWEEN.Easing.Elastic.InOut)
+							.onUpdate(function() {
+								ctx.fillStyle = `rgba(${Math.floor(this.value * 0xff)},0,0,1)`;
+								ctx.fillRect(x*10,y*10,10,10);
+							});
+						tween.chain(tweenBack)
+						tweenBack.chain(tween)
+						tween.start()
+					}
+				}
+			}
+
+			//运动曲线
+			{
+				let motion_curve = [
+					TWEEN.Easing.Linear.None,
+					TWEEN.Easing.Quadratic.In,
+					TWEEN.Easing.Quadratic.Out,
+					TWEEN.Easing.Quadratic.InOut,
+					TWEEN.Easing.Cubic.In,
+					TWEEN.Easing.Cubic.Out,
+					TWEEN.Easing.Cubic.InOut,
+					TWEEN.Easing.Quartic.In,
+					TWEEN.Easing.Quartic.Out,
+					TWEEN.Easing.Quartic.InOut,
+					TWEEN.Easing.Quintic.In,
+					TWEEN.Easing.Quintic.Out,
+					TWEEN.Easing.Quintic.InOut,
+					TWEEN.Easing.Sinusoidal.In,
+					TWEEN.Easing.Sinusoidal.Out,
+					TWEEN.Easing.Sinusoidal.InOut,
+					TWEEN.Easing.Exponential.In,
+					TWEEN.Easing.Exponential.Out,
+					TWEEN.Easing.Exponential.InOut,
+					TWEEN.Easing.Circular.In,
+					TWEEN.Easing.Circular.Out,
+					TWEEN.Easing.Circular.InOut,
+					TWEEN.Easing.Elastic.In,
+					TWEEN.Easing.Elastic.Out,
+					TWEEN.Easing.Elastic.InOut,
+					TWEEN.Easing.Back.In,
+					TWEEN.Easing.Back.Out,
+					TWEEN.Easing.Back.InOut,
+					TWEEN.Easing.Bounce.In,
+					TWEEN.Easing.Bounce.Out,
+					TWEEN.Easing.Bounce.InOut];
+				for(let i = 0;i < motion_curve.length;i++){
+					let position = {x:10,y:10}
+					let ele = document.querySelectorAll('#animate' + (1+i))[0];
+						ele.after(createGraph(motion_curve[i]))
+					let tween = new TWEEN.Tween(position)
+						.delay(1000)
+						.to({x:180,y:180},500)
+						.easing(motion_curve[i])
+						.onUpdate(function(){
+							ele.style.cssText = `left:${this.x}px;top:${this.y}px;`;
+						})
+					let tweenBack = new TWEEN.Tween(position)
+						.delay(1000)
+						.to({x:10,y:10},500)
+						.easing(motion_curve[i])
+						.onUpdate(function(){
+							ele.style.cssText = `left:${this.x}px;top:${this.y}px;`;
+						})
+						tween.chain(tweenBack)
+						tweenBack.chain(tween)
+						tween.start();
+				}
+			}
+
+			//补间动画
+			{
+				let arr = [
+					TWEEN.Interpolation.Linear,
+					TWEEN.Interpolation.Bezier,
+					TWEEN.Interpolation.CatmullRom,
+					TWEEN.Interpolation.Linear,
+					TWEEN.Interpolation.Bezier,
+					TWEEN.Interpolation.CatmullRom
+				];
+				let width = 180,height=130;
+				let min = 1 / 6,
+					max = 5 / 6;
+				let x0 = width * min,
+					y0 = height / 2,
+					xA = [ width * max, width / 2 ],
+					yA = [ height * min, height * max ];
+
+				for(let i = 1;i <= 6;i++){
+					let ele = document.querySelectorAll('#inter'+i)[0];
+					let canvas = document.createElement('canvas');
+						canvas.width = width;
+						canvas.height = height;
+						canvas.style.background = '#fff';
+						ele.appendChild(canvas)
+					let ctx = canvas.getContext('2d');
+
+						//绘制坐标点
+						ctx.fillStyle = "rgb(250,250,250)";
+						ctx.fillRect( 0, 0, width, height );
+						ctx.fillStyle = "rgb(200,200,200)";
+						ctx.fillRect( x0 - 3, y0 - 3, 6, 6 );
+						ctx.fillRect( xA[ xA.length - 1 ] - 3, yA[ yA.length - 1 ] - 3, 6, 6 );
+						if(i >= 4){
+							//闭合路径 起点坐标和终点坐标相同
+							xA.push(x0)
+							yA.push(y0)
+						}
+						for ( var j = 0; j < xA.length; j++ ) {
+							ctx.fillRect( xA[j] - 2, yA[j] - 2, 4, 4 );
+						}
+
+						//绘制线
+						ctx.lineWidth = 2;
+						ctx.strokeStyle = "rgba(255,127,127,0.9)";
+					let obj = { x: x0, y: y0, old: { x: x0, y: y0 } };
+					new TWEEN.Tween( obj )
+						.to( { x: xA, y: yA }, 3000 )
+						.onUpdate( function() {
+							ctx.beginPath();
+							ctx.moveTo( this.old.x, this.old.y );
+							ctx.lineTo( this.x, this.y );
+							ctx.closePath();
+							ctx.stroke();
+							this.old.x = this.x;
+							this.old.y = this.y;
+						})
+						.interpolation( arr[i-1] )
+						.easing( TWEEN.Easing.Linear.None )
+						.delay( 250 )
+						.start(); 
+				}
+			}
+			
+			//repeat
+			{
+				//一次
+				let box41 = document.querySelectorAll('#box4-1')[0];
+				new TWEEN.Tween(box41.dataset)
+				.to({rotation: 360},2000)
+				.repeat(0)
+				.onUpdate(function(){
+					var s         = box41.style,
+						transform = 'rotate(' + Math.floor( this.rotation ) + 'deg)';
+						s.webkitTransform = transform;
+						s.mozTransform = transform;
+						s.transform = transform;
+				}).start()
+				//三次
+				let box42 = document.querySelectorAll('#box4-2')[0];
+				new TWEEN.Tween(box42.dataset)
+				.to({rotation: 360},2000)
+				.repeat(2)
+				.onUpdate(function(){
+					var s         = box42.style,
+						transform = 'rotate(' + Math.floor( this.rotation ) + 'deg)';
+						s.webkitTransform = transform;
+						s.mozTransform = transform;
+						s.transform = transform;
+				}).start()
+				//无限
+				let box43 = document.querySelectorAll('#box4-3')[0];
+				new TWEEN.Tween(box43.dataset)
+				.to({rotation: 360},2000)
+				.repeat(Infinity)
+				.onUpdate(function(){
+					var s         = box43.style,
+						transform = 'rotate(' + Math.floor( this.rotation ) + 'deg)';
+						s.webkitTransform = transform;
+						s.mozTransform = transform;
+						s.transform = transform;
+				}).start()
+			}
+
+			//阶段改变数值
+			{
+				var box5 = document.getElementById( 'box5' );
+				tween1 = new TWEEN.Tween( box5.dataset )
+					.to({top:"+20",left:"+20"},500)
+					.repeat( 6 )
+					.delay( 500 )
+					.easing( TWEEN.Easing.Exponential.In )
+					.onUpdate( function() {
+						this.top = Math.round(this.top);
+						this.left = Math.round(this.left);
+						box5.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+					})
+					.start();
+			}
+
+			//往复运动
+			{
+				var box6 = document.getElementById( 'box6' );
+				new TWEEN.Tween( box6.dataset )
+					.to( { rotation: 360, x: 130, y: 130 }, 750 )
+					.repeat( Infinity )
+					.delay( 1000 )
+					.yoyo( true )
+					.easing( TWEEN.Easing.Cubic.InOut )
+					.onUpdate( function() {
+						box6.style.transform = `translateX(${Math.round(this.x)}px) translateY(${Math.round(this.y)}px) rotate(${Math.floor( this.rotation )}deg)`;
+					})
+					.start()
+			}
+			//按钮控制
+			{
+				var box7  = document.getElementById('box7');
+				var start = document.getElementById('start');
+				var stop  = document.getElementById('stop');
+				var t0;
+				var p0 = { x: 0};
+				start.onclick = function() {
+					if (!t0) {
+						t0 = new TWEEN.Tween(p0)
+						.to({ x: 140 }, 500)
+						.delay(1000)
+						.repeat(Infinity)
+						.yoyo(true)
+						.easing(TWEEN.Easing.Elastic.InOut)
+						.onUpdate(function() {
+							box7.style.left = p0.x + 'px';
+							box7.style.top  = p0.x + 'px';
+						})
+						.onComplete(function() {
+							p0.x = 0;
+							box7.style.left = p0.x + 'px';
+							box7.style.top  = p0.x + 'px';
+						});
+					}
+					t0.start();
+				};
+				stop.onclick = function () {
+					t0.stop();
+				};
+			}
+
+			//canvas绑定统一对象的动画 box8
+			{
+				let width = 200;
+				let height = 200;
+				let box8 = document.querySelectorAll('#box8')[0];
+				let canvas = document.createElement('canvas');
+					canvas.width = width;
+					canvas.height = height;
+					box8.appendChild(canvas);
+				let context = canvas.getContext('2d');
+
+				var rabbit = { x: width - 30, y: 30 };
+				new TWEEN.Tween( rabbit ).to( { x: width - 30, y: height - 30 }, 1500 ).onUpdate( function() {
+					//清空画布
+					context.fillStyle = "rgb(240,250,240)";
+					context.fillRect( 0, 0, 200, 200 );
+					//圆形
+					context.save();
+					context.fillStyle = "rgb(150,150,150)";
+					context.translate( this.x, this.y );
+					context.beginPath();
+					context.arc( 0, 0, 20, 0, Math.PI * 2, true );
+					context.fill();
+					context.restore();
+				} ).start();
+				var fox = { x: 20, y: 20 };
+				new TWEEN.Tween( fox ).to( rabbit, 1500 ).onUpdate( function() {
+					//方形
+					context.fillStyle = "rgb(200,80,80)";
+					context.save();
+					context.translate( this.x, this.y );
+					context.beginPath();
+					//context.arc( 0, 0, 10, 0, Math.PI * 2, true );
+					context.fillRect(-10,-10,20,20)
+					context.closePath();
+					context.fill();
+					context.restore();
+				} ).start();
+			}
+		</script>
+	</body>
+</html>

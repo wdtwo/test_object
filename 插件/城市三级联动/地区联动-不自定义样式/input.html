@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<select id="s_province" class="w110 coTime" name="s_province"></select>&nbsp;&nbsp;
+	<select id="s_city" class="w110 coTime" name="s_city" ></select>&nbsp;&nbsp;
+	<select id="s_county" class="w110 coTime" name="s_county"></select>
+	
+	<script src="jquery.js"></script>
+	<script src="area.js"></script>
+	<script>
+		// 省市联动初始化
+		_init_area();
+			var Gid  = document.getElementById ;
+			var showArea = function(){
+				Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" + 	
+				Gid('s_city').value + " - 县/区" + 
+				Gid('s_county').value + "</h3>"
+			}
+	</script>
+</body>
+</html>
