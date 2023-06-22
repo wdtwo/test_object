@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    
+	<link rel="stylesheet" href="/vendor/charts/sparkline/sparkline.css">
+	<script src="/vendor/charts/sparkline/jquery.sparkline.js"></script>
+
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class=" page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Sparkline 图表</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="http://omnipotent.net/jquery.sparkline/" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <header class="panel-heading">
+                <h3 class="panel-title">基本</h3>
+            </header>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-md-6 col-xl-3">
+                        <div class="example-wrap m-lg-0">
+                            <h4 class="example-title">饼状图</h4>
+                            <div class="example text-center">
+                                <div class="sparkline-pie-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <div class="example-wrap m-lg-0">
+                            <h4 class="example-title">折线图</h4>
+                            <div class="example text-center">
+                                <div class="sparkline-line-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <div class="example-wrap m-sm-0">
+                            <h4 class="example-title">柱状图</h4>
+                            <div class="example text-center">
+                                <div class="sparkline-bar-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <div class="example-wrap">
+                            <h4 class="example-title">组合图</h4>
+                            <div class="example text-center">
+                                <div class="sparkline-compositebar-chart">4,6,7,5,4,3,2,4,8,5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <header class="panel-heading">
+                <h3 class="panel-title">类型</h3>
+            </header>
+            <table class="table table-striped">
+                <tr>
+                    <td>内联</td>
+                    <td>
+                        <span class="sparkline-line">10,8,9,3,5,8,5</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>折线图</td>
+                    <td>
+                        <span class="sparkline-line">8,4,0,0,0,0,1,4,4,10,10,10,10,0,0,0,4,6,5,9,10</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>柱状图</td>
+                    <td>
+                        <span class="sparkline-bar">10,8,9,3,5,8,5</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>负值</td>
+                    <td>
+                        <span class="sparkline-bar">-3,1,2,0,3,-1</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>堆叠</td>
+                    <td>
+                        <span class="sparkline-bar">0:2,2:4,4:2,4:1</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>折线组合图</td>
+                    <td>
+                        <span class="sparkline-compositeline">8,4,0,3,0,3,1,4,4,10,4,10,0,1,4,6,5,9,10</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>范围折线图</td>
+                    <td>
+                        <span class="sparkline-normalline">8,4,0,2,8,3,1,9,4,10,5,10,8,0,3,2,4</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>组合柱状图</td>
+                    <td>
+                        <span class="sparkline-compositebar">4,6,7,7,4,3,2,1,4</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>离散图</td>
+                    <td>
+                        <span class="sparkline-discrete1">4,6,7,7,4,3,2,1,4,4,5,6,7,6,6,2,4,5,4,6,7,7,4,3,2,1,4,4,5,6,7,6,6,2,4,5</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分界离散图</td>
+                    <td>
+                        <span class="sparkline-discrete2">4,6,7,7,4,3,2,1,4,6,7,7,4,3,2,1,4,2,1,4,6,7,7,4,3,4,6,7,7,4,3,2,1,4,2,1,4,6,7,7,4,3</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+	/* 饼状图 */
+	$(".sparkline-pie-chart").sparkline(
+		[6,2,4], {
+			type: 'pie',
+			'width':150,
+			'height':150,
+			sliceColors: ['#9463F7','#8349F5','#A57AFA']
+		}
+	);
+	/* 折线图 */
+	$(".sparkline-line-chart").sparkline(
+		[5,6,7,9,9,5,3,2,2,4,6,7 ], {
+			type: 'line',
+			width: '200',
+			height: '150',
+			lineColor: '#fc1e60',//线颜色
+			fillColor: '#ffdbff',//填充色
+			spotColor: '#40dd40',//终点色
+			minSpotColor: '#d38d3d',//最小值
+			maxSpotColor: '#ad783c',//最大值
+			highlightSpotColor: 'yellow',//标尺交点颜色
+			highlightLineColor: 'green'//标尺颜色
+		}
+	);
+	/* 柱状图 */
+	$(".sparkline-bar-chart").sparkline(
+		[5,6,7,9,9,5,3,2,2,4,6,7 ], {
+			type: 'bar',
+			width: '200',
+			height: '150',
+			barWidth: 17,
+			barSpacing: 10,
+			barColor: '#7090d1',
+			negBarColor: '#ad2626',
+			zeroColor: '#86d688'
+		}
+	);
+	/* 组合图 */
+	(function(){
+		$('.sparkline-compositebar-chart').sparkline(
+			'html', { 
+				type: 'bar', 
+				barColor: '#aaf' ,
+				width: '200',
+				height: '150',
+				barWidth: 17,
+				barSpacing: 10,
+			});
+		$('.sparkline-compositebar-chart').sparkline(
+			[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7], { 
+				composite: true, 
+				fillColor: false, 
+				lineColor: 'green' 
+			}
+		);
+		$('.sparkline-compositebar-chart').sparkline(
+			[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7].reverse(), { 
+				composite: true, 
+				fillColor: false, 
+				lineColor: 'red' 
+			}
+		);
+	})()
+	/* 折线图 内联样式 */
+	$('.sparkline-line').sparkline('html',{
+		width:150,
+		height:50,
+		type: 'line',
+		lineColor: '#fc1e60',//线颜色
+		fillColor: '#ffdbff',//填充色
+	});
+
+	/* 柱状图 */
+	$('.sparkline-bar').sparkline('html', {
+		type: 'bar',
+		width:200,
+		barWidth: 10,
+		barSpacing: 5,
+	})
+    /* 折线组合图 */
+	$('.sparkline-compositeline').sparkline('html', {
+        width:150,
+		height:50,
+		type: 'line',
+		lineColor: '#fc1e60',//线颜色
+        fillColor: false
+	})
+    $('.sparkline-compositeline').sparkline(
+        [4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7], 
+        { composite: true, fillColor: false, lineColor: 'green', changeRangeMin: 0, chartRangeMax: 10 }
+    );
+    /* 范围折线图 */
+    $('.sparkline-normalline').sparkline('html',{ width:150,height:50,fillColor: false, normalRangeMin: -1, normalRangeMax: 8 });
+    /* 组合柱状图 */
+    $('.sparkline-compositebar').sparkline('html', {  barWidth: 10,barSpacing: 5,type: 'bar', barColor: '#aaf' });
+    $('.sparkline-compositebar').sparkline([4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7], 
+        { composite: true, fillColor: false, lineColor: 'red' });
+    /* 离散图 */
+    $('.sparkline-discrete1').sparkline('html', 
+        { type: 'discrete', lineColor: 'blue', xwidth: 18 });
+    $('.sparkline-discrete2').sparkline('html', 
+        { type: 'discrete', lineColor: 'blue', thresholdColor: 'red', thresholdValue: 4 });
+</script>
+</body>
+</html>

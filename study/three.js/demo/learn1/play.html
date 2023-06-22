@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于三维空间的曲线运动</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+            "imports":{
+                "three":"./src/three.module.js"
+            }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three'
+        import {OrbitControls} from './src/OrbitControls.js'
+        import {GLTFLoader} from './src/GLTFLoader.js'
+        import Stats from './src/stats.module.js';
+        let stats;
+			stats = new Stats();
+
+        document.body.appendChild( stats.dom );
+        //创建一个3D场景
+        const scene = new THREE.Scene()
+
+        //创建一个透视相机
+        let width = window.innerWidth,
+            height = window.innerHeight;
+        const camera = new THREE.PerspectiveCamera( 30, width / height, 1, 1000 );
+        //设置相机的位置
+        camera.position.set(100,100,100)
+        //设置相机的拍摄方向
+        camera.lookAt(0,0,0)
+        //添加3D坐标系
+        const axes = new THREE.AxesHelper(300)
+        scene.add(axes)
+
+        //.1创建示意点坐标
+        const initialPoints = [
+            { x: 10, y: 10, z: -10 },
+            { x: 10, y: 0, z: 10 },
+            { x: -10, y: 0, z: 10 },
+            { x: -10, y: 0, z: -10 }
+        ];
+        const addCube=(pos)=>{
+            const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+            const material = new THREE.MeshBasicMaterial({
+                color:0xffffff,
+                transparent:true,
+                opacity:0
+            });
+            const cube = new THREE.Mesh(geometry, material);
+            cube.position.copy(pos);
+            scene.add(cube);
+            return cube
+        }
+        //循环添加点
+        const cubeList = initialPoints.map(pos => {
+            return addCube(pos);
+        });
+        //.2根据点绘制曲线
+        const curve = new THREE.CatmullRomCurve3(
+            cubeList.map((cube) => cube.position) // 直接绑定方块的position以便后续用方块调整曲线
+        );
+        curve.curveType = 'chordal'; // 曲线类型
+        curve.closed = true; // 曲线是否闭合
+
+        const points = curve.getPoints(50); // 50等分获取曲线点数组
+        const line = new THREE.LineLoop(
+            new THREE.BufferGeometry().setFromPoints(points),
+            new THREE.LineBasicMaterial({ color: 0x00ff00 })
+        ); // 绘制实体线条，仅用于示意曲线，后面的向量线条同理，相关代码就省略了
+        scene.add(line);
+
+
+        //运动的小块
+        let mesh = null
+        const geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
+        const material = new THREE.MeshBasicMaterial(0xffffff);
+        mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        
+        //.3获取曲线上的特定位置的点 修改物体位置
+        //有了曲线之后，可以通过 getPointAt 函数获取曲线上特定位置的点向量，然后复制给物体的 position
+        function changePosition (t) {
+            const position = curve.getPointAt(t); // t: 当前点在线条上的位置百分比，后面计算
+            mesh.position.copy(position);
+            //相机位置跟随小块
+            //camera.position.set(position.x+10,position.y+10,position.z+10)
+        }
+        //.4获取曲线上特定位置的切线,修改物体朝向
+        function changeLookAt (t) {
+            const tangent = curve.getTangentAt(t);
+            const lookAtVec = tangent.add(mesh.position); // 位置向量和切线向量相加即为所需朝向的点向量
+            mesh.lookAt(lookAtVec);
+            //相机视角跟随切线
+            //camera.lookAt(lookAtVec)
+        }
+        //.5随时间实时改变物体位置和朝向
+        const loopTime = 10 * 1000; // loopTime: 循环一圈的时间
+        //在渲染函数中获取当前时间
+        const clock = new THREE.Clock();
+        const render = () => {
+            let time = Date.now();
+            let t = (time % loopTime) / loopTime; // 计算当前时间进度百分比
+            changePosition(t);
+            changeLookAt(t);
+            if(mixers){
+                const delta = clock.getDelta();
+                mixers.update( delta );
+            }
+            stats.update();
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+        requestAnimationFrame(render);
+
+        const ambient = new THREE.AmbientLight('ffffff',.4)
+        scene.add(ambient)
+        const point = new THREE.PointLight('ffffff',1)
+        point.position.set(100,80,50)
+        scene.add(point)
+
+        const loader = new GLTFLoader();
+        let mixers;
+        loader.load( './models/Parrot.glb', function ( gltf ) {
+            mesh = gltf.scene
+            mesh.scale.set(0.1,0.1,0.1)
+            mesh.position.set(0,0,0)
+            scene.add( gltf.scene );
+            //动画混合器
+            const mixer = new THREE.AnimationMixer( mesh );
+            console.log(gltf);
+            mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
+            mixers = mixer
+        } );
+
+
+
+
+        //创建一个webgl渲染器
+        const renderer = new THREE.WebGLRenderer({
+            //alpha:true
+        })
+        //设置渲染的宽高
+        renderer.setSize(width,height)
+        //执行渲染
+        renderer.render(scene,camera)
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        //输出到页面
+        document.body.appendChild(renderer.domElement)
+        //相机轨道控制器
+        let control = new OrbitControls(camera,renderer.domElement)
+
+        // //.6添加曲线修改功能
+        //import { TransformControls} from './src/TransformControls.js'
+        // const control = new TransformControls(camera, renderer.domElement);
+        // // 获取点击位置
+        // const mouse = new THREE.Vector2();
+        // renderer.domElement.addEventListener(
+        //     'click',
+        //     (event) => {
+        //         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        //         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        //         // 方块点击检测
+        //         const rayCaster = new THREE.Raycaster();
+        //         rayCaster.setFromCamera(mouse, camera);
+        //         const intersects = rayCaster.intersectObjects(cubeList);
+        //         if (intersects.length) {
+        //             const target = intersects[0].object;
+        //             control.attach(target); // 绑定controls和方块
+        //             scene.add(control);
+        //         }
+        //         // 修改曲线后同步修改实体线条
+        //         control.addEventListener('dragging-changed', (event) => {
+        //             if (!event.value) {
+        //                 const points = curve.getPoints(50);
+        //                 line.geometry.setFromPoints(points);
+        //             }
+        //         });
+        //     },
+        //     false
+        // );
+       
+
+
+
+
+
+
+        // // 轨道分段数
+        // let railNum = 50;
+        // // 导入模型
+        // const loader = new GLTFLoader().setPath('./model/');
+        // loader.load('Horse.glb', (gltf) => {
+        //     // 轨道容器
+        //     const railway = new THREE.Object3D();
+        //     let position = new THREE.Vector3();
+        //     let tangent = new THREE.Vector3();
+        //     for (let i = 0; i < railNum; i++) {
+        //         // 复制多段轨道模型
+        //         let model = gltf.scene.clone();
+        //         railway.add(model);
+                
+        //         // 这里和前面一样通过获取位置和切线向量去计算每段轨道的朝向
+        //         position = curve.getPointAt(i / railNum);
+        //         tangent = curve.getTangentAt(i / railNum);
+        //         model.position.copy(position);
+        //         model.lookAt(tangent.add(position));
+        //     }
+        //     scene.add(railway);
+        // });
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

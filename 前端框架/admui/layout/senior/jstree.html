@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title>笔记 - UI示例</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+	<link rel="stylesheet" href="/vendor/animsition/animsition.css"/>
+	<link rel="stylesheet" href="/vendor/jstree/themes/default/style.css">
+	<link rel="stylesheet" href="/vendor/jstree/themes/jstree.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+	<div class="page animation-fade">
+	    <div class="page-header">
+	        <h1 class="page-title">JsTree</h1>
+	        <div class="page-header-actions">
+	            <a class="btn btn-inverse btn-round" href="http://jstree.com/" target="_blank">
+	                <i class="icon wb-link" aria-hidden="true"></i> 官网</a>
+	        </div>
+	    </div>
+	    <div class="page-content">
+
+	        <div class="panel">
+	            <div class="panel-heading">
+	                <h3 class="panel-title">基础示例</h3>
+	            </div>
+	            <div class="panel-body container-fluid">
+	                <div class="row row-lg">
+	                    <div class="col-xl-4 col-md-4">
+
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">HTML</h4>
+	                            <div class="example">
+	                                <div id="demo1">
+	                                    <ul>
+	                                        <li>父节点
+	                                            <ul>
+	                                                <li data-jstree='{"selected":true}'>子节点 1</li>
+	                                                <li>子节点 2</li>
+	                                            </ul>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                    </div>
+	                    <div class="col-xl-4 col-md-4">
+
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">js数据</h4>
+	                            <div class="example">
+	                                <div id="demo2"></div>
+	                            </div>
+	                        </div>
+
+	                    </div>
+	                    <div class="col-xl-4 col-md-4">
+
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">Ajax</h4>
+	                            <div class="example">
+	                                <div id="demo3"></div>
+	                            </div>
+	                        </div>
+
+	                    </div>
+	                    <div class="col-xl-4 col-md-4">
+
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">懒加载</h4>
+	                            <div class="example">
+	                                <div id="demo4"></div>
+	                            </div>
+	                        </div>
+
+	                    </div>
+	                    <div class="col-md-4 col-md-4">
+
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">从回调函数中获取数据</h4>
+	                            <div class="example">
+	                                <div id="demo5"></div>
+	                            </div>
+	                        </div>
+
+	                    </div>
+	                    <div class="col-md-4 col-md-4">
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">交互和事件</h4>
+	                            <div class="example">
+	                                <div id="demo6"></div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-4 col-md-4">
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">API demo</h4>
+	                            <div class="example">
+	                                <div id="demo7"></div>
+	                            </div>
+	                            <button class="btn btn-default">button</button>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="panel">
+	            <div class="panel-heading">
+	                <div class="panel-heading">
+	                    <h3 class="panel-title">使用插件</h3>
+	                </div>
+	            </div>
+	            <div class="panel-body container-fluid">
+	                <div class="row row-lg">
+	                    <div class="col-xl-4 col-md-6">
+	                        <div class="example-warp">
+	                            <h4 class="example-title">
+									复选框
+	                            </h4>
+	                            <p>
+	                                <code>"plugins":["checkbox"]</code>
+	                            </p>
+	                            <div class="example">
+	                                <div id="demo11"></div>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="col-xl-4 col-md-6">
+	                        <div class="example-warp">
+	                            <h4 class="example-title">
+									右键菜单
+	                            </h4>
+	                            <p>
+	                                <code>"plugins":["contextmenu"]</code>
+	                            </p>
+	                            <div class="example">
+	                                <div id="demo12">
+	                                	<ul>
+	                                        <li>父节点
+	                                            <ul>
+	                                                <li data-jstree='{"selected":true}'>子节点 1</li>
+	                                                <li>子节点 2</li>
+	                                            </ul>
+	                                        </li>
+	                                    </ul>
+	                                    <ul>
+	                                        <li>父节点
+	                                            <ul>
+	                                                <li>子节点 1</li>
+	                                                <li>子节点 2</li>
+	                                            </ul>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="col-xl-4 col-md-6">
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">
+									搜索
+	                            </h4>
+	                            <p>
+	                                <code>"plugins":["search"]</code>
+	                            </p>
+	                            <div class="example">
+	                                <div class="form-group">
+	                                    <div class="input-search" id="jstreeSearch">
+	                                        <input type="search" class="form-control form-control-sm" placeholder="查找 ...">
+	                                        <button type="button" class="input-search-btn">
+	                                            <i class="icon wb-search"></i>
+	                                        </button>
+	                                    </div>
+	                                </div>
+	                                <div id="demo13">
+	                                	<ul>
+	                                        <li>父节点
+	                                            <ul>
+	                                                <li data-jstree='{"selected":true}'>子节点 1</li>
+	                                                <li>子节点 2</li>
+	                                            </ul>
+	                                        </li>
+	                                    </ul>
+	                                    <ul>
+	                                        <li>父节点
+	                                            <ul>
+	                                                <li>子节点 1</li>
+	                                                <li>子节点 2</li>
+	                                            </ul>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="col-xl-4 col-md-6">
+	                        <div class="example-wrap">
+	                            <h4 class="example-title">
+									拖动
+	                            </h4>
+	                            <p>
+	                                <code>"plugins":["dnd"]</code>
+	                            </p>
+	                            <div class="example">
+	                                <div id="demo14">
+	                                	<ul>
+	                                        <li>父节点
+	                                            <ul>
+	                                                <li data-jstree='{"selected":true}'>子节点 1</li>
+	                                                <li>子节点 2</li>
+	                                            </ul>
+	                                        </li>
+	                                    </ul>
+	                                    <ul>
+	                                        <li>父节点
+	                                            <ul>
+	                                                <li>子节点 1</li>
+	                                                <li>子节点 2</li>
+	                                            </ul>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                </div>
+	            </div>
+	        </div>
+
+	    </div>
+	</div>
+	<!-- Vendor JS -->
+	<script src="/vendor/jstree/jstree.min.js"></script>
+	<script>
+		/* https://blog.csdn.net/jason_renyu/article/details/79168940 */
+		$("#demo1").jstree();
+		$("#demo2").jstree({
+			'core' : {
+		        'data' : [
+		            {
+		                "text" : "Root node",
+		                "state" : {"opened" : false },
+		                "children" : [
+		                    {
+			                    "text" : "Child node 1",
+		                    },
+		                    {
+		                    	"text" : "Child node 2",
+		                    }
+		                ]
+		        	},
+		        	{
+		                "text" : "Root node",
+		                "state" : {"opened" : true },
+		                "children" : [
+		                    {
+			                    "text" : "Child node 1",
+			                    "state" : { "selected" : true },
+			                    "icon" : "glyphicon glyphicon-flash"
+		                    },
+		                    { "text" : "Child node 2", "state" : { "disabled" : true } }
+		                ]
+		        	},
+		        ]
+		    }
+		});
+
+		/* ajax */
+		$("#demo3").jstree({
+			'core' : {
+				'data' : {
+					'url' : '/datas/jstreedemo1.json',
+					'data' : function(data){
+						return {'id' : data};
+					}
+				}
+			}
+		});
+		/* 懒加载 */
+		$("#demo4").jstree({
+			'core' : {
+				'data' : {
+					'url' : '/datas/jstreedemo2.json',
+					'data' : function(data){
+						return {'id' : data};
+					}
+				}
+			}
+		});
+
+		/* 从回调函数中获取数据 */
+		$("#demo5").jstree({
+			'core' : {
+				'data' : function (node,cb){
+					if(node.id === "#") {
+						setTimeout(function(){
+							cb([{"text" : "Root", "id" : "1", "children" : true}]);
+						},3000)
+
+			        }else {
+			        	setTimeout(function(){
+							cb(["Child"]);
+						},3000)
+			        }
+				}
+			}
+		});
+		/* 从回调函数中获取数据 */
+		$("#demo6").jstree({
+			'core' : {
+				'data' : [
+			        {"id" : 1, "text" : "Node 1"},
+			        {"id" : 2, "text" : "Node 2"},
+			    ]
+			}
+		});
+		$('#demo6').on("changed.jstree", function (e, data) {
+		    console.log("The selected nodes are:");
+		    console.log(data.selected);
+		    console.log(data.instance.get_selected(true)[0].text);
+  			console.log(data.instance.get_node(data.selected[0]).text);
+		});
+
+		/* API demo */
+		$('#demo7').jstree({
+		    'core' : {
+		        'data' : [
+			        {"id" : 1, "text" : "Node 1"},
+			        {"id" : 2, "text" : "Node 2"},
+		        ]
+		    }
+		});
+		$('.btn').on("click", function () {
+		    var instance = $('#demo7').jstree(true);
+		    instance.deselect_all();
+		    instance.select_node('1');
+		});
+
+		/* 插件 plugins */
+		/* 复选框 */
+		$("#demo11").jstree({
+		    "core" : { // 核心的配置
+		    	'data' : [
+		            {
+		                "text" : "Root node",
+		                "state" : {"opened" : false },
+		                "children" : [
+		                    {
+			                    "text" : "Child node 1",
+		                    },
+		                    {
+		                    	"text" : "Child node 2",
+		                    }
+		                ]
+		        	},
+		        	{
+		                "text" : "Root node",
+		                "state" : {"opened" : true },
+		                "children" : [
+		                    {
+			                    "text" : "Child node 1",
+			                    "state" : { "selected" : true },
+		                    },
+		                    { "text" : "Child node 2"}
+		                ]
+		        	},
+		        ]
+		    },
+		    "plugins" : ["checkbox"]
+		});
+		/* 右键菜单 */
+		$("#demo12").jstree({
+		    "core" : {
+		    	"check_callback" : true,
+		    }, // so that modifying operations work
+		    "plugins" : ["contextmenu"]
+		});
+
+		/* 搜索 */
+		$("#demo13").jstree({
+		    "core" : {
+		    	"check_callback" : true,
+		    },
+		    "plugins" : ["search"]
+		});
+		$("#jstreeSearch button").on('click',function() {
+		    $("#demo13").jstree(true).search($("#jstreeSearch input").val());
+		});
+
+		/* 拖动 */
+		$("#demo14").jstree({
+		    "core" : {
+		    	"check_callback" : true,
+		    }, // so that modifying operations work
+		    "plugins" : ["dnd"]
+		});
+
+
+	</script>
+</body>
+</html>

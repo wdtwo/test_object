@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    
+    <script src="/vendor/charts/morris/raphael.min.js"></script>
+	<link rel="stylesheet" href="/vendor/charts/morris/morris.css">
+	<script src="/vendor/charts/morris/morris.js"></script>
+
+    <script src="/vendor/mock.js"></script>
+</head>
+
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class=" page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Morris 图表</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="http://morrisjs.github.com/morris.js" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content container-fluid">
+
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap m-md-0">
+                            <h4 class="example-title">曲线图</h4>
+                            <p>使用
+                                <code>Morris.Line(options)</code>创建曲线图</p>
+                            <div class="example">
+                                <div id="exampleMorrisLine"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">区域图</h4>
+                            <p>使用
+                                <code>Morris.Area(options)</code>创建区域图</p>
+                            <div class="example">
+                                <div id="exampleMorrisArea"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap m-md-0">
+                            <h4 class="example-title">柱状图</h4>
+                            <p>使用
+                                <code>Morris.Bar(options)</code>创建柱状图</p>
+                            <div class="example">
+                                <div id="exampleMorrisBar"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">环形图</h4>
+                            <p>使用
+                                <code>Morris.Donut(options)</code>创建环形图</p>
+                            <div class="example">
+                                <div id="exampleMorrisDonut"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* 曲线图 */
+    new Morris.Line({
+        element: 'exampleMorrisLine',
+        data: [
+            { year: '2006年', value1: 200,value2: 150, },
+            { year: '2008年', value1: 200,value2: 150, },
+            { year: '2009年', value1: 100,value2: 80, },
+            { year: '2010年', value1: 50,value2: 100, },
+            { year: '2011年', value1: 50,value2: 500, },
+            { year: '2012年', value1: 200,value2: 180, },
+        ],
+        xkey: 'year',
+        ykeys: ['value1','value2'],//线名
+        labels: ['收入','支出'],
+        lineWidth: 1,
+        pointSize: 4,
+        lineColors: ['#A074F8', '#11C26D'],
+        pointStrokeWidths: [1],//交点圆边宽度
+        pointStrokeColors: ['#ffffff'],//交点圆边颜色
+        pointFillColors: [],//交点填充颜色
+        smooth: true,//光滑的
+    });
+    /* 区域图 */
+    new Morris.Area({
+        element: 'exampleMorrisArea',
+        data: [
+            { year: '2006年', value1: 200,value2: 150, },
+            { year: '2008年', value1: 200,value2: 150, },
+            { year: '2009年', value1: 100,value2: 80, },
+            { year: '2010年', value1: 50,value2: 100, },
+            { year: '2011年', value1: 50,value2: 500, },
+            { year: '2012年', value1: 200,value2: 180, },
+        ],
+        xkey: 'year',
+        ykeys: ['value1','value2'],//线名
+        labels: ['收入','支出'],
+        lineWidth: 1,
+        pointSize: 4,
+        lineColors: ['#A074F8', '#11C26D'],
+        fillOpacity:0.3,
+        behaveLikeLine:true,//是否单独从原点计算
+        pointStrokeWidths: [1],//交点圆边宽度
+        pointStrokeColors: ['#ffffff'],//交点圆边颜色
+        pointFillColors: [],//交点填充颜色
+        smooth: true,//光滑的
+    });
+    /* 柱状图 */
+    new Morris.Bar({
+        element: 'exampleMorrisBar',
+        data: [
+            { year: '2006年', value1: 200,value2: 150, },
+            { year: '2008年', value1: 200,value2: 150, },
+            { year: '2009年', value1: 100,value2: 80, },
+            { year: '2010年', value1: 50,value2: 100, },
+            { year: '2011年', value1: 50,value2: 500, },
+            { year: '2012年', value1: 200,value2: 180, },
+        ],
+        xkey: 'year',
+        ykeys: ['value1','value2'],//线名
+        labels: ['收入','支出'],
+        lineWidth: 1,
+        pointSize: 4,
+        lineColors: ['#A074F8', '#11C26D'],
+        pointStrokeWidths: [1],//交点圆边宽度
+        pointStrokeColors: ['#ffffff'],//交点圆边颜色
+        pointFillColors: [],//交点填充颜色
+        smooth: true,//光滑的
+    });
+    /* 环形图 */
+    Morris.Donut({
+        element: 'exampleMorrisDonut',
+        data: [
+            {label: 'Jam', value: 25 },
+            {label: 'Frosted', value: 40 },
+            {label: 'Custard', value: 25 },
+            {label: 'Sugar', value: 10 }
+        ],
+        colors: ['#A57AFA', '#FF666B','#CCD5DB','#36D187'],
+        formatter: function (y) { return y + "%" }
+    });
+</script>
+</body>
+</html>

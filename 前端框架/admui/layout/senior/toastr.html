@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title>笔记 - UI示例</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 移动设备 viewport -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+	<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+	<link rel="stylesheet" href="/vendor/toastr/toastr.min.css">
+	<link rel="stylesheet" href="/vendor/toastr/toastr.css">
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <style>
+    	.bootbox .modal-dialog{width:360px}
+    	.toast-example{position:static!important;margin:10px 0 30px}
+    	.toast-example.padding-0{margin-bottom:30px}
+    	.toast-example>div{width:auto;max-width:300px;margin-bottom:0}
+    	.position-example{position:relative;height:150px;margin-bottom:20px}
+    	.position-example>div{position:absolute;width:100%;padding:20px}
+    	.position-example>.btn-block+.btn-block{margin-top:35px}
+
+    	#toast-container>div,
+    	#toast-container>div:hover {
+		    -moz-box-shadow: 0 0 3px #999;
+		    -webkit-box-shadow: 0 0 3px #999;
+		    box-shadow: 0 0 3px #999;
+    	}
+    </style>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Toastr</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-inverse btn-round" href="https://github.com/CodeSeven/toastr" target="_blank">
+                <i class="icon wb-link" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content">
+
+        <div class="panel">
+            <div class="panel-body container-fluid">
+
+                <div class="example-wrap">
+                    <h4 class="example-title">简单示例</h4>
+                    <p>可以通过添加
+                        <code>.toast-shadow</code> 和
+                        <code>.toast</code> 类来显示阴影效果。可以自定义关闭按钮，可以将其显示为不同的颜色，如
+                        <code>.toast-info</code> 。 </p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-wrap">
+                                <div class="toast-example" id="demo1"
+                                	aria-live="polite"
+                                	data-title="aaaaaa"
+                                	data-message="&lt;strong&gt;声明：&lt;/strong&gt; 我是一个 Toastr 提示"
+                                    data-position="toast-top-right"
+                                    data-icon="toast-info">
+                                    <div class="toast toast-just-text toast-info">
+                                        <button class="toast-close-button" aria-label="关闭" type="button" role="button">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <div class="toast-message">
+                                            <strong>声明：</strong> 我是一个 Toastr 提示
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="toast-example" id="demo2"
+                                	aria-live="polite"
+                                	data-message="&lt;strong&gt;声明：&lt;/strong&gt; 我是一个 Toastr 提示"
+                                    data-position="toast-top-right"
+                                    data-icon="toast-success">
+                                    <div class="toast toast-just-text toast-success">
+                                        <button type="button" class="toast-close-button" aria-label="关闭">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <div class="toast-message">
+                                            <strong>声明：</strong> 我是一个 Toastr 提示
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="toast-example" id="demo3"
+                                	aria-live="polite"
+                                	data-message="&lt;strong&gt;声明：&lt;/strong&gt; 我是一个 Toastr 提示"
+                                    data-position="toast-top-right"
+                                    data-icon="toast-error">
+                                    <div class="toast toast-just-text toast-error">
+                                        <button type="button" class="toast-close-button" aria-label="关闭">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <div class="toast-message">
+                                            <strong>声明：</strong> 我是一个 Toastr 提示
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="toast-example" id="demo4"
+                                	aria-live="polite"
+                                	data-message="&lt;strong&gt;声明：&lt;/strong&gt; 我是一个 Toastr 提示"
+                                    data-position="toast-top-right"
+                                    data-icon="toast-warning">
+                                    <div class="toast toast-just-text toast-warning">
+                                        <button type="button" class="toast-close-button" aria-label="关闭">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <div class="toast-message">
+                                            <strong>声明：</strong> 我是一个 Toastr 提示
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">位置</h4>
+                            <p>点击下列按钮查看不同位置示例。</p>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="example-wrap">
+                                        <div class="bg-blue-grey-100 position-example">
+                                            <div class="text-center">
+                                                <div class="row">
+                                                    <div class="col-sm-4 mb-10">
+                                                        <button class="btn btn-block btn-primary" id="demo5"
+                                                        	data-icon="toast-info"
+                                                        	data-message="我是一个 Toastr 提示"
+                                                            data-position="toast-top-left"
+                                                            >
+															左上
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-4 mb-10">
+                                                        <button class="btn btn-block btn-primary" id="demo6"
+                                                        	data-icon="toast-info"
+                                                        	data-message="我是一个 Toastr 提示"
+                                                            data-position="toast-top-center"
+                                                           >
+															中间
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-4 mb-10">
+                                                        <button class="btn btn-block btn-primary" id="demo7"
+                                                        	data-icon="toast-info"
+                                                        	data-message="我是一个 Toastr 提示"
+                                                            data-position="toast-top-right"
+                                                           >
+															右上
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center" style="bottom: 0;">
+                                                <div class="row">
+                                                    <div class="col-sm-4 mt-10">
+                                                        <button class="btn btn-block btn-primary" id="demo8"
+                                                        	data-icon="toast-info"
+                                                        	data-message="我是一个 Toastr 提示"
+                                                            data-position="toast-bottom-left"
+                                                           >
+															左下
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-4 mt-10">
+                                                        <button class="btn btn-block btn-primary" id="demo9"
+                                                        	data-icon="toast-info"
+                                                        	data-message="我是一个 Toastr 提示"
+                                                            data-position="toast-bottom-center"
+                                                            >
+															底部中间
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-4 mt-10">
+                                                        <button class="btn btn-block btn-primary" id="demo10"
+                                                        	data-icon="toast-info"
+                                                        	data-message="我是一个 Toastr 提示"
+                                                            data-position="toast-bottom-right"
+                                                           >
+															右下
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="example-wrap">
+                                        <div class="bg-blue-grey-100 position-example p-20">
+                                            <button class="btn btn-primary btn-block" id="demo11"
+                                            	data-icon="toast-info"
+                                            	data-message="我是一个 Toastr 提示"
+                                                data-position="toast-top-full-width"
+                                                data-show-method="slideDown"
+                                                >
+												顶部占满
+                                            </button>
+                                            <button class="btn btn-primary btn-block" id="demo12"
+                                            	data-icon="toast-info"
+                                            	data-message="我是一个 Toastr 提示"
+                                                data-position="toast-bottom-full-width"
+                                                data-show-method="slideDown"
+                                                >
+												 底部占满
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/vendor/toastr/toastr.min.js"></script>
+
+<script>
+
+	/* https://www.jianshu.com/p/ceeafbb0eaf7 */
+	var arr = [];
+	for(let i = 1;i <= 12;i++){
+		$("#demo"+i).on('click',function(){
+			var t = $(this);
+			var obj = {};
+				obj.message  = t.data('message')  || "暂无",
+				obj.position = t.data('position') || "toastr-center-right",
+				obj.icon     = t.data('icon')     || "toastr-info";
+				obj.close    = t.data('close')    || true,
+				obj.progress = t.data('progress') || false,
+				obj.title    = t.data('title')    || null
+			ToastrSettings(obj);
+		})
+	}
+
+
+	function ToastrSettings(obj){
+		toastr.options = { // toastr配置
+	        "closeButton"	 : obj.close, //是否显示关闭按钮
+	        "debug"			 : false, //是否使用debug模式
+	        "progressBar"	 : obj.progress, //是否显示进度条，当为false时候不显示；当为true时候，显示进度条，当进度条缩短到0时候，消息通知弹窗消失
+	        "positionClass"	 : obj.position,//显示的动画时间
+	        "showDuration"	 : 400, //显示的动画时间
+	        "hideDuration"	 : 700, //消失的动画时间
+	        "timeOut"		 : 3000, //展现时间
+	        "extendedTimeOut": 1000, //加长展示时间
+	        "showEasing"	 : "swing", //显示时的动画缓冲方式
+	        "hideEasing"	 : "linear", //消失时的动画缓冲方式
+	        "showMethod"	 : "fadeIn", //显示时的动画方式
+	        "hideMethod"	 : "fadeOut" //消失时的动画方式
+	    }
+		switch(obj.icon){
+			case "toast-info":
+				console.log('info');
+				toastr.info(obj.message,obj.title);
+				break;
+			case "toast-success":
+				console.log('success');
+				toastr.success(obj.message,obj.title);
+				break;
+			case "toast-error":
+				console.log('error');
+				toastr.error(obj.message,obj.title);
+				break;
+			case "toast-warning":
+				console.log('warning');
+				toastr.warning(obj.message,obj.title);
+				break;
+			case undefined:
+				console.log('other');
+				toastr.info(obj.message,obj.title);
+				break;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

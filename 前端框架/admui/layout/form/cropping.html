@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- Vendor CSS-->
+	<link rel="stylesheet" href="/vendor/cropper/cropper.min.css">
+	<script src="/vendor/cropper/cropper.js"></script>
+	<style>
+		.cropper-preview,.img-preview{overflow:hidden}
+		.bootbox .modal-dialog{width:360px}
+		.btn-group .btn+.btn,.btn-group .btn+.btn-group,.btn-group .btn-group+.btn,.btn-group .btn-group+.btn-group{margin-left:0}
+		.img-preview{float:left;margin:0 10px 10px 0}
+		.img-preview>img{max-width:100%}
+		.preview-lg{width:263px;height:148px}
+		.preview-md{width:139px;height:78px}
+		.preview-sm{width:69px;height:39px}
+		.preview-xs{width:35px;height:20px;margin-right:0}
+		.cropper,.cropper-toolbar{margin-bottom:30px}
+		@media (min-width:1200px){
+			.cropper{max-height:600px}
+		}
+		@media (min-width:768px){
+			.cropper{max-height:400px}
+		}
+		@media (max-width:767.98px){
+			.cropper{max-height:300px}
+		}
+		@media (max-width:479.98px){
+			.cropper{max-height:246px}
+		}
+		@media (max-width:586px){
+			.btn-group .btn{padding:6px 8px}
+			.cropper{max-height:246px};
+		}
+	</style>
+</head>
+
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-forms">
+    <div class="page-header">
+        <h1 class="page-title">图片裁剪</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>首页</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">表单</a>
+            </li>
+            <li class="breadcrumb-item active">图片裁剪</li>
+        </ol>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="https://github.com/fengyuanchen/cropper" target="_blank">
+                <i class="icon wb-link" aria-hidden="true"></i> 官网
+            </a>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">简单示例</h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="cropper" id="simpleCropper">
+                            <img src="/vendor/theme/img/animal-4.jpg" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="cropper-preview clearfix" id="simpleCropperPreview">
+                            <div class="img-preview preview-lg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">完整示例</h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="cropper text-center" id="exampleFullCropper">
+                            <img src="/vendor/theme/img/animal-4.jpg" alt="...">
+                        </div>
+                        <div class="cropper-toolbar text-center">
+                            <div class="btn-group mb-20">
+                                <button
+                                	id="settings1"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="放大">
+                                    <span class="cropper-tooltip" title="放大">
+                                        <i class="wb-zoom-in"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings2"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="缩小">
+                                    <span class="cropper-tooltip" title="缩小">
+                                        <i class="wb-zoom-out"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings3"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="逆时针旋转90°">
+                                    <span class="cropper-tooltip" title="逆时针旋转90°">
+                                        <i class="wb-arrow-left cropper-flip-horizontal"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings4"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="顺时针旋转90°">
+                                    <span class="cropper-tooltip" title="顺时针旋转90°">
+                                        <i class="wb-arrow-right"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings5"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="逆时针旋转">
+                                    <span class="cropper-tooltip" title="逆时针旋转">
+                                        <i class="wb-refresh cropper-flip-horizontal"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings6"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="顺时针旋转">
+                                    <span class="cropper-tooltip" title="顺时针旋转">
+                                        <i class="icon wb-reload" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="btn-group mb-20">
+                                <button
+                                	id="settings18"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="翻转X">
+                                    <span class="cropper-tooltip" title="翻转X">
+                                        <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings19"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="翻转Y">
+                                    <span class="cropper-tooltip" title="翻转Y">
+                                        <i class="fa fa-arrows-v" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="btn-group mb-20">
+                                <button
+                                	id="settings12"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="锁定">
+                                    <span class="cropper-tooltip" title="锁定">
+                                        <i class="icon wb-lock" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings13"
+                                	class="btn btn-primary"
+                                    data-toggle="tooltip"
+                                    title="解锁">
+                                    <span class="cropper-tooltip" title="解锁">
+                                        <i class="icon wb-unlock" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="btn-group mb-20">
+                                <button
+                                	id="settings7"
+                                	type="button"
+                                	class="btn btn-primary"
+                                	data-cropper-method="setDragMode"
+                                    data-option="move"
+                                    data-toggle="tooltip"
+                                    data-container="body"
+                                    title="移动">
+                                    <span class="cropper-tooltip" title="移动">
+                                        <i class="icon wb-move" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings8"
+                                	type="button"
+                                	class="btn btn-primary"
+                                	data-cropper-method="setDragMode"
+                                    data-option="crop"
+                                    data-toggle="tooltip"
+                                    data-container="body"
+                                    title="裁剪">
+                                    <span class="cropper-tooltip" title="裁剪">
+                                        <i class="icon wb-crop" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings9"
+                                	class="btn btn-primary"
+                                    data-option='{ "width": 320, "height": 180 }'
+                                    data-toggle="tooltip"
+                                    title="获取图片">
+                                    <span class="cropper-tooltip" title="获取图片">
+                                        <i class="icon wb-image" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                <button
+                                	id="settings10"
+                                	class="btn btn-primary"
+                                	data-toggle="tooltip"
+                                    title="清除">
+                                    <span class="cropper-tooltip" title="清除">
+                                        <i class="icon wb-close" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                <label
+                                	id="settings11"
+                                	class="btn btn-primary mb-0"
+                                	data-toggle="tooltip"
+                                	for="inputImage"
+                                    data-container="body"
+                                    title=""
+                                    data-original-title="上传文件">
+                                    <input type="file" class="hidden-xs-up" id="inputImage" name="file" accept="image/*">
+                                    <span class="cropper-tooltip" title="上传文件">
+                                        <i class="icon wb-upload" aria-hidden="true"></i>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="btn-group mb-20">
+                                <button
+	                            	id="settings14"
+	                            	class="btn btn-primary"
+	                                data-toggle="tooltip"
+	                                title="导出lg">
+	                                <span class="cropper-tooltip" title="导出lg">
+	                                    <i class="fa fa-download" aria-hidden="true"></i>
+	                                </span>
+	                            </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cropper-preview clearfix" id="exampleFullCropperPreview">
+                            <div class="img-preview preview-lg"></div>
+                            <div class="img-preview preview-md"></div>
+                            <div class="img-preview preview-sm"></div>
+                            <div class="img-preview preview-xs"></div>
+                        </div>
+                        <h4>数据：</h4>
+                        <div class="cropper-data">
+                            <div class="input-group mb-15">
+                                <label class="input-group-prepend" for="inputDataX">
+                                    <span class="input-group-text">X 轴</span>
+                                </label>
+                                <input
+                                	type="number"
+                                	class="form-control"
+                                	id="inputDataX"
+                                	name="inputNumbers"
+                                    placeholder="x">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">px</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-15">
+                                <label class="input-group-prepend" for="inputDataY">
+                                    <span class="input-group-text">Y 轴</span>
+                                </label>
+                                <input
+                                	type="number"
+                                	class="form-control"
+                                	id="inputDataY"
+                                	name="inputNumbers"
+                                    placeholder="y">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">px</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-15">
+                                <label class="input-group-prepend" for="inputDataWidth">
+                                    <span class="input-group-text">宽度</span>
+                                </label>
+                                <input
+                                	type="number"
+                                	class="form-control"
+                                	id="inputDataWidth"
+                                	name="inputNumbers"
+                                    placeholder="width">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">px</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-15">
+                                <label class="input-group-prepend" for="inputDataHeight">
+                                    <span class="input-group-text">高度</span>
+                                </label>
+                                <input
+	                                type="number"
+	                                class="form-control"
+	                                id="inputDataHeight"
+	                                name="inputNumbers"
+                                    placeholder="height">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">px</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block" id="setCropperData" type="button">设置数据</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade docs-cropped" id="getDataURLModal" aria-hidden="true" aria-labelledby="getDataURLTitle" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="getDataURLTitle">裁剪</h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="getImageData"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+	var demo1 = $('#simpleCropper img').cropper({
+		preview:$("#simpleCropperPreview"),//预览
+		crop:function(event){
+			/*console.log(
+				this.cropper,
+				event.detail.x,
+				event.detail.y,
+				event.detail.width,
+				event.detail.height,
+				event.detail.rotate,
+				event.detail.scaleX,
+				event.detail.scaleY
+			);*/
+		}
+	});
+	//console.log(demo1);
+
+
+	var option = {
+	    viewMode : 0, //0 无限制  1不会超过图片 2图片不会缩到画板里 3充满画板
+	    dragMode :'move', //选框外 crop创建新剪切 move移动画布 none
+	    initialAspectRatio: 1,//裁剪框的初始高比
+	    aspectRatio: 16 / 9, //固定长宽比
+	    //data:{},//
+	    preview:$("#simpleCropperPreview"),//预览
+	    //responsive:false,//调整窗口大小时，重新渲染
+	    //restore:true,//调整窗口初始化
+	    checkCrossOrigin:true,//图片是否跨域
+	    checkOrientation:true,//图片方向 jpeg
+	    modal:true,//裁剪框外变为黑色
+	    guides:false,//裁剪框内显示虚线
+	    center:false,//中心指示器
+	    highlight:true,//白色模式 没效果
+	    background:false,//画布网格背景
+	    autoCrop:true,//初始化自动拆切 false没法用了
+	    autoCropArea : 0.2,//自动裁切区域大小 默认0.8
+	    movable:true,//移动图像
+	    rotatable:true,//旋转图像
+	    //scalable:false,//拓展
+	    zoomable:true,//缩放
+	    zoomOnTouch:false,//通过触摸来缩放
+	    zoomOnWheel:true,//通过滚轮来缩放
+	    wheelZoomRatio:0.1,//滚轮缩放比例
+	    cropBoxMovable:true,//拖拽移动裁剪框
+	    cropBoxResizable:true,//拖拽调整裁剪框
+	    toggleDragModeOnDblclick:true,//双击切换裁剪和移动
+	    minContainerWidth:500,//容器最小宽度
+	    minContainerHeight:450,//容器最小高度
+	    //minCanvasWidth:500,//画布最小宽度
+		//minCanvasHeight:450,//画布最小高度
+		minCropBoxWidth:100,//裁剪框最小宽度
+		minCropBoxHeight:100,//裁剪框最小高度
+		ready:function(event) {
+			//准备
+			console.log('准备')
+		},
+		cropstart:function(event) {
+			//点击裁剪框
+			console.log('裁剪开始')
+		},
+		cropmove:function(event) {
+			//移动裁剪框
+			console.log('裁剪移动')
+		},
+		cropend:function(event) {
+			//结束移动裁剪框
+			console.log('裁剪停止')
+		},
+	    crop: function(event) {
+	    	//只要有操作就会执行
+	    	console.log('作物')
+		  	/*
+		    console.log(event.detail.x);
+		    console.log(event.detail.y);
+		    console.log(event.detail.width);
+		    console.log(event.detail.height);
+		    console.log(event.detail.rotate);
+		    console.log(event.detail.scaleX);
+		    console.log(event.detail.scaleY);
+		    */
+	    },
+	    zoom: function(){
+	    	//放大
+	    	console.log('底图放大缩小')
+	    }
+	}
+
+	var option1 = {
+		preview : ".img-preview",	//预览
+		zoomOnTouch : false,		//通过触摸来缩放
+	    zoomOnWheel : false,		//通过滚轮来缩放
+		ready : function(event) {
+			//准备
+			console.log('准备',event);
+		},
+	};
+	var demo2 = $('#exampleFullCropper img').cropper(option1);
+
+	$("#settings1").on('click',function(){
+		//放大
+		demo2.cropper('zoom',0.1);
+	})
+	$("#settings2").on('click',function(){
+		//缩小
+		demo2.cropper('zoom',-0.1);
+	})
+	$("#settings3").on('click',function(){
+		//左移
+		demo2.cropper('move' , -10,0)
+	})
+	$("#settings4").on('click',function(){
+		//右移
+		demo2.cropper('move' , 10,0)
+	})
+	$("#settings5").on('click',function(){
+		//左转
+		demo2.cropper('rotate' , 90)
+	})
+	$("#settings6").on('click',function(){
+		//右转
+		demo2.cropper('rotate' , -90)
+	})
+	$("#settings7").on('click',function(){
+		//移动
+		demo2.cropper('setDragMode' , 'move')
+	})
+	$("#settings8").on('click',function(){
+		//裁剪
+		demo2.cropper('setDragMode' , 'crop')
+	})
+	$("#settings9").on('click',function(){
+		//图片
+		demo2.cropper('getCroppedCanvas' , { "width": 320, "height": 180 })
+	})
+	$("#settings10").on('click',function(){
+		//重置
+		demo2.cropper('reset');
+	})
+
+	//Import image
+	var $inputImage = $('#inputImage');
+	if (URL) {
+	    $inputImage.change(function(){
+	        var files = this.files;
+	        var file;
+	        if(!demo2.data('cropper')){
+	        	return;
+	        }
+	        if(files && files.length){
+		        file = files[0];
+		        if(/^image\/\w+$/.test(file.type)){
+		            uploadedImageName = file.name;
+		            uploadedImageType = file.type;
+		            uploadedImageURL = URL.createObjectURL(file);
+		            demo2.cropper('destroy').attr('src', uploadedImageURL).cropper(option1);
+	            	$inputImage.val('');
+		        }else{
+		          window.alert('请选择一张图片.');
+		        }
+	        }
+	    });
+	}else{
+	    $inputImage.prop('disabled', true).parent().addClass('disabled');
+	}
+	$("#settings12").on('click',function(){
+		//锁定
+		demo2.cropper('disable')
+	})
+	$("#settings13").on('click',function(){
+		//解锁
+		demo2.cropper('enable')
+	})
+
+	$("#settings14").on('click',function(){
+		//导出1
+		var cas = demo2.cropper("getCroppedCanvas");
+		var base64url = cas.toDataURL('image/jpeg');
+
+		var a = document.createElement('a');
+		a.download = 'image'+ new Date().getTime();
+		a.href = base64url;
+		$("body").append(a);
+		a.click();
+		a.remove();
+	})
+	var scaleX = 1,
+		scaleY = 1;
+	$("#settings18").on('click',function(){
+		//X翻转
+		scaleX = -scaleX;
+		demo2.cropper('scaleX',scaleX)
+	})
+	$("#settings19").on('click',function(){
+		//Y翻转
+		scaleY = -scaleY;
+		demo2.cropper('scaleY',scaleY)
+	})
+	$("#setCropperData").on('click',function(){
+		//参数设置
+		demo2.cropper("setData",{
+			x      : parseInt($("#inputDataX").val()),      //裁剪区域的左偏移
+			y 	   : parseInt($("#inputDataY").val()),      //裁剪区域的偏移顶部
+			width  : parseInt($("#inputDataWidth").val()),  //裁切区域的宽度
+			height : parseInt($("#inputDataHeight").val()), //裁剪区域的高度
+			//rotate : 0,     //图像的旋转角度
+			//scaleX : 0,     //应用于图像横坐标的比例因子
+			//scaleY : 0,     //应用于图像纵坐标的比例因子
+		});
+	})
+
+
+
+
+
+
+
+	//Methods
+	/*
+	crop			//显示裁剪框
+	reset			//初始化
+	clear			//清除裁剪框
+	replace			//替换底图 如果新图片与旧图片相同大小 不会重置裁剪器
+	enable			//启动裁剪器
+	disable			//锁定裁剪器
+	destroy			//注销裁剪器
+	move			//相对位置移动
+	moveTo			//绝对位置移动
+	zoom			//相对比例缩放
+	zoomTo			//绝对比例缩放
+	rotate			//相对旋转
+	rotateTo		//绝对旋转
+	scale			//缩放
+	scaleX			//缩放X
+	scaleY			//缩放Y
+	getData			//输出最终的裁切区域位置和尺寸数据（基于原始图像的自然尺寸）。
+	setData			//使用新数据（基于原始图像）更改裁剪区域的位置和大小。
+	getContainerData//输出容器尺寸数据。
+	getImageData	//输出图像的位置，大小和其他相关数据。
+	getCanvasData	//输出画布（图像包装器）的位置和尺寸数据。
+	setCanvasData	//使用新数据更改画布（图像包装器）的位置和大小。
+	getCropBoxData	//输出裁剪框的位置和尺寸数据。
+	setCropBoxData	//使用新数据更改裁剪框的位置和大小。
+	getCroppedCanvas//画布绘制了裁剪的图像（返回值）
+	setAspectRatio	//
+	setDragMode		//
+	*/
+
+
+</script>
+
+</body>
+</html>

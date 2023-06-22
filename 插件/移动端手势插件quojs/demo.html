@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='zh-CN' xml:lang='zh-CN' xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+		<title>quojs 手指触摸事件演示版 (Touch events) -  我不忙爱分享</title>
+		<meta name="viewport" content="width=device-width,user-scalable=0"/>
+		<script type="text/javascript" src="quo.js"></script>
+		<style type="text/css">
+		    body {margin:0px;padding:0px;}
+			p {padding: 10px; line-height: 30px;}
+			span {padding: 10px; margin: 10px; border: 1px solid #ccc; display:block; text-align:center;}
+			.content {width: 320px;overflow:hidden;}
+			.box {height: 60px; line-height: 60px;}
+		</style>
+	</head>
+	<body>
+	    <div class="content">
+		<h1>quojs 手指触摸事件演示版 (Touch events)</h1>
+		<h4>官方网站: http://quojs.tapquo.com/</h4>
+		<h5>演示版作者：xusion</h5>
+		<p>操作说明：使用手机浏览，手指触摸下边文字后，上边文字颜色相对应改变。</p>
+		
+		<p id="p1">
+			<span class="s1-0">一个手指单击</span>
+			<span class="s1-1 box" style="color: red;">一个手指点我是红色</span>
+			<span class="s1-2 box" style="color: blue;">一个手指点我是蓝色</span>
+		</p>
+		<p id="p2">
+			<span class="s2-0">一个手指双击</span>
+			<span class="s2-1 box" style="color: red;">一个手指双击我是红色</span>
+			<span class="s2-2 box" style="color: blue;">一个手指双击我是蓝色</span>
+		</p>
+		<p id="p3">
+			<span class="s3-0">一个手指按住</span>
+			<span class="s3-1 box" style="color: red;">一个手指我是红色</span>
+			<span class="s3-2 box" style="color: blue;">一个手指我是蓝色</span>
+		</p>
+		<p id="p4">
+			<span class="s4-0">一个手指四个方向滑动</span>
+			<span class="s4-1 box" style="color: red;">一个手指向左滑动</span>
+			<span class="s4-2 box" style="color: blue;">一个手指向右滑动</span>
+			<span class="s4-3 box" style="color: green;">一个手指向上滑动</span>
+			<span class="s4-4 box" style="color: yellow;">一个手指向下滑动</span>
+		</p>
+		<p id="p5">
+			<span class="s5-0">两个手指左右方向转动</span>
+			<span class="s5-1 box" style="color: red;">两个手指向左转动</span>
+			<span class="s5-2 box" style="color: blue;">两个手指向右转动</span>
+		</p>
+		<p id="p6">
+			<span class="s6-0">两个手指放大缩小</span>
+			<span class="s6-1 box" style="color: red;">两个手指放大</span>
+			<span class="s6-2 box" style="color: blue;">两个手指缩小</span>
+		</p>
+		<p style="height: 100px;"></p>
+		</div>
+		<script type="text/javascript">
+			//一个手指单击
+			$$('span.s1-1').tap(function() {
+				$$('p#p1').style('color', 'red');
+			});
+			$$('span.s1-2').tap(function() {
+				$$('p#p1').style('color', 'blue');
+			});
+			//一个手指双击
+			$$('span.s2-1').doubleTap(function() {
+				$$('p#p2').style('color', 'red');
+			});
+			$$('span.s2-2').doubleTap(function() {
+				$$('p#p2').style('color', 'blue');
+			});
+			//一个手指按住
+			$$('span.s3-1').hold(function() {
+				$$('p#p3').style('color', 'red');
+			});
+			$$('span.s3-2').hold(function() {
+				$$('p#p3').style('color', 'blue');
+			});
+			//一个手指四个方向滑动
+			$$('span.s4-1').swipeLeft(function() {
+				$$('p#p4').style('color', 'red');
+			});
+			$$('span.s4-2').swipeRight(function() {
+				$$('p#p4').style('color', 'blue');
+			});
+			$$('span.s4-3').swipeUp(function() {
+				$$('p#p4').style('color', 'green');
+			});
+			$$('span.s4-4').swipeDown(function() {
+				$$('p#p4').style('color', 'yellow');
+			});
+			//两个手左右方向转动
+			$$('span.s5-1').rotateLeft(function() {
+				$$('p#p5').style('color', 'red');
+			});
+			$$('span.s5-2').rotateRight(function() {
+				$$('p#p5').style('color', 'blue');
+			});
+			//两个手放大缩小
+			$$('span.s6-1').pinchOut(function() {
+				$$('p#p6').style('color', 'red');
+				var fsize = $$('span.s6-0').style('fontSize').replace('px','');
+				$$('span.s6-0').style('fontSize', (parseInt(fsize)+2)+'px');
+			});
+			$$('span.s6-2').pinchIn(function() {
+				$$('p#p6').style('color', 'blue');
+				var fsize = $$('span.s6-0').style('fontSize').replace('px','');
+				$$('span.s6-0').style('fontSize', (parseInt(fsize)-2)+'px');
+			});
+		</script>
+	</body>
+</html>

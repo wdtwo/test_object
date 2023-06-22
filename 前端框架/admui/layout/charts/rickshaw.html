@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <script src="/vendor/charts/d3/d3.js"></script>
+
+    <link rel="stylesheet" href="/vendor/charts/rickshaw/rickshaw.css">
+    <script src="/vendor/charts/rickshaw/rickshaw.js"></script>
+
+    <script src="/vendor/moment/moment.js"></script>
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class=" page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Rickshaw 图表</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="https://shutterstock.github.io/rickshaw/" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i> 官网
+            </a>
+        </div>
+    </div>
+    <div class="page-content container-fluid">
+
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">曲线图</h4>
+                            <div class="example rickshaw-wrap">
+                                <div id="exampleChart"></div>
+                                <div class="rickshaw-legend-wrap">
+                                    <div id="exampleChartLegend"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">散点图</h4>
+                            <div class="example rickshaw-wrap">
+                                <div id="exampleScatterChart"></div>
+                                <div class="rickshaw-legend-wrap">
+                                    <div id="exampleScatterLegend"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">堆叠柱状图</h4>
+                            <div class="example rickshaw-wrap">
+                                <div id="exampleStackedChart"></div>
+                                <div class="rickshaw-legend-wrap">
+                                    <div id="exampleStackedLegend"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">区域图</h4>
+                            <div class="example rickshaw-wrap">
+                                <div id="exampleAreaChart"></div>
+                                <div class="rickshaw-legend-wrap">
+                                    <div id="exampleAreaLegend"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">组合图</h4>
+                            <div class="example rickshaw-wrap">
+                                <div id="exampleMultipleChart"></div>
+                                <div id="exampleMultipleSlider" class="mt-10"></div>
+                                <div class="rickshaw-legend-wrap">
+                                    <div id="exampleMultipleLegend"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    var seriesData = [ [], [], [] ];
+    var random = new Rickshaw.Fixtures.RandomData(150);
+    for (var i = 0; i < 150; i++) {
+        random.addData(seriesData);
+    }
+    var series = [
+        {
+            color: "#28d17c",
+            data: seriesData[0],
+            name: 'New York'
+        }, {
+            color: "#ff666b",
+            data: seriesData[1],
+            name: 'London'
+        }, {
+            color: "#a57afa",
+            data: seriesData[2],
+            name: 'Tokyo'
+        }
+    ];
+
+
+    /* 曲线图 */
+    var graph = new Rickshaw.Graph( {
+        element: document.getElementById("exampleChart"),
+        width: document.getElementById("exampleChart").offsetWidth,
+        height: 500,
+        renderer: 'line',
+        series: series
+    } );
+    graph.render();
+    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph
+    } );
+    var legend = new Rickshaw.Graph.Legend( {
+        graph: graph,
+        element: document.getElementById('exampleChartLegend')
+    } );
+    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
+        graph: graph,
+        legend: legend
+    } );
+    var axes = new Rickshaw.Graph.Axis.Time( {
+        graph: graph
+    } );
+    axes.render();
+    /* 散点图 */
+    var graph = new Rickshaw.Graph( {
+        element: document.getElementById("exampleScatterChart"),
+        width: document.getElementById("exampleScatterChart").offsetWidth,
+        height: 500,
+        renderer: 'scatterplot',
+        series: series
+    } );
+    graph.renderer.dotSize = 6;
+    new Rickshaw.Graph.HoverDetail({ graph: graph });
+    graph.render();
+    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph
+    } );
+    var legend = new Rickshaw.Graph.Legend( {
+        graph: graph,
+        element: document.getElementById('exampleScatterLegend')
+    } );
+    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
+        graph: graph,
+        legend: legend
+    } );
+    var axes = new Rickshaw.Graph.Axis.Time( {
+        graph: graph
+    } );
+    axes.render();
+   
+    /* 堆叠柱状图 */
+    var palette = new Rickshaw.Color.Palette( { scheme: 'httpStatus' } );
+
+    var wrapper = new Rickshaw.Graph.Ajax( {
+        element: document.getElementById("exampleStackedChart"),
+        dataURL: '/datas/charts/status.json',
+        width: document.getElementById("exampleStackedChart").offsetWidth,
+        height: 300,
+        renderer: 'bar',
+        onData: function(d) { return transformData(d) },
+        onComplete: function(w) {
+            var legend = new Rickshaw.Graph.Legend( { 
+                element: document.querySelector('#exampleStackedLegend'), 
+                graph: w.graph
+            } );
+        }
+    } );
+    function transformData(d) {
+        var data = [];
+        var statusCounts = {};
+        Rickshaw.keys(d).sort().forEach( function(t) {
+            Rickshaw.keys(d[t]).forEach( function(status) {
+                statusCounts[status] = statusCounts[status] || [];
+                statusCounts[status].push( { x: parseFloat(t), y: d[t][status] } );
+            } );
+        } );
+        Rickshaw.keys(statusCounts).sort().forEach( function(status) {
+            data.push( {
+                name: status,
+                data: statusCounts[status],
+                color: palette.color(status)
+            } );
+        } );
+        Rickshaw.Series.zeroFill(data);
+        return data;
+    }
+
+
+
+
+
+
+    /* 区域图 */
+
+
+    /* 组合图 */
+    var seriesData = [ [], [], [], [], [] ];
+    var random = new Rickshaw.Fixtures.RandomData(50);
+    for (var i = 0; i < 75; i++) {
+        random.addData(seriesData);
+    }
+    var graph = new Rickshaw.Graph( {
+        element: document.getElementById("exampleMultipleChart"),
+        renderer: 'multi',
+        width: document.getElementById("exampleMultipleChart").offsetWidth,
+        height: 500,
+        dotSize: 5,
+        series: [
+            {
+                name: '温度',
+                data: seriesData.shift(),
+                color: 'rgb(40, 209, 124)',
+                renderer: 'stack'
+            }, {
+                name: '体感温度',
+                data: seriesData.shift(),
+                color: 'rgb(40, 192, 222)',
+                renderer: 'stack'
+            }, {
+                name: '降雨量',
+                data: seriesData.shift(),
+                color: 'rgb(88, 159, 252)',
+                renderer: 'scatterplot'
+            }, {
+                name: '空气质量',
+                data: seriesData.shift().map(function(d) { return { x: d.x, y: d.y / 4 } }),
+                color: 'rgb(125, 142, 250)',
+                renderer: 'bar'
+            }, {
+                name: '紫外线',
+                data: seriesData.shift(),//.map(function(d) { return { x: d.x, y: d.y * 1.5 } })
+                color: 'rgb(255, 102, 107)',
+                renderer: 'line'
+            }
+        ]
+    } );
+    var slider = new Rickshaw.Graph.RangeSlider.Preview({
+        graph: graph,
+        element: document.querySelector('#exampleMultipleSlider')
+    });
+    graph.render();
+    var detail = new Rickshaw.Graph.HoverDetail({
+        graph: graph
+    });
+    var legend = new Rickshaw.Graph.Legend({
+        graph: graph,
+        element: document.querySelector('#exampleMultipleLegend')
+    });
+    var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+        graph: graph,
+        legend: legend,
+        disabledColor: function() { return 'rgba(0, 0, 0, 0.2)' }
+    });
+    var highlighter = new Rickshaw.Graph.Behavior.Series.Toggle({
+        graph: graph,
+        legend: legend
+    });
+
+</script>
+</body>
+</html>

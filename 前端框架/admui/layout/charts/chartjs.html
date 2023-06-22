@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    
+    
+    <link rel="stylesheet" href="/vendor/charts/chartjs/chartjs.css" />
+    <script src="/vendor/charts/chartjs/Chart.js"></script>
+	
+</head>
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Chart.js 图表</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="http://www.chartjs.org" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i> 
+				官网
+            </a>
+        </div>
+    </div>
+    <div class="page-content">
+
+        <div class="panel">
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-lg-6 col-xl-4">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">曲线图</h4>
+                            <div class="example text-center">
+                                <canvas id="exampleChartjsLine" height="300" width="450"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">柱状图</h4>
+                            <div class="example text-center">
+                                <canvas id="exampleChartjsBar" height="300" width="450"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">雷达图</h4>
+                            <div class="example text-center max-width">
+                                <canvas id="exampleChartjsRadar" height="250"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+
+                        <div class="example-wrap m-lg-0">
+                            <h4 class="example-title">极地区域图</h4>
+                            <div class="example text-center max-width">
+                                <canvas id="exampleChartjsPloarArea" height="250"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+	/* Chart.js 图表 */
+	//https://www.chartjs.org/docs/latest/
+	var ctx1 = document.getElementById('exampleChartjsLine').getContext('2d');
+	var myChart1 = new Chart(ctx1, {
+	    type: 'line',
+	    data: {
+	        labels: ['一月', '二月', '三月', '四月', '五月', '六月'],
+	        datasets: [{
+	            label: '同比增长',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(0, 0, 0, 0.1)',
+	               
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                
+	            ],
+	            borderWidth: 3
+	        },
+	        {
+	            label: '同步增长',
+	            data: [19, 3, 30, 6, 7, 1],
+	            backgroundColor: [
+	                'rgba(255, 0, 0, 0.1)',
+	                
+	            ],
+	            borderColor: [
+	                'rgba(255, 0, 255, 1)',
+	               
+	            ],
+	            borderWidth: 3
+	        }]
+	    },
+	});
+	
+	var ctx2 = document.getElementById('exampleChartjsBar').getContext('2d');
+	var myChart2 = new Chart(ctx2, {
+	    type: 'bar',
+	    data: {
+	        labels: ['一月', '二月', '三月', '四月', '五月', '六月'],
+	        datasets: [{
+	            label: '同比增长',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(0, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(255, 99, 132, 1)',
+	                
+	            ],
+	            borderWidth: 3
+	        },
+	        {
+	            label: '同步增长',
+	            data: [19, 3, 30, 6, 7, 1],
+	            backgroundColor: [
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                'rgba(255, 0, 0, 0.1)',
+	                
+	            ],
+	            borderColor: [
+	                'rgba(255, 0, 255, 1)',
+	                'rgba(255, 0, 255, 1)',
+	                'rgba(255, 0, 255, 1)',
+	                'rgba(255, 0, 255, 1)',
+	                'rgba(255, 0, 255, 1)',
+	                'rgba(255, 0, 255, 1)',
+	               
+	            ],
+	            borderWidth: 3
+	        }]
+	    },
+	});
+	var ctx3 = document.getElementById('exampleChartjsRadar').getContext('2d');
+	var myChart3 = new Chart(ctx3, {
+	    type: 'radar',
+	    data: {
+	        labels: ['一月', '二月', '三月', '四月', '五月', '六月'],
+	        datasets: [{
+	            label: '同比增长',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(0, 0, 0, 0.1)',
+	               
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                
+	            ],
+	            borderWidth: 1
+	        },
+	        {
+	            label: '同步增长',
+	            data: [19, 3, 30, 6, 7, 1],
+	            backgroundColor: [
+	                'rgba(255, 0, 0, 0.1)',
+	                
+	            ],
+	            borderColor: [
+	                'rgba(255, 0, 255, 1)',
+	               
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	});
+	var ctx4 = document.getElementById('exampleChartjsPloarArea').getContext('2d');
+	var myChart4 = new Chart(ctx4, {
+	    type: 'polarArea',
+	    data: {
+	        labels: ['一月', '二月', '三月', '四月', '五月', '六月'],
+	        datasets: [{
+	            label: '同比增长',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                '#059BFF',
+	                '#FF3D67',
+	                '#FFC233',
+	                '#22CECE',
+	                '#B1B5BE',
+	                '#000000'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                
+	            ],
+	            borderWidth: 0
+	        }]
+	    },
+	});
+</script>
+</body>
+</html>

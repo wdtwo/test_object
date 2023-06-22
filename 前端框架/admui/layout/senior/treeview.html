@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title>笔记 - UI示例</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+	<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet"  href="/vendor/theme/css/site.css">
+
+    <link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+	<link rel="stylesheet" href="/vendor/animsition/animsition.css"/>
+	<link rel="stylesheet" href="/vendor/treeview/css/bootstrap-treeview.css"/>
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/vendor/treeview/dist/bootstrap-treeview.min.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Treeview</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-inverse btn-round" href="https://github.com/jonmiles/bootstrap-treeview" target="_blank">
+                <i class="icon wb-link" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content">
+
+        <div class="panel">
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-xl-4 col-md-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本</h4>
+                            <div class="example">
+                                <div id="demo1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">收起</h4>
+                            <div class="example">
+                                <div id="demo2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title"></h4>
+                            <div class="example">
+                                <div id="demo3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="example-wrap">
+                            <h4 class="example-title">查找</h4>
+                            <div class="form-group" role="search">
+                                <div class="input-search">
+                                    <input type="search" class="form-control" id="inputSearchable" placeholder="Search ...">
+                                    <button class="input-search-btn" id="searchBtn">
+                                        <i class="icon wb-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="example">
+                                 <div id="demo7"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">展开收起</h4>
+                            <button class="btn btn-outline btn-default" id="exampleExpandAll">
+                            	全部展开
+                            </button>
+                            <button class="btn btn-outline btn-default" id="exampleCollapseAll">
+                            	全部收起
+                            </button>
+                            <button class="btn btn-outline btn-default" id="exampleDis">
+                            	全部禁用
+                            </button>
+                            <button class="btn btn-outline btn-default" id="exampleEnable">
+                            	全部启用
+                            </button>
+                            <div class="example">
+                                 <div id="demo8"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">事件</h4>
+
+                            <div class="example">
+                                 <div id="demo9"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+	/* 基础 */
+	var defaultData = [
+        {
+            text: 'Parent 1',
+            //icon: "wb-folder",//未选中显示的图标
+            href: '#parent1',
+            //selectable: false,//可选中  不可选择则点击会展开或关闭
+            //color: "blue",//文字和图标得颜色
+			//backColor: "white",//背景颜色
+			//selectedIcon: "wb-bell",//选中以后显示得图标(不可选中状态不会显示)
+			tags: ['0'],
+			state: {
+			    checked : false,  // 是否检测节点
+			    disabled: false,  //禁用
+			    expanded: true,   //节点是否打开
+			    selected: false   //默认选中
+			},
+            nodes: [
+	            {
+	                text : 'Child 1',
+	                href : '#child1',
+	                //icon : "wb-folder",
+	                state: {
+				    checked : false,  // 是否检测节点
+				    disabled: false,  //禁用
+				    expanded: true,   //节点是否打开
+				    selected: false   //默认选中
+				},
+	                tags : ['0'],
+	                nodes: [
+			            {
+			                text: 'Child 1',
+			                href: 'http://www.baidu.com/',
+			                icon : "wb-folder",
+			                tags: ['0']
+			            }
+		            ]
+	            }
+            ]
+        },
+        {
+            text: 'Parent 2',
+            href: '#parent2',
+			//selectable: false,//可选中  不可选择则点击会展开或关闭
+			tags: ['1'],
+            nodes: [
+	            {
+	                text : 'Child 1',
+	                href : '#child1',
+	                tags : ['1'],
+	            }
+            ]
+        }
+    ];
+
+    var data2 = [
+
+        {
+            text: 'Parent 2',
+            href: '#parent2',
+			state: {
+			    expanded: true,   //节点是否打开
+			},
+			tags: ['1'],
+			state: {
+			    checked : false,  // 是否检测节点
+			    disabled: false,  //禁用
+			    expanded: true,   //节点是否打开
+			    selected: false   //默认选中
+			},
+            nodes: [
+	            {
+	                text : 'Child 1',
+	                href : '#child1',
+	                tags : ['1'],
+	            }
+            ]
+        }
+    ];
+
+	/* 基本 */
+	$('#demo1').treeview({
+		data : defaultData,
+		expandIcon : 'wb-plus',             //最前面得加号图标 //设置要在可扩展树节点上使用的图标
+		collapseIcon : 'wb-minus',          //最前面的减号图标
+		//emptyIcon : 'wb-tag',             //没有子节点的图标
+
+		//showIcon : false,                 //是否显示节点图标
+		//nodeIcon : 'wb-inbox',            //节点默认图标
+		//selectedIcon : 'wb-bookmark',     //节点选中图标
+
+		//enableLinks:true,		            //是否把有href的节点变为超链接
+		//levels : 1,                       //设置默认情况下将树扩展到的深度的层次级别数。
+		//showTags : true,                  //显示节点中得tags内容
+
+		//onhoverColor :'red',              //选中的节点hover时的颜色
+
+		//color : 'red',			        //全局文字和图标颜色
+		//backColor : 'red',	            //所有节点的背景颜色 ，会被节点的背景颜色覆盖
+
+		//selectedBackColor : 'green',      //设置所选节点的背景色。默认值：“＃428bca”。
+		//selectedColor :'green',           //选中节点的前景色.默认值：“＃FFFFFF”。
+
+		//showBorder  : false,              //是否在节点周围显示边框(默认显示)
+		//borderColor : 'red',              //边框颜色
+
+		//multiSelect: true,                  //多选
+		//showCheckbox : true,		        //是否显示复选框
+		//checkedIcon : 'wb-minus-circle',    //复选款图标
+		//uncheckedIcon : 'wb-check-circle',  //将图标设置为未选中的复选框，与showCheckbox结合使用。
+
+		HighlightSearchResults : true,      //是否突出显示搜索结果
+		HighlightSelected : true,           //是否突出显示所选节点
+
+		searchResultBackColor : 'red',      //设置所选节点的背景颜色
+		searchResultColor : 'blue',         //设置所选节点的前景色,默认值：“＃D9534F”。
+    });
+
+    /* 默认收起 */
+    $('#demo2').treeview({
+		data : data2,
+		expandIcon : 'wb-plus',             //最前面得加号图标 //设置要在可扩展树节点上使用的图标
+		collapseIcon : 'wb-minus',          //最前面的减号图标
+		nodeIcon : 'wb-folder',             //节点默认图标
+    });
+
+    /* 搜索 */
+    $('#demo7').treeview({
+		data         : defaultData,
+		expandIcon   : 'wb-plus',             //最前面得加号图标 //设置要在可扩展树节点上使用的图标
+		collapseIcon : 'wb-minus',          //最前面的减号图标
+		nodeIcon     : 'wb-folder'
+    });
+    $("#searchBtn").on('click',function(){
+    	var str = $("#inputSearchable").val();
+    	var options = {
+            ignoreCase    : true,     // 不区分大小写的
+  			exactMatch    : false,    // 等于或等于
+  			revealResults : true,  // 显示匹配的节点
+        };
+    	var results = $('#demo7').treeview('search', [ str, options ]);
+    	console.log(results);
+    })
+    $('#demo7').on('searchComplete',function(event, results){
+		// - 搜索完成后
+		console.log(9,'搜索完成',event,results)
+	}).on('searchCleared',function(event, results){
+		// - 清除搜索结果后
+		console.log(10,'清空搜索结果',event,results)
+	})
+
+    /*展开收起*/
+    $('#demo8').treeview({
+		data : defaultData,
+		expandIcon : 'wb-plus',             //最前面得加号图标 //设置要在可扩展树节点上使用的图标
+		collapseIcon : 'wb-minus',          //最前面的减号图标
+		nodeIcon : 'wb-folder',
+    });
+
+    $("#exampleExpandAll").on('click',function(){
+    	//全部展开
+    	$('#demo8').treeview('expandAll',{ levels: 2,silent:true});
+    })
+    $("#exampleCollapseAll").on('click',function(){
+    	//全部折叠
+    	$('#demo8').treeview('collapseAll',{silent:true});
+    })
+    $("#exampleDis").on('click',function(){
+    	//全部禁用
+    	$('#demo8').treeview('disableAll', { silent: true } );
+    })
+    $("#exampleEnable").on('click',function(){
+    	//全部启用
+    	$('#demo8').treeview('enableAll',{ silent: true } );
+    })
+
+    /* 事件 */
+    $('#demo9').treeview({
+		data : defaultData,
+		expandIcon : 'wb-plus',             //最前面得加号图标 //设置要在可扩展树节点上使用的图标
+		collapseIcon : 'wb-minus',          //最前面的减号图标
+		nodeIcon : 'wb-folder',
+
+		/* 回调函数 */
+		onNodeCollapsed (event, node){
+			// - 节点折叠
+			console.log(2,'折叠一个节点',node.text);
+
+		},
+		onNodeExpanded (event, node){
+			// - 扩展节点
+			console.log(5,'展开一个节点',node.text)
+		},
+		onNodeSelected (event, node){
+			// - 选择了一个节点
+			console.log(6,'当前选中的节点',node.text)
+		},
+		onNodeUnselected (event, node){
+			// - 未选择节点
+			console.log(8,'取消当前选中',node.text)
+		}
+    });
+    /* jquery事件demo */
+    /*$('#demo9').on('nodeSelected', function(event, data) {
+	   console.log(event,data)
+	});*/
+
+
+    /*
+    getCollapsed		回折叠节点的数组
+    getDisabled			返回禁用节点的数组
+    getEnabled			返回启用节点的数组
+    getExpanded			返回扩展节点的数组
+    getNode				返回与给定节点ID匹配的单个节点对象
+    getParent			返回给定节点的父节点，如果有效，则返回未定义。
+    getSelected			返回选定节点的数组
+    getSiblings			返回给定节点的同级节点数组，如果有效，则返回未定义。
+    getUnselected		返回未选择节点的数组
+    remove				删除树视图组件。删除附加事件，内部附加对象和添加的HTML元素。
+    revealNode			显示给定的树节点，将树从节点扩展到根。
+    search				在树视图中搜索与给定字符串匹配的节点，并在树中突出显示它们。
+    selectNode			选择一个给定的树节点
+    toggleNodeChecked	切换节点的检查状态；检查是否未选中，检查是否未选中。
+    toggleNodeDisabled	切换节点禁用状态；如果启用则禁用，如果禁用则启用。
+    toggleNodeExpanded	切换节点展开状态；如果展开则折叠，如果折叠则展开。
+    toggleNodeSelected	切换节点选择状态；如果未选择则选择，如果已选择则取消选择。
+    uncheckAll			取消选中所有树节点。
+    uncheckNode			取消选中给定的树节点
+    unselectNode		取消选择给定的树节点
+    */
+</script>
+
+
+</body>
+</html>

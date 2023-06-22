@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+/*clear-default*/
+* { margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+html, input, button, select, textarea { font-family:"microsoft yahei","微软雅黑", "宋体", Tahoma, Helvetica, Arial, sans-serif; }
+body { background: #fff; font-size: 14px; color: #333; }
+a, a:link, a:visited, a:hover, a:active { text-decoration: none; }
+a img, fieldset { border: 0; }
+img { border: 0; display: block; }
+ul, ol, dl, li { list-style: none; }
+sup { vertical-align: text-top; }
+sub { vertical-align: text-bottom; }
+table { font-size: inherit; border-collapse: collapse; border-spacing: 0; }
+input, button, select, textarea { outline: none; }
+textarea { display: block; resize: none; overflow: auto; }
+q:before, blockquote:before, q:after, blockquote:after { content: ""; }
+
+/*float*/
+.fl { float: left; display: inline; }
+.fr { float: right; display: inline; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; overflow: hidden; }
+.clearfix { zoom: 1; /*IE<8*/ }
+/*common*/
+.none { display: none; }
+.pos-re { position: relative; }
+.pos-ab { position: absolute; }
+.pos-fix { position:fixed; }
+/*reset结束*/
+
+body {
+	background:#003156;
+	color:#fff;
+}
+.touch {
+	width:100%;
+	height:300px;
+	background: #99f;
+	position:relative;
+	text-align: center;
+	line-height: 300px;
+}
+.touch span {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/

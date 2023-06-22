@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    
+    <link rel="stylesheet" href="/vendor/charts/flot/flot.css" />
+    <link rel="stylesheet" href="/vendor/charts/flot/flot_custom.css" />
+	<!-- Vendor JS -->
+	<script src="/vendor/charts/flot/jquery.flot.js"></script>
+    <script src="/vendor/charts/flot/jquery.flot.resize.js"></script>
+    <script src="/vendor/charts/flot/jquery.flot.time.js"></script>
+    <script src="/vendor/charts/flot/jquery.flot.stack.js"></script>
+    <script src="/vendor/charts/flot/jquery.flot.pie.js"></script>
+    <script src="/vendor/charts/flot/jquery.flot.selection.js"></script>
+
+    <script src="/vendor/mock.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class=" page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">Flot 图表</h1>
+        <div class="page-header-actions">
+            <a class="btn btn-default btn-outline btn-round" href="http://www.flotcharts.org" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i> 官网</a>
+        </div>
+    </div>
+    <div class="page-content">
+
+        <div class="panel">
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">实时显示</h4>
+                            <div class="example">
+                                <div id="exampleFlotRealtime"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">全背景曲线图</h4>
+                            <div class="example example-responsive">
+                                <div class="w-xs-400" id="exampleFlotFullBg"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap m-md-0">
+                            <h4 class="example-title">曲线图</h4>
+                            <div class="example example-responsive">
+                                <div class="w-xs-400" id="exampleFlotCurve"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">混合图</h4>
+                            <div class="example example-responsive">
+                                <div class="w-xs-400" id="exampleFlotMix"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap m-lg-0">
+                            <h4 class="example-title">堆叠柱状图</h4>
+                            <div class="example">
+                                <div id="exampleFlotStackBar"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">横向柱状图</h4>
+                            <div class="example">
+                                <div id="exampleFlotHorizontalBar"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">饼状图</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example-wrap">
+                    <div class="example text-center">
+                        <div id="exampleFlotPie"></div>
+                    </div>
+                    <div class="example-buttons text-center mb-30">
+                        <button class="btn btn-primary btn-outline" id="btnPieDefault" type="button">默认</button>
+                        <button class="btn btn-primary btn-outline" id="btnPieWithoutLegend" type="button">隐藏图例</button>
+                        <button class="btn btn-primary btn-outline" id="btnPieLabelRadius" type="button">圆形</button>
+                        <button class="btn btn-primary btn-outline" id="btnPieRectangular" type="button">矩形</button>
+                        <button class="btn btn-primary btn-outline" id="btnPieDonutHole" type="button">环形</button>
+                        <button class="btn btn-primary btn-outline" id="btnPieInteractivity" type="button">交互</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">访客图</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example-wrap">
+                    <div class="example">
+                        <div id="exampleFlotVisitors"></div>
+                        <div id="exampleFlotVisitorsOverview"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    
+    // var d1 = [];
+    // for (var i = 0; i < 14; i += 0.5) {
+    //     d1.push([i, Math.sin(i)]);
+    // }
+    // var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+    // // A null signifies separate line segments
+    // var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+    // $.plot("#exampleFlotRealtime", [ d1, d2, d3 ]);
+
+    /* 实时显示 */
+    function demo1(){
+        var data = [{ 
+            data: [[1, 7.5], [2, 7.5], [3, 5.7], [4, 8.9], [5, 10], [6, 7], [7, 9], [8, 13], [9, 7], [10, 6]], 
+        }]; 
+        var options = { 
+            //points: {show: true, radius: 4, lineWidth: 3, fillColor: 'rgba(18,147,204,.1)'}, 
+            lines: {show: true, lineWidth: 0, fill: 0.5, fillColor: 'rgba(18,147,204,.1)'}, 
+            color: 'red', 
+            grid: {hoverable: false, clickable: false, borderWidth: 0, color: '#ccc'}, //网格
+        }; 
+        $.plot($("#exampleFlotRealtime"), data, options); 
+    }
+    demo1();
+    /* 全背景曲线图 */
+    function demo2(){
+        var data = [{ 
+            data: [[1, 7.5], [2, 7.5], [3, 5.7], [4, 8.9], [5, 10], [6, 7], [7, 9], [8, 13], [9, 7], [10, 6]], 
+        }]; 
+        var options = { 
+            //points: {show: true, radius: 4, lineWidth: 3, fillColor: 'rgba(18,147,204,.1)'}, 
+            lines: {show: true, lineWidth: 0, fill: 0.5, fillColor: 'rgba(18,147,204,.1)'}, 
+            color: 'red', 
+            grid: {hoverable: false, clickable: false, borderWidth: 0, color: '#ccc'}, //网格
+        }; 
+        $.plot($("#exampleFlotFullBg"), data, options); 
+    }
+    demo2();
+    /* 曲线图 */
+    function demo3(){
+        var sin = [],
+            cos = [];
+
+        for (var i = 0; i < 14; i += 0.5) {
+            sin.push([i, Math.sin(i)]);
+            cos.push([i, Math.cos(i)]);
+        }
+        var plot = $.plot("#exampleFlotCurve", [
+            { data: sin, label: "sin(x)"},
+            { data: cos, label: "cos(x)"}
+        ], {
+            series: {
+                lines: {
+                    show: true
+                },
+                points: {
+                    show: true
+                }
+            },
+            grid: {
+                hoverable: true,
+                clickable: true
+            },
+            yaxis: {
+                min: -1.2,
+                max: 1.2
+            },
+            zoom: {
+                interactive: true
+            },
+            pan: {
+                interactive: true,
+                enableTouch: true
+            }
+        });
+        window.setInterval(function () {
+            plot.setData([
+                { data: sin, label: "sin(x)"},
+                { data: cos, label: "cos(x)"}
+            ]);
+        }, 2000);
+        $("<div id='tooltip'></div>").css({
+            position: "absolute",
+            display: "none",
+            border: "1px solid #fdd",
+            padding: "2px",
+            "background-color": "#fee",
+            opacity: 0.80
+        }).appendTo("body");
+        $("#exampleFlotCurve").bind("plothover", function (event, pos, item) {
+            if (!pos.x || !pos.y) {
+                return;
+            }
+            if ($("#enablePosition:checked").length > 0) {
+                var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
+                $("#hoverdata").text(str);
+            }
+            if ($("#enableTooltip:checked").length > 0) {
+                if (item) {
+                    var x = item.datapoint[0].toFixed(2),
+                        y = item.datapoint[1].toFixed(2);
+
+                    $("#tooltip").html(item.series.label + " of " + x + " = " + y)
+                        .css({top: item.pageY+5, left: item.pageX+5})
+                        .fadeIn(200);
+                } else {
+                    $("#tooltip").hide();
+                }
+            }
+        });
+        $("#exampleFlotCurve").bind("plothovercleanup", function (event, pos, item) {
+                $("#tooltip").hide();
+        });
+        $("#exampleFlotCurve").bind("plotclick", function (event, pos, item) {
+            if (item) {
+                $("#clickdata").text(" - click point " + item.dataIndex + " in " + item.series.label);
+                plot.highlight(item.series, item.datapoint);
+            }
+        });
+    }
+    demo3();
+    /* 混合图 */
+    function demo4(){
+        var d1 = [];
+		for (var i = 0; i < 14; i += 0.5) {
+			d1.push([i, Math.sin(i)]);
+		}
+
+		var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+
+		var d3 = [];
+		for (var i = 0; i < 14; i += 0.5) {
+			d3.push([i, Math.cos(i)]);
+		}
+
+		var d4 = [];
+		for (var i = 0; i < 14; i += 0.1) {
+			d4.push([i, Math.sqrt(i * 10)]);
+		}
+
+		var d5 = [];
+		for (var i = 0; i < 14; i += 0.5) {
+			d5.push([i, Math.sqrt(i)]);
+		}
+
+		var d6 = [];
+		for (var i = 0; i < 14; i += 0.5 + Math.random()) {
+			d6.push([i, Math.sqrt(2*i + Math.sin(i) + 5)]);
+		}
+
+		$.plot("#exampleFlotMix", [{
+			data: d1,
+			lines: { show: true, fill: true }
+		}, {
+			data: d2,
+			bars: { show: true }
+		}, {
+			data: d3,
+			points: { show: true }
+		}, {
+			data: d4,
+			lines: { show: true }
+		}, {
+			data: d5,
+			lines: { show: true },
+			points: { show: true }
+		}, {
+			data: d6,
+			lines: { show: true, steps: true }
+		}]);
+    }
+    demo4();
+    /* 堆叠柱状图 */
+    (function(){
+        var d1 = [];
+		for (var i = 0; i <= 10; i += 1) {
+			d1.push([i, parseInt(Math.random() * 30)]);
+		}
+
+		var d2 = [];
+		for (var i = 0; i <= 10; i += 1) {
+			d2.push([i, parseInt(Math.random() * 30)]);
+		}
+
+		var d3 = [];
+		for (var i = 0; i <= 10; i += 1) {
+			d3.push([i, parseInt(Math.random() * 30)]);
+		}
+
+		var stack = 0,
+			bars = true,
+			lines = false,
+			steps = false;
+
+		function plotWithOptions() {
+			$.plot("#exampleFlotStackBar", [ d1, d2, d3 ], {
+				series: {
+					stack: stack,
+					lines: {
+						show: lines,
+						fill: true,
+						steps: steps
+					},
+					bars: {
+						show: bars,
+						barWidth: 0.6
+					}
+				},
+                yaxis: {
+                    autoScale:"exact"
+                }
+			});
+		}
+
+		plotWithOptions();
+
+		$(".stackControls button").click(function (e) {
+			e.preventDefault();
+			stack = $(this).text() == "With stacking" ? true : null;
+			plotWithOptions();
+		});
+
+		$(".graphControls button").click(function (e) {
+			e.preventDefault();
+			bars = $(this).text().indexOf("Bars") != -1;
+			lines = $(this).text().indexOf("Lines") != -1;
+			steps = $(this).text().indexOf("steps") != -1;
+			plotWithOptions();
+		});
+    })()
+
+    /* 饼状图 */
+/*     $.plot('#exampleFlotPie', data, {
+        series: {
+            pie: {
+                show: true
+            }
+        },
+        grid: {
+            hoverable: true,
+            clickable: true
+        }
+    });
+     */
+
+
+
+var data = [],
+    series = Math.floor(Math.random() * 6) + 3;
+
+for (var i = 0; i < series; i++) {
+    data[i] = {
+        label: "Series" + (i + 1),
+        data: Math.floor(Math.random() * 100) + 1
+    }
+}
+
+var placeholder = $("#exampleFlotPie");
+
+$("#example-1").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Default pie chart");
+    $("#description").text("The default pie chart with no options set.");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true
+            }
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true",
+        "        }",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-2").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Default without legend");
+    $("#description").text("The default pie chart when the legend is disabled. Since the labels would normally be outside the container, the chart is resized to fit.");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-3").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Custom Label Formatter");
+    $("#description").text("Added a semi-transparent background to the labels and a custom labelFormatter function.");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                radius: 1,
+                label: {
+                    show: true,
+                    radius: 1,
+                    formatter: labelFormatter,
+                    background: {
+                        opacity: 0.8
+                    }
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true,",
+        "            radius: 1,",
+        "            label: {",
+        "                show: true,",
+        "                radius: 1,",
+        "                formatter: labelFormatter,",
+        "                background: {",
+        "                    opacity: 0.8",
+        "                }",
+        "            }",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-4").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Label Radius");
+    $("#description").text("Slightly more transparent label backgrounds and adjusted the radius values to place them within the pie.");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                radius: 1,
+                label: {
+                    show: true,
+                    radius: 3/4,
+                    formatter: labelFormatter,
+                    background: {
+                        opacity: 0.5
+                    }
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true,",
+        "            radius: 1,",
+        "            label: {",
+        "                show: true,",
+        "                radius: 3/4,",
+        "                formatter: labelFormatter,",
+        "                background: {",
+        "                    opacity: 0.5",
+        "                }",
+        "            }",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-5").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Label Styles #1");
+    $("#description").text("Semi-transparent, black-colored label background.");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                radius: 1,
+                label: {
+                    show: true,
+                    radius: 3/4,
+                    formatter: labelFormatter,
+                    background: {
+                        opacity: 0.5,
+                        color: "#000"
+                    }
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: { ",
+        "            show: true,",
+        "            radius: 1,",
+        "            label: {",
+        "                show: true,",
+        "                radius: 3/4,",
+        "                formatter: labelFormatter,",
+        "                background: { ",
+        "                    opacity: 0.5,",
+        "                    color: '#000'",
+        "                }",
+        "            }",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-6").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Label Styles #2");
+    $("#description").text("Semi-transparent, black-colored label background placed at pie edge.");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                radius: 3/4,
+                label: {
+                    show: true,
+                    radius: 3/4,
+                    formatter: labelFormatter,
+                    background: {
+                        opacity: 0.5,
+                        color: "#000"
+                    }
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true,",
+        "            radius: 3/4,",
+        "            label: {",
+        "                show: true,",
+        "                radius: 3/4,",
+        "                formatter: labelFormatter,",
+        "                background: {",
+        "                    opacity: 0.5,",
+        "                    color: '#000'",
+        "                }",
+        "            }",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-7").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Hidden Labels");
+    $("#description").text("Labels can be hidden if the slice is less than a given percentage of the pie (10% in this case).");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                radius: 1,
+                label: {
+                    show: true,
+                    radius: 2/3,
+                    formatter: labelFormatter,
+                    threshold: 0.1
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true,",
+        "            radius: 1,",
+        "            label: {",
+        "                show: true,",
+        "                radius: 2/3,",
+        "                formatter: labelFormatter,",
+        "                threshold: 0.1",
+        "            }",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-8").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Combined Slice");
+    $("#description").text("Multiple slices less than a given percentage (5% in this case) of the pie can be combined into a single, larger slice.");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                combine: {
+                    color: "#999",
+                    threshold: 0.05
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true,",
+        "            combine: {",
+        "                color: '#999',",
+        "                threshold: 0.1",
+        "            }",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-9").click(function() {
+
+    placeholder.unbind();
+
+    $("#title").text("Rectangular Pie");
+    $("#description").text("The radius can also be set to a specific size (even larger than the container itself).");
+
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                radius: 500,
+                label: {
+                    show: true,
+                    formatter: labelFormatter,
+                    threshold: 0.1
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
+    setCode([
+        "$.plot('#placeholder', data, {",
+        "    series: {",
+        "        pie: {",
+        "            show: true,",
+        "            radius: 500,",
+        "            label: {",
+        "                show: true,",
+        "                formatter: labelFormatter,",
+        "                threshold: 0.1",
+        "            }",
+        "        }",
+        "    },",
+        "    legend: {",
+        "        show: false",
+        "    }",
+        "});"
+    ]);
+});
+
+$("#example-10").click(function() {
+
+placeholder.unbind();
+
+$("#title").text("Tilted Pie");
+$("#description").text("The pie can be tilted at an angle.");
+
+$.plot(placeholder, data, {
+    series: {
+        pie: {
+            show: true,
+            radius: 1,
+            tilt: 0.5,
+            label: {
+                show: true,
+                radius: 1,
+                formatter: labelFormatter,
+                background: {
+                    opacity: 0.8
+                }
+            },
+            combine: {
+                color: "#999",
+                threshold: 0.1
+            }
+        }
+    },
+    legend: {
+        show: false
+    }
+});
+
+setCode([
+    "$.plot('#placeholder', data, {",
+    "    series: {",
+    "        pie: {",
+    "            show: true,",
+    "            radius: 1,",
+    "            tilt: 0.5,",
+    "            label: {",
+    "                show: true,",
+    "                radius: 1,",
+    "                formatter: labelFormatter,",
+    "                background: {",
+    "                    opacity: 0.8",
+    "                }",
+    "            },",
+    "            combine: {",
+    "                color: '#999',",
+    "                threshold: 0.1",
+    "            }",
+    "        }",
+    "    },",
+    "    legend: {",
+    "        show: false",
+    "    }",
+    "});",
+]);
+});
+
+$("#example-11").click(function() {
+
+placeholder.unbind();
+
+$("#title").text("Donut Hole");
+$("#description").text("A donut hole can be added.");
+
+$.plot(placeholder, data, {
+    series: {
+        pie: {
+            innerRadius: 0.5,
+            show: true
+        }
+    }
+});
+
+setCode([
+    "$.plot('#placeholder', data, {",
+    "    series: {",
+    "        pie: {",
+    "            innerRadius: 0.5,",
+    "            show: true",
+    "        }",
+    "    }",
+    "});"
+]);
+});
+
+$("#example-12").click(function() {
+
+placeholder.unbind();
+
+$("#title").text("Interactivity");
+$("#description").text("The pie can be made interactive with hover and click events.");
+
+$.plot(placeholder, data, {
+    series: {
+        pie: {
+            show: true
+        }
+    },
+    grid: {
+        hoverable: true,
+        clickable: true
+    }
+});
+
+setCode([
+    "$.plot('#placeholder', data, {",
+    "    series: {",
+    "        pie: {",
+    "            show: true",
+    "        }",
+    "    },",
+    "    grid: {",
+    "        hoverable: true,",
+    "        clickable: true",
+    "    }",
+    "});"
+]);
+
+placeholder.bind("plothover", function(event, pos, obj) {
+
+    if (!obj) {
+        return;
+    }
+
+    var percent = parseFloat(obj.series.percent).toFixed(2);
+    $("#hover").html("<span style='font-weight:bold; color:" + obj.series.color + "'>" + obj.series.label + " (" + percent + "%)</span>");
+});
+
+placeholder.bind("plotclick", function(event, pos, obj) {
+
+    if (!obj) {
+        return;
+    }
+
+    percent = parseFloat(obj.series.percent).toFixed(2);
+    alert(""  + obj.series.label + ": " + percent + "%");
+});
+});
+
+// Show the initial default chart
+
+$("#example-1").click();
+
+
+function labelFormatter(label, series) {
+return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+}
+
+//
+
+function setCode(lines) {
+$("#code").text(lines.join("\n"));
+}
+</script>
+
+</body>
+</html>

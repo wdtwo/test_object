@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+	<script src="/vendor/twbs-pagination/jquery.twbsPagination.js"></script>
+</head>
+
+<body class="site-contabs-open site-menubar-unfold">
+
+<div class="page animation-fade">
+    <div class="page-header">
+        <h1 class="page-title">分页</h1>
+        <div class="page-header-actions">
+            <form>
+                <div class="input-search input-search-dark">
+                    <i class="input-search-icon wb-search" aria-hidden="true"></i>
+                    <input type="text" class="form-control" name="" placeholder="搜索...">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="page-content">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">分页</h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本</h4>
+                            <p>下面是一个基本示例。</p>
+                            <div class="example">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="上一页">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="下一页">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">禁用 / 选中</h4>
+                            <p>添加
+                                <code>.disabled</code> 禁用，添加
+                                <code>.active</code> 类选中。</p>
+                            <div class="example">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="javascript:;" aria-label="上一页">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="javascript:;">1
+                                                <span class="sr-only">当前</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="下一页">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">间隙</h4>
+                            <div class="example">
+                                <nav>
+                                    <ul class="pagination pagination-gap">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="javascript:;" aria-label="上一页">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="javascript:;">1
+                                                <span class="sr-only">当前</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="下一页">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">无边框</h4>
+                            <div class="example">
+                                <nav>
+                                    <ul class="pagination pagination-no-border">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="javascript:;" aria-label="上一页">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="javascript:;">1
+                                                <span class="sr-only">当前</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="下一页">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">大小</h4>
+                            <p>使用
+                                <code>.pagination-lg</code> 或
+                                <code>.pagination-sm</code> 改变默认大小。</p>
+                            <div class="example">
+                                <nav>
+                                    <ul class="pagination pagination-lg">
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="上一页">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="下一页">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="上一页">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="下一页">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <nav>
+                                    <ul class="pagination pagination-sm">
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="上一页">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;" aria-label="下一页">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">简单分页</h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">默认</h4>
+                            <div class="example">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">上一页</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">下一页</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">禁用</h4>
+                            <div class="example">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="javascript:;">上一页</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">下一页</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">twbsPagination.js
+                    <small>
+                        <a class="example-plugin-link" href="https://github.com/esimakin/twbs-pagination" target="_blank">
+							官网
+                        </a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">基本</h4>
+                            <div class="example">
+                                <nav aria-label="Page navigation">
+							        <ul class="pagination" id="pagination1"></ul>
+								</nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">间隙</h4>
+                            <div class="example">
+                                <nav>
+                                    <ul data-plugin="twbsPagination" data-total-pages="50" data-pagination-class="pagination pagination-gap"></ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap m-md-0">
+                            <h4 class="example-title">无边框</h4>
+                            <div class="example">
+                                <nav>
+                                    <ul data-plugin="twbsPagination" data-total-pages="50" data-pagination-class="pagination pagination-no-border"></ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">尺寸</h4>
+                            <div class="example">
+                                <nav>
+                                    <ul data-plugin="twbsPagination" data-total-pages="50" data-pagination-class="pagination pagination-lg"></ul>
+                                </nav>
+                                <nav>
+                                    <ul data-plugin="twbsPagination" data-total-pages="50"></ul>
+                                </nav>
+                                <nav>
+                                    <ul data-plugin="twbsPagination" data-total-pages="50" data-pagination-class="pagination pagination-sm"></ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+	/*http://josecebe.github.io/twbs-pagination/*/
+	/*var settings = {
+		totalPages				//页数		1个
+		startPage				//开始时显示的当前页面	1个
+		visiblePages			//可见页数上限	5
+		initiateStartPageClick	//插件初始化时在起始页面上点击	true
+		hideOnlyOnePage			//如果有一页，它将隐藏所有控制按钮	false
+		href					//生成查询字符串或生成＃	false
+		pageVariable			//模板将替换为页码	'{{page}}'
+		totalPagesVariable		//将替换为总页数	'{{total_pages}}'
+		page					//可用于自定义页码标签	null
+		first					//“第一个”按钮的文字标签	'First'
+		prev					//“上一个”按钮的标签	'Previous'
+		next					//“下一步”按钮的标签	'Next'
+		last					//“最后”按钮的标签	串	'Last'
+		loop					//轮播式分页	false
+		onPageClick				//点击事件回调	null
+		paginationClass			//分页组件的根样式	'pagination'
+		nextClass				//“下一步”按钮的CSS类	'page-item next'
+		prevClass				//“上一个”按钮的类别	'page-item prev'
+		lastClass				//“最后”按钮的类别	'page-item last'
+		firstClass				//“第一”按钮的类别	'page-item first'
+		pageClass				//页面按钮的类	'page-item'
+		activeClass				//活动按钮的类别	'active'
+		disabledClass			//禁用按钮的类别	'disabled'
+		anchorClass				//按钮内的锚点的CSS类	'page-link'
+	}*/
+    $(function() {
+        $('#pagination1').twbsPagination({
+            totalPages: 35,
+            visiblePages: 6,
+            onPageClick: function (event, page) {
+                console.info(page + ' (from options)');
+            }
+        }).on('page', function (event, page) {
+            console.info(page + ' (from event listening)');
+        });
+        $('#pagination2').twbsPagination({
+            totalPages: 35,
+            visiblePages: 6,
+            onPageClick: function (event, page) {
+                console.info(page + ' (from options)');
+            }
+        })
+        $('#pagination3').twbsPagination({
+            totalPages: 35,
+            visiblePages: 6,
+            onPageClick: function (event, page) {
+                console.info(page + ' (from options)');
+            }
+        })
+        $('#pagination4').twbsPagination({
+            totalPages: 35,
+            visiblePages: 6,
+            onPageClick: function (event, page) {
+                console.info(page + ' (from options)');
+            }
+        })
+
+
+    });
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/vendor/theme/css/site.css">
+
+	<link rel="stylesheet" href="/vendor/fonts/awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/vendor/fonts/web-icons/web-icons.css">
+
+	<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+
+
+    <!-- Vendor CSS-->
+    <link rel="stylesheet" href="/vendor/dropify/css/dropify.css">
+    <script src="/vendor/dropify/js/dropify.js"></script>
+
+
+
+    <!--<script src="/vendor/jquery-fileupload/jquery.ui.widget.js"></script>
+	<link rel="stylesheet" href="/vendor/jquery-fileupload/css/jquery.fileupload.css">
+	<script src="/vendor/jquery-fileupload/js/jquery.fileupload.js"></script>-->
+
+</head>
+
+<body class="site-contabs-open site-menubar-unfold ">
+
+<div class="page animation-fade page-forms">
+    <div class="page-header">
+        <h1 class="page-title">文件上传</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>首页</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:;">表单</a>
+            </li>
+            <li class="breadcrumb-item active">文件上传</li>
+        </ol>
+    </div>
+    <div class="page-content">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Dropify
+                    <small>
+                        <a class="example-plugin-link" href="https://jeremyfagis.github.io/dropify/" target="_blank">
+							官网
+                        </a>
+                    </small>
+                </h3>
+            </div>
+            <div class="panel-body container-fluid">
+                <div class="row row-lg">
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">默认</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control"
+                                	id="input-file-now"
+                                	data-plugin="dropify"
+                                    data-default-file="">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">设置默认值</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control"
+                                	id="input-file-now-custom-1"
+                                	data-plugin="dropify"
+                                    data-default-file="/vendor/dropify/images/placeholder.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">设置高度</h4>
+                            <div class="example">
+                                <input type="file"
+                                	class="form-control"
+                                	id="input-file-now-custom-2"
+                                	data-plugin="dropify"
+                                    data-height="100">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">多个设置项</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control"
+                                	id="input-file-now-custom-3"
+                                	data-plugin="dropify"
+                                    data-height="300"
+                                    data-default-file="/vendor/dropify/images/placeholder.png">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">禁用</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control"
+                                	id="input-file-now-disabled-1"
+                                	data-plugin="dropify"
+                                    disabled="disabled">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">默认文件</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control"
+                                	id="input-file-now-disabled-2"
+                                	data-plugin="dropify"
+                                    disabled="disabled"
+                                    data-default-file="/vendor/dropify/images/placeholder.png">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">文件大小限制</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control"
+                                	id="input-file-max-fs"
+                                	data-plugin="dropify"
+                                    data-max-file-size="2M">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">禁用移除按钮</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control"
+                                	id="input-file-disable-remove"
+                                	data-plugin="dropify"
+                                    data-disable-remove="true">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+
+                        <div class="example-wrap">
+                            <h4 class="example-title">事件</h4>
+                            <div class="example">
+                                <input
+                                	type="file"
+                                	class="form-control dropify-event"
+                                	id="input-file-events"
+                                    data-plugin="dropify"
+                                    data-default-file="/vendor/dropify/images/placeholder.png">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-wrap">
+            <h3 class="example-title">jQuery File Upload
+                <small>
+                    <a class="example-plugin-link" href="https://blueimp.github.io/jQuery-File-Upload/" target="_blank">
+						官网
+                    </a>
+                </small>
+            </h3>
+            <form class="upload-form" id="exampleUploadForm" method="POST">
+                <input type="file" id="inputUpload" name="files[]" multiple="">
+                <label for="inputUpload" class="block">
+                	<div class="uploader-inline">
+	                    <h4 class="upload-instructions">单击或直接拖动需要上传的文件到此处</h4>
+	                </div>
+                </label>
+
+                <div class="file-wrap container-fluid">
+                    <div class="file-list row"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+	/* Dropify */
+	//https://github.com/JeremyFagis/dropify
+	//http://jeremyfagis.github.io/dropify/
+	//默认
+	$('#input-file-now').dropify();
+	//设置默认值
+	$("#input-file-now-custom-1").dropify();
+	//设置高度
+	$("#input-file-now-custom-2").dropify();
+	//多个设置项
+	$("#input-file-now-custom-3").dropify();
+	//禁用
+	$("#input-file-now-disabled-1").dropify();
+	//默认文件
+	$("#input-file-now-disabled-2").dropify();
+	//文件大小限制
+	$("#input-file-max-fs").dropify();
+	//禁用移除按钮
+	$("#input-file-disable-remove").dropify();
+	//事件
+	$("#input-file-events").dropify();
+
+
+
+
+
+	/* jQuery File Upload */
+	//https://github.com/blueimp/jQuery-File-Upload
+	/*
+	<input
+	 	id="fileupload"
+	 	type="file"
+	 	name="files[]"
+	 	multiple
+	    data-url="/path/to/upload/handler.json"
+	    data-sequential-uploads="true"
+	    data-form-data='{"script": "true"}'>
+	*/
+
+	/*$("#inputUpload").fileupload({
+	    url: '/datas/demo1.json',
+	    sequentialUploads: true
+	});
+	$('#inputUpload').fileupload(
+	    'option',
+	    'url',
+	    '/datas/demo1.json'
+	);*/
+	/*$("#inputUpload").fileupload({
+	    url: '/datas/demo1.json',
+	    sequentialUploads: true
+	});*/
+	/*$('#inputUpload').fileupload({
+	    drop: function (e, data) {
+	        $.each(data.files, function (index, file) {
+	            console.log('Dropped file: ' + file.name);
+	        });
+	    },
+	    change: function (e, data) {
+	        $.each(data.files, function (index, file) {
+	            console.log('Selected file: ' + file.name);
+	        });
+	    }
+	});
+	$('#inputUpload').fileupload('destroy');
+	$('#fileupload').fileupload('disable');
+	$('#fileupload').fileupload('enable');
+	var overallProgress = $('#fileupload').fileupload('progress');
+	var activeUploads = $('#fileupload').fileupload('active');
+	$('#fileupload').fileupload('add', {files: filesList});
+	var filesList = $('input[type="file"]').prop('files');
+	$('#fileupload').fileupload('add', {files: filesList, url: '/path/to/upload/handler.json'});
+	$('#fileupload').fileupload('send', {files: filesList});*/
+	/*var jqXHR = $('#fileupload').fileupload('send', {files: filesList})
+			    .success(function (result, textStatus, jqXHR) {
+
+			    })
+			    .error(function (jqXHR, textStatus, errorThrown) {
+
+			    })
+			    .complete(function (result, textStatus, jqXHR) {
+
+			    });
+
+	$('#some-file-input-field').bind('change', function (e) {
+	    $('#fileupload').fileupload('add', {
+	        fileInput: $(this)
+	    });
+	});
+
+	$('#fileupload').fileupload({
+	    drop: function (e, data) {
+	        $.each(data.files, function (index, file) {
+	            alert('Dropped file: ' + file.name);
+	        });
+	    },
+	    change: function (e, data) {
+	        $.each(data.files, function (index, file) {
+	            alert('Selected file: ' + file.name);
+	        });
+	    }
+	});
+
+	$('#fileupload')
+    .bind('fileuploaddrop', function (e, data) {
+
+    })
+    .bind('fileuploadchange', function (e, data) {
+
+    });
+
+	$('#fileupload').fileupload({
+	    add: function (e, data) {
+	        data.submit();
+	    }
+	});
+
+	$('#fileupload').fileupload({
+	    add: function (e, data) {
+	        var jqXHR = data.submit()
+	            .success(function (result, textStatus, jqXHR) {
+
+	            })
+	            .error(function (jqXHR, textStatus, errorThrown) {
+
+	            })
+	            .complete(function (result, textStatus, jqXHR) {
+
+	            });
+	    }
+	});
+
+	var jqXHR = $('#fileupload').fileupload('send', {files: filesList})
+	    .error(function (jqXHR, textStatus, errorThrown) {
+	        if (errorThrown === 'abort') {
+	            alert('File Upload has been canceled');
+	        }
+	    });
+	$('button.cancel').click(function (e) {
+	    jqXHR.abort();
+	});
+
+	$('#fileupload').fileupload({
+	    add: function (e, data) {
+	        var count = data.files.length;
+	        var i;
+	        for (i = 0; i < count; i++) {
+	            data.files[i].uploadName =
+	                Math.floor(Math.random() * 1000) + '_' + data.files[i].name;
+	        }
+	        data.submit();
+	    }
+	});*/
+</script>
+
+</body>
+</html>

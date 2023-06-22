@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum=1,maximum=1,user-scalable=0">
+    <meta name="baidu-site-verification" content="53Dx5t95PU" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>摇一摇抽奖</title>
+	<style type="text/css">
+		#main {
+			text-align: center;
+		}
+		#main img {
+			display: block;
+			margin:100px auto;
+			width:150px;
+		}
+		.yaoyao {
+			animation: ease 1000ms yaoyao infinite;
+			-webkit-animation: ease 1000ms yaoyao infinite;
+		}
+		@keyframes yaoyao {
+			34% {
+				transform: rotate(-30deg);
+			}
+			67% {
+				transform: rotate(30deg);
+			}
+			100% {
+				transform: rotate(0deg);
+			}
+		}
+		@-webkit-keyframes yaoyao {
+			34% {
+				-webkit-transform: rotate(-30deg);
+			}
+			67% {
+				-webkit-transform: rotate(30deg);
+			}
+			100% {
+				-webkit-transform: rotate(0deg);
+			}
+		}
+	</style>
+</head>
+<body>
+    <div id="main">
+       <img src="images/yaoyiyao-pic.png" />
+    </div>
+    <script src="js/jquery-1.11.3.min.js"></script>
+	<script>
+		//================== 初始化摇一摇
+    	$(function(){ new yaoyao()});
+		
+		var yaoyao = function(){
+			//定义一个变量保存上次更新的时间
+			var last_update = 0;
+			var x,y,z,last_x,last_y,last_z;
+			var clearClass = '';
+			//为了方便控制，增加一个计数器,作为开关
+  			yyopen = 1;
+			//首先在页面上要监听运动传感事件 
+			var init = function(){
+				if (window.DeviceMotionEvent){
+					// 移动浏览器支持运动传感事件
+					window.addEventListener('devicemotion', deviceMotionHandler, false);
+				}else{
+					alert('您的设备不支持摇一摇!');
+				}
+			}
+			var deviceMotionHandler = function(eventData){
+				//获取含重力的加速度
+				var acceleration = eventData.accelerationIncludingGravity; 
+				//获取当前时间
+				var curTime = new Date().getTime(); 
+				var diffTime = curTime - last_update;
+				//固定时间段
+				if (diffTime > 100){
+					last_update = curTime,x = acceleration.x,y = acceleration.y,z = acceleration.z;
+					var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000; 
+					if(speed > 3000){//首先，定义一个摇动的阈值
+						if(yyopen == 1){
+							//立即关闭
+							$("#main h1").html('('+yyopen+')('+x+')('+y+')('+z+')');
+							//获取数据
+							$.ajax({
+								type:"get",
+								url:"./wap-yaoyao.html",
+								async:true,
+								success:function(data){
+									yyopen = 0;
+									alert(data);
+								}
+							});
+						}
+						var animateYaoyao = function(ele,delay){
+							var delay = delay || 1000;
+							ele.addClass('yaoyao');
+							window.clearTimeout(clearClass);
+							clearClass = window.setTimeout(function(){
+								ele.removeClass('yaoyao');
+								alert(123);
+							},delay);
+						}
+						animateYaoyao($("#main"),1000);
+					}
+					last_x = x,last_y = y,last_z = z;//重置下一次的初始值
+				}
+			}
+			init();
+		}
+	</script>
+</body>
+</html>
