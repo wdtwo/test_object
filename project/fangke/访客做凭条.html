@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>访客凭条</title>
+	<link href="css/basic.css" rel="stylesheet" type="text/css"/>
+	<link href="toast/toast.css" rel="stylesheet" type="text/css">
+	<link href="toast/animate.css" rel="stylesheet" type="text/css">
+	<script>
+        function autoScale(){
+            var winW = document.documentElement.clientWidth;
+            return Math.min (1,Math.min(winW / 1080));
+        }
+        document.documentElement.style.cssText = 'font-size:'+(100 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+	
+</head>
+<body>
+	<div class="wrap p-b-150 card-page page-loading">
+		<div class="p-t-50 p-l-50 p-r-50">
+			<!-- 待审核状态添加 changestate -->
+			<div class="content p-b-30 flex flex-column" style="overflow: hidden;">
+				<div class="card-state flex flex-item-end p-b-20">
+					待审核
+				</div>
+				<div class="card-person">
+					<img src="" class="img" onerror="onerror=null;src='images/ico-person.svg'">
+				</div>
+				<div class="f60 c-666 m-t-25 name"></div>
+				<ul class="m-t-85 c-666 f40">
+					<li class="flex flex-jus-start">
+						<img src="images/ico-tel.svg">
+						<span class="tel"></span>
+					</li>
+					<li class="flex flex-jus-start">
+						<img src="images/ico-id.svg">
+						<span class="personid"></span>
+					</li>
+					<li class="flex flex-jus-start">
+						<img src="images/ico-car.svg">
+						<span class="carnum"></span>
+					</li>
+					<li class="flex flex-jus-start">
+						<img src="images/ico-address.svg">
+						<span class="companyname"></span>
+					</li>
+				</ul>
+				<div class="f44 c-999 m-t-80">
+					来访 : <span class="starttime"></span><br>
+					离访 : <span class="endtime"></span>
+				</div>
+				<div class="f36 c-cf t-c m-t-40">
+					让所有人在任何城镇都能住上好酒店
+				</div>
+			</div>
+		</div>
+		<!-- <img src="images/logo.png" class="logo m-b-50"> -->
+	</div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="datepicker/js/dayjs.min.js"></script>
+	<script src="datepicker/js/datepicker.min.js"></script>
+	<script src="toast/toast.js"></script>
+	<script>
+
+		//预约信息查询
+		$.ajax({
+			url:'/AppointRecordInfo/getAppointRecordLocal?appointId=5',
+			type:'get',
+			success:function(res){
+				let obj = JSON.parse(res)
+				if(obj.errCode == 0){
+					$('.img').attr('src',obj.img)
+					console.log(obj.errMsg);
+					$('.name').html(obj.errMsg.visitorName)
+					$('.tel').html(obj.errMsg.phoneNo)
+					$('.personid').html(obj.errMsg.certificateNo)
+					$('.carnum').html(obj.errMsg.plateNo)
+					$('.starttime').html(dayjs(obj.errMsg.appointStartTime).format("YYYY/MM/DD HH:mm:ss"))
+					$('.endtime').html(dayjs(obj.errMsg.appointEndTime).format("YYYY/MM/DD HH:mm:ss"))
+					$('.companyname').html(obj.errMsg.companyName)
+					$('.page-loading').removeClass("page-loading")
+					if(obj.errMsg.visitReasonType == 0){
+						$('.card-state').html('待审核')
+					}else{
+						$('.card-state').html('已审核').addClass("card-state-success")
+					}
+				}else{
+					$('body').toast({
+						content:res.errMsg,
+						duration:2000
+					});
+					setTimeout(function(){
+						closeWindow()
+					},2500)
+				}
+			},error(err){
+				$('body').toast({
+					content:err,
+					duration:2000
+				});
+				setTimeout(function(){
+					closeWindow()
+				},2500)
+			}
+		})
+		
+		//关闭页面
+		function closeWindow(){
+			var isLppzApp = false
+			var ua = navigator.userAgent.toLowerCase()
+			var uaApp = ua ? ua.match(/BeStore/i) : '' // match方法返回的是对象
+			var uaAndroid = /android/i.test(ua) // test返回的是true/false
+			var uaIos = /iphone|ipad|ipod/i.test(ua)
+			//if (uaApp.toString() === 'bestore') { // 必须将match返回的对象转成字符串
+			//    isLppzApp = true
+			//} else {
+			//    isLppzApp = false
+			//}
+			if (window.WeixinJSBridge) {
+				window.WeixinJSBridge.call('closeWindow') // 微信
+			} else if (window.AlipayJSBridge) {
+				window.AlipayJSBridge.call('closeWebview') // 支付宝
+			} else if (isLppzApp && uaAndroid) {
+				window.obj.closePageLppzRequest('') // 安卓app
+			} else if (isLppzApp && uaIos) {
+				window.webkit.messageHandlers.closePageLppzRequest.postMessage('') //ios app
+			} else {
+				window.close();
+			}
+		}
+
+	</script>
+</body>
+</html>

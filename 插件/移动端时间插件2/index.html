@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>时间多功能插件</title>
+<style>body,html{width:100%;overflow:hidden;margin:0;padding:0 5px;box-sizing:border-box;}.nav{width:100%;display:flex;align-items:center;flex-wrap:wrap;margin-bottom:30px;margin-top:30px;font-size:12px;}.nav p{font-size:12px;color:#333;background-color:#eee;line-height:32px;border-radius:5px;padding:0 10px;margin:5px 7px;user-select:none;transition:all 0.2s;}.nav p:active{transform:scale(0.95);}.list_con{width:100%;padding:0 10px;box-sizing:border-box;}.list_con p{font-size:12px;color:#333;word-break:break-all;}</style>
+</head>
+<div class="nav">
+类型
+<p onclick="singleDate()">单选</p>
+<p onclick="multipleDate()">多选</p>
+<p onclick="dateMulti()">时间范围</p>
+<p onclick="appointDate()">指定日期</p>
+<p onclick="appointDateText()">指定日期带文本</p>
+<p onclick="appointnoDate()">指定不可选日期</p>
+</div>
+<p>内容</p>
+<div class="list_con"></div>
+<div class="nav">
+位置
+<p onclick="topShow()">顶部</p>
+<p onclick="centerShow()">中部</p>
+<p onclick="bottomShow()">默认底部</p>
+</div>
+<div class="nav">
+自定义主题
+<p onclick="oneStyle()">主题案列</p>
+<p onclick="twoStyle()">主题案列</p>
+<p onclick="threeStyle()">主题案列</p>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="./js/dateMultiFunc.min.js"></script>
+<script>
+function singleDate() {
+	var dateMulti = new dateMultiFunc({
+		type: 0,
+		cancelFunc: function() {
+			console.log("取消");
+		},
+		confirmFunc: function(res) {
+			console.log("确认");
+			console.log(res);
+			listCon(res, 0);
+		}
+	});
+
+	dateMulti.show();
+};
+
+function multipleDate() {
+	var dateMulti = new dateMultiFunc({
+		type: 1,
+		cancelFunc: function() {
+			console.log("取消")
+		},
+		confirmFunc: function(res) {
+			console.log("确认")
+			console.log(res)
+			listCon(res, 1)
+		}
+
+
+	});
+
+	dateMulti.show();
+};
+
+function dateMulti() {
+	var dateMulti = new dateMultiFunc({
+		type: 2,
+		maxTime: 0,
+		cancelFunc: function() {
+			console.log("取消")
+		},
+		confirmFunc: function(res) {
+			console.log("确认")
+			console.log(res)
+			listCon(res, 2)
+		}
+	});
+	dateMulti.show();
+};
+
+function appointDate() {
+	var dateMulti = new dateMultiFunc({
+		type: 0,
+		minTime: "2022.6.1",
+		maxTime: 1,
+		defaultYears: "2022.7.1",
+		appointTime: ["2022.6.2", "2022.7.5", "2022.7.10", "2022.7.15"],
+		cancelFunc: function() {
+			console.log("取消")
+		},
+		confirmFunc: function(res) {
+			console.log("确认")
+			console.log(res)
+			listCon(res, 0)
+		}
+	});
+	dateMulti.show();
+};
+
+function appointDateText() {
+	var dateMulti = new dateMultiFunc({
+		type: 1,
+		minTime: 1,
+		maxTime: "2022.8.10",
+		appointTime: [{
+			date: "2022.7.1",
+			text: "111"
+		}, {
+			date: "2022.7.5",
+			text: "555"
+		}, {
+			date: "2022.7.8",
+			text: "888"
+		}, {
+			date: "2022.7.20",
+			text: "2020"
+		}],
+		cancelFunc: function() {
+			console.log("取消")
+		},
+		confirmFunc: function(res) {
+			console.log("确认")
+			console.log(res)
+			listCon(res, 0)
+		}
+	});
+	dateMulti.show();
+};
+
+function appointnoDate() {
+	var dateMulti = new dateMultiFunc({
+		type: 1,
+		minTime: 0,
+		maxTime: "2022.8.20",
+		defaultYears: "2022.7.5",
+		appointOn: [{
+			date: "2022.7.1",
+			text: "111"
+		}, {
+			date: "2022.7.5",
+			text: "555"
+		}, {
+			date: "2022.7.8",
+			text: "888"
+		}, {
+			date: "2022.7.20",
+			text: "2020"
+		}],
+		cancelFunc: function() {
+			console.log("取消")
+		},
+		confirmFunc: function(res) {
+			console.log("确认")
+			console.log(res)
+			listCon(res, 0)
+		}
+	});
+	dateMulti.show();
+};
+
+function listCon(res, type) {
+	var html = '';
+	if (type == 2) {
+		html += "<p>开始时间：" + JSON.stringify(res.statrTime) + "</p>";
+		html += "<p>结束时间：" + JSON.stringify(res.endTime) + "</p>";
+	} else {
+		for (var i = 0; i < res.length; i++) {
+			html += "<p>" + JSON.stringify(res[i]) + "</p>";
+		}
+	}
+	var list_con = document.querySelector(".list_con");
+	list_con.innerHTML = html;
+}; 
+
+</script>
+<script>function topShow() {var dateMulti =new dateMultiFunc({type:0,position:"top",radius:[0,0,10,10],cancelFunc:function () {console.log("取消")
+},confirmFunc:function (res) {console.log("确认")
+console.log(res)
+}
+});dateMulti.show();};function centerShow() {var dateMulti =new dateMultiFunc({type:0,position:"center",radius:10,cancelFunc:function () {console.log("取消")
+},confirmFunc:function (res) {console.log("确认")
+console.log(res)
+}
+});dateMulti.show();};function bottomShow() {var dateMulti =new dateMultiFunc({type:0,position:"bottom",radius:[10,10,0,0],cancelFunc:function () {console.log("取消")
+},confirmFunc:function (res) {console.log("确认")
+console.log(res)
+}
+});dateMulti.show();};</script > < script > function oneStyle() {
+	var dateMulti = new dateMultiFunc({
+		type: 2,
+		radius: [10, 10, 0, 0],
+		background: "#ef8e29",
+		color: "#fff",
+		tranColor: "#fff",
+		cancelFunc: function() {
+			console.log("取消")
+		},
+		confirmFunc: function(res) {
+			console.log("确认")
+			console.log(res)
+		}
+	});
+	dateMulti.show();
+};
+
+function twoStyle() {
+	var dateMulti = new dateMultiFunc({
+		type: 2,
+		radius: [10, 10, 0, 0],
+		background: "#fe4052",
+		color: "#fff",
+		selectBg: "#67C23A",
+		tranColor: "#fff",
+		tranBg: "#666",
+		cancelFunc: function() {
+			console.log("取消");
+		},
+		confirmFunc: function(res) {
+			console.log("确认");
+			console.log(res);
+		}
+	});
+	dateMulti.show();
+};
+
+function threeStyle() {
+	var dateMulti = new dateMultiFunc({
+		type: 2,
+		radius: [10, 10, 0, 0],
+		background: "#40e4fe",
+		color: "#323f6c",
+		selectBg: "#ffab2c",
+		selectRadius: 8,
+		tranBg: "#efd577",
+		cancelFunc: function() {
+			console.log("取消");
+		},
+		confirmFunc: function(res) {
+			console.log("确认");
+			console.log(res);
+		}
+	});
+	dateMulti.show();
+};
+
+
+</script>
