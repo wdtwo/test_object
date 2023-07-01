@@ -8,13 +8,13 @@
 
   <div id="text"></div>
 
-  <script src="./src/tesseract.min.js"></script>
+  <script src="https://images.wdtwo.com/tesseract/tesseract.min.js"></script>
   <script>
     const { createWorker } = Tesseract;
     const worker = createWorker({
-      workerPath: './src/worker.min.js',
+      workerPath: 'https://images.wdtwo.com/tesseract/worker.min.js',
       langPath: './lang-data',
-      corePath: './src/tesseract-core.wasm.js',
+      corePath: 'https://images.wdtwo.com/tesseract/tesseract-core.wasm.js',
       logger: m => console.log(m),
     });
     let input = document.querySelectorAll('input')[0]
