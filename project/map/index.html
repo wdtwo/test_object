@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        html,body,#app {
+            width: 100%;
+            height:100%
+        }
+        .map,.province {
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            height:100%;
+            transition: all ease .5s;
+        }
+        .map.circlemap.none,.province.none,.provincecirclemap.none,.chinacircleorder.none,.provincecircleorder.none {
+            opacity: 0!important;
+        }
+        .map {
+            z-index: 1;
+        }
+        .map.none {
+            opacity: 0.2;
+        }
+        .province {
+            z-index: 2;
+            opacity: 1;
+        }
+        .provinceWink {
+            z-index: 3;
+            opacity: 0;
+        }
+        .circlemap {
+            z-index: 4;
+        }
+        .provincecirclemap {
+            z-index: 5;
+        }
+        .chinacircleorder {
+            z-index: 6;
+        }
+        .provincecircleorder {
+            z-index: 7;
+        }
+        button {
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top:0;
+            z-index: 4;
+        }
+        .twink {
+            animation: twink 2.5s ease;
+            
+        }
+        @keyframes twink {
+            0%,50%,100% {
+                opacity: 0;
+            }
+            25%,75% {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div ref="chart" class="map" :class="mapClass" style="height:100%"></div>
+        <div ref="province" class="province" :class="provinceClass" style="height:100%"></div>
+        <div ref="provinceWink" class="map provinceWink" :class="cityTwink" style="height:100%"></div>
+
+        <div ref="chinaCircleMap" class="map circlemap" :class="mapClass" style="height:100%"></div>
+        <div ref="provinceCircleMap" class="map provincecirclemap" :class="provinceClass" style="height:100%"></div>
+       
+        <div ref="chinaCircleOrder" class="map chinacircleorder" :class="mapClass" style="height:100%"></div>
+
+        <div ref="provinceCircleOrder" class="map provincecircleorder" :class="provinceClass" style="height:100%"></div>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/china.js"></script>
+
+    <script>
+        var vue = new Vue({
+            el: '#app', // 根元素的选择器
+            data: {
+                echartsMap:null,
+                provinceMap:null,
+                provinceWink:null,
+                chinaCircleMap:null,
+                provinceCircleMap:null,
+                chinaCircleOrder:null,
+                province:'china',
+                provinceList:[
+                    {
+                        "province": "河北",
+                        "provinceCode": "130000",
+                        "pinyin":"hebei",
+                        "center":[116.48,39.03],
+                        "zoom":5.4
+                    },
+                    {
+                        "province": "山西",
+                        "provinceCode": "140000",
+                        "pinyin":"shanxi",
+                        "center":[112.53,37.87],
+                        "zoom":5.75
+                    },
+                    {
+                        "province": "江苏",
+                        "provinceCode": "320000",
+                        "pinyin":"jiangsu",
+                        "center":[119.8,33],
+                        "zoom":8.1
+                    },
+                    {
+                        "province": "浙江",
+                        "provinceCode": "330000",
+                        "pinyin":"zhejiang",
+                        "center":[120.5,29],
+                        "zoom":8.55
+                    },
+                    {
+                        "province": "安徽",
+                        "provinceCode": "340000",
+                        "pinyin":"anhui",
+                        "center":[117.27,31.86],
+                        "zoom":6.73
+                    },
+                    {
+                        "province": "福建",
+                        "provinceCode": "350000",
+                        "pinyin":"fujian",
+                        "center":[118.7,26.08],
+                        "zoom":7.4
+                    },
+                    {
+                        "province": "江西",
+                        "provinceCode": "360000",
+                        "pinyin":"jiangxi",
+                        "center":[116.2,27.3],
+                        "zoom":6.33
+                    },
+                    {
+                        "province": "山东",
+                        "provinceCode": "370000",
+                        "pinyin":"shandong",
+                        "center":[119,36.3],
+                        "zoom":8.8
+                    },
+                    {
+                        "province": "河南",
+                        "provinceCode": "410000",
+                        "pinyin":"henan",
+                        "center":[114,34],
+                        "zoom":7.1
+                    },
+                    {
+                        "province": "湖北",
+                        "provinceCode": "420000",
+                        "pinyin":"hubei",
+                        "center":[112.5,31],
+                        "zoom":8.30
+                    },
+                    {
+                        "province": "湖南",
+                        "provinceCode": "430000",
+                        "pinyin":"hunan",
+                        "center":[112,27.3],
+                        "zoom":6.45
+                    },
+                    {
+                        "province": "广东",
+                        "provinceCode": "440000",
+                        "pinyin":"guangdong",
+                        "center":[113.23,22.8],
+                        "zoom":6.68
+                    },
+                    {
+                        "province": "广西",
+                        "provinceCode": "450000",
+                        "pinyin":"guangxi",
+                        "center":[108.33,23.84],
+                        "zoom":6.45
+                    },
+                    {
+                        "province": "四川",
+                        "provinceCode": "510000",
+                        "pinyin":"sichuan",
+                        "center":[103,30],
+                        "zoom":4.28
+                    },
+                    {
+                        "province": "贵州",
+                        "provinceCode": "520000",
+                        "pinyin":"guizhou",
+                        "center":[106.71,26.9],
+                        "zoom":7.7
+                    },
+                    {
+                        "province": "云南",
+                        "provinceCode": "530000",
+                        "pinyin":"yunnan",
+                        "center":[101.73,25.04],
+                        "zoom":4.38
+                    },
+                    {
+                        "province": "陕西",
+                        "provinceCode": "610000",
+                        "pinyin":"shanxi1",
+                        "center":[108.7,35.7],
+                        "zoom":4.5
+                    },
+                    {
+                        "province": "甘肃",
+                        "provinceCode": "620000",
+                        "pinyin":"gansu",
+                        "center":[100.73,37.5],
+                        "zoom":3.47
+                    },
+                    {
+                        "province": "宁夏",
+                        "provinceCode": "640000",
+                        "pinyin":"ningxia",
+                        "center":[106.2,37.27],
+                        "zoom":8.57
+                    },
+                ],
+                quyu:"china",
+                provinceClass:"none",
+                mapClass:"",
+                center:[104.0, 37.5],
+                cityTwink:"",
+                mapDian:[],
+                mapDianAll:[],
+                lock1:true,
+                lock2:true,
+                lock3:true,
+                lock4:true,
+                lock5:true,
+            },
+            methods:{
+                showProvince:function(pName) {
+                    //这写省份的js都是通过在线构建工具生成的，保存在本地，需要时加载使用即可，最好不要一开始全部直接引入。
+                    this.loadBdScript('$' + pName['pinyin'] + 'JS', './js/map/province/' + pName['pinyin'] + '.js',  ()=>{
+                        this.initEchartsProvince(pName['center']);
+                        this.initEchartsProvinceCircleMap(pName['center'])//省份散点图
+                        this.initEchartsProvinceCircleOrder(pName['center'])
+                    });
+                    },
+                // 加载对应的JS
+                loadBdScript:function(scriptId, url, callback) {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    if (script.readyState) {  //IE
+                        script.onreadystatechange = function () {
+                        if (script.readyState === "loaded" || script.readyState === "complete") {
+                            script.onreadystatechange = null;
+                            callback();
+                        }
+                        };
+                    } else {  // Others
+                        script.onload = function () {
+                            callback();
+                        };
+                    }
+                    script.src = url;
+                    script.id = scriptId;
+                    document.getElementsByTagName("head")[0].appendChild(script);
+                },
+                initEcharts:function() {
+                    //地图基础数据层
+                    let option = {
+                        title: {
+                        text: '',
+                        left: 'center'
+                        },
+                        geo: {  // 地理坐标系组件。地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+                            map: this.province,//this.nowProvince.province || pName,
+                            roam: false, // 是否开启鼠标缩放和平移漫游。默认不开启,true是开启
+                            zoom:1,
+                            center: this.center,
+                            label: {
+                                normal: {
+                                    show: true,//显示省份标签
+                                    textStyle:{color:"#999"}//省份标签字体颜色
+                                },
+                                emphasis: {//对应的鼠标悬浮效果
+                                    show: false,
+                                    textStyle:{color:"#999"}
+                                }
+                            },
+                            itemStyle: {  // 地图区域的多边形 图形样式。
+                                normal: {
+                                    borderWidth: 0.8,//区域边框宽度
+                                    borderColor: '#ccc',//区域边框颜色
+                                    areaColor:"#fff",//区域颜色
+                                },
+                                emphasis: {
+                                    borderWidth: .5,
+                                    borderColor: '#aaa',
+                                    areaColor:"#eee",
+                                }
+                            },
+                            emphasis: {  // 高亮状态下的多边形和标签样式。
+                                itemStyle: {
+                                    areaColor: '#999'  // 地图区域的颜色。
+                                }
+                            }
+                        }
+                    }
+                    this.echartsMap.setOption(option);
+                },
+                initEchartsProvince:function(center) {
+                    //地图基础数据层
+                    let option = {
+                        title: {
+                            text: '',
+                            left: 'center'
+                        },
+                        silent: true,//过渡动画
+                        geo: {  // 地理坐标系组件。地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+                            map: this.province,//this.nowProvince.province || pName,
+                            roam: false, // 是否开启鼠标缩放和平移漫游。默认不开启,true是开启
+                            zoom:1,
+                            center: center || this.center,
+                            label: {
+                                normal: {
+                                    show: true,//显示省份标签
+                                    textStyle:{color:"#999"}//省份标签字体颜色
+                                },
+                                emphasis: {//对应的鼠标悬浮效果
+                                    show: false,
+                                    textStyle:{color:"#999"}
+                                }
+                            },
+                            itemStyle: {  // 地图区域的多边形 图形样式。
+                                normal: {
+                                    borderWidth: 0.8,//区域边框宽度
+                                    borderColor: '#ccc',//区域边框颜色
+                                    areaColor:"#fff",//区域颜色
+                                },
+                                emphasis: {
+                                    borderWidth: .5,
+                                    borderColor: '#aaa',
+                                    areaColor:"#eee",
+                                }
+                            },
+                            emphasis: {  // 高亮状态下的多边形和标签样式。
+                                itemStyle: {
+                                    areaColor: '#999'  // 地图区域的颜色。
+                                }
+                            }
+                        }
+                    }
+                    this.provinceMap.setOption(option);
+                },
+                //省份闪烁动画层
+                initEchartsProvinceWink:function(){
+                    let option = {
+                    title: {
+                        text: '',
+                        left: 'center'
+                    },
+                    series: [
+                        {
+                        z:1,
+                        type: "map",
+                        map: this.province,
+                        roam: false,
+                        zoom: 1,
+                        center: this.center,
+                        showLegendSymbol: false, // 存在legend时显示
+                        data:[],
+                        //[
+                            // 其他省份的数据项
+                            //{ name: '山东', value: 100, itemStyle: { areaColor: 'rgba(255,0,0,1)' } } // 单独设置广东省的颜色
+                        //],
+                        label: {
+                            normal: {
+                                show: true,//显示省份标签
+                                textStyle:{color:"rgba(0,0,0,0)"}//省份标签字体颜色
+                            },
+                            emphasis: {//对应的鼠标悬浮效果
+                                show: false,
+                                textStyle:{color:"rgba(0,0,0,0)"}
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                areaColor: "rgba(0,0,0,0)",
+                                borderColor: "rgba(0,0,0,0)",
+                                borderWidth: 0.5
+                            },
+                            emphasis: {
+                                areaColor: "rgba(255,0,0,1)",
+                                borderColor: "rgba(0,0,0,0)",
+                                borderWidth: 0.5
+                            }
+                        }
+                        }
+                    ],
+                    }
+                    this.provinceWink.setOption(option);
+                },
+                // 全国散点
+                initEchartsCircleMap:function(){
+                    let option = {
+                        title: {
+                        text: '',
+                        left: 'center'
+                        },
+                        geo: {  // 地理坐标系组件。地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+                            map: this.province,//this.nowProvince.province || pName,
+                            roam: false, // 是否开启鼠标缩放和平移漫游。默认不开启,true是开启
+                            zoom:1,
+                            center: this.center,
+                            label: {
+                                normal: {
+                                    show: true,//显示省份标签
+                                    textStyle:{color:"rgba(0,0,0,0)"}//省份标签字体颜色
+                                },
+                                emphasis: {//对应的鼠标悬浮效果
+                                    show: false,
+                                    textStyle:{color:"rgba(0,0,0,0)"}
+                                }
+                            },
+                            itemStyle: {  // 地图区域的多边形 图形样式。
+                                normal: {
+                                    borderWidth: 0.8,//区域边框宽度
+                                    borderColor: "rgba(0,0,0,0)",//区域边框颜色
+                                    areaColor:"rgba(0,0,0,0)",//区域颜色
+                                },
+                                emphasis: {
+                                    borderWidth: .5,
+                                    borderColor: "rgba(0,0,0,0)",
+                                    areaColor:"rgba(0,0,0,0)",
+                                }
+                            },
+                            emphasis: {  // 高亮状态下的多边形和标签样式。
+                                itemStyle: {
+                                    areaColor: "rgba(0,0,0,0)"  // 地图区域的颜色。
+                                }
+                            }
+                        },series: [
+                            // 散点图
+                            {
+                                z:3,
+                                map: this.province,
+                                name: "",
+                                type: "scatter",
+                                coordinateSystem: "geo",
+                                center: this.center,
+                                data: this.mapDian,
+                                // symbolSize: function(val) {
+                                //   console.log(val);
+                                //   return val[1];
+                                // },
+                                symbol: "circle",
+                                symbolSize: 5,
+                                itemStyle: {
+                                opacity:0.3,
+                                color:"rgba(255,0,0,1)"//rgba(224, 89, 67, 1)
+                                },
+                            },
+                        ],
+                    }
+                    this.chinaCircleMap.setOption(option);
+                },
+                //显示省的散点
+                initEchartsProvinceCircleMap:function(center){
+                    console.log(this.province);
+                    let option = {
+                        title: {
+                            text: '',
+                            left: 'center'
+                        },
+                        geo: {  // 地理坐标系组件。地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+                            map: this.province,//this.nowProvince.province || pName,
+                            //roam: false, // 是否开启鼠标缩放和平移漫游。默认不开启,true是开启
+                            zoom:1,
+                            center: center || this.center,
+                            label: {
+                                normal: {
+                                    show: true,//显示省份标签
+                                    textStyle:{color:"rgba(0,0,0,0)"}//省份标签字体颜色
+                                },
+                                emphasis: {//对应的鼠标悬浮效果
+                                    show: false,
+                                    textStyle:{color:"rgba(0,0,0,0)"}
+                                }
+                            },
+                            itemStyle: {  // 地图区域的多边形 图形样式。
+                                normal: {
+                                    borderWidth: 0.8,//区域边框宽度
+                                    borderColor: "rgba(0,0,0,0)",//区域边框颜色
+                                    areaColor:"rgba(0,0,0,0)",//区域颜色
+                                },
+                                emphasis: {
+                                    borderWidth: .5,
+                                    borderColor: "rgba(0,0,0,0)",
+                                    areaColor:"rgba(0,0,0,0)",
+                                }
+                            },
+                            emphasis: {  // 高亮状态下的多边形和标签样式。
+                                itemStyle: {
+                                    areaColor: "rgba(0,0,0,0)"  // 地图区域的颜色。
+                                }
+                            }
+                        },
+                        series: [
+                            // 散点图
+                            {
+                                z:3,
+                                map: this.province,
+                                name: "",
+                                type: "scatter",
+                                coordinateSystem: "geo",
+                                center: center || this.center,
+                                data: this.mapDian.filter(v=>v.province == this.province),
+                                symbol: "circle",
+                                symbolSize: 5,
+                                itemStyle: {
+                                opacity:0.3,
+                                color:"rgba(255,0,0,1)"//rgba(224, 89, 67, 1)
+                                },
+                            },
+                            
+                        ],
+                    }
+                    this.provinceCircleMap.setOption(option);
+                },
+                //全国订单层
+                initEchartsChinaCircleOrder:function(){
+                    console.log('全国订单层');
+                    //地图基础数据层
+                    let option = {
+                        title: {
+                            text: '',
+                            left: 'center'
+                        },
+                        geo: {  // 地理坐标系组件。地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+                            map: this.province,//this.nowProvince.province || pName,
+                            roam: false, // 是否开启鼠标缩放和平移漫游。默认不开启,true是开启
+                            zoom:1,
+                            center: this.center,
+                            label: {
+                                normal: {
+                                    show: true,//显示省份标签
+                                    textStyle:{color:"rgba(0,0,0,0)"}//省份标签字体颜色
+                                },
+                                emphasis: {//对应的鼠标悬浮效果
+                                    show: false,
+                                    textStyle:{color:"rgba(0,0,0,0)"}
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    areaColor: "rgba(0,0,0,0)",
+                                    borderColor: "rgba(0,0,0,0)",
+                                    borderWidth: 0.5
+                                },
+                                emphasis: {
+                                    areaColor: "rgba(0,0,0,0)",
+                                    borderColor: "rgba(0,0,0,0)",
+                                    borderWidth: 0.5
+                                }
+                            },
+                            emphasis: {  // 高亮状态下的多边形和标签样式。
+                                itemStyle: {
+                                    areaColor: '#999'  // 地图区域的颜色。
+                                }
+                            }
+                        }
+                    }
+                    this.chinaCircleOrder.setOption(option);
+                },
+                //省份订单层
+                initEchartsProvinceCircleOrder:function(center){
+                    console.log('省份订单层');
+                    //地图基础数据层
+                    let option = {
+                        title: {
+                            text: '',
+                            left: 'center'
+                        },
+                        geo: {  // 地理坐标系组件。地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+                            map: this.province,//this.nowProvince.province || pName,
+                            roam: false, // 是否开启鼠标缩放和平移漫游。默认不开启,true是开启
+                            zoom:1,
+                            center: center || this.center,
+                            label: {
+                                normal: {
+                                    show: true,//显示省份标签
+                                    textStyle:{color:"rgba(0,0,0,0)"}//省份标签字体颜色
+                                },
+                                emphasis: {//对应的鼠标悬浮效果
+                                    show: false,
+                                    textStyle:{color:"rgba(0,0,0,0)"}
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    areaColor: "rgba(0,0,0,0)",
+                                    borderColor: "rgba(0,0,0,0)",
+                                    borderWidth: 0.5
+                                },
+                                emphasis: {
+                                    areaColor: "rgba(0,0,0,0)",
+                                    borderColor: "rgba(0,0,0,0)",
+                                    borderWidth: 0.5
+                                }
+                            },
+                            emphasis: {  // 高亮状态下的多边形和标签样式。
+                                itemStyle: {
+                                    areaColor: '#999'  // 地图区域的颜色。
+                                }
+                            }
+                        }
+                    }
+                    this.provinceCircleOrder.setOption(option);
+                },
+
+                //获取正在下单的数据
+                getNowOrder(){
+                    this.chinaCircleOrder.setOption({series: []});
+                    axios.post('/ScreenInfo/screenBooking', {}).then(res=>{
+                        //json转换
+                        //如果当前单数大于50则用真实数据 this.minBookNum
+                        //如果当前单数小于50则补充至50单
+                        let arr = []
+                        this.nowOrder = res.data
+
+                        //console.log(this.nowOrder);
+                        for(v in this.nowOrder){
+                            if(this.mapDian.filter(w=>w.name == this.nowOrder[v].shopid).length > 0){  //v.shopid
+                                arr = arr.concat(this.mapDian.filter(w=>w.name == this.nowOrder[v].shopid))
+                            }
+                        }
+                        this.nowOrder = arr
+                        let optionArr = []
+                        for(v of arr){
+                            optionArr.push(
+                                {
+                                    z:3,
+                                    map: this.province,
+                                    name: "",
+                                    type:'effectScatter',
+                                    coordinateSystem: "geo",
+                                    center: this.center,
+                                    showEffectOn:'render',  //'render'绘制完成后显示特效,'emphasis' 高亮（hover）的时候显示特效。
+                                    color: ['#5d49fa'],
+                                    rippleEffect:{  //设置涟漪动画样式
+                                        color:'purple',   //涟漪颜色,默认为散点自身颜色
+                                        brushType:'stroke',  //动画方式,全填充或只有线条,'stroke'
+                                        period:2,   //动画周期
+                                        scale:'4.5',  //涟漪规模
+                                    },
+                                    data: [v],
+                                    symbolSize: 8, // 散点大小
+                                }
+                            )
+                        }
+
+                        console.log("一分钟内所有订单:",optionArr);
+                        optionArr = optionArr.sort(()=>Math.random()-0.5)
+
+                        
+
+                        let i = 0
+                        let time = ()=>{
+                            if(i < optionArr.length-1){
+                                i++
+                                //this.queueList.enqueue(optionArr[i]);
+                                this.queueList.enqueuePointer(optionArr[i],optionArr.length-1);
+                                setTimeout(()=>{
+                                    
+                                    this.chinaCircleOrder.setOption({series: this.queueList.allItem()});
+                                    //使用列队
+                                    //console.log("列队长度:",this.queueList.allItem());
+                                    time()
+
+                                },50 / optionArr.length * 1000)
+                            }
+                            // else{
+                            //     console.log('解锁删除数据');
+                            //     //从第二次请求开始 启动一个删除列队的定时器
+                            //     let t = ()=>{
+                            //         setTimeout(()=>{
+                            //             this.queueList.dequeue()
+                            //             //如果当前数据少于10条 则停止删除数据
+                            //             if(this.queueList.length < 10){
+                            //                 this.lock1 = true
+                            //             }else{
+                            //                 t()
+                            //             }
+                            //         },1000)
+                            //     }
+                            //     if(!this.lock1){
+                            //         this.lock1 = false
+                            //         t()
+                            //     }
+                            // }
+                        }
+                        time()
+
+                    })
+                },
+
+                //从已有数据中获取省份数据
+                getNowOrderProvince(){
+                    this.provinceCircleOrder.setOption({series: []});
+                    if(!this.nowOrder){
+                        return
+                    }
+                    let arr = []
+                    for(v of this.nowOrder.filter(v=>v.province == this.province)){
+                        arr.push({
+                            z:3,
+                            map: this.province,
+                            name: "",
+                            type:'effectScatter',
+                            coordinateSystem: "geo",
+                            center: this.center,
+                            showEffectOn:'render',  //'render'绘制完成后显示特效,'emphasis' 高亮（hover）的时候显示特效。
+                            color: ['#5d49fa'],
+                            rippleEffect:{  //设置涟漪动画样式
+                                color:'purple',   //涟漪颜色,默认为散点自身颜色
+                                brushType:'stroke',  //动画方式,全填充或只有线条,'stroke'
+                                period:2,   //动画周期
+                                scale:'4.5',  //涟漪规模
+                            },
+                            data: [v],
+                            symbolSize: 8, // 散点大小
+                        })
+                    }
+                    //清空上一层的订单
+                    let option = this.provinceCircleOrder.getOption()
+                    option.series = arr
+                    this.provinceCircleOrder.clear()
+                    console.log("省内订单:",arr);
+                    this.provinceCircleOrder.setOption(option);
+                },
+
+                //计时器开始
+                TimeChange(timeLen){
+                    setTimeout(()=>{
+                        if(this.quyu == 'china'){
+                            
+                            console.log('全国进省份');
+                            //切换城市
+                            //先随机城市
+                            let random = parseInt(Math.random()*this.provinceList.length)
+                            this.quyu = this.provinceList[random]['province'];
+
+                            //选软闪烁省份数据
+                            var series = this.provinceWink.getOption().series[0]; // 获取闪烁省份数据
+                            var data = series.data;
+                            this.provinceWink.setOption({ 
+                                series: [
+                                    {
+                                        data:[{ name: this.quyu, itemStyle: { areaColor: 'rgba(255,152,51,1)' } }]
+                                    }
+                                ]
+                            });
+                            this.cityTwink = "twink"
+
+                            setTimeout(()=>{
+                                // 省份层
+                                this.province = this.quyu
+                                //省份层先切换不显示 然后显示层放大 然后显示省份层
+                                this.showProvince(this.provinceList[random])
+
+                                setTimeout(()=>{
+                                    //大地图
+                                    this.echartsMap.setOption({
+                                        geo:{
+                                            zoom   : this.provinceList[random]['zoom'],
+                                            center : this.provinceList[random].center
+                                        }
+                                    });
+                                    //散点图
+                                    this.chinaCircleMap.setOption({
+                                        geo:{
+                                            zoom   : this.provinceList[random]['zoom'],
+                                            center : this.provinceList[random].center
+                                        }
+                                    });
+                                    this.getNowOrderProvince()
+                                    this.mapClass = "none" //隐藏大地图的散点
+                                },200)
+
+                                setTimeout(()=>{
+                                    this.provinceClass = ""
+                                    setTimeout(()=>{
+                                        this.cityTwink = ""//清空闪烁省份图层class
+                                    },300)
+                                },800)
+                            },2000)
+                            this.TimeChange(23000)
+                        }else{
+
+                            console.log('省份进全国');
+                            //先切换地图界面 再进行缩放
+                            this.quyu = 'china';
+                            this.provinceClass = "none"
+                            setTimeout(()=>{
+                                this.mapClass = ""
+                                //大地图
+                                this.echartsMap.setOption({
+                                    geo:{
+                                        zoom   : 1,
+                                        center : this.center,
+                                    }
+                                });
+                                //散点图
+                                this.chinaCircleMap.setOption({
+                                    geo:{
+                                        zoom   : 1,
+                                        center : this.center,
+                                    }
+                                });
+                                
+                                this.province = this.quyu;
+                                this.initEchartsProvince()
+                            },300)
+                            this.TimeChange(15000)
+                        }
+                    },timeLen)
+                },
+                getData(){
+                    //全部散点数据
+                    axios.post('/ScreenInfo/getsmhotelinfofourfield', {}).then((res)=>{
+                        let arr = []
+                        res.data.data.map(v=>{
+                            arr.push({name:v[0],value:[v[2],v[1]],province:v[3],provinceCode:v[4]})
+                        })
+                        //所有点的信息 抓取一次即可
+                        this.mapDian = arr
+                        this.mapDianAll = arr
+                        //console.log(arr);
+                        this.initEchartsCircleMap()//全国散点图
+                       
+                        //获取正在下单的数据 每60秒更新一次
+                        this.getNowOrder()
+                        setInterval(()=>{
+                            this.getNowOrder()
+                        },57000)
+                    }).catch((error) =>{
+                        console.log("err:",error);
+                    });
+                },
+                //列队
+                Queue:function(){
+                    this.items = []; // 使用陣列來儲存隊列中的元素
+                    this.pointer = 0;// 指针 通过指针更新数组内的数据
+                    // 將元素添加到隊列尾部
+                    enqueue = (element) =>{
+                        this.items.push(element);
+                    }
+                    //将数组添加到指针位置
+                    enqueuePointer = (element,num) =>{
+                        setPointer(num);
+                        this.items[this.pointer] = element;
+                    }
+                    // 從隊列中移除並返回第一個元素
+                    dequeue = () =>{
+                        if (isEmpty()) {
+                            return "列队为空";
+                        }
+                        return this.items.shift();
+                    }
+                    // 從隊列中移除並返回最后一个元素
+                    dequeueList = () =>{
+                        if (isEmpty()) {
+                            return "列队为空";
+                        }
+                        return this.items.pop();
+                    }
+                    // 返回隊列中的第一個元素
+                    front = () =>{
+                        if (isEmpty()) {
+                            return "列队为空";
+                        }
+                        return this.items[0];
+                    }
+                    // 檢查隊列是否為空
+                    isEmpty = () => {
+                        return this.items.length === 0;
+                    }
+                    // 返回隊列的長度
+                    size = () =>{
+                        return this.items.length;
+                    }
+                    autoDelete = ()=>{
+                        setInterval(()=>{
+                            if(this.items.length > 30){
+                                dequeueList()
+                            }
+                        },1500)
+                    }
+                    // 返回所有数据
+                    allItem = () =>{
+                        return this.items;
+                    }
+                    // 清空隊列
+                    clear = () =>{
+                        this.items = [];
+                    }
+                    setPointer = (num) =>{
+                        this.pointer = this.pointer < num ? this.pointer + 1 : 0;
+                    }
+                    return {
+                        enqueue,
+                        enqueuePointer,
+                        dequeue,
+                        dequeueList,
+                        front,
+                        isEmpty,
+                        size,
+                        clear,
+                        allItem,
+                        autoDelete
+                    }
+                }
+            
+            },
+            mounted(){
+                // 获取 ECharts 实例
+                this.echartsMap = echarts.init(this.$refs.chart);
+                this.initEcharts()//全国地图
+                this.echartsMap = echarts.init(this.$refs.chart);
+                this.initEcharts()//全国地图
+                this.provinceMap = echarts.init(this.$refs.province);
+                this.initEchartsProvince()//省份地图
+                this.provinceWink = echarts.init(this.$refs.provinceWink);
+                this.initEchartsProvinceWink()//省份闪烁层
+                
+                this.chinaCircleMap = echarts.init(this.$refs.chinaCircleMap);
+
+                this.chinaCircleOrder = echarts.init(this.$refs.chinaCircleOrder);
+                this.initEchartsChinaCircleOrder()//全国正在下单的店
+
+                this.provinceCircleMap = echarts.init(this.$refs.provinceCircleMap);
+                this.initEchartsProvinceCircleMap()//省份散点图
+
+                this.provinceCircleOrder = echarts.init(this.$refs.provinceCircleOrder);
+                this.initEchartsProvinceCircleOrder()//省份下单层
+
+                this.TimeChange(15000)//定时器
+                this.getData()
+
+                //启动列队
+                this.queueList = new this.Queue()
+                this.queueList.autoDelete()//启动自动删除定时器
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>
