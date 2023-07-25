@@ -193,6 +193,7 @@
                 if(index>= text.length){
                     setTimeout(function(){
                         document.querySelectorAll('.loading')[0].className = "loading"
+                        index = 0
                         for(ele of text){
                             ele.setAttribute('style',`transform:translateY(0px);`)
                         }
