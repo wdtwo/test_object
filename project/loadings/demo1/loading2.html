@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .box {
+            perspective: 300px;
+            width: 1100px;
+            height:500px;
+            margin:0 auto;
+            background: url(./images/bg.jpg) no-repeat center center;
+            background-size: 100% 100%;
+            overflow: hidden;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            display: none;
+        }
+        .box.show {
+            display: flex;
+        }
+        .coin {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #3cefff;
+            animation: spin 8s linear infinite;
+            position: absolute;
+            left:50%;
+            top:33%;
+            transform: translate(-50%,-50%);
+        }
+        .coin1 {
+            animation-delay: 0;
+        }
+        .coin2 {
+            opacity: 0.7;
+            animation-delay: 0.05s;
+        }
+        .coin3 {
+            opacity: 0.6;
+            animation-delay: 0.1s;
+        }
+        .coin4 {
+            opacity: 0.5;
+            animation-delay: 0.15s;
+        }
+        .coin5 {
+            opacity: 0.4;
+            animation-delay: 0.2s;
+        }
+        .coin6 {
+            opacity: 0.3;
+            animation-delay: 0.25s;
+        }
+        .coin7 {
+            opacity: 0.2;
+            animation-delay: 0.3s;
+        }
+        .coin8 {
+            opacity: 0.1;
+            animation-delay: 0.35s;
+        }
+        .text {
+            color:#3cefff;
+            position: absolute;
+            top:30%;
+            width: 100%;
+            height:40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        ul {
+            position: absolute;
+            left:0;
+            bottom:0;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            padding:20px 50px;
+            box-sizing: border-box;
+        }
+        ul li {
+            width: 120px;
+            height:120px;
+            background-color: white;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: left;
+            padding:5px 10px;
+            font-size: 14px;
+            color:#787878;
+            opacity: 0;
+            transition: all ease-in-out .5s;
+            transform: translateX(50px);
+        }
+        ul li.show {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+        ul li img {
+            width: 30px;
+            height:30px;
+            display: block;
+            margin-top: 15px;
+        }
+        @keyframes spin {
+            from {
+                transform:translate(-50%,-50%) rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+            }
+            to {
+                transform:translate(-50%,-50%) rotateY(1080deg) rotateX(900deg) rotateZ(900deg);
+            }
+        }
+        #canvas {
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            height:100%;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <button id="show">显示</button>
+
+    <div class="box">
+        <div id="canvas"></div>
+        <div class="text" id="text">
+            正在加载...
+        </div>
+        <div class="coin coin1"></div>
+        <div class="coin coin2"></div>
+        <div class="coin coin3"></div>
+        <div class="coin coin4"></div>
+        <div class="coin coin5"></div>
+        <div class="coin coin6"></div>
+        <div class="coin coin7"></div>
+        <div class="coin coin8"></div>
+        <ul>
+            <li>
+                正在加载周围酒店信息1
+                <img src="./images/loading.svg" alt="">
+            </li>
+            <li>
+                正在加载周围酒店信息2
+                <img src="./images/loading.svg" alt="">
+            </li>
+            <li>
+                正在加载周围酒店信息3
+                <img src="./images/loading.svg" alt="">
+            </li>
+            <li>
+                正在加载周围酒店信息4
+                <img src="./images/loading.svg" alt="">
+            </li>
+            <li>
+                正在加载周围酒店信息5
+                <img src="./images/loading.svg" alt="">
+            </li>
+            <li>
+                正在加载周围酒店信息6
+                <img src="./images/loading.svg" alt="">
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 方式一：一次性引入所有特效 -->
+    <script src="./js/jparticles.all.js"></script>
+    <script>
+
+        let text = document.getElementById("text")
+        var i = 0;
+        function playLoading(){
+            setTimeout(function(){
+                if(i > 3) i = 0
+                text.innerHTML = `正在加载中${Array(i).fill(".").join("")}`
+                i++
+                playLoading()
+            },400)
+        }
+        playLoading()
+
+        let li = document.querySelectorAll('li')
+        let i2 = 0
+        setInterval(setLi,2000)
+        function setLi(){
+            if(i2 <= li.length){
+                if(i2 != 0){
+                    li[i2-1].querySelectorAll("img")[0].setAttribute('src',`./images/success.svg?math=${Math.random()}`)
+                }
+                if(li[i2]){
+                    li[i2].className = "show"
+                }else{
+                    setTimeout(function(){
+                        document.querySelectorAll('.box')[0].className = "box"
+                        for(ele of li){
+                            ele.querySelectorAll("img")[0].setAttribute('src',`./images/loading.svg`)
+                            ele.className = ""
+                        }
+                        i2 = 0
+                    },2000)
+                    
+                }
+                i2++
+            }
+        }
+        document.getElementById('show').onclick = function(){
+            document.querySelectorAll('.box')[0].className = "box show"
+            new JParticles.Particle('#canvas', {
+                // 两粒子圆心点之间的直线距离
+                proximity: 1,
+                // 定位点半径 100 以内（包含）的所有粒子，圆心点之间小于等于 proximity 值，则连线
+                range: 1,
+            })
+            setLi()
+        }
+    </script>
+
+
+
+</body>
+</html>
