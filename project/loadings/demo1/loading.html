@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="show">显示</button>
+    <div class="loading">
+
+        <!-- <img src="images/2.svg" class="img0" alt=""> -->
+        <img src="images/1.svg" class="img1" alt="">
+        <img src="images/2.svg" class="img2" alt="">
+        <img src="images/3.svg" class="img3" alt="">
+        <img src="images/4.svg" class="img4" alt="">
+        <img src="images/5.svg" class="img5" alt="">
+        <img src="images/6.svg" class="img6" alt="">
+        <img src="images/7.svg" class="img7" alt="">
+        <img src="images/8.svg" class="img8" alt="">
+        <img src="images/9.svg" class="img9" alt="">
+        <img src="images/10.svg" class="img10" alt="">
+        <img src="images/11.svg" class="img11" alt="">
+        <img src="images/12.svg" class="img12" alt="">
+        <img src="images/13.svg" class="img13" alt="">
+        <img src="images/1.svg" class="img14" alt="">
+        <img src="images/1.svg" class="img15" alt="">
+    
+        <div class="text">
+            <ul>
+                <li>正在查询附近商家111</li>
+                <li>正在查询附近商家222</li>
+                <li>正在查询附近商家333</li>
+                <li>正在查询附近商家444</li>
+                <li>正在查询附近商家555</li>
+                <li>正在查询附近商家111</li>
+                <li>正在查询附近商家222</li>
+                <li>正在查询附近商家333</li>
+                <li>正在查询附近商家444</li>
+                <li>正在查询附近商家555</li>
+                <li>正在查询附近商家111</li>
+                <li>正在查询附近商家222</li>
+                <li>正在查询附近商家333</li>
+                <li>正在查询附近商家444</li>
+                <li>已完成</li>
+            </ul>
+
+        </div>
+    </div>
+
+
+
+
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        .loading {
+            width: 1100px;
+            height:520px;
+            /* background: linear-gradient(to bottom,#8ec2f5,#0f7fef); */
+            background: url(./images/bg.jpg) no-repeat center center;
+            background-size: 100% 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 50px auto 0;
+            display: none;
+        }
+        .loading.show {
+            display: block;
+        }
+        img {
+            position: absolute;
+            width: 50px;
+            opacity: 1;
+            top:-60px;
+        }
+        .img0 {
+            width: 100px;
+            bottom:0;
+            left:50%;
+            top:auto;
+            transform: translateX(-50%);
+        }
+        .img1 {
+            left:0;
+        }
+        .img2 {
+            left:1100px;
+        }
+        .img3 {
+            left:500px;
+        }
+        .img4 {
+            left:300px;
+        }
+        .img5 {
+            left:700px;
+        }
+        .img6 {
+            left:200px;
+        }
+        .img7 {
+            left:850px;
+        }
+        .img8 {
+            left:350px;
+        }
+        .img9 {
+            left:650px;
+        }
+        .img10 {
+            left:730px;
+        }
+        .img11 {
+            left:450px;
+        }
+        .img12 {
+            left:600px;
+        }
+        .img13 {
+            left:180px;
+        }
+        .img14 {
+            left:820px;
+        }
+        .img15 {
+            left:530px;
+        }
+        .active {
+            left : 530px;
+            top : 440px;
+            opacity: 0;
+            transition: all ease-out 1s;
+        }
+        .text {
+            position: absolute;
+            left:10px;
+            bottom:10px;
+            font-size: 18px;
+            font-weight: bold;
+            color:white;
+        }
+        .text ul {
+            position: relative;
+            width: 400px;
+            height:30px;
+            overflow: hidden;
+        }
+        .text ul li {
+            transition: all linear 0.5s;
+            line-height: 0;
+            height:30px;
+            line-height: 30px;
+        }
+        /* .text ul li.move {
+            transform: translateY(-130px);
+        } */
+    </style>
+
+    <script>
+        
+
+        var move1 = document.querySelectorAll('.img1')[0]
+        function init(){
+            for(let i = 1;i < 16;i++){
+                settings(i,(i-1)*1000)
+            }
+
+        }
+        function settings(i,time){
+            var ele = document.querySelectorAll('.img'+i)[0]
+            setTimeout(function(){
+                //console.log(i,ele);
+                if(!ele){
+                    return false;
+                }
+                ele.setAttribute('class',"active")
+                setTimeout(function(){
+                    ele.setAttribute('class',"img"+i)
+                },1010)
+            },time)
+        }
+        setInterval(function(){
+            init()
+        },1742)
+        let index = 0;
+        let text = document.querySelectorAll('li')
+        function gundong(){
+            setTimeout(function(){
+                index++;
+                if(index>= text.length){
+                    setTimeout(function(){
+                        document.querySelectorAll('.loading')[0].className = "loading"
+                        for(ele of text){
+                            ele.setAttribute('style',`transform:translateY(0px);`)
+                        }
+                    },2000)
+                    return false;
+                }
+                for(ele of text){
+                    ele.setAttribute('style',`transform:translateY(${-index*30}px);`)
+                }
+                gundong()
+            },900)
+        }
+
+        document.querySelectorAll('#show')[0].addEventListener('click',function(){
+            gundong()
+            document.querySelectorAll('.loading')[0].className = "loading show"
+        })
+
+        
+        
+
+    </script>
+
+
+
+
+</body>
+</html>
