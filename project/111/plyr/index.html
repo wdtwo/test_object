@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        html,body {
+            height:100%;
+            background: black;
+        }
+        .plyr {
+            width:750px;
+            height:431px;
+            margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+   <!--  <video 
+        controls="controls" 
+        preload="auto" 
+        poster="https://bitdash-a.akamaihd.net/content/sintel/poster.png" 
+        x5-video-player-fullscreen="true" 
+        webkit-playsinline="true" 
+        x-webkit-airplay="true" 
+        playsinline="true" x5-playsinline 
+        src="demo.mp4"
+        muted
+        >   -->
+        <!-- <video 
+            src="demo.mp4" 
+            controls="" 
+            x5-playsinline="" 
+            playsinline="" 
+            webkit-playsinline="" 
+            poster="" 
+            preload="auto"
+        ></video> -->
+        <video
+				src="demo.mp4"
+				controls="controls"
+				x5-playsinline=""
+				playsinline=""
+				webkit-playsinline=""
+				x5-video-player-fullscreen="true"
+				x-webkit-airplay="true"
+				poster="poster.png"
+				preload="auto"
+		></video>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            var video = document.querySelector('video');
+            var player = new Plyr(video, {
+                captions: {active: true, update: true}
+            });
+            var video_lock = false;
+            document.addEventListener('touchstart', function(){ 
+                if(video_lock){
+                    video_lock = !video_lock;
+                    window.setTimeout(function(){
+                        player.play();
+                    },3000)
+                }
+                
+            }, false);
+        });
+    </script>
+</body>
+</html>
