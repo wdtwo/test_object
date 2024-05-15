@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>尚客优</title>
+	<script type="text/javascript">
+        function autoScale(){
+            var winW = document.documentElement.clientWidth-15;
+			let scale = 1;
+			if(winW < 1910 && winW >= 1248){ // 1440
+				scale = Math.min(1,Math.min(winW / 1920));
+			}else if(winW >= 1910){
+				scale = 1;
+			}else{
+				scale = 0.65;
+			}
+            return scale
+        }
+		window.onresize = function(){
+			document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+		}
+		document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+    <link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	
+</head>
+<body>
+    <header>
+		<div class="content w1400 flex flex-jus-between">
+			<div class="logo flex">
+				<img src="images/logo.png" alt="尚客优酒店">
+				<hr>
+				<img src="images/logo2.png" alt="小城回家尚客优">
+			</div>
+			<div class="flex c-b2b2b2 f16">
+				<img src="images/ico-tel.png">
+				加盟热线：0532-8681833
+				<span class="m-0-20">丨</span>
+				订房热线：4006-456-999
+			</div>
+		</div>
+    </header>
+	<nav class="bg-812c2b">
+		<div class="content flex flex-jus-end c-white w1400 m-c h50 f18">
+			<a href="index.html" class="flex">首页</a>
+			<a href="品牌介绍.html" class="flex">品牌介绍</a>
+			<a href="新闻资讯.html" class="flex">新闻资讯</a>
+			<a href="如何开酒店.html" class="flex">如何开酒店</a>
+			<a href="加盟合作.html" class="active flex">加盟合作</a>
+			<a href="酒店设计.html" class="flex">酒店设计</a>
+		</div>
+	</nav>
+    <main class="w1920 m-c">
+		<div class="join-banner">
+			<div class="content m-c re">
+				<dl class="w1400 c-white m-c ab z-index9 h100p flex flex-column flex-item-start">
+					<dt class="f80r">
+						加盟尚客优酒店
+					</dt>
+					<dd class="f42r">
+						从物业考察到开业运营提供全流程服务
+					</dd>
+				</dl>
+				<img src="images/join-banner.png" class="block m-c w100p" alt="">
+			</div>
+		</div>
+		<div class="join-nav w1400 mw1440 m-c m-t-90 flex flex-jus-between f24 p-0-140 p-b-90">
+			<a href="加盟合作.html">加盟支持</a>
+			<a href="加盟优势.html">加盟优势</a>
+			<a href="加盟条件.html">加盟条件</a>
+			<a href="加盟流程.html" class="active">加盟流程</a>
+		</div>
+
+		<div class="m-c w1920 re">
+			<div class="t-c title m-t-60">合作流程</div>
+			<ul class="flex flex-jus-between w1440 m-c m-t-85 lh15">
+				<li class="flex flex-column flex-jus-start">
+					<img src="images/icon-lc1.png" class="block w100">
+					<div class="f28 f-w-b m-15-0 w100p">
+						1.提出申请
+					</div>
+					<p class="f18">
+						全国统一加盟线：<br>
+						0532-86899922 <br>
+						或留言咨询
+					</p>
+				</li>
+				<li class="flex flex-column flex-jus-start">
+					<img src="images/icon-lc2.png" class="block w100">
+					<div class="f28 f-w-b m-15-0 w100p">
+						2.项目分析
+					</div>
+					<p class="f18">
+						物业评估、选址分析、<br>
+						收益预测，出具可行<br>
+						性报告
+					</p>
+				</li>
+				<li class="flex flex-column flex-jus-start">
+					<img src="images/icon-lc3.png" class="block w100">
+					<div class="f28 f-w-b m-15-0 w100p">
+						3.项目决策
+					</div>
+					<p class="f18">
+						项目可行性综<br>
+						合评估通过
+					</p>
+				</li>
+				<li class="flex flex-column flex-jus-start">
+					<img src="images/icon-lc4.png" class="block w100">
+					<div class="f28 f-w-b m-15-0 w100p">
+						4.签订合同
+					</div>
+					<p class="f18">
+						签订合同并缴纳费用<br>
+						后，按计划开展行动
+					</p>
+				</li>
+				<li class="flex flex-column flex-jus-start">
+					<img src="images/icon-lc5.png" class="block w100">
+					<div class="f28 f-w-b m-15-0 w100p">
+						5.设计筹建
+					</div>
+					<p class="f18">
+						全程跟踪筹建过程，<br>
+						准确把握酒店施工标准
+					</p>
+				</li>
+				<li class="flex flex-column flex-jus-start">
+					<img src="images/icon-lc6.png" class="block w100">
+					<div class="f28 f-w-b m-15-0 w100p">
+						6.开业运营
+					</div>
+					<p class="f18">
+						尚客优派遣资深店<br>
+						长驻店，协助您开<br>
+						业和运营
+					</p>
+				</li>
+			</ul>
+		</div>
+		<div class="p-t-100 p-b-60"></div>
+		<div class="message m-c w1920 re t-c">
+			<img src="images/lc-bg.png" class="w1920 block">
+			<div class="content ab">
+				<div class="title f40 c-white">加盟登记</div>
+				<div class="flex flex-column flex-item-start c-white form m-c">
+					<input type="text" id="name" autocomplete="off" placeholder="请输入您的姓名">
+					<div class="flex flex-jus-between w100p">
+						<select class="country" id="ucode">
+							<option value="86" selected="selected">中国(+86)</option>
+							<option value="60">马来西亚(+60)</option>
+							<option value="63">菲律宾(+63)</option>
+							<option value="66">泰国(+66)</option>
+							<option value="670">东帝汶(+670)</option>
+							<option value="856">老挝(+856)</option>
+							<option value="855">柬埔寨(+855)</option>
+							<option value="673">文莱(+673)</option>
+							<option value="95">缅甸(+95)</option>
+						</select>
+						<input type="tel" id="umobile" autocomplete="off" placeholder="请输入您的电话号码">
+					</div>
+					<div class="flex flex-jus-between w100p m-b-13">
+						<select class="country no-m w100p p-l-20" placeholder="是否有物业">
+							<option value="-1">是否有物业</option>
+							<option value="1">是</option>
+							<option value="0">否</option>
+						</select>
+					</div>
+					<input type="text" id="address" autocomplete="off" placeholder="物业地址">
+					<div class="flex flex-jus-between w100p">
+						<input type="text" class="country p-l-20 w200" autocomplete="off" placeholder="物业面积">
+						<input type="text" autocomplete="off" placeholder="房量">
+					</div>
+					<button id="submitclick">提交信息</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="p-t-100 p-b-100 "></div>
+    </main>
+
+    <footer>
+        公司名称 : 青岛尚美数智酒店集团<br>
+		公司地址 : 山东省青岛市黄岛区胶州湾东路1号尚美数智产业园<br>
+		服务热线 : 0532-86899922<br>
+		<p class="flex">
+			<img src="images/icon-ba.png" alt="备案" class="block m-r-5" style="width: 13px;">
+			鲁公网安备37021002001434
+		</p>
+    </footer>
+    
+	<script src="js/jquery-1.11.3.min.js"></script>
+    <script src="swiper/js/swiper.min.js"></script>
+	<script>
+
+		var lock = false
+		$("#submitclick").click(function () {
+			if (lock) {
+				alert('请勿连续点击')
+				return false
+			}
+			console.log($('#country_id').val())
+			var name = $("#name").val();
+			if (name == '') {
+				alert('请输入您的姓名！');
+				$("#name").focus();
+				return false;
+			}
+			var mobile = $("#umobile").val();
+			if (mobile == '') {
+				alert('请输入您的电话！');
+				$("#mobile").focus();
+				return false;
+			}
+			// var pattern = /^1[3,4,5,6,7,8,9]\d{9}$/;
+			// if (!pattern.test(mobile)) {
+			//     alert("请输入您正确的手机号!");
+			//     $("#mobile").focus();
+			//     return false;
+			// }
+			var mobile = $("#ucode").val()+"-"+$("#umobile").val();
+			var params = {};
+				params.mobile = mobile;
+				params.name = name;
+				params.content =  $("#content").val();
+				console.log(params);
+			//   alert("content:"+params.content);
+			lock = true;
+			$.post("/cn/Index/leaveMsg",params,function(data){
+				alert(data.errMsg);
+				$("#name").val("");
+				$("#umobile").val("");
+				$("#content").val("");
+				lock = false
+			},"json");
+		})
+
+	</script>
+	
+</body>
+</html>

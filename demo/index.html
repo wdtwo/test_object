@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>尚客优</title>
+	<script type="text/javascript">
+        function autoScale(){
+            var winW = document.documentElement.clientWidth-15;
+			let scale = 1;
+			if(winW < 1910 && winW >= 1248){ // 1440
+				scale = Math.min(1,Math.min(winW / 1920));
+			}else if(winW >= 1910){
+				scale = 1;
+			}else{
+				scale = 0.65;
+			}
+            return scale
+        }
+		window.onresize = function(){
+			document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+		}
+		document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+    <link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
+	<link href="vidbacking/jquery.vidbacking.min.css" rel="stylesheet" type="text/css">
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	<link href="css/animate.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+		<div class="content w1400 flex flex-jus-between">
+			<div class="logo flex">
+				<img src="images/logo.png" class="logo1" alt="尚客优酒店">
+				<hr>
+				<img src="images/logo2.png" class="logo2" alt="小城回家尚客优">
+			</div>
+			<div class="flex c-b2b2b2 f16">
+				<img src="images/ico-tel.png">
+				加盟热线：0532-8681833
+				<span class="m-0-20">丨</span>
+				订房热线：4006-456-999
+			</div>
+		</div>
+    </header>
+	<nav class="bg-812c2b">
+		<div class="content flex flex-jus-end c-white w1400 m-c h50 f18">
+			<a href="index.html" class="active flex">首页</a>
+			<a href="品牌介绍.html" class="flex">品牌介绍</a>
+			<a href="新闻资讯.html" class="flex">新闻资讯</a>
+			<a href="如何开酒店.html" class="flex">如何开酒店</a>
+			<a href="加盟合作.html" class="flex">加盟合作</a>
+			<a href="酒店设计.html" class="flex">酒店设计</a>
+		</div>
+	</nav>
+    <main class="w1920 m-c">
+		<div class="banner mw1440 video-back re">
+			<div class="muted play"></div>
+			<video poster="assets/screenshot1.jpg" autoplay muted loop class="vidbacking">
+				<source src="assets/video.webm" type="video/webm">
+				<source src="assets/video.mp4" type="video/mp4">
+			</video>
+			<div class="flex flex-column c-white ab fangxiang f20">
+				向下滑动
+				<img src="images/icon-down.svg" class="block w30 animate1">
+			</div>
+		</div>
+
+		<div class="company-data mw1440 m-t-50 f24">
+			<ul class="flex">
+				<li>
+					<span class="f50 f-w-b c-812c2b arial">3178</span>
+					家酒店<span class="c-666">（含筹建）</span>
+				</li>
+				<li>
+					<span class="f50 f-w-b c-812c2b arial">1.3</span>
+					亿集团会员
+				</li>
+				<li>
+					覆盖
+					<span class="f50 f-w-b c-812c2b arial">326</span>
+					座城市
+				</li>
+			</ul>
+			<div class="f16 c-94887c t-c m-t-45">
+				数据来源：以上数据来自尚美数智酒店集团统计。
+			</div>
+		</div>
+		<div class="sky-box1 w1190 m-c m-t-110 re pointer">
+			<img src="images/index-pic1.png" alt="尚客优" class="w100p block">
+			<div class="f50 c-white ab info">
+				<span>尚客优酒店</span>
+				<img src="images/icon-jt1.png" alt="尚客优" class="m-t-25">
+			</div>
+		</div>
+
+		<hr class="hr-red w1190 m-t-170">
+
+		<div class="index-box1 mw1440 m-t-95">
+			<div class="w1190 m-c">
+				<div class="flex flex-jus-between">
+					<span class="f50 c-812c2b">高颜值设计</span>
+					<ul class="flex f24 swiper-indic">
+						<li class="active pointer">尚客优酒店</li>
+						<li class="m-l-50 pointer">尚客优悦酒店</li>
+					</ul>
+				</div>
+				<div class="swiper-box flex flex-jus-between flex-wrap m-t-50">
+					<div class="swiper" id="swiper1">
+						<div class="swiper-wrapper">
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic1.png">
+						  </div>
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic7.png">
+						  </div>
+						</div>
+					</div>
+					<div class="swiper" id="swiper2">
+						<div class="swiper-wrapper">
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic2.png">
+						  </div>
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic8.png">
+						  </div>
+						</div>
+					</div>
+					<div class="swiper" id="swiper3">
+						<div class="swiper-wrapper">
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic3.png">
+						  </div>
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic9.png">
+						  </div>
+						</div>
+					</div>
+					<div class="swiper m-t-15" id="swiper4">
+						<div class="swiper-wrapper">
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic4.png">
+						  </div>
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic10.png">
+						  </div>
+						</div>
+					</div>
+					<div class="swiper m-t-15" id="swiper5">
+						<div class="swiper-wrapper">
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic5.png">
+						  </div>
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic11.png">
+						  </div>
+						</div>
+					</div>
+					<div class="swiper m-t-15" id="swiper6">
+						<div class="swiper-wrapper">
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic6.png">
+						  </div>
+						  <div class="swiper-slide">
+							<img src="images/index-swiper-pic12.png">
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="hr-red w1190 m-t-150">
+
+		<div class="index-box2 mw1440 m-t-95">
+			<div class="w1190 m-c">
+				<div class="flex flex-jus-start">
+					<span class="f50 c-812c2b">全智能配套</span>
+				</div>
+				<ul class="flex flex-jus-between flex-wrap m-t-60 f38 c-white">
+					<li>
+						<img src="images/index-box2-pic1.png">
+						<div>刷脸入住</div>
+					</li>
+					<li>
+						<img src="images/index-box2-pic2.png">
+						<div>刷脸入住</div>
+					</li>
+					<li>
+						<img src="images/index-box2-pic3.png">
+						<div>刷脸入住</div>
+					</li>
+					<li>
+						<img src="images/index-box2-pic4.png">
+						<div>智能机器人</div>
+					</li>
+					<li>
+						<img src="images/index-box2-pic5.png">
+						<div>智能储物</div>
+					</li>
+					<li>
+						<img src="images/index-box2-pic6.png">
+						<div>智能马桶</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<hr class="hr-red w1190 m-t-150">
+
+		<div class="index-box3 mw1440 m-t-95" id="index-box3">
+			<div class="w1190 m-c">
+				<div class="flex flex-jus-start">
+					<span class="f50 c-812c2b">酒店超配服务</span>
+				</div>
+			</div>
+			<div class="w1400 m-c m-t-70">
+				<div class="swiper-btn re">
+					<div class="swiper-prev"></div>
+					<div class="swiper-next"></div>
+				</div>
+			</div>
+			<div class="w1190 m-c">
+				<div class="swiper-box">
+					<div class="swiper swiper7" id="swiper7">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide flex flex-jus-start">
+								<img src="images/index-swiper7-pic1.png">
+								<dl class="f40">
+									<dt>深夜食堂</dt>
+									<dd class="f30 m-t-55 lh16">
+										即使深夜到店，<br>
+										依然可以享用一碗<br>
+										家乡的汤面。
+									</dd>
+								</dl>
+							</div>
+							<div class="swiper-slide flex flex-jus-start">
+								<img src="images/index-swiper7-pic2.png">
+								<dl class="f40">
+									<dt>智能洗衣房</dt>
+									<dd class="f30 m-t-55 lh16">
+										超大洗衣房，<br>
+										可晾晒，可烘干<br>
+										洗衣状态智能提醒。
+									</dd>
+								</dl>
+							</div>
+							<div class="swiper-slide flex flex-jus-start">
+								<img src="images/index-swiper7-pic3.png">
+								<dl class="f40">
+									<dt>原叶茶奉茶服务</dt>
+									<dd class="f30 m-t-55 lh16">
+										尚客优将小城原叶茶<br>
+										奉献给每一个<br>
+										奔赴小城的旅人。
+									</dd>
+								</dl>
+							</div>
+							<div class="swiper-slide flex flex-jus-start">
+								<img src="images/index-swiper7-pic4.png">
+								<dl class="f40">
+									<dt>小城美食美景推荐</dt>
+									<dd class="f30 m-t-55 lh16">
+										推荐只有本地人<br>
+										才知道的美食与美景。
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="hr-red w1190 m-t-170">
+
+		<div class="index-box3 mw1440 m-t-95" id="index-box4">
+			<div class="w1190 m-c">
+				<div class="flex flex-jus-start">
+					<span class="f50 c-812c2b">尚客优(悦)标杆酒店</span>
+				</div>
+				<div class="f32 m-t-35">
+					点击图片，下载心里美APP预订
+				</div>
+			</div>
+			<div class="w1400 m-c m-t-70">
+				<div class="swiper-btn re">
+					<div class="swiper-prev"></div>
+					<div class="swiper-next"></div>
+				</div>
+			</div>
+			<div class="w1190 m-c">
+				<div class="swiper-box">
+					<div class="swiper c-white t-c f28" id="swiper8">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<img src="images/index-swiper8-pic1.png">
+								<div>
+									尚客优悦 <br>
+									淮安水渡口大道酒店
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper8-pic2.png">
+								<div>
+									尚客优 <br>
+									盐城东台安丰镇酒店
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper8-pic3.png">
+								<div>
+									尚客优悦唐山路 <br>
+									北区火车站西广场酒店
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper8-pic4.png">
+								<div>
+									尚客优悦青岛 <br>
+									城阳区凤岗路地铁站酒店
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper8-pic5.png">
+								<div>
+									尚客优 <br>
+									阳泉盂县店
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper8-pic6.png">
+								<div>
+									尚客优悦 <br>
+									信阳潢川会展中心酒店
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<hr class="hr-red w1190 m-t-140">
+
+		<div class="index-news mw1440 m-t-95">
+			<div class="w1190 m-c">
+				<div class="flex flex-jus-between p-r-25">
+					<span class="f50 c-812c2b">新闻资讯</span>
+					<a href="新闻资讯.html" class="flex f24">
+						更多资讯
+						<img src="images/icon-goto.png" class="m-l-25 w45">
+					</a>
+				</div>
+			</div>
+			<div class="w1190 m-c m-t-50 list c-white flex flex-jus-between">
+				<a href="新闻资讯.html">
+					<img src="images/temp1.png" alt="">
+					<dl class="flex flex-column flex-item-start">
+						<dt class="f18">
+							尚客优U6S：引领小城经济型酒店"代际跃升"
+						</dt>
+						<dd class="f14">
+							尚客优酒店作为中国下沉市场的领军品牌，持续致力于通过创新和现代化推动小城经济型酒店的崛起
+						</dd>
+					</dl>
+				</a>
+				<a href="新闻资讯.html">
+					<img src="images/temp1.png" alt="">
+					<dl class="flex flex-column flex-item-start">
+						<dt class="f18">
+							尚客优U6S：引领小城经济型酒店"代际跃升"
+						</dt>
+						<dd class="f14">
+							尚客优酒店作为中国下沉市场的领军品牌，持续致力于通过创新和现代化推动小城经济型酒店的崛起
+						</dd>
+					</dl>
+				</a>
+				<a href="新闻资讯.html">
+					<img src="images/temp1.png" alt="">
+					<dl class="flex flex-column flex-item-start">
+						<dt class="f18">
+							尚客优U6S：引领小城经济型酒店"代际跃升"
+						</dt>
+						<dd class="f14">
+							尚客优酒店作为中国下沉市场的领军品牌，持续致力于通过创新和现代化推动小城经济型酒店的崛起
+						</dd>
+					</dl>
+				</a>
+			</div>
+			<div class="p-t-100 p-b-100"></div>
+		</div>
+    </main>
+    <footer>
+        公司名称 : 青岛尚美数智酒店集团<br>
+		公司地址 : 山东省青岛市黄岛区胶州湾东路1号尚美数智产业园<br>
+		服务热线 : 0532-86899922<br>
+		<p class="flex">
+			<img src="images/icon-ba.png" alt="备案" class="block m-r-5" style="width: 13px;">
+			鲁公网安备37021002001434
+		</p>
+    </footer>
+	<div class="dialog-sky-info">
+		<div class="close"></div>
+		<dl class="c-white flex flex-item-start p-t-150">
+			<dt class="f50">尚客优酒店</dt>
+			<dd class="f18 m-l-180 re">
+				尚客优酒店深耕小城14年，与小城共生共荣<br>
+				奠定“小城·回家·尚客优”的品牌基因与品牌底蕴<br>
+				时至今日，尚客优酒店已遍布全国<br>
+				“小城高颜值、家乡烟火味、旅居智体验”的经济型酒店新标准<br>
+				将更好的酒店，更好的小城旅居生活<br>
+				奉献给每一个奔赴小城的旅人<br>
+				这是尚客优酒店的初心，也是尚客优的使命<br>
+				每一座小城都是未来，每一个未来都有尚客优
+			</dd>
+		</dl>
+	</div>
+	<!-- 遮罩 -->
+    <div class="dialog-shadow"></div>
+	
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="vidbacking/jquery.vidbacking.min.js" type="text/javascript"></script>
+    <script src="swiper/js/swiper.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.banner').height(window.innerHeight - 150 * autoScale())
+            $('.video-back').vidbacking({
+                'masked': false
+            });
+			
+			$('.muted').click(()=>{
+				let video = document.querySelectorAll('video')[0]
+				if($('.muted').hasClass("play")){
+					$('.muted').removeClass("play")
+					video.muted = false;
+				}else{
+					$('.muted').addClass("play")
+					video.muted = true;
+				}
+			})
+			$('.sky-box1').click(()=>{
+				$('.dialog-sky-info').slideDown(300)
+				$('.dialog-shadow').addClass('show')
+			})
+			$('.dialog-sky-info .close').click(()=>{
+				$('.dialog-sky-info').slideUp(300)
+				$('.dialog-shadow').removeClass('show')
+			})
+			$('.swiper-box li').click(function(){
+				$(this).addClass('active')
+			})
+			let swiperArr = []
+			function setSwiper(i){
+				swiperArr[i] = new Swiper(`#swiper${i+1}`, {
+					effect   : 'flip',
+					speed    : 800,
+					// autoplay : {
+					// 	delay : 3000
+					// },
+				})
+			}
+			for(let i = 0;i < 6;i++){
+				setTimeout(()=>{
+					setSwiper(i)
+				},i * 100)
+			}
+			$('.swiper-indic li').click(function(){
+				let t = $(this)
+				if(!t.hasClass('active')){
+					t.addClass('active').siblings().removeClass('active')
+					let i = t.index()
+					gotoPage(i)
+				}
+			})
+			// 翻页
+			let swiperArrIndex = 0;
+			function gotoPage(i){
+				if(swiperArrIndex < swiperArr.length){
+					setTimeout(()=>{
+						swiperArr[swiperArrIndex].slideTo(i, 800);
+						swiperArrIndex++;
+						gotoPage(i)
+					},100)
+				}else{
+					swiperArrIndex = 0;
+				}
+			}
+			let swiper7 = new Swiper(`#swiper7`, {
+				loop         : true,
+				followFinger : false,
+				speed        : 800,
+				mousewheel   : false,
+				autoplay:{
+					delay:3000
+				},
+				on:{
+					init:function(swiper){
+						swiper1 = this.slides.eq(0);
+						swiper1.addClass('ani-slide');
+					},
+					transitionStart: function(){
+						for(i = 0;i < this.slides.length;i++){
+							swiper1 = this.slides.eq(i);
+							swiper1.removeClass('ani-slide');
+						}
+					},
+					transitionEnd: function(){
+						swiper1 = this.slides.eq(this.activeIndex);
+						swiper1.addClass('ani-slide');
+					},
+				}
+			})
+			$('#index-box3 .swiper-prev').click(function(){
+				swiper7.slidePrev();
+			})
+			$('#index-box3 .swiper-next').click(function(){
+				swiper7.slideNext();
+			})
+			let swiper8 = new Swiper(`#swiper8`, {
+				slidesPerView: 3,
+				spaceBetween: 30,
+				loop:true,
+				autoplay:{
+					delay:3000
+				},
+			})
+			$('#index-box4 .swiper-prev').click(function(){
+				swiper8.slidePrev();
+			})
+			$('#index-box4 .swiper-next').click(function(){
+				swiper8.slideNext();
+			})
+		});
+	</script>
+</body>
+</html>

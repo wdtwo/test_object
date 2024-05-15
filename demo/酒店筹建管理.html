@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>尚客优</title>
+	<script type="text/javascript">
+        function autoScale(){
+            var winW = document.documentElement.clientWidth-15;
+			let scale = 1;
+			if(winW < 1910 && winW >= 1248){ // 1440
+				scale = Math.min(1,Math.min(winW / 1920));
+			}else if(winW >= 1910){
+				scale = 1;
+			}else{
+				scale = 0.65;
+			}
+            return scale
+        }
+		window.onresize = function(){
+			document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+		}
+		document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+    <link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	
+</head>
+<body>
+    <header>
+		<div class="content w1400 flex flex-jus-between">
+			<div class="logo flex">
+				<img src="images/logo.png" alt="尚客优酒店">
+				<hr>
+				<img src="images/logo2.png" alt="小城回家尚客优">
+			</div>
+			<div class="flex c-b2b2b2 f16">
+				<img src="images/ico-tel.png">
+				加盟热线：0532-8681833
+				<span class="m-0-20">丨</span>
+				订房热线：4006-456-999
+			</div>
+		</div>
+    </header>
+	<nav class="bg-812c2b">
+		<div class="content flex flex-jus-end c-white w1400 m-c h50 f18">
+			<a href="index.html" class="flex">首页</a>
+			<a href="品牌介绍.html" class="flex">品牌介绍</a>
+			<a href="新闻资讯.html" class="flex">新闻资讯</a>
+			<a href="如何开酒店.html" class="active flex">如何开酒店</a>
+			<a href="加盟合作.html" class="flex">加盟合作</a>
+			<a href="酒店设计.html" class="flex">酒店设计</a>
+		</div>
+	</nav>
+    <main class="w1920 m-c">
+		<div class="join-banner">
+			<div class="content m-c re">
+				<dl class="w1400 c-white m-c ab z-index9 h100p flex flex-column no-p-l" style="top:0rem;">
+					<dt class="title f80 f-w-b t-c p-t-80">
+						酒店筹建管理
+						<hr style="border:none;border-bottom: 1px solid white;width: 520rem;margin-top: 60rem;">
+					</dt>
+				</dl>
+				<img src="images/cj-banner.png" class="block m-c w100p" alt="">
+			</div>
+		</div>
+
+		<div class="w1190 m-c m-t-35 f26 flex flex-jus-start">
+			<a href="index.html">首页</a>
+			<img src="images/icon-right.svg" class="m-0-20 w30">
+			<a href="如何开酒店.html">如何开酒店</a>
+			<img src="images/icon-right.svg" class="m-0-20 w30">
+			<span class="c-812c2b">酒店筹建</span>
+		</div>
+
+		<div class="addr-box2 w1190 m-c m-t-60 re">
+			<div class="w1400 m-t-95 design-swiper4">
+				<ul class="flex f32 w1190 swiper-indic m-c">
+					<li class="active pointer">4大施工标准</li>
+					<li class="m-0-120 pointer">4次筹建指导</li>
+					<li class="pointer">严选装饰公司</li>
+				</ul>
+				<div class="w1400 m-c m-t-80">
+					<div class="swiper-btn re">
+						<div class="swiper-prev" style="top:300rem;"></div>
+						<div class="swiper-next" style="top:300rem;"></div>
+					</div>
+				</div>
+				<div class="w1190 m-c m-t-80">
+					<div class="swiper-box">
+						<div class="swiper" id="swiper4">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide re">
+									<img class="swiper-lazy" data-src="images/addr-box2-pic1.png">
+									<div class="ab w100p h100p c-white t-c" style="left:0;top:140rem;">
+										<div class="f40">
+											严格按照施工标准筹建
+										</div>
+										<hr class="m-c m-t-45 m-b-60" style="width: 420rem;border:none;border-bottom: 1px solid white;">
+										<p class="f24 lh25 p-b-50">
+											施工工艺标准<br>
+											施工材料标准<br>
+											水电等设施安装标准<br>
+											消防规范
+										</p>
+									</div>
+								</div>
+								<div class="swiper-slide">
+									<img class="swiper-lazy" data-src="images/addr-box2-pic2.png">
+									<div class="ab w100p h100p c-white t-c" style="left:0;top:140rem;">
+										<div class="f40">
+											筹建顾问全程指导
+										</div>
+										<hr class="m-c m-t-45 m-b-60" style="width: 420rem;border:none;border-bottom: 1px solid white;">
+										<p class="f24 lh25 p-b-50">
+											科学规划酒店布局、优化房型配比<br>
+											标准VI方案，为装修提供可视化参考<br>
+											筹建顾问驻场进行技术指导<br>
+											资深项目经理全程跟踪施工流程
+										</p>
+									</div>
+								</div>
+								<div class="swiper-slide">
+									<img class="swiper-lazy" data-src="images/addr-box2-pic3.png">
+									<div class="ab w100p h100p c-white t-c" style="left:0;top:140rem;">
+										<div class="f40">
+											严选装饰公司
+										</div>
+										<hr class="m-c m-t-45 m-b-60" style="width: 420rem;border:none;border-bottom: 1px solid white;">
+										<p class="f24 lh25 p-b-50">
+											严选具有二级及以上资质的装修公司<br>
+											严选资深经验的装修公司，把控工期<br>
+											采用招投标机制，为业主方提供更多优质选择<br>
+											多方比价，为业主方节省投资成本<br>
+											执行筹建质保金制度，监督装修公司施工质量
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="p-t-100 p-b-80"></div>
+    </main>
+    <footer>
+        公司名称 : 青岛尚美数智酒店集团<br>
+		公司地址 : 山东省青岛市黄岛区胶州湾东路1号尚美数智产业园<br>
+		服务热线 : 0532-86899922<br>
+		<p class="flex">
+			<img src="images/icon-ba.png" alt="备案" class="block m-r-5" style="width: 13rem;">
+			鲁公网安备37021002001434
+		</p>
+    </footer>
+    
+	<script src="js/jquery-1.11.3.min.js"></script>
+    <script src="swiper/js/swiper.min.js"></script>
+	<script>
+		let swiper4 = new Swiper(`#swiper4`, {
+			speed    : 800,
+			autoplay : {
+				delay : 3000
+			},
+			lazy     : {loadPrevNext: true},
+			on       : {
+				slideChangeTransitionStart: function(){
+					$('.swiper-indic li').eq(this.activeIndex).addClass('active').siblings().removeClass('active')
+				},
+			},
+		})
+		$('.swiper-prev').click(function(){
+			swiper4.slidePrev();
+		})
+		$('.swiper-next').click(function(){
+			swiper4.slideNext();
+		})
+		$('.swiper-indic li').click(function(){
+			let t = $(this)
+			if(!t.hasClass('active')){
+				t.addClass('active').siblings().removeClass('active')
+				let i = t.index()
+				swiper4.slideTo(i, 800);
+			}
+		})
+	</script>
+	
+</body>
+</html>

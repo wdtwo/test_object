@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>尚客优</title>
+	<script type="text/javascript">
+        function autoScale(){
+            var winW = document.documentElement.clientWidth-15;
+			let scale = 1;
+			if(winW < 1910 && winW >= 1248){ // 1440
+				scale = Math.min(1,Math.min(winW / 1920));
+			}else if(winW >= 1910){
+				scale = 1;
+			}else{
+				scale = 0.65;
+			}
+            return scale
+        }
+		window.onresize = function(){
+			document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+		}
+		document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+    <link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	
+</head>
+<body>
+    <header>
+		<div class="content w1400 flex flex-jus-between">
+			<div class="logo flex">
+				<img src="images/logo.png" alt="尚客优酒店">
+				<hr>
+				<img src="images/logo2.png" alt="小城回家尚客优">
+			</div>
+			<div class="flex c-b2b2b2 f16">
+				<img src="images/ico-tel.png">
+				加盟热线：0532-8681833
+				<span class="m-0-20">丨</span>
+				订房热线：4006-456-999
+			</div>
+		</div>
+    </header>
+	<nav class="bg-812c2b">
+		<div class="content flex flex-jus-end c-white w1400 m-c h50 f18">
+			<a href="index.html" class="flex">首页</a>
+			<a href="品牌介绍.html" class="flex">品牌介绍</a>
+			<a href="新闻资讯.html" class="flex">新闻资讯</a>
+			<a href="如何开酒店.html" class="active flex">如何开酒店</a>
+			<a href="加盟合作.html" class="flex">加盟合作</a>
+			<a href="酒店设计.html" class="flex">酒店设计</a>
+		</div>
+	</nav>
+    <main class="w1920 m-c">
+		<div class="join-banner">
+			<div class="content m-c re">
+				<dl class="w1400 c-white m-c ab z-index9 h100p flex flex-column no-p-l" style="top:0rem;">
+					<dt class="title f80 f-w-b t-c p-t-80">
+						酒店筹建管理
+						<hr style="border:none;border-bottom: 1px solid white;width: 520rem;margin-top: 60rem;">
+					</dt>
+				</dl>
+				<img src="images/cj-banner.png" class="block m-c w100p" alt="">
+			</div>
+		</div>
+
+		<div class="w1190 m-c m-t-35 f26 flex flex-jus-start">
+			<a href="index.html">首页</a>
+			<img src="images/icon-right.svg" class="m-0-20 w30">
+			<a href="如何开酒店.html">如何开酒店</a>
+			<img src="images/icon-right.svg" class="m-0-20 w30">
+			<span class="c-812c2b">酒店运营</span>
+		</div>
+
+		<div class="addr-box3 w1920 m-c m-t-60 re t-c c-white">
+			<div class="content ab w1190 m-c flex flex-column">
+				<div class="f60 f-w-b">
+					总部制定战略目标
+				</div>
+				<hr class="m-c m-t-45" style="border:none;border-bottom: 1px solid white;width: 420rem;">
+				<ul class="flex flex-jus-between m-t-100">
+					<li>
+						<div class="f40 f-w-b p-b-15">全国7大区域</div>
+						<div class="f28 p-b-40">精细化目标分解</div>
+						<div class="f18 lh25">
+							遵照尚客优经营模式规定的战略<br>
+							方向，全面负责区域内分店运营<br>
+							管理及支持，完成分店业绩目<br>
+							标，从而完成公司及区域各项指标。
+						</div>
+					</li>
+					<li class="m-0-60">
+						<div class="f40 f-w-b p-b-15">城际区域</div>
+						<div class="f28 p-b-40">发挥桥梁纽带作用</div>
+						<div class="f18 lh25">
+							完成大区域分解的战略和目标，<br>
+							全面负责区域内分店运营管理及<br>
+							支持。
+						</div>
+					</li>
+					<li>
+						<div class="f40 f-w-b p-b-15">运营经理</div>
+						<div class="f28 p-b-40">发挥桥梁纽带作用</div>
+						<div class="f18 lh25">
+							巡视指导分店，遵照尚客优经营<br>
+							模式规定的战略方向，维护品牌<br>
+							形象，协助城际区域经理负责分<br>
+							管分店运营管理，全面负责分管<br>
+							区域分店的运营管理工作，指导<br>
+							店长，每1~2月巡视分店至少一次。
+						</div>
+					</li>
+				</ul>
+			</div>
+			<img src="images/yy-box3.png" class="w1920 m-c block">
+		</div>
+
+		<div class="w1190 m-c m-t-130 t-c f60 title">
+			总部派遣资深店长驻店
+		</div>
+		<div class="czd w1370 m-c m-t-105">
+			<ul class="flex flex-jus-between flex-wrap c-white">
+				<li class="re">
+					<img src="images/czd-bg1.png" class="block w673">
+					<dl class="ab flex flex-column">
+						<dt class="f32">实现高效低成本管理</dt>
+						<dd class="p-t-30 f20">
+							定期对酒店设施设备巡回检<br>
+							查，定期维护、保养、更新
+						</dd>
+					</dl>
+				</li>
+				<li class="re">
+					<img src="images/czd-bg2.png" class="block w673">
+					<dl class="ab flex flex-column">
+						<dt class="f32">星级酒店入住体验</dt>
+						<dd class="p-t-30 f20">
+							总部提供各项服务培训，做好前厅服务，<br>
+							联络协调对客服务，酒店清洁保养等服务
+						</dd>
+					</dl>
+				</li>
+				<li class="re m-t-25">
+					<img src="images/czd-bg3.png" class="block w673">
+					<dl class="ab flex flex-column">
+						<dt class="f32">规范每一个服务细节</dt>
+						<dd class="p-t-30 f20">
+							规范化接待客户，标准化办理入住流程，<br>
+							提高客户满意度
+						</dd>
+					</dl>
+				</li>
+				<li class="re m-t-25">
+					<img src="images/czd-bg4.png" class="block w673">
+					<dl class="ab flex flex-column">
+						<dt class="f32">严格把控酒店收支</dt>
+						<dd class="p-t-30 f20">
+							编制财务计划，做好经济核算，<br>
+							控制成本费用，加强财务分析等
+						</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+
+		<div class="p-t-100 p-b-80"></div>
+    </main>
+    <footer>
+        公司名称 : 青岛尚美数智酒店集团<br>
+		公司地址 : 山东省青岛市黄岛区胶州湾东路1号尚美数智产业园<br>
+		服务热线 : 0532-86899922<br>
+		<p class="flex">
+			<img src="images/icon-ba.png" alt="备案" class="block m-r-5" style="width: 13rem;">
+			鲁公网安备37021002001434
+		</p>
+    </footer>
+    
+	<script src="js/jquery-1.11.3.min.js"></script>
+    <script src="swiper/js/swiper.min.js"></script>
+	<script>
+		
+	</script>
+	
+</body>
+</html>

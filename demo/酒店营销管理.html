@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>尚客优</title>
+	<script type="text/javascript">
+        function autoScale(){
+            var winW = document.documentElement.clientWidth-15;
+			let scale = 1;
+			if(winW < 1910 && winW >= 1248){ // 1440
+				scale = Math.min(1,Math.min(winW / 1920));
+			}else if(winW >= 1910){
+				scale = 1;
+			}else{
+				scale = 0.65;
+			}
+            return scale
+        }
+		window.onresize = function(){
+			document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+		}
+		document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+    <link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	
+</head>
+<body>
+    <header>
+		<div class="content w1400 flex flex-jus-between">
+			<div class="logo flex">
+				<img src="images/logo.png" alt="尚客优酒店">
+				<hr>
+				<img src="images/logo2.png" alt="小城回家尚客优">
+			</div>
+			<div class="flex c-b2b2b2 f16">
+				<img src="images/ico-tel.png">
+				加盟热线：0532-8681833
+				<span class="m-0-20">丨</span>
+				订房热线：4006-456-999
+			</div>
+		</div>
+    </header>
+	<nav class="bg-812c2b">
+		<div class="content flex flex-jus-end c-white w1400 m-c h50 f18">
+			<a href="index.html" class="flex">首页</a>
+			<a href="品牌介绍.html" class="flex">品牌介绍</a>
+			<a href="新闻资讯.html" class="flex">新闻资讯</a>
+			<a href="如何开酒店.html" class="active flex">如何开酒店</a>
+			<a href="加盟合作.html" class="flex">加盟合作</a>
+			<a href="酒店设计.html" class="flex">酒店设计</a>
+		</div>
+	</nav>
+    <main class="w1920 m-c">
+		<div class="join-banner">
+			<div class="content m-c re">
+				<dl class="w1400 c-white m-c ab z-index9 h100p flex flex-column no-p-l" style="top:0rem;">
+					<dt class="title f80 f-w-b t-c p-t-80">
+						酒店营销管理
+						<hr style="border:none;border-bottom: 1px solid white;width: 520rem;margin-top: 60rem;">
+					</dt>
+					<dd class="w1190 m-c">
+						<ul class="flex flex-jus-between f26 c-white m-t-100 tips668 w100p p-0-75">
+							<li class="flex flex-column p-0-90 re">
+								<img src="images/icon-yx1.png" class="block w110 m-b-20">
+								<p>
+									新媒体矩阵
+								</p>
+							</li>
+							<li class="flex flex-column p-0-90 re">
+								<img src="images/icon-yx2.png" class="block w110 m-b-20">
+								<p>
+									心里美会员平台
+								</p>
+							</li>
+							<li class="flex flex-column p-0-90 re">
+								<img src="images/icon-yx3.png" class="block w110 m-b-20">
+								<p>
+									线下营销
+								</p>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<img src="images/cj-banner.png" class="block m-c w100p" alt="">
+			</div>
+		</div>
+
+		<div class="w1190 m-c m-t-35 f26 flex flex-jus-start">
+			<a href="index.html">首页</a>
+			<img src="images/icon-right.svg" class="m-0-20 w30">
+			<a href="如何开酒店.html">如何开酒店</a>
+			<img src="images/icon-right.svg" class="m-0-20 w30">
+			<span class="c-812c2b">酒店选址</span>
+		</div>
+
+		<div class="w1400 m-c m-t-105 xz-box">
+			<ul class="flex flex-jus-between c-white t-c">
+				<li class="re">
+					<img src="images/yx-bg1.png" class="block w454">
+					<dl class="ab flex flex-column flex-jus-start p-t-80">
+						<dt class="f26">6大媒体营销矩阵</dt>
+						<dd class="p-t-30 f18">
+							通过行业媒体、品牌微信公众号、微博、<br>
+							抖音、小红书、快手六大媒体营销矩阵，<br>
+							持续进行线上推广，帮助酒店引流并建立<br>
+							私下域流量
+						</dd>
+					</dl>
+				</li>
+				<li class="re">
+					<img src="images/yx-bg2.png" class="block w454">
+					<dl class="ab flex flex-column flex-jus-start p-t-80">
+						<dt class="f26">心里美会员平台</dt>
+						<dd class="p-t-30 f18">
+							在集团1.3亿会员APP，设置广告宣传位，<br>
+							并向门店输送客源
+						</dd>
+					</dl>
+				</li>
+				<li class="re">
+					<img src="images/yx-bg3.png" class="block w454">
+					<dl class="ab flex flex-column flex-jus-start p-t-80">
+						<dt class="f26">线下营销活动</dt>
+						<dd class="p-t-30 f18">
+							结合实时热点、节日、属地特色等举办<br>
+							线下营销活动，为酒店引流
+						</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+
+		<div class="addr-box4 w1920 m-c m-t-125 re t-c c-white">
+			<div class="content ab w1190 m-c flex flex-column p-t-65">
+				<div class="f40 f-w-b">
+					自媒体配合，扩大影响力
+				</div>
+				<div class="f20 p-t-20">
+					与会员系统相配合，双向互助，打开营销新局面
+				</div>
+				<ul class="flex flex-jus-between m-t-80 p-0-95 w100p f20">
+					<li>
+						<img src="images/qrcode1.png" class="block w193">
+						<p class="m-t-20">
+							尚客优酒店 <br>
+							微信公众号二维码
+						</p>
+					</li>
+					<li>
+						<img src="images/qrcode2.png" class="block w193">
+						<p class="m-t-20">
+							心里美会员直销平台<br>
+							微信公众号二维码
+						</p>
+					</li>
+					<li>
+						<img src="images/qrcode3.png" class="block w193">
+						<p class="m-t-20">
+							尚美数智酒店集团<br>
+							官方加盟微信公众号
+						</p>
+					</li>
+					<li>
+						<img src="images/qrcode4.png" class="block w193">
+						<p class="m-t-20">
+							尚客优酒店<br>
+							加盟抖音号
+						</p>
+					</li>
+				</ul>
+			</div>
+			<img src="images/yx-bg4.png" class="w1920 m-c block">
+		</div>
+
+		
+		<div class="p-t-55"></div>
+    </main>
+    <footer>
+        公司名称 : 青岛尚美数智酒店集团<br>
+		公司地址 : 山东省青岛市黄岛区胶州湾东路1号尚美数智产业园<br>
+		服务热线 : 0532-86899922<br>
+		<p class="flex">
+			<img src="images/icon-ba.png" alt="备案" class="block m-r-5" style="width: 13rem;">
+			鲁公网安备37021002001434
+		</p>
+    </footer>
+    
+	<script src="js/jquery-1.11.3.min.js"></script>
+    <script src="swiper/js/swiper.min.js"></script>
+	<script>
+		
+	</script>
+	
+</body>
+</html>

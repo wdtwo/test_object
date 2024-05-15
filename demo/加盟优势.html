@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="GaryWang">
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>尚客优</title>
+	<script type="text/javascript">
+        function autoScale(){
+            var winW = document.documentElement.clientWidth-15;
+			let scale = 1;
+			if(winW < 1910 && winW >= 1248){ // 1440
+				scale = Math.min(1,Math.min(winW / 1920));
+			}else if(winW >= 1910){
+				scale = 1;
+			}else{
+				scale = 0.65;
+			}
+            return scale
+        }
+		window.onresize = function(){
+			document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+		}
+		document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+        //1rem = 100px
+	</script>
+    <link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
+	<link href="css/basic.css" rel="stylesheet" type="text/css">
+	
+</head>
+<body>
+    <header>
+		<div class="content w1400 flex flex-jus-between">
+			<div class="logo flex">
+				<img src="images/logo.png" alt="尚客优酒店">
+				<hr>
+				<img src="images/logo2.png" alt="小城回家尚客优">
+			</div>
+			<div class="flex c-b2b2b2 f16">
+				<img src="images/ico-tel.png">
+				加盟热线：0532-8681833
+				<span class="m-0-20">丨</span>
+				订房热线：4006-456-999
+			</div>
+		</div>
+    </header>
+	<nav class="bg-812c2b">
+		<div class="content flex flex-jus-end c-white w1400 m-c h50 f18">
+			<a href="index.html" class="flex">首页</a>
+			<a href="品牌介绍.html" class="flex">品牌介绍</a>
+			<a href="新闻资讯.html" class="flex">新闻资讯</a>
+			<a href="如何开酒店.html" class="flex">如何开酒店</a>
+			<a href="加盟合作.html" class="active flex">加盟合作</a>
+			<a href="酒店设计.html" class="flex">酒店设计</a>
+		</div>
+	</nav>
+    <main class="w1920 m-c">
+		<div class="join-banner">
+			<div class="content m-c re">
+				<dl class="w1400 c-white m-c ab z-index9 h100p flex flex-column flex-item-start">
+					<dt class="f80r">
+						加盟尚客优酒店
+					</dt>
+					<dd class="f42r">
+						从物业考察到开业运营提供全流程服务
+					</dd>
+				</dl>
+				<img src="images/join-banner.png" class="block m-c w100p" alt="">
+			</div>
+		</div>
+		<div class="join-nav w1400 mw1440 m-c m-t-90 flex flex-jus-between f24 p-0-140 p-b-90">
+			<a href="加盟合作.html">加盟支持</a>
+			<a href="加盟优势.html" class="active">加盟优势</a>
+			<a href="加盟条件.html">加盟条件</a>
+			<a href="加盟流程.html">加盟流程</a>
+		</div>
+
+		<div class="m-c advantage-box w1920 re">
+			<img src="images/advantage-box1.png" class="block w1344 m-c">
+			<div class="content c-white ab t-c">
+				<div class="title f40 f-w-b">
+					强大供应链体系
+				</div>
+				<hr>
+				<ul class="flex f26 f-w-b m-t-120">
+					<li>
+						<div class="f60">2843个</div>
+						<p>覆盖县城供应链体系</p>
+					</li>
+					<li class="m-0-230">
+						<div class="f60">283家</div>
+						<p>供应商合作伙伴</p>
+					</li>
+					<li>
+						<div class="f60">30亿</div>
+						<p>筹建合同额</p>
+					</li>
+				</ul>
+				<div class="tips ab f16">数据来源：以上数据来源于尚美数智酒店集团统计。</div>
+			</div>
+		</div>
+		<div class="m-c m-t-60 advantage-box w1920 re">
+			<img src="images/advantage-box2.png" class="block w1344 m-c">
+			<div class="content c-white ab t-c">
+				<div class="title f40 f-w-b">
+					高效筹建团队
+				</div>
+				<hr>
+				<ul class="flex f26 f-w-b m-t-120">
+					<li>
+						<div class="f60">20天</div>
+						<p>制图周期提前</p>
+					</li>
+					<li class="m-0-300">
+						<div class="f60">30%</div>
+						<p>施工周期节约</p>
+					</li>
+					<li>
+						<div class="f60">5-10天</div>
+						<p>物资配货提前</p>
+					</li>
+				</ul>
+				<div class="tips ab f16">数据来源：以上数据来源于尚美数智酒店集团统计。</div>
+			</div>
+		</div>
+		<div class="m-c m-t-60 advantage-box w1920 re">
+			<img src="images/advantage-box3.png" class="block w1344 m-c">
+			<div class="content c-white ab t-c">
+				<div class="title f40 f-w-b">
+					高效筹建团队
+				</div>
+				<hr>
+				<ul class="flex f26 f-w-b m-t-120">
+					<li>
+						<div class="f60"><span style="font-size: 90rem;">14</span>年</div>
+						<p>
+							连锁酒店<br>
+							运营管理经验
+						</p>
+					</li>
+					<li class="m-0-270">
+						<div>
+							<img src="images/icon-7.png" class="block m-c m-b-20" style="width: 99rem;">
+						</div>
+						<p>
+							成熟运作模式<br>
+							和成熟管控经验
+						</p>
+					</li>
+					<li>
+						<div>
+							<img src="images/icon-8.png" class="block m-c m-b-20" style="width: 92rem;">
+						</div>
+						<p>
+							垂直管理体系<br>
+							提高门店管理效率
+						</p>
+					</li>
+				</ul>
+				<div class="tips ab f16">数据来源：以上数据来源于尚美数智酒店集团统计。</div>
+			</div>
+		</div>
+
+		<div class="m-c m-t-60 advantage-box w1920 re">
+			<img src="images/advantage-box4.png" class="block w1920 m-c">
+			<div class="content c-white ab t-c">
+				<div class="title f40 f-w-b p-t-120">
+					尚客优运营案例
+				</div>
+				<hr>
+				<div class="info m-t-100 flex t-l c-white">
+					<dl class="f20 m-r-65">
+						<dt class="flex">
+							<span class="f40 f-w-b">尚客优酒店</span>
+							<span class="f28">（莱西姜山镇门店数据）</span>
+						</dt>
+						<dd>
+							<div class="flex flex-jus-start p-l-120">
+								<b class="w300">签约时间</b>
+								<span>2020年11月下旬</span>
+							</div>
+							<hr>
+						</dd>
+						<dd>
+							<div class="flex flex-jus-start p-l-120">
+								<b class="w300">开业时间</b>
+								<span>2021年2月6日</span>
+							</div>
+							<hr>
+						</dd>
+						<dd>
+							<div class="flex flex-jus-start p-l-120">
+								<b class="w300">平均房价</b>
+								<span>158元</span>
+							</div>
+							<hr>
+						</dd>
+						<dd>
+							<div class="flex flex-jus-start p-l-120">
+								<b class="w300">春节旺季房价</b>
+								<span>216元</span>
+							</div>
+							<hr>
+						</dd>
+						<dd>
+							<div class="flex flex-jus-start p-l-120">
+								<b class="w300">平均出租率</b>
+								<span>84.52%</span>
+							</div>
+							<hr>
+						</dd>
+						<dd>
+							<div class="flex flex-jus-start p-l-120">
+								<b class="w300">春节旺季出租率</b>
+								<span>93.41%</span>
+							</div>
+						</dd>
+					</dl>
+					<div>
+						<div class="c-cc1b21">
+							<span class="f162 f-w-b arial m-r-10">90</span>
+							<span class="f77">天</span>
+						</div>
+						<div class="f40" style="letter-spacing: 12rem;">
+							筹 建 周 期
+						</div>
+					</div>
+				</div>
+				<div class="tips ab f16 p-l-100" style="bottom:80rem">*以上数据来自尚美数智酒店集团统计</div>
+			</div>
+		</div>
+
+
+		<div class="p-t-100 p-b-100 "></div>
+    </main>
+
+    <footer>
+        公司名称 : 青岛尚美数智酒店集团<br>
+		公司地址 : 山东省青岛市黄岛区胶州湾东路1号尚美数智产业园<br>
+		服务热线 : 0532-86899922<br>
+		<p class="flex">
+			<img src="images/icon-ba.png" alt="备案" class="block m-r-5" style="width: 13px;">
+			鲁公网安备37021002001434
+		</p>
+    </footer>
+    
+	<script src="js/jquery-1.11.3.min.js"></script>
+    <script src="swiper/js/swiper.min.js"></script>
+	
+	
+</body>
+</html>
