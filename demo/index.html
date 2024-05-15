@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta name="author" content="GaryWang">
 	<meta name='renderer' content='webkit'>
-	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' >
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1'>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="email=no">
 	<title>尚客优</title>
 	<script type="text/javascript">
-        function autoScale(){
-            var winW = document.documentElement.clientWidth-15;
+		function autoScale() {
+			var winW = document.documentElement.clientWidth - 15;
 			let scale = 1;
-			if(winW < 1910 && winW >= 1248){ // 1440
-				scale = Math.min(1,Math.min(winW / 1920));
-			}else if(winW >= 1910){
+			if (winW < 1910 && winW >= 1248) { // 1440
+				scale = Math.min(1, Math.min(winW / 1920));
+			} else if (winW >= 1910) {
 				scale = 1;
-			}else{
+			} else {
 				scale = 0.65;
 			}
-            return scale
-        }
-		window.onresize = function(){
-			document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
+			return scale
 		}
-		document.documentElement.style.cssText = 'font-size:'+(1 * autoScale())+'px';
-        //1rem = 100px
+		window.onresize = function () {
+			document.documentElement.style.cssText = 'font-size:' + (1 * autoScale()) + 'px';
+		}
+		document.documentElement.style.cssText = 'font-size:' + (1 * autoScale()) + 'px';
+		//1rem = 100px
 	</script>
-    <link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
+	<link href="swiper/css/swiper.min.css" rel="stylesheet" type="text/css">
 	<link href="vidbacking/jquery.vidbacking.min.css" rel="stylesheet" type="text/css">
 	<link href="css/basic.css" rel="stylesheet" type="text/css">
 	<link href="css/animate.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-    <header>
+	<header>
 		<div class="content w1400 flex flex-jus-between">
 			<div class="logo flex">
 				<img src="images/logo.png" class="logo1" alt="尚客优酒店">
@@ -50,7 +52,7 @@
 				订房热线：4006-456-999
 			</div>
 		</div>
-    </header>
+	</header>
 	<nav class="bg-812c2b">
 		<div class="content flex flex-jus-end c-white w1400 m-c h50 f18">
 			<a href="index.html" class="active flex">首页</a>
@@ -61,7 +63,7 @@
 			<a href="酒店设计.html" class="flex">酒店设计</a>
 		</div>
 	</nav>
-    <main class="w1920 m-c">
+	<main class="w1920 m-c">
 		<div class="banner mw1440 video-back re">
 			<div class="muted play"></div>
 			<video poster="assets/screenshot1.jpg" autoplay muted loop class="vidbacking">
@@ -116,62 +118,62 @@
 				<div class="swiper-box flex flex-jus-between flex-wrap m-t-50">
 					<div class="swiper" id="swiper1">
 						<div class="swiper-wrapper">
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic1.png">
-						  </div>
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic7.png">
-						  </div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic1.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic7.png">
+							</div>
 						</div>
 					</div>
 					<div class="swiper" id="swiper2">
 						<div class="swiper-wrapper">
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic2.png">
-						  </div>
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic8.png">
-						  </div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic2.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic8.png">
+							</div>
 						</div>
 					</div>
 					<div class="swiper" id="swiper3">
 						<div class="swiper-wrapper">
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic3.png">
-						  </div>
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic9.png">
-						  </div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic3.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic9.png">
+							</div>
 						</div>
 					</div>
 					<div class="swiper m-t-15" id="swiper4">
 						<div class="swiper-wrapper">
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic4.png">
-						  </div>
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic10.png">
-						  </div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic4.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic10.png">
+							</div>
 						</div>
 					</div>
 					<div class="swiper m-t-15" id="swiper5">
 						<div class="swiper-wrapper">
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic5.png">
-						  </div>
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic11.png">
-						  </div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic5.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic11.png">
+							</div>
 						</div>
 					</div>
 					<div class="swiper m-t-15" id="swiper6">
 						<div class="swiper-wrapper">
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic6.png">
-						  </div>
-						  <div class="swiper-slide">
-							<img src="images/index-swiper-pic12.png">
-						  </div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic6.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="images/index-swiper-pic12.png">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -349,7 +351,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<hr class="hr-red w1190 m-t-140">
 
 		<div class="index-news mw1440 m-t-95">
@@ -399,16 +401,16 @@
 			</div>
 			<div class="p-t-100 p-b-100"></div>
 		</div>
-    </main>
-    <footer>
-        公司名称 : 青岛尚美数智酒店集团<br>
+	</main>
+	<footer>
+		公司名称 : 青岛尚美数智酒店集团<br>
 		公司地址 : 山东省青岛市黄岛区胶州湾东路1号尚美数智产业园<br>
 		服务热线 : 0532-86899922<br>
 		<p class="flex">
 			<img src="images/icon-ba.png" alt="备案" class="block m-r-5" style="width: 13px;">
 			鲁公网安备37021002001434
 		</p>
-    </footer>
+	</footer>
 	<div class="dialog-sky-info">
 		<div class="close"></div>
 		<dl class="c-white flex flex-item-start p-t-150">
@@ -426,57 +428,62 @@
 		</dl>
 	</div>
 	<!-- 遮罩 -->
-    <div class="dialog-shadow"></div>
-	
+	<div class="dialog-shadow"></div>
+
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="vidbacking/jquery.vidbacking.min.js" type="text/javascript"></script>
-    <script src="swiper/js/swiper.min.js"></script>
+	<script src="swiper/js/swiper.min.js"></script>
 	<script type="text/javascript">
-		$(function(){
+		$(function () {
+			let img = new Image();
+			img.src = "./images/index-box1-bg.png";
+			img.onload = function () {
+				console.log(1111);
+			}
 			$('.banner').height(window.innerHeight - 150 * autoScale())
-            $('.video-back').vidbacking({
-                'masked': false
-            });
-			
-			$('.muted').click(()=>{
+			$('.video-back').vidbacking({
+				'masked': false
+			});
+
+			$('.muted').click(() => {
 				let video = document.querySelectorAll('video')[0]
-				if($('.muted').hasClass("play")){
+				if ($('.muted').hasClass("play")) {
 					$('.muted').removeClass("play")
 					video.muted = false;
-				}else{
+				} else {
 					$('.muted').addClass("play")
 					video.muted = true;
 				}
 			})
-			$('.sky-box1').click(()=>{
+			$('.sky-box1').click(() => {
 				$('.dialog-sky-info').slideDown(300)
 				$('.dialog-shadow').addClass('show')
 			})
-			$('.dialog-sky-info .close').click(()=>{
+			$('.dialog-sky-info .close').click(() => {
 				$('.dialog-sky-info').slideUp(300)
 				$('.dialog-shadow').removeClass('show')
 			})
-			$('.swiper-box li').click(function(){
+			$('.swiper-box li').click(function () {
 				$(this).addClass('active')
 			})
 			let swiperArr = []
-			function setSwiper(i){
-				swiperArr[i] = new Swiper(`#swiper${i+1}`, {
-					effect   : 'flip',
-					speed    : 800,
+			function setSwiper(i) {
+				swiperArr[i] = new Swiper(`#swiper${i + 1}`, {
+					effect: 'flip',
+					speed: 800,
 					// autoplay : {
 					// 	delay : 3000
 					// },
 				})
 			}
-			for(let i = 0;i < 6;i++){
-				setTimeout(()=>{
+			for (let i = 0; i < 6; i++) {
+				setTimeout(() => {
 					setSwiper(i)
-				},i * 100)
+				}, i * 100)
 			}
-			$('.swiper-indic li').click(function(){
+			$('.swiper-indic li').click(function () {
 				let t = $(this)
-				if(!t.hasClass('active')){
+				if (!t.hasClass('active')) {
 					t.addClass('active').siblings().removeClass('active')
 					let i = t.index()
 					gotoPage(i)
@@ -484,63 +491,64 @@
 			})
 			// 翻页
 			let swiperArrIndex = 0;
-			function gotoPage(i){
-				if(swiperArrIndex < swiperArr.length){
-					setTimeout(()=>{
+			function gotoPage(i) {
+				if (swiperArrIndex < swiperArr.length) {
+					setTimeout(() => {
 						swiperArr[swiperArrIndex].slideTo(i, 800);
 						swiperArrIndex++;
 						gotoPage(i)
-					},100)
-				}else{
+					}, 100)
+				} else {
 					swiperArrIndex = 0;
 				}
 			}
 			let swiper7 = new Swiper(`#swiper7`, {
-				loop         : true,
-				followFinger : false,
-				speed        : 800,
-				mousewheel   : false,
-				autoplay:{
-					delay:3000
+				loop: true,
+				followFinger: false,
+				speed: 800,
+				mousewheel: false,
+				autoplay: {
+					delay: 3000
 				},
-				on:{
-					init:function(swiper){
+				on: {
+					init: function (swiper) {
 						swiper1 = this.slides.eq(0);
 						swiper1.addClass('ani-slide');
 					},
-					transitionStart: function(){
-						for(i = 0;i < this.slides.length;i++){
+					transitionStart: function () {
+						for (i = 0; i < this.slides.length; i++) {
 							swiper1 = this.slides.eq(i);
 							swiper1.removeClass('ani-slide');
 						}
 					},
-					transitionEnd: function(){
+					transitionEnd: function () {
 						swiper1 = this.slides.eq(this.activeIndex);
 						swiper1.addClass('ani-slide');
 					},
 				}
 			})
-			$('#index-box3 .swiper-prev').click(function(){
+			$('#index-box3 .swiper-prev').click(function () {
 				swiper7.slidePrev();
 			})
-			$('#index-box3 .swiper-next').click(function(){
+			$('#index-box3 .swiper-next').click(function () {
 				swiper7.slideNext();
 			})
 			let swiper8 = new Swiper(`#swiper8`, {
 				slidesPerView: 3,
 				spaceBetween: 30,
-				loop:true,
-				autoplay:{
-					delay:3000
+				loop: true,
+				autoplay: {
+					delay: 3000
 				},
 			})
-			$('#index-box4 .swiper-prev').click(function(){
+			$('#index-box4 .swiper-prev').click(function () {
 				swiper8.slidePrev();
 			})
-			$('#index-box4 .swiper-next').click(function(){
+			$('#index-box4 .swiper-next').click(function () {
 				swiper8.slideNext();
 			})
 		});
 	</script>
 </body>
+
 </html>
